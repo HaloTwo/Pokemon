@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -411,6 +411,22 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d8eed1a0f6821b4a88982aae6c519ae, type: 3}
+--- !u!1 &733864839
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 3758540907993307003, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
+  m_PrefabInstance: {fileID: 4100647150404673779}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450652531092786}
+  m_Layer: 0
+  m_Name: 'Koraidon(Riding) (Missing Prefab with guid: 7155081b426f3d54e8f44037f3c9b682)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -692,6 +708,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1131536663
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 6945851462744064457, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
+  m_PrefabInstance: {fileID: 7828934880439834131}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543450651699744096}
+  m_Layer: 0
+  m_Name: 'Koraidon (Missing Prefab with guid: cb55f9064cc357f4abed13e5b85feb84)'
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &1221456511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1272,11 +1304,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7767581363998976384, guid: 67a4ac98e78925349be02ec8476d870e, type: 3}
   m_PrefabInstance: {fileID: 7800594531284901163}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &543450651699744096 stripped
+--- !u!4 &543450651699744096
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
   m_PrefabInstance: {fileID: 7828934880439834131}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1131536663}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1080680196}
+  m_RootOrder: 51
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450651716561760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7341051107838031800, guid: 6a3b3faaa4e42704b8deba74fa666537, type: 3}
@@ -1372,11 +1413,20 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3029182325478904919, guid: ef3b73f1c1f1ac34a8acdedbdd2cb1bc, type: 3}
   m_PrefabInstance: {fileID: 3279579558978232738}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &543450652531092786 stripped
+--- !u!4 &543450652531092786
 Transform:
+  m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
   m_PrefabInstance: {fileID: 4100647150404673779}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 733864839}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1080680196}
+  m_RootOrder: 52
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450652580775124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5974125639649046711, guid: 6e5521aace6b6d34cb42df574876b5eb, type: 3}
