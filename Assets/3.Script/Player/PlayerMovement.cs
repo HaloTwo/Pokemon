@@ -6,9 +6,9 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 {
 
-    [SerializeField] private float defaultSpeed = 900;
+    [SerializeField] private float defaultSpeed = 600;
     [SerializeField] private float currentSpeed;
-    [SerializeField] private float walkSpeed = 400;
+    [SerializeField] private float walkSpeed = 200;
     [SerializeField] private float rotationSpeed = 10f;
 
     private PlayerControlsButton inputActions;
@@ -18,8 +18,11 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 moveDirection;
 
-    [SerializeField] private GameObject FollowCamera;
+    [SerializeField] private Transform groundCheck;
+    [SerializeField] private bool isGrounded = true;
+    [SerializeField] private bool isLookon;
 
+    [SerializeField] private GameObject FollowCamera;
 
 
     private void OnEnable()
@@ -46,54 +49,60 @@ public class PlayerMovement : MonoBehaviour
     {
         bool hasControl = (moveDirection != Vector3.zero);
 
-        if (hasControl)
-        {
-            //transform.localRotation = Quaternion.LookRotation(moveDirection);
+        // 회전
+        Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
+        Vector3 cameraForward = Vector3.Scale(FollowCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
+        moveDirection = (input.x * FollowCamera.transform.right + input.y * cameraForward).normalized;
 
-            //회전
-            float rotationAngle = Mathf.Atan2(moveDirection.x, moveDirection.z) * Mathf.Rad2Deg;
-            Quaternion targetRotation = Quaternion.Euler(0f, rotationAngle, 0f);
+        if (hasControl && isGrounded && !isLookon)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
-            //이동
             controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
+
+
+            if (animator.GetFloat("Velocity") != 1)
+            {
+                animator.SetFloat("Velocity", 2);
+            }
         }
         else
         {
             animator.SetFloat("Velocity", 0);
         }
+
+
     }
 
-    public void onMove(InputAction.CallbackContext context)
+    private void FixedUpdate()
     {
-        Vector2 input = context.ReadValue<Vector2>();
+        isGrounded = IsGrounded();
 
-        if (input != null)
-        {
-            // 카메라의 전방 벡터를 획득
-            Vector3 cameraForward = Vector3.Scale(FollowCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
-
-            Debug.Log(cameraForward);
-            // 입력값과 카메라의 전방 벡터를 조합하여 이동 방향 계산
-            moveDirection = (input.x * FollowCamera.transform.right + input.y * cameraForward).normalized;
-
-            //moveDirection = new Vector3(input.x, 0f, input.y);
-            //Debug.Log("유니티 이벤트 : " + input.magnitude);
-        }
-
-        if (animator.GetFloat("Velocity") != 1)
-        {
-            animator.SetFloat("Velocity", 2);
-        }
+        animator.SetBool("isGround", isGrounded);
     }
 
-    public void onJump(InputAction.CallbackContext context)
+    public void OnJump(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
-
+            StartCoroutine(StartThorw_co());
         }
     }
+
+    IEnumerator StartThorw_co()
+    {
+        isLookon = true;
+        animator.SetTrigger("Throw");
+        //while (true)
+        //{
+        //    yield return null;
+        //}
+        yield return animator.GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl_throw02_gfbanm");
+        isLookon = false;
+    }
+
+
     public void onWalk(InputAction.CallbackContext context)
     {
         //대쉬 버튼을 꾹 눌렀을때
@@ -109,4 +118,21 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Velocity", 2);
         }
     }
+
+    public bool IsGrounded()
+    {
+        Vector3 boxsize = transform.lossyScale;
+        int groundLayerMask = LayerMask.GetMask("GroundLayer");
+        bool isGrounded = Physics.CheckBox(groundCheck.position, boxsize, Quaternion.identity, groundLayerMask);
+
+        return isGrounded;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Vector3 boxsize = transform.lossyScale;
+        Gizmos.DrawWireCube(groundCheck.position, boxsize);
+    }
+
 }
