@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4740379445714008419}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_e_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4593914768257955302}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_ring_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5362744171691701023}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_middle_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 331243136208448890}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_b_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -130,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1483567109141357849}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2649340646362565526}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_09
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -194,7 +194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8446130642924180889}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_body_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3602355699192756100}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -256,7 +256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1469040624106884884}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_foot_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8666218369215397957}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_body_mesh_lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5735596768206062072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: center_feeler_g
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -349,7 +349,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6917237452723315752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_foot_index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -380,7 +380,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 834287118301462072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_foot_middle_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -410,7 +410,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8024131174381253772}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_body_mesh_lod2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,9 +441,11 @@ GameObject:
   m_Component:
   - component: {fileID: 232479909323446730}
   - component: {fileID: 338709245197221411}
-  m_Layer: 0
+  - component: {fileID: 6874018990554935806}
+  - component: {fileID: 7408675126083680162}
+  m_Layer: 8
   m_Name: Luxray
-  m_TagString: Untagged
+  m_TagString: Pokemon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -455,7 +457,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 608618797927220080}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.39, y: 4.239319, z: 11.952918}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -487,6 +489,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &6874018990554935806
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608618797927220080}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &7408675126083680162
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 608618797927220080}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &732783383049155207
 GameObject:
   m_ObjectHideFlags: 0
@@ -496,7 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7903160545519808407}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_b_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -527,7 +559,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2969420400998032394}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pointlight2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -558,7 +590,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3069369874354651597}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_arm_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -589,7 +621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4675894510061581649}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_eyelid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -620,7 +652,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7937580230802903928}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -651,7 +683,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8276088253364773392}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -682,7 +714,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6813020521210012143}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -714,7 +746,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1838360262846407003}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: var_mod_00_00_lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -745,7 +777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8366796815251709891}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -776,7 +808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9014169730654840072}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_08
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -807,7 +839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1966034362094572182}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: spine_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -844,7 +876,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4063089634002629202}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_body_mesh_lod1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -874,7 +906,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 666998593491373589}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_h_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -904,7 +936,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 906708508193965062}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_c_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -934,7 +966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8845192044061178811}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_ear_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -965,7 +997,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1601374571804232384}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_b_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -996,7 +1028,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7154395556415795353}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1027,7 +1059,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8320308340820108372}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_foot_index_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1057,7 +1089,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3090530478522695403}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_middle_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1087,7 +1119,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6088047377935587776}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1118,7 +1150,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7172355570556011301}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_hand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1150,7 +1182,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9041539249267951222}
   - component: {fileID: 2894086858619348240}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_body_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1331,7 +1363,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4057179079890681857}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_f
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1362,7 +1394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3785225957317098383}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_eyelid_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1392,7 +1424,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 549828225400157455}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_arm_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1423,7 +1455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8571136716830408496}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: center_feeler_a_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1453,7 +1485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 623009885203673245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1484,7 +1516,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8737422969465628127}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: var_mod_00_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1515,7 +1547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6408758230086416835}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1578,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5870031398343143213}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: center_feeler_a_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1577,7 +1609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7026474717462221785}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1608,7 +1640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5061018110218683278}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_leg_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1639,7 +1671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2491373179042893444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_h
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1670,7 +1702,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 26660377939272176}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_i_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1700,7 +1732,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1071824657020319164}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_ear_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1731,7 +1763,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5854544156719059018}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: nose
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1762,7 +1794,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8631456246312477130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1793,7 +1825,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 369907612645031971}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: var_mod_00_00_lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1824,7 +1856,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7777747068337427767}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_arm_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1855,7 +1887,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6673878889477100481}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_toe_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1888,7 +1920,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3800843796315200181}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_foot_ring_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1918,7 +1950,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5495930208652155158}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_06
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1949,7 +1981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6166969903799352760}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_f_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1979,7 +2011,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4134329216317109840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_ear_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2009,7 +2041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 271905563639813385}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_i
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2040,7 +2072,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4953894479342209007}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2071,7 +2103,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7099631413488778591}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: jaw_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2101,7 +2133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5295201709451947658}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_b_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2131,7 +2163,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6670754653883889643}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_b_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2161,7 +2193,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1766301186320679949}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2193,7 +2225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2869101821948418715}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_i
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2224,7 +2256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 333076613069104761}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pointlight1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2255,7 +2287,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8438323279459711200}
   - component: {fileID: 3407853422548618403}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_b_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2433,7 +2465,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7041877905383225832}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_c_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2464,7 +2496,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5572571098640775838}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_i_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2494,7 +2526,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8814769701040931308}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_h
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2525,7 +2557,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1014548557723219258}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_d_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2555,7 +2587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6106021041930089493}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_c_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2586,7 +2618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8362142034696007711}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2617,7 +2649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1489492266522931236}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_arm_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2648,7 +2680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4610061784454030188}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_b_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2679,7 +2711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2866032384704974254}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_finger_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2712,7 +2744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4801358210749774245}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2743,7 +2775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8376948827437257221}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_foot_ring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2774,7 +2806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3791257046237710731}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2804,7 +2836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5861913890903539290}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_ear_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2834,7 +2866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2924408754445191043}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2865,7 +2897,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5932249824363950840}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_a_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2896,7 +2928,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2381738951138645524}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_j
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2927,7 +2959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6200066791321163063}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_foot_ring_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2957,7 +2989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7764798939311922811}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_eyelid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2989,7 +3021,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9203176400356643210}
   - component: {fileID: 4600946834034378112}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_a_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3167,7 +3199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8948555238656904442}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_d_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3197,7 +3229,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6025668844716234683}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_d_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3227,7 +3259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5999670590461535055}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: spine_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3258,7 +3290,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5430886737726875894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_e
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3289,7 +3321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4662200895088903478}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_foot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3320,7 +3352,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7166280942867304003}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3351,7 +3383,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6929670088751992966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3382,7 +3414,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 470278874885329075}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_j_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3412,7 +3444,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3001964735322369535}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3443,7 +3475,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7673754919197630073}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3474,7 +3506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7784973589071717939}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: nose_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3504,7 +3536,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3287411034094224582}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_leg_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3535,7 +3567,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8248283949792699352}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_leg_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3566,7 +3598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2188547258320685675}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_body_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3596,7 +3628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4288464015578510551}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_b_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3627,7 +3659,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 142468957426920191}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_c_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3657,7 +3689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1675627316452250728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_e_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3687,7 +3719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 420803660159712671}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_c_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3718,7 +3750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3429760874099907377}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_eyelid_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3748,7 +3780,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1739710399504747947}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_h_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3778,7 +3810,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4351069252911058742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_ear_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3809,7 +3841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2683180474400974082}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_foot_middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3840,7 +3872,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5481664172706161382}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_foot_middle_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3870,7 +3902,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8486644601344708430}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_index_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3900,7 +3932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 176139255761127796}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3935,7 +3967,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 650257857933847895}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_ear_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3966,7 +3998,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1933070449219241905}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_toe_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3997,7 +4029,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7727332456828213712}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_d
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4028,7 +4060,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8727469987633313324}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_foot_middle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4059,7 +4091,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4973800351449106369}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_f_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4089,7 +4121,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2172343653219607531}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_leg_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4120,7 +4152,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6500878838935239733}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: center_feeler_a_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4151,7 +4183,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7038002659508365692}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_c_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4182,7 +4214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6523873824407838760}
   - component: {fileID: 5283195203111582379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_c_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4360,7 +4392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2771611760974355879}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_ring_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4390,7 +4422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4920724010444715799}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_09_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4420,7 +4452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6909335648814914745}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_c_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4451,7 +4483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3640244456459028212}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_b_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4481,7 +4513,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2950959135848385293}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_index_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4511,7 +4543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8642553907617528040}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_a_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4541,7 +4573,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2437989364414247167}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_toe_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4574,7 +4606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6607651115327335893}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_07
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4605,7 +4637,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5096702814281229484}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_c_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4637,7 +4669,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9037580794039332345}
   - component: {fileID: 3890618695250993139}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_d_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4815,7 +4847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1401730919022756605}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4846,7 +4878,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3433656068380802421}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pointlight2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4876,7 +4908,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1981092591266141993}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_foot_index
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4907,7 +4939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5896702789899292379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4938,7 +4970,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3379830234644797426}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4978,7 +5010,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6956213001392671892}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_j_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5008,7 +5040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3421937189684022170}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_finger_base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5041,7 +5073,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 461839064954837536}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_shoulder
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5073,7 +5105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1191851361370342210}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00.trmdl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5106,7 +5138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5027304885412346556}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_body_mesh_lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5137,7 +5169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6771039549306517051}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pointlight1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5168,7 +5200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8143842559211667685}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_toe_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5199,7 +5231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1601003396495393797}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5230,7 +5262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2175423215384969390}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_foot_index_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5260,7 +5292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5309269789964257853}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5291,7 +5323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2498192807822956054}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0405_00_00_claw_d_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5322,7 +5354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8428988638820154661}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: center_feeler_g_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5352,7 +5384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5583050070407589366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5395,7 +5427,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2094048831237304639}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_j
   m_TagString: Untagged
   m_Icon: {fileID: 0}

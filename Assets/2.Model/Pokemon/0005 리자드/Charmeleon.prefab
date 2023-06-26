@@ -41,8 +41,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1040212692474596801}
   - component: {fileID: 370495020693542778}
-  - component: {fileID: 734019507}
   - component: {fileID: 734019509}
+  - component: {fileID: 734019507}
   m_Layer: 8
   m_Name: Charmeleon
   m_TagString: Pokemon
@@ -87,20 +87,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!136 &734019507
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 370495020693542779}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  m_Radius: 0.2708464
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0.0011350526, y: 0.5, z: 0.105767496}
 --- !u!54 &734019509
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -117,6 +103,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!136 &734019507
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370495020693542779}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.35
+  m_Height: 1.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1 &375804749373302267
 GameObject:
   m_ObjectHideFlags: 0

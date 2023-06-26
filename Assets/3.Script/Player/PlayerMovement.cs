@@ -14,25 +14,23 @@ public class PlayerMovement : MonoBehaviour
     [Header("몬스터 볼 관련")]
     [SerializeField] private float ThrowPower = 20f;
     [SerializeField] private float distance = 6f;
-
+    [SerializeField] private Transform ball_loc;
+    [SerializeField] private GameObject ball_prefab;
 
     [Header("체크")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isLookon;
 
+    [Header("카메라")]
     [SerializeField] private GameObject FollowCamera;
 
-    [SerializeField] private Transform ball_loc;
-    [SerializeField] private GameObject ball_prefab;
 
     private Vector3 moveDirection;
 
     private PlayerControlsButton inputActions;
     private CharacterController controller;
     private Animator animator;
-
-    public Collider[] colls;
 
     //볼 중력
     private Rigidbody ball_rb;
@@ -55,8 +53,10 @@ public class PlayerMovement : MonoBehaviour
 
         currentSpeed = defaultSpeed;
 
+
         if (groundCheck == null) groundCheck = transform.Find("groundCheck");
         if (ball_loc == null) ball_loc = transform.Find("tr0050_00.trmdl/origin/foot_base/waist/spine_01/spine_02/spine_03/right_shoulder/right_arm_width/right_arm_01/right_arm_02/right_hand/right_attach_on");
+        if (FollowCamera == null) FollowCamera = GameObject.FindGameObjectWithTag("MainCamera");
         ball_rb = ball_prefab.GetComponent<Rigidbody>();
         TryGetComponent(out controller);
         TryGetComponent(out animator);
@@ -139,7 +139,7 @@ public class PlayerMovement : MonoBehaviour
         Vector3 size = new Vector3(2f, 6f, 10f);
 
         // 기즈모 시각화
-        Gizmos.color = new Color(0f, 1f, 0f, 0.1f);
+        Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
         Gizmos.matrix = Matrix4x4.TRS(position, rotation, Vector3.one);
         Gizmos.DrawCube(Vector3.zero, size);
     }
@@ -163,8 +163,8 @@ public class PlayerMovement : MonoBehaviour
         animator.SetTrigger("Throw");
 
         yield return null;
-
         yield return new WaitUntil(() => animator.GetCurrentAnimatorStateInfo(0).IsTag("Move"));
+        yield return null;
         isLookon = false;
     }
 
@@ -174,6 +174,7 @@ public class PlayerMovement : MonoBehaviour
 
         ball_prefab.SetActive(true);
         //float time =Time.fixedDeltaTime++;
+        ball_rb.useGravity = true;
         ball_rb.velocity = Vector3.zero;
         ball_rb.angularVelocity = Vector3.zero;
         ball_prefab.transform.rotation = Quaternion.identity;
@@ -186,8 +187,9 @@ public class PlayerMovement : MonoBehaviour
         Vector3 size = new Vector3(2f, 6f, 10f);
 
         int PokemonLayer = LayerMask.GetMask("Pokemon");
-        colls = Physics.OverlapBox(position, size, rotation, PokemonLayer);
 
+        Collider[] colls;
+        colls = Physics.OverlapBox(position, size, rotation, PokemonLayer);
 
         if (colls.Length > 0)
         {
@@ -197,7 +199,7 @@ public class PlayerMovement : MonoBehaviour
             for (int i = 0; i < colls.Length; i++)
             {
                 Collider coll = colls[i];
-                float distanceToCollider = Vector3.Distance(transform.position, coll.transform.position);
+                float distanceToCollider = Vector3.Distance(ball_loc.position, coll.transform.position);
 
                 if (distanceToCollider < closestDistance)
                 {
@@ -208,9 +210,10 @@ public class PlayerMovement : MonoBehaviour
 
             if (closestPokemon != null)
             {
-                Debug.Log("Closest Pokemon: " + closestPokemon.name);
-                Vector3 forceDirection = (closestPokemon.transform.position - transform.position).normalized;
-                ball_rb.AddForce(forceDirection * ThrowPower, ForceMode.Impulse);
+                Debug.Log("타겟 포켓몬 : " + closestPokemon.name);
+                ball_rb.useGravity = false;
+                Vector3 forceDirection = (closestPokemon.transform.position - (ball_loc.position - new Vector3(0, 0.5f, 0))).normalized;
+                ball_rb.AddForce(forceDirection * (ThrowPower+1f), ForceMode.Impulse);
             }
         }
         else

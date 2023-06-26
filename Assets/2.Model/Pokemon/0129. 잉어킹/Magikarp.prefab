@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 639774338947936482}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_05_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8431750325279225728}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_arm_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -71,7 +71,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1220333512396804341}
   - component: {fileID: 9206245858999121968}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_whisker_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2075193755939543817}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1818137253186739472}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2986488608076183510}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_arm_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 744368967012677611}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: var_vis_00_00_lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7034328807026629388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00.trmdl
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -356,7 +356,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5211436248074909139}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_whisker_mesh_lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -387,7 +387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5541211302373563542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_arm_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -417,7 +417,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3655698670875285333}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_eye_mesh_lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -448,7 +448,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1052093869312309059}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -479,7 +479,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5723642201464580036}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -513,9 +513,11 @@ GameObject:
   m_Component:
   - component: {fileID: 3112651368011558258}
   - component: {fileID: 2340054596464293835}
-  m_Layer: 0
+  - component: {fileID: 2625080825120863463}
+  - component: {fileID: 3151635787765550142}
+  m_Layer: 8
   m_Name: Magikarp
-  m_TagString: Untagged
+  m_TagString: Pokemon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -527,7 +529,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2340054596464293832}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.5399995, y: 4.239319, z: 12.248919}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -557,6 +559,36 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!54 &2625080825120863463
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340054596464293832}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &3151635787765550142
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2340054596464293832}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2817457063982126099
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7059420302249235379}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_arm_02_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -596,7 +628,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4346156713514502304}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -629,7 +661,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1705859390810405993}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -660,7 +692,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8183115047738267529}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_eye_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -691,7 +723,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6350684501874456571}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: feeler_a
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -722,7 +754,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 984114845602105145}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_eye_mesh_lod1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -752,7 +784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 594890616475165065}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -785,7 +817,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2944785672371562721}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +848,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8097060555485176128}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: upper_jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -847,7 +879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7287604540550099056}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_whisker_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -877,7 +909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6720122651709096992}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_body_mesh_lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -908,7 +940,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4160852221656384598}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -941,7 +973,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6631934813496476195}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: feeler_b_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -971,7 +1003,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6608261875321208985}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_whisker_mesh_lod1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1001,7 +1033,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3207240095158257769}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_05_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1031,7 +1063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8596982506297083264}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1062,7 +1094,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4550864025014517388}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1093,7 +1125,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5353020571763086418}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_03_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1123,7 +1155,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6722019410655623049}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: var_vis_00_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1154,7 +1186,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8040376716754873088}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_eye_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1184,7 +1216,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3711552619409726924}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_body_mesh_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1214,7 +1246,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5933492759568077249}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lower_jaw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1245,7 +1277,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5514903314496895631}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_whisker_mesh_lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1276,7 +1308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9068139077414739020}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1307,7 +1339,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3904692299515709814}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1339,7 +1371,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1000782508411823592}
   - component: {fileID: 5030229350017495454}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_body_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1463,7 +1495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2518912183298584288}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_whisker_mesh_lod2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1493,7 +1525,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 694203586733094084}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_arm_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1524,7 +1556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7948303835314766577}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lod_group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1557,7 +1589,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7360359265654164274}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_whisker_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1588,7 +1620,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4969218660999931401}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1620,7 +1652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3090664972216332544}
   - component: {fileID: 4321792839998241827}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_eye_mesh_shape
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1745,7 +1777,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1442118109673100651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_04
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1776,7 +1808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2922144916467783881}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: origin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1807,7 +1839,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3202975638082740701}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_body_mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1838,7 +1870,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1493390439008326440}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1869,7 +1901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6402232454855576183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1900,7 +1932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1715415754149343350}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_body_mesh_lod2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1930,7 +1962,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8227783709905216724}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_feeler_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1961,7 +1993,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5854244764355495005}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_body_mesh_lod1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1992,7 +2024,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8307070743415449527}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_eye_mesh_lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2023,7 +2055,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 54247635245849881}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: left_feeler_05
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2054,7 +2086,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8529475592922842681}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: upper_jaw_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2084,7 +2116,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2382032345947518407}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_eye_mesh_lod2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2114,7 +2146,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8545977621694663318}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: feeler_a_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2144,7 +2176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7745857316804976866}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: feeler_b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2175,7 +2207,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6636641943742883987}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: pm0129_00_00_body_mesh_lod1_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2205,7 +2237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5799600666673960137}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: var_vis_00_00_lod2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2236,7 +2268,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2211871853167881831}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: lower_jaw_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2266,7 +2298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6072502606915346665}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: waist
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2298,7 +2330,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7233732360485768662}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: tail_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2329,7 +2361,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5716488560219304244}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: right_arm_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}

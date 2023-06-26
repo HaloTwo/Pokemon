@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -132,7 +132,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3848580604791679808, guid: aee9cdd1acc69b64ab6c2ce0fd46c4ce, type: 3}
       propertyPath: m_RootOrder
-      value: 57
+      value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 3848580604791679808, guid: aee9cdd1acc69b64ab6c2ce0fd46c4ce, type: 3}
       propertyPath: m_LocalPosition.x
@@ -360,7 +360,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1675082966221891426, guid: 0d8eed1a0f6821b4a88982aae6c519ae, type: 3}
       propertyPath: m_RootOrder
-      value: 58
+      value: 56
       objectReference: {fileID: 0}
     - target: {fileID: 1675082966221891426, guid: 0d8eed1a0f6821b4a88982aae6c519ae, type: 3}
       propertyPath: m_LocalPosition.x
@@ -413,22 +413,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1675082966221891426, guid: 0d8eed1a0f6821b4a88982aae6c519ae, type: 3}
   m_PrefabInstance: {fileID: 709218253}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &733864839
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 3758540907993307003, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-  m_PrefabInstance: {fileID: 4100647150404673779}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 543450652531092786}
-  m_Layer: 0
-  m_Name: 'Koraidon(Riding) (Missing Prefab with guid: 7155081b426f3d54e8f44037f3c9b682)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -624,8 +608,6 @@ Transform:
   - {fileID: 543450653058491924}
   - {fileID: 543450653554164611}
   - {fileID: 543450653530995302}
-  - {fileID: 543450651699744096}
-  - {fileID: 543450652531092786}
   - {fileID: 1961054230}
   - {fileID: 1515398811}
   - {fileID: 1296581731}
@@ -635,22 +617,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1131536663
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 6945851462744064457, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-  m_PrefabInstance: {fileID: 7828934880439834131}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 543450651699744096}
-  m_Layer: 0
-  m_Name: 'Koraidon (Missing Prefab with guid: cb55f9064cc357f4abed13e5b85feb84)'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1001 &1221456511
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -660,7 +626,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5419267489527644760, guid: 23297e38645396545bd37a8150fbffc7, type: 3}
       propertyPath: m_RootOrder
-      value: 56
+      value: 54
       objectReference: {fileID: 0}
     - target: {fileID: 5419267489527644760, guid: 23297e38645396545bd37a8150fbffc7, type: 3}
       propertyPath: m_LocalPosition.x
@@ -726,7 +692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7496692100325614532, guid: 4343bb062904653409d804dc828f9bbe, type: 3}
       propertyPath: m_RootOrder
-      value: 55
+      value: 53
       objectReference: {fileID: 0}
     - target: {fileID: 7496692100325614532, guid: 4343bb062904653409d804dc828f9bbe, type: 3}
       propertyPath: m_LocalPosition.x
@@ -788,7 +754,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7118792936252338249, guid: 00920674b3efc68478ffa8cbf7b15272, type: 3}
       propertyPath: m_RootOrder
-      value: 54
+      value: 52
       objectReference: {fileID: 0}
     - target: {fileID: 7118792936252338249, guid: 00920674b3efc68478ffa8cbf7b15272, type: 3}
       propertyPath: m_LocalPosition.x
@@ -850,7 +816,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7957347790608424434, guid: a18eff0dd720fc74aa048545f6ea03f6, type: 3}
       propertyPath: m_RootOrder
-      value: 53
+      value: 51
       objectReference: {fileID: 0}
     - target: {fileID: 7957347790608424434, guid: a18eff0dd720fc74aa048545f6ea03f6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1259,20 +1225,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7767581363998976384, guid: 67a4ac98e78925349be02ec8476d870e, type: 3}
   m_PrefabInstance: {fileID: 7800594531284901163}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &543450651699744096
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-  m_PrefabInstance: {fileID: 7828934880439834131}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1131536663}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1080680196}
-  m_RootOrder: 51
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450651716561760 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7341051107838031800, guid: 6a3b3faaa4e42704b8deba74fa666537, type: 3}
@@ -1368,20 +1320,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3029182325478904919, guid: ef3b73f1c1f1ac34a8acdedbdd2cb1bc, type: 3}
   m_PrefabInstance: {fileID: 3279579558978232738}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &543450652531092786
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-  m_PrefabInstance: {fileID: 4100647150404673779}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 733864839}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 1080680196}
-  m_RootOrder: 52
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &543450652580775124 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5974125639649046711, guid: 6e5521aace6b6d34cb42df574876b5eb, type: 3}
@@ -2776,63 +2714,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2154668068223694567, guid: 8896003fbe99cf9449b7a92af59ca769, type: 3}
   m_PrefabInstance: {fileID: 3096915453499826410}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &4100647150404673779
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1080680196}
-    m_Modifications:
-    - target: {fileID: 3758540907993307003, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_Name
-      value: Koraidon(Riding)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_RootOrder
-      value: 52
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -2.0644019
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.239319
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14.784918
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.9367778
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0.349925
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 40.965
-      objectReference: {fileID: 0}
-    - target: {fileID: 4567447882458156481, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 7155081b426f3d54e8f44037f3c9b682, type: 3}
 --- !u!1001 &4184541150122724357
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3926,63 +3807,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 67a4ac98e78925349be02ec8476d870e, type: 3}
---- !u!1001 &7828934880439834131
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1080680196}
-    m_Modifications:
-    - target: {fileID: 6945851462744064457, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_Name
-      value: Koraidon
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_RootOrder
-      value: 51
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 4.2655983
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 4.239319
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 14.943918
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.91657895
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.39985386
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: -47.138
-      objectReference: {fileID: 0}
-    - target: {fileID: 7723479530438695795, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: cb55f9064cc357f4abed13e5b85feb84, type: 3}
 --- !u!1001 &8163499351860061535
 PrefabInstance:
   m_ObjectHideFlags: 0
