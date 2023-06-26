@@ -136,7 +136,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 position = transform.position + transform.forward * 5f;
         Quaternion rotation = transform.rotation;
-        Vector3 size = new Vector3(2f, 6f, 10f);
+        Vector3 size = new Vector3(1f, 6f, 10f);
 
         // 기즈모 시각화
         Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
@@ -156,7 +156,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    //볼 날리는 코루틴
+    //볼 날리는 모션
     IEnumerator StartThorw_co()
     {
         isLookon = true;
@@ -173,22 +173,19 @@ public class PlayerMovement : MonoBehaviour
     {
 
         ball_prefab.SetActive(true);
-        //float time =Time.fixedDeltaTime++;
+
         ball_rb.useGravity = true;
         ball_rb.velocity = Vector3.zero;
         ball_rb.angularVelocity = Vector3.zero;
         ball_prefab.transform.rotation = Quaternion.identity;
         ball_prefab.transform.position = ball_loc.position;
 
-        //colls = Physics.OverlapSphere(transform.position + transform.forward * (distance - 0.5f), distance, PokemonLayer);
-
         Vector3 position = transform.position + transform.forward * 5f;
         Quaternion rotation = transform.rotation;
-        Vector3 size = new Vector3(2f, 6f, 10f);
-
-        int PokemonLayer = LayerMask.GetMask("Pokemon");
+        Vector3 size = new Vector3(1f, 6f, 10f);
 
         Collider[] colls;
+        int PokemonLayer = LayerMask.GetMask("Pokemon");
         colls = Physics.OverlapBox(position, size, rotation, PokemonLayer);
 
         if (colls.Length > 0)
@@ -213,7 +210,7 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("타겟 포켓몬 : " + closestPokemon.name);
                 ball_rb.useGravity = false;
                 Vector3 forceDirection = (closestPokemon.transform.position - (ball_loc.position - new Vector3(0, 0.5f, 0))).normalized;
-                ball_rb.AddForce(forceDirection * (ThrowPower+1f), ForceMode.Impulse);
+                ball_rb.AddForce(forceDirection * ThrowPower, ForceMode.Impulse);
             }
         }
         else
