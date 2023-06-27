@@ -13,9 +13,7 @@ public class PokemonBattleMode : MonoBehaviour
 
     void Start()
     {
-        //BattleManager.instance.onBattle += player13;
-        //BattleManager.instance.onBattle.AddListener(player13);
-        BattleManager.instance.onBattle.AddListener(player13);
+        BattleManager.instance.onBattle.AddListener(Pokemon_Roar);
         BattleManager.instance.Battle_Start();
     }
 
@@ -25,8 +23,9 @@ public class PokemonBattleMode : MonoBehaviour
         
     }
 
-    public void player13()
+    public void Pokemon_Roar()
     {
-        Debug.Log("µé¾î°¬Áö·Õ");
+        anim.SetBool("Battle", true);
+        Debug.Log("¹èÆ²½ÃÀÛ!");
     }
 }

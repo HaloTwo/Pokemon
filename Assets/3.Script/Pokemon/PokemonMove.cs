@@ -39,8 +39,6 @@ public class PokemonMove : MonoBehaviour
         Vector3 directionToPlayer = Player.gameObject.transform.position - transform.position;
         transform.rotation = Quaternion.LookRotation(directionToPlayer);
 
-        anim.SetBool("Battle", true);
-
         //배틀모드로 돌입
         pokemonbattle.enabled = true;
         this.enabled = false;
