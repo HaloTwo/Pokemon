@@ -134,9 +134,9 @@ public class PlayerMovement : MonoBehaviour
         //Gizmos.DrawSphere(transform.position + transform.forward * (distance - 0.5f), distance);
         //Gizmos.DrawCube(this.transform.position + transform.forward * 5f, new Vector3(10f ,8f, 10f));
 
-        Vector3 position = transform.position + transform.forward * 5f;
+        Vector3 position = transform.position + transform.forward * 4f;
         Quaternion rotation = transform.rotation;
-        Vector3 size = new Vector3(1f, 6f, 10f);
+        Vector3 size = new Vector3(1f, 6f, 8f);
 
         // 기즈모 시각화
         Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
@@ -180,9 +180,9 @@ public class PlayerMovement : MonoBehaviour
         ball_prefab.transform.rotation = Quaternion.identity;
         ball_prefab.transform.position = ball_loc.position;
 
-        Vector3 position = transform.position + transform.forward * 5f;
+        Vector3 position = transform.position + transform.forward * 4f;
         Quaternion rotation = transform.rotation;
-        Vector3 size = new Vector3(1f, 6f, 10f);
+        Vector3 size = new Vector3(1f, 6f, 8f);
 
         Collider[] colls;
         int PokemonLayer = LayerMask.GetMask("Pokemon");

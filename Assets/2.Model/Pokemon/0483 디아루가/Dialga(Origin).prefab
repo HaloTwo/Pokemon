@@ -3010,6 +3010,7 @@ GameObject:
   - component: {fileID: 6022002114621952494}
   - component: {fileID: 1870575205699673375}
   - component: {fileID: 3356960195179794414}
+  - component: {fileID: 919132147721984551}
   m_Layer: 8
   m_Name: Dialga(Origin)
   m_TagString: Pokemon
@@ -3069,7 +3070,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &3356960195179794414
 CapsuleCollider:
@@ -3085,6 +3086,36 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &919132147721984551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6022002114621952493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d132e12b7b5ca04894ce4ea93bb65df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  MaxHp: 0
+  Attack: 0
+  Defence: 0
+  SpAttack: 0
+  SpDefence: 0
+  Speed: 0
+  Level: 0
+  Exp: 0
+  Type1: 0
+  Type2: 0
+  AttackRank: 0
+  SpAttackRank: 0
+  DefenceRank: 0
+  SpDefenceRank: 0
+  SpeedRank: 0
+  HitrateRank: 0
+  skills: []
 --- !u!1 &6203484209120858691
 GameObject:
   m_ObjectHideFlags: 0

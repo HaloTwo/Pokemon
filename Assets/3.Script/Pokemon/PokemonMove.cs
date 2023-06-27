@@ -4,25 +4,18 @@ using UnityEngine;
 
 public class PokemonMove : MonoBehaviour
 {
-    [SerializeField]Animator anim;
+    Animator anim;
+    PokemonBattleMode pokemonbattle;
 
-    void Start()
+    private void Awake()
     {
         TryGetComponent(out anim);
-
-        StartCoroutine(StartMotion());
+        TryGetComponent(out pokemonbattle);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Start()
     {
-        
-    }
-
-    IEnumerator StartMotion()
-    {
-        yield return null;
-        anim.SetBool("Walk", true);
+        anim.SetBool("Walk", true);    
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -47,5 +40,10 @@ public class PokemonMove : MonoBehaviour
         transform.rotation = Quaternion.LookRotation(directionToPlayer);
 
         anim.SetBool("Battle", true);
+
+        //배틀모드로 돌입
+        pokemonbattle.enabled = true;
+        this.enabled = false;
+        BattleManager.instance.Battle_Start();
     }
 }

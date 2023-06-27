@@ -13,14 +13,17 @@ public class DataManager : MonoBehaviour
         pokemonStats = FindObjectOfType<PokemonStats>();
         pokemonData = pokemonStats.GetPokemonArray();
 
-
+        //pokemon = Resources.LoadAll<GameObject>("Pokemon");
         SkillData[] skillDataArray = Resources.LoadAll<SkillData>("Skill");
         PokemonSkill = new SkillData[skillDataArray.Length];
+
         foreach (SkillData skillData in skillDataArray)
         {
             int index = skillData.Num;
             PokemonSkill[index] = skillData;
         }
+
+
         
 
         for (int i = 0; i < pokemon.Length; i++)

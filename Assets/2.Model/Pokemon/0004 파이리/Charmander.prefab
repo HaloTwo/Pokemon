@@ -1462,6 +1462,7 @@ GameObject:
   - component: {fileID: 3089690783274483713}
   - component: {fileID: 1617269395}
   - component: {fileID: 1617269396}
+  - component: {fileID: 2935461834200927630}
   - component: {fileID: 1784665462}
   m_Layer: 8
   m_Name: Charmander
@@ -1538,6 +1539,36 @@ CapsuleCollider:
   m_Height: 0.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.3, z: 0}
+--- !u!114 &2935461834200927630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3089690783274483714}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d132e12b7b5ca04894ce4ea93bb65df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: 
+  MaxHp: 0
+  Attack: 0
+  Defence: 0
+  SpAttack: 0
+  SpDefence: 0
+  Speed: 0
+  Level: 0
+  Exp: 0
+  Type1: 0
+  Type2: 0
+  AttackRank: 0
+  SpAttackRank: 0
+  DefenceRank: 0
+  SpDefenceRank: 0
+  SpeedRank: 0
+  HitrateRank: 0
+  skills: []
 --- !u!114 &1784665462
 MonoBehaviour:
   m_ObjectHideFlags: 0
