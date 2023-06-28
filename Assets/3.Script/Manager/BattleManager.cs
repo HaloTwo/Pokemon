@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,27 +11,27 @@ public class BattleManager : MonoBehaviour
 
     private void Awake()
     {
-        if (instance == null) //instance°¡ null. Áï, ½Ã½ºÅÛ»ó¿¡ Á¸ÀçÇÏ°í ÀÖÁö ¾ÊÀ»¶§
+        if (instance == null) //instanceê°€ null. ì¦‰, ì‹œìŠ¤í…œìƒì— ì¡´ì¬í•˜ê³  ìˆì§€ ì•Šì„ë•Œ
         {
-            instance = this; //³»ÀÚ½ÅÀ» instance·Î ³Ö¾îÁİ´Ï´Ù.
-            DontDestroyOnLoad(gameObject); //OnLoad(¾ÀÀÌ ·Îµå µÇ¾úÀ»¶§) ÀÚ½ÅÀ» ÆÄ±«ÇÏÁö ¾Ê°í À¯Áö
+            instance = this; //ë‚´ìì‹ ì„ instanceë¡œ ë„£ì–´ì¤ë‹ˆë‹¤.
+            DontDestroyOnLoad(gameObject); //OnLoad(ì”¬ì´ ë¡œë“œ ë˜ì—ˆì„ë•Œ) ìì‹ ì„ íŒŒê´´í•˜ì§€ ì•Šê³  ìœ ì§€
         }
         else
         {
-            if (instance != this) //instance°¡ ³»°¡ ¾Æ´Ï¶ó¸é ÀÌ¹Ì instance°¡ ÇÏ³ª Á¸ÀçÇÏ°í ÀÖ´Ù´Â ÀÇ¹Ì
-                Destroy(this.gameObject); //µÑ ÀÌ»ó Á¸ÀçÇÏ¸é ¾ÈµÇ´Â °´Ã¼ÀÌ´Ï ¹æ±İ AWakeµÈ ÀÚ½ÅÀ» »èÁ¦
+            if (instance != this) //instanceê°€ ë‚´ê°€ ì•„ë‹ˆë¼ë©´ ì´ë¯¸ instanceê°€ í•˜ë‚˜ ì¡´ì¬í•˜ê³  ìˆë‹¤ëŠ” ì˜ë¯¸
+                Destroy(this.gameObject); //ë‘˜ ì´ìƒ ì¡´ì¬í•˜ë©´ ì•ˆë˜ëŠ” ê°ì²´ì´ë‹ˆ ë°©ê¸ˆ AWakeëœ ìì‹ ì„ ì‚­ì œ
         }
     }
 
     public PokemonData PlayerPokemon;
     public PokemonData EnemyPokemon;
 
-    [Header("·©Å©")]
-    //Å¸ÀÔ·©Å©
+    [Header("ë­í¬")]
+    //íƒ€ì…ë­í¬
     public float DamageRank = 1;
-    //ÀÚ¼Ó·©Å©
+    //ìì†ë­í¬
     public float PropertyRank = 1;
-    //½ºÅ×ÀÌÅÍ½º ·©Å©
+    //ìŠ¤í…Œì´í„°ìŠ¤ ë­í¬
     public float AttackerAttackRank = 1;
     public float AttackerSpAttackRank = 1;
     public float AttackerDefenceRank = 1;
@@ -46,20 +46,21 @@ public class BattleManager : MonoBehaviour
     public float TargetSpeedRank = 1;
     public float TargetHitrateRank = 1;
 
-    //ÃÖÁ¾ µ¥¹ÌÁö
+    //ìµœì¢… ë°ë¯¸ì§€
     private float Damage = 0;
     [SerializeField] Text Explain_txt;
 
-    [Header("¼­·ÎÀÇ °Å¸®")]
-    private float distance = 5f;
-    [Header("Ä«¸Ş¶ó")]
+    [Header("ì„œë¡œì˜ ê±°ë¦¬")]
+    [SerializeField] private float distance = 8f;
+    [Header("ì¹´ë©”ë¼")]
     [SerializeField]private CinemachineVirtualCamera virtualCamera;
     [SerializeField]private CinemachineFreeLook PlayerCamera;
 
-    [Header("Æ÷ÄÏ¸ó")]
+    [Header("í¬ì¼“ëª¬")]
     public GameObject playerPokemon;
     public GameObject enemyPokemon;
 
+    [Header("í”Œë ˆì´ì–´")]
     [SerializeField] private GameObject player;
 
     public UnityEvent Battle_Ready;
@@ -71,10 +72,10 @@ public class BattleManager : MonoBehaviour
 
     //private void Update()
     //{
-    //    Debug.Log("ÇÃ·¹ÀÌ¾î À§Ä¡ : " + player.transform.position);
+    //    Debug.Log("í”Œë ˆì´ì–´ ìœ„ì¹˜ : " + player.transform.position);
     //}
 
-    //½ÃÀÛ Ä«¸Ş¶ó ¿¬Ãâ
+    //ì‹œì‘ ì¹´ë©”ë¼ ì—°ì¶œ
     IEnumerator BattleCamera(GameObject enemyPokemon)
     {
         Vector3 targetCenter = this.enemyPokemon.transform.position + this.enemyPokemon.transform.up * enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
@@ -88,28 +89,48 @@ public class BattleManager : MonoBehaviour
 
         PlayerCamera.Follow = playerPokemon.transform;
         PlayerCamera.LookAt = playerPokemon.transform;
+
+
+        // Get the current angle of the player's PokÃ©mon
+        float playerPokemonAngle = Quaternion.LookRotation(playerPokemon.transform.forward, Vector3.up).eulerAngles.y;
+
+        // Calculate the desired camera angle
+        float cameraXAngle = playerPokemonAngle - 10f;
+
+        // Adjust the camera angle within the range of -180 to 180 degrees
+        cameraXAngle = Mathf.Repeat(cameraXAngle + 180f, 360f) - 180f;
+
+        // Set the camera's xAxis.Value
+        PlayerCamera.m_XAxis.Value = cameraXAngle;
+
+        // Set the local angles of PlayerCamera
+        PlayerCamera.m_YAxis.Value = 0.4f;
     }
 
     public void Battle_Start(GameObject enemyPokemon)
     {
         this.enemyPokemon = enemyPokemon;
 
-        //ÇÃ·¹ÀÌ¾î ¸ø¿òÁ÷ÀÌ°Ô
-        player.GetComponent<PlayerMovement>().isBattle = true;
-        player.GetComponent<Animator>().enabled = false;
+        //ì• ë‹ˆë©”ì´í„° ì ì‹œ ë”
+        StartCoroutine(player.GetComponent<PlayerMovement>().animatoer_end());
 
-        //Æ÷ÄÏ¸ó »ı¼º
+        //í”Œë ˆì´ì–´ ëª»ì›€ì§ì´ê²Œ
+        player.GetComponent<PlayerMovement>().isBattle = true;
+
+        //í¬ì¼“ëª¬ ìƒì„±
         Battle_Ready.Invoke();
 
-        //Æ÷ÄÏ¸ó À§Ä¡¿Í ÇÃ·¹ÀÌ¾î À§Ä¡ Á¶Á¤
+        //í¬ì¼“ëª¬ ìœ„ì¹˜ì™€ í”Œë ˆì´ì–´ ìœ„ì¹˜ ì¡°ì •
         playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
         playerPokemon.transform.LookAt(enemyPokemon.transform.position);
-        Debug.Log("Æ÷ÄÏ¸ó À§Ä¡ : " + playerPokemon.transform.position + "ÇÃ·¹ÀÌ¾î À§Ä¡ : " + player.transform.position);
-        player.GetComponent<Animator>().enabled = false;
-        player.transform.position = playerPokemon.transform.position + new Vector3(-1f, 0, -2f);
-        player.GetComponent<Animator>().enabled = true;
-        Debug.Log("Æ÷ÄÏ¸ó À§Ä¡ : " + playerPokemon.transform.position + "ÇÃ·¹ÀÌ¾î À§Ä¡ : " + player.transform.position);
-        //Ä«¸Ş¶ó ¿¬Ãâ ½ÃÀÛ
+
+        Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
+        Vector3 offset = rotation * -playerPokemon.transform.forward;
+
+        player.transform.position = playerPokemon.transform.position + offset * 2f;
+        player.transform.LookAt(enemyPokemon.transform.position);
+
+        //ì¹´ë©”ë¼ ì—°ì¶œ ì‹œì‘
         StartCoroutine(BattleCamera(enemyPokemon));
 
     }
@@ -132,16 +153,16 @@ public class BattleManager : MonoBehaviour
 
         if (DamageRank > 1)
         {
-            Explain_txt.text = "È¿°ú°¡ ±²ÀåÇß´Ù!";
+            Explain_txt.text = "íš¨ê³¼ê°€ êµ‰ì¥í–ˆë‹¤!";
         }
         else if (DamageRank < 1)
         {
 
-            Explain_txt.text = "È¿°ú°¡ º°·ÎÀÎµíÇÏ´Ù...";
+            Explain_txt.text = "íš¨ê³¼ê°€ ë³„ë¡œì¸ë“¯í•˜ë‹¤...";
         }
         else if (DamageRank == 0)
         {
-            Explain_txt.text = "È¿°ú°¡ ¾ø´Â°Å°°´Ù.";
+            Explain_txt.text = "íš¨ê³¼ê°€ ì—†ëŠ”ê±°ê°™ë‹¤.";
             Damage = 0;
         }
         else
@@ -149,9 +170,9 @@ public class BattleManager : MonoBehaviour
 
         }
         target.Hp -= (int)Damage;
-        Debug.Log("{0}¿¡°Ô {1}¸¸Å­ÀÇ µ¥¹ÌÁö¸¦ ÁÖ¾ú´Ù!" + target.name + Damage);
+        Debug.Log("{0}ì—ê²Œ {1}ë§Œí¼ì˜ ë°ë¯¸ì§€ë¥¼ ì£¼ì—ˆë‹¤!" + target.name + Damage);
 
-        //¹èÆ² º¯¼ö°ªµé ÃÊ±âÈ­
+        //ë°°í‹€ ë³€ìˆ˜ê°’ë“¤ ì´ˆê¸°í™”
         PropertyRank = 1;
         DamageRank = 1;
     }
@@ -172,7 +193,7 @@ public class BattleManager : MonoBehaviour
                 DamageRank *= 0.5f;
             }
 
-        } //³ë¸»Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        } //ë…¸ë§íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Fight)
         {
             if (pokemon.Type1 == PokemonStats.Type.Normal || pokemon.Type2 == PokemonStats.Type.Normal)
@@ -219,7 +240,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//°İÅõÅ¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ê²©íˆ¬íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Poison)
         {
             if (pokemon.Type1 == PokemonStats.Type.Grass || pokemon.Type2 == PokemonStats.Type.Grass)
@@ -251,7 +272,7 @@ public class BattleManager : MonoBehaviour
                 DamageRank *= 2f;
             }
 
-        }//µ¶Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë…íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Earth)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -286,7 +307,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 2f;
             }
-        }//¶¥Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë•…íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Flight)
         {
             if (pokemon.Type1 == PokemonStats.Type.Grass || pokemon.Type2 == PokemonStats.Type.Grass)
@@ -313,7 +334,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//ºñÇàÅ¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë¹„í–‰íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Bug)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -356,7 +377,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//¹ú·¹Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë²Œë ˆíƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Rock)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -387,7 +408,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//¹ÙÀ§Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë°”ìœ„íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Ghost)
         {
             if (pokemon.Type1 == PokemonStats.Type.Normal || pokemon.Type2 == PokemonStats.Type.Normal)
@@ -406,7 +427,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//°í½ºÆ®Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ê³ ìŠ¤íŠ¸íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Steel)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -437,7 +458,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 2f;
             }
-        }//°­Ã¶Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ê°•ì² íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Fire)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -472,7 +493,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 2f;
             }
-        }//ºÒÅ¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë¶ˆíƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Water)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -499,7 +520,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//¹°Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë¬¼íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Electricty)
         {
             if (pokemon.Type1 == PokemonStats.Type.Water || pokemon.Type2 == PokemonStats.Type.Water)
@@ -526,7 +547,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//Àü±âÅ¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ì „ê¸°íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Grass)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -569,7 +590,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//Ç®Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//í’€íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Ice)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -604,7 +625,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//¾óÀ½Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ì–¼ìŒíƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Esper)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fight || pokemon.Type2 == PokemonStats.Type.Fight)
@@ -627,7 +648,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//¿¡½ºÆÛÅ¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ì—ìŠ¤í¼íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Dragon)
         {
             if (pokemon.Type1 == PokemonStats.Type.Dragon || pokemon.Type2 == PokemonStats.Type.Dragon)
@@ -642,7 +663,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0f;
             }
-        }//µå·¡°ïÅ¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ë“œë˜ê³¤íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Evil)
         {
             if (pokemon.Type1 == PokemonStats.Type.Ice || pokemon.Type2 == PokemonStats.Type.Ice)
@@ -665,7 +686,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//¾ÇÅ¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//ì•…íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
         if (skill.propertyType == SkillData.PropertyType.Fairy)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
@@ -692,7 +713,7 @@ public class BattleManager : MonoBehaviour
             {
                 DamageRank *= 0.5f;
             }
-        }//Æä¾î¸®Å¸ÀÔ ·©Å© µ¥¹ÌÁö ÆÇº°
+        }//í˜ì–´ë¦¬íƒ€ì… ë­í¬ ë°ë¯¸ì§€ íŒë³„
 
     }
     public void CheckProPertyType(SkillData skill, PokemonStats pokemon)
@@ -701,7 +722,7 @@ public class BattleManager : MonoBehaviour
         {
             PropertyRank *= 1.5f;
         }
-        #region ÁÖ¼®(ÀÚ¼ÓÈ®ÀÎ)
+        #region ì£¼ì„(ìì†í™•ì¸)
         /*
         if (skill.propertyType == SkillData.PropertyType.Normal)
         {
@@ -709,126 +730,126 @@ public class BattleManager : MonoBehaviour
             {
                 PropertyRank *= 1.5f;
             }
-        }//³ë¸»Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ë…¸ë§íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Fight)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fight || pokemon.Type2 == PokemonStats.Type.Fight)
             {
                 PropertyRank *= 1.5f;
             }
-        } //°İÅõÅ¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        } //ê²©íˆ¬íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Poison)
         {
             if (pokemon.Type1 == PokemonStats.Type.Poison || pokemon.Type2 == PokemonStats.Type.Poison)
             {
                 PropertyRank *= 1.5f;
             }
-        }//µ¶Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ë…íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Earth)
         {
             if (pokemon.Type1 == PokemonStats.Type.Earth || pokemon.Type2 == PokemonStats.Type.Earth)
             {
                 PropertyRank *= 1.5f;
             }
-        }//¶¥Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ë•…íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Flight)
         {
             if (pokemon.Type1 == PokemonStats.Type.Flight || pokemon.Type2 == PokemonStats.Type.Flight)
             {
                 PropertyRank *= 1.5f;
             }
-        }//ºñÇàÅ¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ë¹„í–‰íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Bug)
         {
             if (pokemon.Type1 == PokemonStats.Type.Bug || pokemon.Type2 == PokemonStats.Type.Bug)
             {
                 PropertyRank *= 1.5f;
             }
-        } // ¹ú·¹Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        } // ë²Œë ˆíƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Rock)
         {
             if (pokemon.Type1 == PokemonStats.Type.Rock || pokemon.Type2 == PokemonStats.Type.Rock)
             {
                 PropertyRank *= 1.5f;
             }
-        } //¹ÙÀ§Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        } //ë°”ìœ„íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Ghost)
         {
             if (pokemon.Type1 == PokemonStats.Type.Ghost || pokemon.Type2 == PokemonStats.Type.Ghost)
             {
                 PropertyRank *= 1.5f;
             }
-        }//°í½ºÆ®Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ê³ ìŠ¤íŠ¸íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Steel)
         {
             if (pokemon.Type1 == PokemonStats.Type.Steel || pokemon.Type2 == PokemonStats.Type.Steel)
             {
                 PropertyRank *= 1.5f;
             }
-        }//°­Ã¶Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ê°•ì² íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Fire)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fire || pokemon.Type2 == PokemonStats.Type.Fire)
             {
                 PropertyRank *= 1.5f;
             }
-        }//ºÒÅ¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ë¶ˆíƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Water)
         {
             if (pokemon.Type1 == PokemonStats.Type.Water || pokemon.Type2 == PokemonStats.Type.Water)
             {
                 PropertyRank *= 1.5f;
             }
-        }//¹°Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ë¬¼íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Electricty)
         {
             if (pokemon.Type1 == PokemonStats.Type.Electricty || pokemon.Type2 == PokemonStats.Type.Electricty)
             {
                 PropertyRank *= 1.5f;
             }
-        }//Àü±âÅ¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ì „ê¸°íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Grass)
         {
             if (pokemon.Type1 == PokemonStats.Type.Grass || pokemon.Type2 == PokemonStats.Type.Grass)
             {
                 PropertyRank *= 1.5f;
             }
-        }//Ç®Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//í’€íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Ice)
         {
             if (pokemon.Type1 == PokemonStats.Type.Ice || pokemon.Type2 == PokemonStats.Type.Ice)
             {
                 PropertyRank *= 1.5f;
             }
-        }//¾óÀ½Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ì–¼ìŒíƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Esper)
         {
             if (pokemon.Type1 == PokemonStats.Type.Esper || pokemon.Type2 == PokemonStats.Type.Esper)
             {
                 PropertyRank *= 1.5f;
             }
-        }//¿¡½ºÆÛÅ¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ì—ìŠ¤í¼íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Dragon)
         {
             if (pokemon.Type1 == PokemonStats.Type.Dragon || pokemon.Type2 == PokemonStats.Type.Dragon)
             {
                 PropertyRank *= 1.5f;
             }
-        }//µå·¡°ïÅ¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ë“œë˜ê³¤íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Evil)
         {
             if (pokemon.Type1 == PokemonStats.Type.Evil || pokemon.Type2 == PokemonStats.Type.Evil)
             {
                 PropertyRank *= 1.5f;
             }
-        }//¾ÇÅ¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//ì•…íƒ€ì… ìì†í™•ì¸
         if (skill.propertyType == SkillData.PropertyType.Fairy)
         {
             if (pokemon.Type1 == PokemonStats.Type.Fairy || pokemon.Type2 == PokemonStats.Type.Fairy)
             {
                 PropertyRank *= 1.5f;
             }
-        }//Æä¾î¸®Å¸ÀÔ ÀÚ¼ÓÈ®ÀÎ
+        }//í˜ì–´ë¦¬íƒ€ì… ìì†í™•ì¸
         */
         #endregion
     }
@@ -897,7 +918,7 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
 
-        }//°ø°İ ·©Å©¾÷ È®ÀÎ
+        }//ê³µê²© ë­í¬ì—… í™•ì¸
         switch (attacker.SpAttackRank)
         {
             case 6:
@@ -961,7 +982,7 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
 
-        }//Æ¯¼ö°ø°İ ·©Å©¾÷ È®ÀÎ
+        }//íŠ¹ìˆ˜ê³µê²© ë­í¬ì—… í™•ì¸
         switch (target.DefenceRank)
         {
             case 6:
@@ -1025,7 +1046,7 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
 
-        } // Å¸°Ù ¹æ¾î ·©Å©´Ù¿î È®ÀÎ
+        } // íƒ€ê²Ÿ ë°©ì–´ ë­í¬ë‹¤ìš´ í™•ì¸
         switch (target.SpDefenceRank)
         {
             case 6:
@@ -1089,9 +1110,9 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
 
-        } // Å¸°Ù Æ¯¼ö¹æ¾î ·©Å©´Ù¿î È®ÀÎ
+        } // íƒ€ê²Ÿ íŠ¹ìˆ˜ë°©ì–´ ë­í¬ë‹¤ìš´ í™•ì¸
 
-        #region ¼Óµµºñ±³ÇÏ´Â°Å ¿©±â¼­ ÇÏ´ÂÁö¸ğ¸£°ÚÀ½ todo ±è¹Î¼ö
+        #region ì†ë„ë¹„êµí•˜ëŠ”ê±° ì—¬ê¸°ì„œ í•˜ëŠ”ì§€ëª¨ë¥´ê² ìŒ todo ê¹€ë¯¼ìˆ˜
         /*
         switch (attacker.SpeedRank)
         {
@@ -1156,7 +1177,7 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
 
-        } // °ø°İÀÚ ½ºÇÇµå ·©Å©´Ù¿î È®ÀÎ
+        } // ê³µê²©ì ìŠ¤í”¼ë“œ ë­í¬ë‹¤ìš´ í™•ì¸
         switch (target.SpeedRank)
         {
             case 6:
@@ -1220,10 +1241,13 @@ public class BattleManager : MonoBehaviour
                 }
                 break;
 
-        } // Å¸°Ù ½ºÇÇµå ·©Å©´Ù¿î È®ÀÎ
+        } // íƒ€ê²Ÿ ìŠ¤í”¼ë“œ ë­í¬ë‹¤ìš´ í™•ì¸
         */
 
 
         #endregion
     }
 }
+
+//1.5 / 75 -> 0.9/74e
+//1.4 / 75

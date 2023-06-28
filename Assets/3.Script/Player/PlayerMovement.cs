@@ -18,7 +18,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isLookon;
     public bool isBattle;
-
+    bool hasControl;
     [Header("카메라")]
     [SerializeField] private GameObject FollowCamera;
 
@@ -66,7 +66,7 @@ public class PlayerMovement : MonoBehaviour
         animator.SetBool("isGround", isGrounded);
         animator.SetBool("Battle", isBattle);
 
-        bool hasControl = (moveDirection != Vector3.zero);
+        hasControl = (moveDirection != Vector3.zero);
 
         // 회전
         Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
@@ -99,7 +99,7 @@ public class PlayerMovement : MonoBehaviour
     public void onWalk(InputAction.CallbackContext context)
     {
         //걷기 버튼을 꾹 눌렀을때
-        if (context.performed && !isBattle)
+        if (context.performed && !isBattle && hasControl)
         {
             animator.SetFloat("Velocity", 1);
         }
@@ -117,7 +117,14 @@ public class PlayerMovement : MonoBehaviour
 
         return isGrounded;
     }
-
+    
+    public IEnumerator animatoer_end()
+    {
+        animator.applyRootMotion = false;
+        yield return new WaitForSeconds(5f);
+        animator.applyRootMotion = true;
+        yield break;
+    }
 
     #region 범위 시각화
 
@@ -205,13 +212,16 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("타겟 포켓몬 : " + closestPokemon.name);
                 ball_rb.useGravity = false;
-                Vector3 forceDirection = (closestPokemon.transform.position - (ball_loc.position - new Vector3(0, 0.5f, 0))).normalized;
+
+                Vector3 targetCenter = closestPokemon.transform.position + closestPokemon.transform.up * closestPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
+
+                Vector3 forceDirection = (targetCenter - ball_loc.position).normalized;
                 ball_rb.AddForce(forceDirection * ThrowPower, ForceMode.Impulse);
             }
         }
         else
         {
-            ball_rb.AddForce(transform.forward * ThrowPower, ForceMode.Impulse);
+            ball_rb.AddForce(transform.forward * ThrowPower / 2, ForceMode.Impulse);
         }
 
         Invoke("DisableBallPrefab", 1.2f);
