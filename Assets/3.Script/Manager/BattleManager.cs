@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
+using Cinemachine;
 
 public class BattleManager : MonoBehaviour
 {
@@ -49,12 +50,68 @@ public class BattleManager : MonoBehaviour
     private float Damage = 0;
     [SerializeField] Text Explain_txt;
 
+    [Header("서로의 거리")]
+    private float distance = 5f;
+    [Header("카메라")]
+    [SerializeField]private CinemachineVirtualCamera virtualCamera;
+    [SerializeField]private CinemachineFreeLook PlayerCamera;
 
-    public UnityEvent onBattle;
+    [Header("포켓몬")]
+    public GameObject playerPokemon;
+    public GameObject enemyPokemon;
 
-    public void Battle_Start()
+    [SerializeField] private GameObject player;
+
+    public UnityEvent Battle_Ready;
+
+    private void Start()
     {
-        onBattle.Invoke();
+        player = GameObject.Find("Player").gameObject;
+    }
+
+    //private void Update()
+    //{
+    //    Debug.Log("플레이어 위치 : " + player.transform.position);
+    //}
+
+    //시작 카메라 연출
+    IEnumerator BattleCamera(GameObject enemyPokemon)
+    {
+        Vector3 targetCenter = this.enemyPokemon.transform.position + this.enemyPokemon.transform.up * enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
+
+        virtualCamera.transform.position = targetCenter + this.enemyPokemon.transform.forward * 3f;
+        virtualCamera.transform.rotation = Quaternion.LookRotation(targetCenter - virtualCamera.transform.position);
+      
+        virtualCamera.Priority = 15;
+        yield return new WaitForSeconds(3f);
+        virtualCamera.Priority = 0;
+
+        PlayerCamera.Follow = playerPokemon.transform;
+        PlayerCamera.LookAt = playerPokemon.transform;
+    }
+
+    public void Battle_Start(GameObject enemyPokemon)
+    {
+        this.enemyPokemon = enemyPokemon;
+
+        //플레이어 못움직이게
+        player.GetComponent<PlayerMovement>().isBattle = true;
+        player.GetComponent<Animator>().enabled = false;
+
+        //포켓몬 생성
+        Battle_Ready.Invoke();
+
+        //포켓몬 위치와 플레이어 위치 조정
+        playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
+        playerPokemon.transform.LookAt(enemyPokemon.transform.position);
+        Debug.Log("포켓몬 위치 : " + playerPokemon.transform.position + "플레이어 위치 : " + player.transform.position);
+        player.GetComponent<Animator>().enabled = false;
+        player.transform.position = playerPokemon.transform.position + new Vector3(-1f, 0, -2f);
+        player.GetComponent<Animator>().enabled = true;
+        Debug.Log("포켓몬 위치 : " + playerPokemon.transform.position + "플레이어 위치 : " + player.transform.position);
+        //카메라 연출 시작
+        StartCoroutine(BattleCamera(enemyPokemon));
+
     }
 
 
@@ -640,7 +697,7 @@ public class BattleManager : MonoBehaviour
     }
     public void CheckProPertyType(SkillData skill, PokemonStats pokemon)
     {
-        if(skill.propertyType == (SkillData.PropertyType)pokemon.Type1 || skill.propertyType == (SkillData.PropertyType)pokemon.Type2)
+        if (skill.propertyType == (SkillData.PropertyType)pokemon.Type1 || skill.propertyType == (SkillData.PropertyType)pokemon.Type2)
         {
             PropertyRank *= 1.5f;
         }

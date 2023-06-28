@@ -13,8 +13,7 @@ public class PokemonBattleMode : MonoBehaviour
 
     void Start()
     {
-        BattleManager.instance.onBattle.AddListener(Pokemon_Roar);
-        BattleManager.instance.Battle_Start();
+        anim.SetBool("Battle", true);
     }
 
     // Update is called once per frame
@@ -23,9 +22,5 @@ public class PokemonBattleMode : MonoBehaviour
         
     }
 
-    public void Pokemon_Roar()
-    {
-        anim.SetBool("Battle", true);
-        Debug.Log("배틀시작!");
-    }
+
 }

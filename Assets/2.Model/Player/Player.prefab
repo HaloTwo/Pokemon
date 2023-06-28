@@ -4306,8 +4306,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2887830627955496487}
-  - component: {fileID: 2546910981996907676}
+  - component: {fileID: 2141166183439624893}
   - component: {fileID: 2546910981996907683}
+  - component: {fileID: 2546910981996907676}
   - component: {fileID: 2546910981996907682}
   - component: {fileID: 2546910981996907681}
   - component: {fileID: 1160372094}
@@ -4358,6 +4359,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2141166183439624893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546910981996907677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 89f59b2f96e94df4f8e4d5af4989f075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerPokemon: []
+--- !u!114 &2546910981996907683
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2546910981996907677}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d92cf84cf61b414eb109f569b82280a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultSpeed: 600
+  walkSpeed: 100
+  rotationSpeed: 5
+  ThrowPower: 2
+  distance: 6
+  ball_loc: {fileID: 7129147292648456067}
+  ball_prefab: {fileID: 0}
+  groundCheck: {fileID: 3429803218510468503}
+  isGrounded: 0
+  isLookon: 0
+  FollowCamera: {fileID: 0}
 --- !u!114 &2546910981996907676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4419,38 +4456,11 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 156ce436-1a25-4e0f-bc6b-9b274771fa84
     m_ActionName: Player/New action
-  - m_PersistentCalls:
-      m_Calls: []
-    m_ActionId: a5ce0bea-977e-40b9-8f8c-f3d9144c5f62
-    m_ActionName: Player/MouseMove[/Mouse/delta/y]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &2546910981996907683
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2546910981996907677}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5d92cf84cf61b414eb109f569b82280a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultSpeed: 600
-  walkSpeed: 100
-  rotationSpeed: 5
-  ThrowPower: 2
-  distance: 6
-  ball_loc: {fileID: 7129147292648456067}
-  ball_prefab: {fileID: 0}
-  groundCheck: {fileID: 3429803218510468503}
-  isGrounded: 0
-  isLookon: 0
-  FollowCamera: {fileID: 0}
 --- !u!95 &2546910981996907682
 Animator:
   serializedVersion: 3

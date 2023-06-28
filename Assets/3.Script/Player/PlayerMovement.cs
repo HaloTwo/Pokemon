@@ -5,10 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
-    [Header("이동 속도")]
-    [SerializeField] private float defaultSpeed = 600;
-    private float currentSpeed;
-    [SerializeField] private float walkSpeed = 200;
     [Header("회전 속도")]
     [SerializeField] private float rotationSpeed = 5f;
     [Header("몬스터 볼 관련")]
@@ -21,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Transform groundCheck;
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isLookon;
+    public bool isBattle;
 
     [Header("카메라")]
     [SerializeField] private GameObject FollowCamera;
@@ -30,7 +27,8 @@ public class PlayerMovement : MonoBehaviour
 
     private PlayerControlsButton inputActions;
     private CharacterController controller;
-    private Animator animator;
+    [HideInInspector]
+    public Animator animator;
 
     //볼 중력
     private Rigidbody ball_rb;
@@ -51,9 +49,6 @@ public class PlayerMovement : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        currentSpeed = defaultSpeed;
-
-
         if (groundCheck == null) groundCheck = transform.Find("groundCheck");
         if (ball_loc == null) ball_loc = transform.Find("tr0050_00.trmdl/origin/foot_base/waist/spine_01/spine_02/spine_03/right_shoulder/right_arm_width/right_arm_01/right_arm_02/right_hand/right_attach_on");
         if (FollowCamera == null) FollowCamera = GameObject.FindGameObjectWithTag("MainCamera");
@@ -69,6 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = IsGrounded();
         animator.SetBool("isGround", isGrounded);
+        animator.SetBool("Battle", isBattle);
 
         bool hasControl = (moveDirection != Vector3.zero);
 
@@ -77,12 +73,12 @@ public class PlayerMovement : MonoBehaviour
         Vector3 cameraForward = Vector3.Scale(FollowCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
         moveDirection = (input.x * FollowCamera.transform.right + input.y * cameraForward).normalized;
 
-        if (hasControl && isGrounded && !isLookon)
+        if (hasControl && isGrounded && !isLookon && !isBattle)
         {
             Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
             transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
-            controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
+            //controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
 
             if (animator.GetFloat("Velocity") != 1)
             {
@@ -91,25 +87,25 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            animator.SetFloat("Velocity", 0);
+            if (animator.GetFloat("Velocity") != 1)
+            {
+                animator.SetFloat("Velocity", 0);
+            }
         }
 
     }
 
 
-
     public void onWalk(InputAction.CallbackContext context)
     {
         //걷기 버튼을 꾹 눌렀을때
-        if (context.performed)
+        if (context.performed && !isBattle)
         {
-            currentSpeed = walkSpeed;
             animator.SetFloat("Velocity", 1);
         }
         //걷기 버튼을 땠을때
         else if (context.canceled)
         {
-            currentSpeed = defaultSpeed;
             animator.SetFloat("Velocity", 2);
         }
     }
@@ -150,7 +146,7 @@ public class PlayerMovement : MonoBehaviour
     //버튼 이벤트
     public void OnThrow(InputAction.CallbackContext context)
     {
-        if (context.performed)
+        if (context.performed && !isBattle)
         {
             StartCoroutine(StartThorw_co());
         }

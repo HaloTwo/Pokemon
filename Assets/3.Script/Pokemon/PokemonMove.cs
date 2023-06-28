@@ -33,8 +33,9 @@ public class PokemonMove : MonoBehaviour
     IEnumerator Battle_Go_co()
     {
         anim.SetBool("Walk", false);
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(1.5f);
 
+        //플레이어 위치 추적해서 쳐다보기
         GameObject Player = GameObject.FindGameObjectWithTag("Player");
         Vector3 directionToPlayer = Player.gameObject.transform.position - transform.position;
         transform.rotation = Quaternion.LookRotation(directionToPlayer);
@@ -42,6 +43,7 @@ public class PokemonMove : MonoBehaviour
         //배틀모드로 돌입
         pokemonbattle.enabled = true;
         this.enabled = false;
-        BattleManager.instance.Battle_Start();
+
+        BattleManager.instance.Battle_Start(gameObject);
     }
 }
