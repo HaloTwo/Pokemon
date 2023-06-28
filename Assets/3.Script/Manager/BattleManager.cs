@@ -52,6 +52,7 @@ public class BattleManager : MonoBehaviour
 
     [Header("서로의 거리")]
     [SerializeField] private float distance = 8f;
+
     [Header("카메라")]
     [SerializeField]private CinemachineVirtualCamera virtualCamera;
     [SerializeField]private CinemachineFreeLook PlayerCamera;
@@ -70,40 +71,37 @@ public class BattleManager : MonoBehaviour
         player = GameObject.Find("Player").gameObject;
     }
 
-    //private void Update()
-    //{
-    //    Debug.Log("플레이어 위치 : " + player.transform.position);
-    //}
-
     //시작 카메라 연출
-    IEnumerator BattleCamera(GameObject enemyPokemon)
+    IEnumerator Wild_BattleCamera_co(GameObject enemyPokemon)
     {
+        //카메라 이동
+        virtualCamera.Priority = 15;
+
+        //적 포켓몬의 중심
         Vector3 targetCenter = this.enemyPokemon.transform.position + this.enemyPokemon.transform.up * enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
 
+        //중심을 바라보도록
         virtualCamera.transform.position = targetCenter + this.enemyPokemon.transform.forward * 3f;
         virtualCamera.transform.rotation = Quaternion.LookRotation(targetCenter - virtualCamera.transform.position);
-      
-        virtualCamera.Priority = 15;
+
+        //3초 딜레이
         yield return new WaitForSeconds(3f);
+        
+        //다시 원래 카메라로
         virtualCamera.Priority = 0;
 
+        //PlayerPokemon을 쳐다보도록
         PlayerCamera.Follow = playerPokemon.transform;
         PlayerCamera.LookAt = playerPokemon.transform;
 
-
-        // Get the current angle of the player's Pokémon
+        //보고싶은 카메라의 각도 = 포켓몬 위치에서 10도
         float playerPokemonAngle = Quaternion.LookRotation(playerPokemon.transform.forward, Vector3.up).eulerAngles.y;
+        float cameraXAngle_local = 10f;
+        //각도 계산
+        float cameraXAngle = Mathf.Repeat(playerPokemonAngle - cameraXAngle_local + 180f, 360f) - 180f;
 
-        // Calculate the desired camera angle
-        float cameraXAngle = playerPokemonAngle - 10f;
-
-        // Adjust the camera angle within the range of -180 to 180 degrees
-        cameraXAngle = Mathf.Repeat(cameraXAngle + 180f, 360f) - 180f;
-
-        // Set the camera's xAxis.Value
+        //플레이어 카메라의 값
         PlayerCamera.m_XAxis.Value = cameraXAngle;
-
-        // Set the local angles of PlayerCamera
         PlayerCamera.m_YAxis.Value = 0.4f;
     }
 
@@ -120,18 +118,19 @@ public class BattleManager : MonoBehaviour
         //포켓몬 생성
         Battle_Ready.Invoke();
 
-        //포켓몬 위치와 플레이어 위치 조정
+        //포켓몬과 플레이어 위치 조정
+        //포켓몬 위치
         playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
         playerPokemon.transform.LookAt(enemyPokemon.transform.position);
 
+        //플레이어 위치
         Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
         Vector3 offset = rotation * -playerPokemon.transform.forward;
-
         player.transform.position = playerPokemon.transform.position + offset * 2f;
         player.transform.LookAt(enemyPokemon.transform.position);
 
         //카메라 연출 시작
-        StartCoroutine(BattleCamera(enemyPokemon));
+        StartCoroutine(Wild_BattleCamera_co(enemyPokemon));
 
     }
 

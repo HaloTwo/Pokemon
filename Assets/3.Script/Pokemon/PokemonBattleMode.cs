@@ -5,6 +5,7 @@ using UnityEngine;
 public class PokemonBattleMode : MonoBehaviour
 {
     Animator anim;
+    public bool wildPokemon = false;
 
     private void Awake()
     {

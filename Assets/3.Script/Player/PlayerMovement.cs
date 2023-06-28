@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering.LookDev;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -18,7 +19,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isLookon;
     public bool isBattle;
-    bool hasControl;
+    [SerializeField] private bool hasControl;
+    [SerializeField] private bool isWalking = false;
     [Header("Ä«¸Þ¶ó")]
     [SerializeField] private GameObject FollowCamera;
 
@@ -80,7 +82,11 @@ public class PlayerMovement : MonoBehaviour
 
             //controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
 
-            if (animator.GetFloat("Velocity") != 1)
+            if (isWalking)
+            {
+                animator.SetFloat("Velocity", 1);
+            }
+            else if (animator.GetFloat("Velocity") != 1)
             {
                 animator.SetFloat("Velocity", 2);
             }
@@ -99,14 +105,16 @@ public class PlayerMovement : MonoBehaviour
     public void onWalk(InputAction.CallbackContext context)
     {
         //°È±â ¹öÆ°À» ²Ú ´­·¶À»¶§
-        if (context.performed && !isBattle && hasControl)
+        if (context.performed && !isBattle)
         {
-            animator.SetFloat("Velocity", 1);
+            isWalking = true;
+            //animator.SetFloat("Velocity", 1);
         }
         //°È±â ¹öÆ°À» ¶®À»¶§
         else if (context.canceled)
         {
-            animator.SetFloat("Velocity", 2);
+            isWalking = false;
+            animator.SetFloat("Velocity", 0);
         }
     }
     public bool IsGrounded()
