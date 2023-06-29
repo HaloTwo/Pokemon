@@ -40,9 +40,14 @@ public class PlayerBag : MonoBehaviour
             for (int i = 0; i < PlayerPokemon.Count; i++)
             {
                 GameObject newPokemon = Instantiate(PlayerPokemon[i]);
+
                 NowPokemon.Add(newPokemon);
                 newPokemon.GetComponent<PokemonMove>().enabled = false;
-                newPokemon.GetComponent<PokemonBattleMode>().enabled = true;
+
+                PokemonBattleMode newPokemonBattleMode = newPokemon.GetComponent<PokemonBattleMode>();
+                newPokemonBattleMode.enabled = true;
+                newPokemonBattleMode.isWild = false;
+
                 newPokemon.SetActive(false);
             }         
         }

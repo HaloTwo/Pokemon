@@ -53,6 +53,15 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Input"",
+                    ""type"": ""Button"",
+                    ""id"": ""a1500cf4-f17a-42c0-a8d2-1e30689923af"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -132,6 +141,17 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
                     ""action"": ""Move"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""50cdd4d6-c709-4d7d-b31b-e98d33616351"",
+                    ""path"": ""<Keyboard>/space"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Input"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -160,6 +180,7 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Throw_co = m_Player.FindAction("Throw_co", throwIfNotFound: true);
         m_Player_Walk = m_Player.FindAction("Walk", throwIfNotFound: true);
+        m_Player_Input = m_Player.FindAction("Input", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -222,6 +243,7 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Throw_co;
     private readonly InputAction m_Player_Walk;
+    private readonly InputAction m_Player_Input;
     public struct PlayerActions
     {
         private @PlayerControlsButton m_Wrapper;
@@ -229,6 +251,7 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Throw_co => m_Wrapper.m_Player_Throw_co;
         public InputAction @Walk => m_Wrapper.m_Player_Walk;
+        public InputAction @Input => m_Wrapper.m_Player_Input;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -247,6 +270,9 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
                 @Walk.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
                 @Walk.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
                 @Walk.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnWalk;
+                @Input.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInput;
+                @Input.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInput;
+                @Input.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnInput;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -260,6 +286,9 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
                 @Walk.started += instance.OnWalk;
                 @Walk.performed += instance.OnWalk;
                 @Walk.canceled += instance.OnWalk;
+                @Input.started += instance.OnInput;
+                @Input.performed += instance.OnInput;
+                @Input.canceled += instance.OnInput;
             }
         }
     }
@@ -278,5 +307,6 @@ public partial class @PlayerControlsButton : IInputActionCollection2, IDisposabl
         void OnMove(InputAction.CallbackContext context);
         void OnThrow_co(InputAction.CallbackContext context);
         void OnWalk(InputAction.CallbackContext context);
+        void OnInput(InputAction.CallbackContext context);
     }
 }

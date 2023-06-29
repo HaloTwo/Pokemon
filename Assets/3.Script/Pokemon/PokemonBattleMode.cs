@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class PokemonBattleMode : MonoBehaviour
 {
+    public bool isWild = true;
+    
     Animator anim;
-    public bool wildPokemon = false;
+    BattleManager battlemaneger = BattleManager.instance;
+
 
     private void Awake()
     {
@@ -14,13 +17,16 @@ public class PokemonBattleMode : MonoBehaviour
 
     void Start()
     {
-        anim.SetBool("Battle", true);
+        if (isWild)
+        {
+            anim.SetTrigger("Roar");
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
 

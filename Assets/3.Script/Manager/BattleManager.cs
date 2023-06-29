@@ -54,24 +54,59 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private float distance = 8f;
 
     [Header("카메라")]
-    [SerializeField]private CinemachineVirtualCamera virtualCamera;
-    [SerializeField]private CinemachineFreeLook PlayerCamera;
+    [SerializeField] private CinemachineVirtualCamera virtualCamera;
+    [SerializeField] private CinemachineFreeLook PlayerCamera;
 
     [Header("포켓몬")]
     public GameObject playerPokemon;
+    [SerializeField] private int skillnum;
     public GameObject enemyPokemon;
+    [SerializeField] private int enemyskillnum;
 
     [Header("플레이어")]
     [SerializeField] private GameObject player;
 
+    [Header("플레이어 UI")]
+    [SerializeField] private Canvas Battle_UI;
+
+
+    public bool islose = true;
     public UnityEvent Battle_Ready;
 
-    private void Start()
+    //배틀 시작!
+    public void Battle_Start(GameObject enemyPokemon, GameObject player)
     {
-        player = GameObject.Find("Player").gameObject;
+        this.enemyPokemon = enemyPokemon;
+        this.player = player;
+
+        //애니메이터 잠시 끔
+        StartCoroutine(player.GetComponent<PlayerMovement>().apply_motion_wait(5f));
+
+        //플레이어 못움직이게
+        player.GetComponent<PlayerMovement>().isBattle = true;
+
+        //포켓몬 생성 하고 playerPokemon을 채워줌
+        Battle_Ready.Invoke();
+
+        //포켓몬과 플레이어 위치 조정
+        //포켓몬 위치
+        playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
+        playerPokemon.transform.LookAt(enemyPokemon.transform.position);
+
+        //플레이어 위치
+        Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
+        Vector3 offset = rotation * -playerPokemon.transform.forward;
+        player.transform.position = playerPokemon.transform.position + offset * 2f;
+        player.transform.LookAt(enemyPokemon.transform.position);
+
+        //카메라 연출 시작(아직 야생만)
+        StartCoroutine(Wild_BattleCamera_co(enemyPokemon));
+
+        //과 동시에 배틀 시작
+        StartCoroutine(Battle(enemyPokemon, playerPokemon, player));
     }
 
-    //시작 카메라 연출
+    //카메라 연출(아직 야생만)
     IEnumerator Wild_BattleCamera_co(GameObject enemyPokemon)
     {
         //카메라 이동
@@ -86,7 +121,7 @@ public class BattleManager : MonoBehaviour
 
         //3초 딜레이
         yield return new WaitForSeconds(3f);
-        
+
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
 
@@ -103,36 +138,81 @@ public class BattleManager : MonoBehaviour
         //플레이어 카메라의 값
         PlayerCamera.m_XAxis.Value = cameraXAngle;
         PlayerCamera.m_YAxis.Value = 0.4f;
+
+        yield return new WaitForSeconds(1.5f);
+
+        //UI 시작!
+        Battle_UI.gameObject.SetActive(true);
     }
 
-    public void Battle_Start(GameObject enemyPokemon)
+    //배틀 시작
+    public IEnumerator Battle(GameObject enemyPokemon, GameObject playerPokemon, GameObject player)
     {
-        this.enemyPokemon = enemyPokemon;
+        PokemonStats Enemy_pokemon = enemyPokemon.GetComponent<PokemonStats>();
+        PokemonStats Player_pokemon = playerPokemon.GetComponent<PokemonStats>();
 
-        //애니메이터 잠시 끔
-        StartCoroutine(player.GetComponent<PlayerMovement>().animatoer_end());
+        while (islose)
+        {
+            yield return Skill_Choice(Enemy_pokemon, Player_pokemon);
 
-        //플레이어 못움직이게
-        player.GetComponent<PlayerMovement>().isBattle = true;
+            //서로 스피드 비교
+            SpeedComparison(Enemy_pokemon, Player_pokemon);
 
-        //포켓몬 생성
-        Battle_Ready.Invoke();
 
-        //포켓몬과 플레이어 위치 조정
-        //포켓몬 위치
-        playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
-        playerPokemon.transform.LookAt(enemyPokemon.transform.position);
 
-        //플레이어 위치
-        Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
-        Vector3 offset = rotation * -playerPokemon.transform.forward;
-        player.transform.position = playerPokemon.transform.position + offset * 2f;
-        player.transform.LookAt(enemyPokemon.transform.position);
 
-        //카메라 연출 시작
-        StartCoroutine(Wild_BattleCamera_co(enemyPokemon));
+        }
 
     }
+
+
+
+
+    IEnumerator Skill_Choice(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon)
+    {
+        skillnum = 0;
+        enemyskillnum = Random.Range(1, 4);
+
+        while (skillnum == 0)
+        {
+            Debug.Log("스킬 언넝 선택해주세요");
+            yield return null;
+        }
+    }
+
+
+    public void Player_Choise_Skill(int num)
+    {
+        Debug.Log("클릭한겨?");
+        skillnum = num;
+    }
+
+    //스피드 비교
+    void SpeedComparison(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon)
+    {
+        if (Enemy_pokemon.Speed < Player_pokemon.Speed)
+        {
+            //내가 먼저 공격함,
+        }
+        else if (Enemy_pokemon.Speed > Player_pokemon.Speed)
+        {
+            //적이 먼저 공격함,
+        }
+        else if (Enemy_pokemon.Speed == Player_pokemon.Speed)
+        {
+            int rand = Random.Range(1, 2);
+
+            if (rand == 1)
+            {
+                //플레이어 선공
+            }
+            else if (rand == 2)
+            {
+                //적의 선공
+            }
+        }
+    }
+
 
 
     public void OnDamage(SkillData skill, PokemonStats attacker, PokemonStats target)
@@ -1248,5 +1328,3 @@ public class BattleManager : MonoBehaviour
     }
 }
 
-//1.5 / 75 -> 0.9/74e
-//1.4 / 75

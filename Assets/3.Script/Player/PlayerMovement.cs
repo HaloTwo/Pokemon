@@ -48,13 +48,14 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
 
         if (groundCheck == null) groundCheck = transform.Find("groundCheck");
         if (ball_loc == null) ball_loc = transform.Find("tr0050_00.trmdl/origin/foot_base/waist/spine_01/spine_02/spine_03/right_shoulder/right_arm_width/right_arm_01/right_arm_02/right_hand/right_attach_on");
         if (FollowCamera == null) FollowCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        ball_rb = ball_prefab.GetComponent<Rigidbody>();
+        
+        ball_prefab.TryGetComponent(out ball_rb);
         TryGetComponent(out controller);
         TryGetComponent(out animator);
 
@@ -63,7 +64,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         isGrounded = IsGrounded();
         animator.SetBool("isGround", isGrounded);
         animator.SetBool("Battle", isBattle);
@@ -101,7 +101,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-
     public void onWalk(InputAction.CallbackContext context)
     {
         //°È±â ¹öÆ°À» ²Ú ´­·¶À»¶§
@@ -126,10 +125,10 @@ public class PlayerMovement : MonoBehaviour
         return isGrounded;
     }
     
-    public IEnumerator animatoer_end()
+    public IEnumerator apply_motion_wait(float wait)
     {
         animator.applyRootMotion = false;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(wait);
         animator.applyRootMotion = true;
         yield break;
     }
