@@ -17,6 +17,8 @@ public class PokemonBattleMode : MonoBehaviour
 
     void Start()
     {
+        anim.SetBool("Battle", true);
+
         if (isWild)
         {
             anim.SetTrigger("Roar");

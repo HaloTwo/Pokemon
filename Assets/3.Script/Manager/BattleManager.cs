@@ -153,62 +153,64 @@ public class BattleManager : MonoBehaviour
 
         while (islose)
         {
-            yield return Skill_Choice(Enemy_pokemon, Player_pokemon);
+            skillnum = 0;
+            enemyskillnum = Random.Range(1, 4);
+
+            yield return new WaitUntil(() => skillnum != 0);
 
             //서로 스피드 비교
             SpeedComparison(Enemy_pokemon, Player_pokemon);
 
-
+            //이제 공격을 해야되는데
 
 
         }
 
     }
 
-
-
-
-    IEnumerator Skill_Choice(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon)
-    {
-        skillnum = 0;
-        enemyskillnum = Random.Range(1, 4);
-
-        while (skillnum == 0)
-        {
-            Debug.Log("스킬 언넝 선택해주세요");
-            yield return null;
-        }
-    }
 
 
     public void Player_Choise_Skill(int num)
     {
-        Debug.Log("클릭한겨?");
         skillnum = num;
     }
 
     //스피드 비교
     void SpeedComparison(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon)
     {
-        if (Enemy_pokemon.Speed < Player_pokemon.Speed)
+
+        //내 스킬의 우선도가 더 높을때
+        if (Player_pokemon.skills[skillnum].Priority > Enemy_pokemon.skills[enemyskillnum].Priority)
         {
-            //내가 먼저 공격함,
+            
         }
-        else if (Enemy_pokemon.Speed > Player_pokemon.Speed)
+        //적의 스킬의 우선도가 더 높을때
+        else if (Player_pokemon.skills[skillnum].Priority < Enemy_pokemon.skills[enemyskillnum].Priority)
         {
-            //적이 먼저 공격함,
+            
         }
+        //내 포켓몬의 속도가 더 높을때
+        else if (Player_pokemon.Speed > Enemy_pokemon.Speed)
+        {
+            
+        }
+        //적의 스피드가 더 높을 때
+        else if (Player_pokemon.Speed < Enemy_pokemon.Speed)
+        {
+            
+        }
+        //스피드가 똑같을때는 랜덤으로 결정
         else if (Enemy_pokemon.Speed == Player_pokemon.Speed)
         {
-            int rand = Random.Range(1, 2);
+            int randomStart = Random.Range(1, 2);
 
-            if (rand == 1)
+            if (randomStart == 1)
             {
-                //플레이어 선공
+                
             }
-            else if (rand == 2)
+            else if (randomStart == 2)
             {
-                //적의 선공
+                
             }
         }
     }
