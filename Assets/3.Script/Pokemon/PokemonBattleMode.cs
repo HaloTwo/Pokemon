@@ -6,7 +6,7 @@ public class PokemonBattleMode : MonoBehaviour
 {
     public bool isWild = true;
     
-    Animator anim;
+    public Animator anim;
     BattleManager battlemaneger = BattleManager.instance;
 
 

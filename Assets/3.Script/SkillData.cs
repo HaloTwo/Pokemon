@@ -11,6 +11,7 @@ public class SkillData : ScriptableObject
     [SerializeField] public int Damage;
     [SerializeField] public int Hitrate;
     [SerializeField] public int PP;
+    [SerializeField] public int MaxPP;
     [SerializeField] public int Number_of_Attack = 1;
 
     [Header("속성")]
@@ -26,6 +27,8 @@ public class SkillData : ScriptableObject
     [SerializeField] public bool isMustDamage;
     [Header("일격기인지")]
     [SerializeField] public bool isStriker;
+    [Header("펀치모션인지 아닌지")]
+    [SerializeField] public bool isPunch;
     public enum attackType
     {
         Attack, Speicial, None

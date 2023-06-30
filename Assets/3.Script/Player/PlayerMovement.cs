@@ -10,7 +10,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float rotationSpeed = 5f;
     [Header("몬스터 볼 관련")]
     [SerializeField] private float ThrowPower = 20f;
-    [SerializeField] private float distance = 6f;
     [SerializeField] private Transform ball_loc;
     [SerializeField] private GameObject ball_prefab;
 

@@ -48,6 +48,8 @@ public class BattleManager : MonoBehaviour
 
     //최종 데미지
     private float Damage = 0;
+
+    [Header("배틀 텍스트")]
     [SerializeField] Text Explain_txt;
 
     [Header("서로의 거리")]
@@ -59,7 +61,7 @@ public class BattleManager : MonoBehaviour
 
     [Header("포켓몬")]
     public GameObject playerPokemon;
-    [SerializeField] private int skillnum;
+    [SerializeField] private int playerskillnum;
     public GameObject enemyPokemon;
     [SerializeField] private int enemyskillnum;
 
@@ -69,7 +71,8 @@ public class BattleManager : MonoBehaviour
     [Header("플레이어 UI")]
     [SerializeField] private Canvas Battle_UI;
 
-
+    [Header("배틀 턴")]
+    [SerializeField]private int turn;
     public bool islose = true;
     public UnityEvent Battle_Ready;
 
@@ -96,7 +99,7 @@ public class BattleManager : MonoBehaviour
         //플레이어 위치
         Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
         Vector3 offset = rotation * -playerPokemon.transform.forward;
-        player.transform.position = playerPokemon.transform.position + offset * 2f;
+        player.transform.position = playerPokemon.transform.position + offset * 4f;
         player.transform.LookAt(enemyPokemon.transform.position);
 
         //카메라 연출 시작(아직 야생만)
@@ -148,75 +151,157 @@ public class BattleManager : MonoBehaviour
     //배틀 시작
     public IEnumerator Battle(GameObject enemyPokemon, GameObject playerPokemon, GameObject player)
     {
-        PokemonStats Enemy_pokemon = enemyPokemon.GetComponent<PokemonStats>();
-        PokemonStats Player_pokemon = playerPokemon.GetComponent<PokemonStats>();
+        PokemonStats Enemy_pokemon_Stats = enemyPokemon.GetComponent<PokemonStats>();
+        PokemonStats Player_pokemon_Stats = playerPokemon.GetComponent<PokemonStats>();
+
+        PokemonStats first_attack_pokemon;
+        PokemonStats next_tattacker_pokemon;
 
         while (islose)
         {
-            skillnum = 0;
-            enemyskillnum = Random.Range(1, 4);
 
-            yield return new WaitUntil(() => skillnum != 0);
+            playerskillnum = -1;
+            enemyskillnum = Random.Range(0, 4);
 
-            //서로 스피드 비교
-            SpeedComparison(Enemy_pokemon, Player_pokemon);
+            yield return new WaitUntil(() => playerskillnum != -1);
+
+
+            //스피드 비교
+            CompareSpeed(Enemy_pokemon_Stats, Player_pokemon_Stats, out first_attack_pokemon, out next_tattacker_pokemon);
 
             //이제 공격을 해야되는데
+            Debug.Log("선공 : " + first_attack_pokemon.Name + "/ 후공 :" + next_tattacker_pokemon.Name);
 
+            yield return new WaitForSeconds(1f);
+            //공격 페이즈
+            AttackPhase(first_attack_pokemon, next_tattacker_pokemon);
 
+            yield return new WaitForSeconds(3f);
+
+            AttackPhase(next_tattacker_pokemon, first_attack_pokemon);
+
+            turn++;
         }
 
-    }
-
-
-
-    public void Player_Choise_Skill(int num)
-    {
-        skillnum = num;
     }
 
     //스피드 비교
-    void SpeedComparison(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon)
+    void CompareSpeed(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon, out PokemonStats firstattcker, out PokemonStats nextattacker)
     {
+        #region 속도 체크
+        firstattcker = null;
+        nextattacker = null;
 
         //내 스킬의 우선도가 더 높을때
-        if (Player_pokemon.skills[skillnum].Priority > Enemy_pokemon.skills[enemyskillnum].Priority)
+        if (Player_pokemon.skills[playerskillnum].Priority > Enemy_pokemon.skills[enemyskillnum].Priority)
         {
-            
+            firstattcker = Player_pokemon;
+            nextattacker = Enemy_pokemon;
         }
         //적의 스킬의 우선도가 더 높을때
-        else if (Player_pokemon.skills[skillnum].Priority < Enemy_pokemon.skills[enemyskillnum].Priority)
+        else if (Player_pokemon.skills[playerskillnum].Priority < Enemy_pokemon.skills[enemyskillnum].Priority)
         {
-            
+            firstattcker = Enemy_pokemon;
+            nextattacker = Player_pokemon;
         }
         //내 포켓몬의 속도가 더 높을때
         else if (Player_pokemon.Speed > Enemy_pokemon.Speed)
         {
-            
+            firstattcker = Player_pokemon;
+            nextattacker = Enemy_pokemon;
         }
         //적의 스피드가 더 높을 때
         else if (Player_pokemon.Speed < Enemy_pokemon.Speed)
         {
-            
+            firstattcker = Enemy_pokemon;
+            nextattacker = Player_pokemon;
         }
         //스피드가 똑같을때는 랜덤으로 결정
         else if (Enemy_pokemon.Speed == Player_pokemon.Speed)
         {
-            int randomStart = Random.Range(1, 2);
+            int randomStart = Random.Range(1, 3);
 
+            //나 먼저
             if (randomStart == 1)
             {
-                
+                firstattcker = Player_pokemon;
+                nextattacker = Enemy_pokemon;
             }
+            //적 먼저
             else if (randomStart == 2)
             {
-                
+                firstattcker = Enemy_pokemon;
+                nextattacker = Player_pokemon;
             }
         }
+        #endregion
     }
 
+    //공격 페이즈
+    void AttackPhase(PokemonStats attacker, PokemonStats target)
+    {
+        int skillnum, skilltype;
 
+        //스킬 판별
+        CompareSkillType(attacker, out skillnum, out skilltype);
 
+        //데미지 주기
+        OnDamage(attacker.skills[skillnum], attacker, target);
+
+        //4번째 지속 공격은 이상함
+        attacker.GetComponent<PokemonBattleMode>().anim.SetFloat("AttackNum", skilltype);
+        attacker.GetComponent<PokemonBattleMode>().anim.SetTrigger("Attack");
+
+        Explain_txt.gameObject.SetActive(true);
+        Explain_txt.text = $" {attacker.Name}의 {attacker.skills[skillnum].Name}!!";
+
+        Invoke("setoff", 1.5f);
+
+    }
+
+    void setoff()
+    {
+        Explain_txt.gameObject.SetActive(false);
+    }
+
+    //스킬 판별
+    void CompareSkillType(PokemonStats firstpokemon, out int num, out int type)
+    {
+        num = 0;
+        type = 0;
+
+        if (firstpokemon == enemyPokemon.GetComponent<PokemonStats>()) num = enemyskillnum;
+        else if (firstpokemon == playerPokemon.GetComponent<PokemonStats>())
+        {
+            num = playerskillnum;
+            player.GetComponent<Animator>().SetTrigger("Order");
+        }
+        if (firstpokemon.skills[num].AttackType == SkillData.attackType.Attack)
+        {
+            if (firstpokemon.skills[num].isPunch)
+            {
+                type = 1;
+            }
+            else
+            {
+                type = 2;
+            }
+            
+        }
+        else if (firstpokemon.skills[num].AttackType == SkillData.attackType.Speicial)
+        {
+            type = 4;
+        }
+        else if (firstpokemon.skills[num].AttackType == SkillData.attackType.None)
+        {
+            type = 3;
+        }
+
+        //type = (int)firstpokemon.skills[num].AttackType;
+
+    }
+
+    //데미지 판별
     public void OnDamage(SkillData skill, PokemonStats attacker, PokemonStats target)
     {
         CheckProPertyType(skill, attacker);
@@ -230,7 +315,10 @@ public class BattleManager : MonoBehaviour
         {
             Damage = ((attacker.SpAttack * AttackerSpAttackRank) * skill.Damage * (attacker.Level * 2 / 5 + 2) / (target.SpDefence * TargetSpDefenceRank) / 50 + 2) * PropertyRank * DamageRank;
         }
-
+        if (Damage <= 0)
+        {
+            Damage = 1;
+        }
 
         if (DamageRank > 1)
         {
@@ -250,15 +338,19 @@ public class BattleManager : MonoBehaviour
         {
 
         }
+
         target.Hp -= (int)Damage;
-        Debug.Log("{0}에게 {1}만큼의 데미지를 주었다!" + target.name + Damage);
+        Debug.Log($"{target.Name}에게 {(int)Damage}만큼의 데미지를 주었다!");
 
         //배틀 변수값들 초기화
         PropertyRank = 1;
         DamageRank = 1;
     }
+
+    //타입 판별
     public void CheckDamageType(SkillData skill, PokemonStats pokemon)
     {
+        #region 타입판별
         if (skill.propertyType == SkillData.PropertyType.Normal)
         {
             if (pokemon.Type1 == PokemonStats.Type.Rock || pokemon.Type2 == PokemonStats.Type.Rock)
@@ -795,8 +887,10 @@ public class BattleManager : MonoBehaviour
                 DamageRank *= 0.5f;
             }
         }//페어리타입 랭크 데미지 판별
-
+        #endregion
     }
+
+    //자기 속성 판별
     public void CheckProPertyType(SkillData skill, PokemonStats pokemon)
     {
         if (skill.propertyType == (SkillData.PropertyType)pokemon.Type1 || skill.propertyType == (SkillData.PropertyType)pokemon.Type2)
@@ -934,8 +1028,11 @@ public class BattleManager : MonoBehaviour
         */
         #endregion
     }
+
+    //랭크 판별
     public void CheckStateRank(PokemonStats attacker, PokemonStats target)
     {
+        #region 랭크업 확인
         switch (attacker.AttackRank)
         {
             case 6:
@@ -1327,6 +1424,14 @@ public class BattleManager : MonoBehaviour
 
 
         #endregion
+        #endregion
+    }
+
+
+    //그냥 입력 이벤트
+    public void Player_Choise_Skill(int num)
+    {
+        playerskillnum = num;
     }
 }
 
