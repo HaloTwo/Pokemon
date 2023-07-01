@@ -72,7 +72,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private Canvas Battle_UI;
 
     [Header("배틀 턴")]
-    [SerializeField]private int turn;
+    [SerializeField] private int turn;
     public bool islose = true;
     public UnityEvent Battle_Ready;
 
@@ -112,6 +112,16 @@ public class BattleManager : MonoBehaviour
     //카메라 연출(아직 야생만)
     IEnumerator Wild_BattleCamera_co(GameObject enemyPokemon)
     {
+        //플레이어 위치
+        Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
+        Vector3 offset = rotation * -playerPokemon.transform.forward;
+
+        if (player.transform.position != playerPokemon.transform.position + offset * 4f)
+        {
+            player.transform.position = playerPokemon.transform.position + offset * 4f;
+            player.transform.LookAt(enemyPokemon.transform.position);
+        }
+
         //카메라 이동
         virtualCamera.Priority = 15;
 
@@ -278,7 +288,11 @@ public class BattleManager : MonoBehaviour
         }
         if (firstpokemon.skills[num].AttackType == SkillData.attackType.Attack)
         {
-            if (firstpokemon.skills[num].isPunch)
+
+            if (firstpokemon.skills[num].isPunch_isBite
+                || firstpokemon.skills[num].Name.Contains("엄니")
+                || firstpokemon.skills[num].Name.Contains("깨물")
+                || firstpokemon.skills[num].Name.Contains("펀치"))
             {
                 type = 1;
             }
@@ -286,11 +300,18 @@ public class BattleManager : MonoBehaviour
             {
                 type = 2;
             }
-            
+
         }
         else if (firstpokemon.skills[num].AttackType == SkillData.attackType.Speicial)
         {
-            type = 4;
+            if (firstpokemon.skills[num].isPunch_isBite)
+            {
+                type = 1;
+            }
+            else
+            {
+                type = 4;
+            }
         }
         else if (firstpokemon.skills[num].AttackType == SkillData.attackType.None)
         {

@@ -23,12 +23,13 @@ public class PokemonBattleMode : MonoBehaviour
         {
             anim.SetTrigger("Roar");
         }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
+       
     }
 
 

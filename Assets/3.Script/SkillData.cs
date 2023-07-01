@@ -27,8 +27,8 @@ public class SkillData : ScriptableObject
     [SerializeField] public bool isMustDamage;
     [Header("일격기인지")]
     [SerializeField] public bool isStriker;
-    [Header("펀치모션인지 아닌지")]
-    [SerializeField] public bool isPunch;
+    [Header("펀치모션이나 물기모션")]
+    [SerializeField] public bool isPunch_isBite;
     public enum attackType
     {
         Attack, Speicial, None

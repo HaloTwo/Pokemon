@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2551,7 +2551,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389213982}
-  m_LocalRotation: {x: 0.14521314, y: 1.6271901e-15, z: -2.6894993e-16, w: 0.98940045}
+  m_LocalRotation: {x: 0.14521313, y: -0.00000003296683, z: 0.000000004838502, w: 0.98940045}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4366,7 +4366,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 809470915}
-  m_LocalRotation: {x: 0.18910751, y: -0.0000000084479606, z: 0.0000000016269286, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910751, y: 0.000000008447955, z: -0.0000000016269276, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4532,10 +4532,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5852901172484188134, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: isWild
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 6335459958937819158, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -4583,38 +4579,6 @@ PrefabInstance:
     - target: {fileID: 6676520376207622828, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
       propertyPath: m_Name
       value: 1114.Annihilape
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696249602943808118, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 22100000, guid: 0f325f96fbd130a498250e8e6746a050, type: 2}
-    - target: {fileID: 6696249602943808118, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_UpdateMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696249602943808118, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_CullingMode
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6696249602943808118, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7780640967523052361, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_Height
-      value: 1.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 7780640967523052361, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_Radius
-      value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 7780640967523052361, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_Center.x
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 7780640967523052361, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
-      propertyPath: m_Center.y
-      value: 0.9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
@@ -4771,7 +4735,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.18910754, y: -0.0000000084479606, z: 0.0000000016269286, w: 0.9819564}
+  m_LocalRotation: {x: 0.18910754, y: 0.000000008447957, z: -0.0000000016269279, w: 0.9819564}
   m_LocalPosition: {x: 0, y: 32.43, z: 57.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10343,7 +10307,7 @@ PrefabInstance:
     - target: {fileID: 2141166183439624893, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: PlayerPokemon.Array.data[0]
       value: 
-      objectReference: {fileID: 5011732875407070929, guid: c4fd26c57c8728b478beccef60efe55a, type: 3}
+      objectReference: {fileID: 7113099173684092799, guid: 63f2d4079ffcb4d43a62328d9f2e4c26, type: 3}
     - target: {fileID: 2141166183439624893, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: PlayerPokemon.Array.data[1]
       value: 
