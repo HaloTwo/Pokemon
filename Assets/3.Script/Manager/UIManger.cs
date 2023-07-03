@@ -112,6 +112,13 @@ public class UIManger : MonoBehaviour
         {
             if (i < playerBag.NowPokemon.Count)
             {
+                //꺼져있으면
+                if (!change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.activeSelf)
+                {
+                    Debug.Log("꺼져있습니다.");
+                    change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(true);
+                }
+
                 // 포켓몬이 있는 슬롯일 경우
                 PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
 
@@ -124,10 +131,11 @@ public class UIManger : MonoBehaviour
             else
             {
                 // 포켓몬이 없는 슬롯일 경우
-                change_pokemon_name_txt[i].text = "";
-                change_pokemon_hp_txt[i].text = "";
-                change_pokemon_img[i].color = new Color(1f, 1f, 1f, 0f);
-                change_pokemon_Lv_txt[i].text = "";
+                //change_pokemon_name_txt[i].text = "";
+                //change_pokemon_hp_txt[i].text = "";
+                //change_pokemon_img[i].color = new Color(1f, 1f, 1f, 0f);
+                //change_pokemon_Lv_txt[i].text = "";
+                change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(false);
             }
         }
     }
@@ -149,14 +157,15 @@ public class UIManger : MonoBehaviour
                 PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
 
                 bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
-                bag_pokemon_img[i].color = Color.white;
+                //bag_pokemon_img[i].color = Color.white;
                 bag_pokemon_img[i].sprite = pokemon.image;
             }
             else
             {
                 // 포켓몬이 없는 슬롯일 경우
-                bag_pokemon_hp_txt[i].text = "";
-                bag_pokemon_img[i].color = new Color(1f, 1f, 1f, 0f);
+                //bag_pokemon_hp_txt[i].text = "";
+                //bag_pokemon_img[i].color = new Color(1f, 1f, 1f, 0f);
+                bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
             }
         }
     }

@@ -33,8 +33,10 @@ public class PlayerBag : MonoBehaviour
     public void PlayerPokemon_Battle_go()
     {
 
+        Debug.Log("플레이어 포켓몬 배틀 이벤트 들간다!");
+
         //tudo 나중에 꼭 수정해야됌
-        if (NowPokemon.Count == 0)
+        if (NowPokemon.Count <= 0)
         {
             Debug.Log("현재 포켓몬이 없어서 필드로 꺼낸다");
             for (int i = 0; i < PlayerPokemon.Count; i++)
@@ -48,7 +50,7 @@ public class PlayerBag : MonoBehaviour
                 newPokemonBattleMode.enabled = true;
                 newPokemonBattleMode.isWild = false;
                 newPokemon.SetActive(false);
-            }         
+            }
         }
         else
         {

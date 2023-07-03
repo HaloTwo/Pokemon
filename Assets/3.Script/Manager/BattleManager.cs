@@ -76,17 +76,12 @@ public class BattleManager : MonoBehaviour
     public bool islose = true;
     public UnityEvent Battle_Ready;
 
+    [SerializeField] Transform newTransform;
     //배틀 시작!
     public void Battle_Start(GameObject enemyPokemon, GameObject player)
     {
         this.enemyPokemon = enemyPokemon;
         this.player = player;
-
-        //애니메이터 잠시 끔
-        StartCoroutine(player.GetComponent<PlayerMovement>().apply_motion_wait(5f));
-
-        //플레이어 못움직이게
-        player.GetComponent<PlayerMovement>().isBattle = true;
 
         //포켓몬 생성 하고 playerPokemon을 채워줌
         Battle_Ready.Invoke();
@@ -103,19 +98,16 @@ public class BattleManager : MonoBehaviour
         player.transform.LookAt(enemyPokemon.transform.position);
 
         //카메라 연출 시작(아직 야생만)
-        StartCoroutine(Wild_BattleCamera_co());
+        StartCoroutine(Wild_BattleCamera_co(offset));
 
         //과 동시에 배틀 시작
         StartCoroutine(Battle(enemyPokemon, playerPokemon, player));
     }
 
     //카메라 연출(아직 야생만)
-    IEnumerator Wild_BattleCamera_co()
+    IEnumerator Wild_BattleCamera_co(Vector3 offset)
     {
-        //플레이어 위치
-        Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
-        Vector3 offset = rotation * -playerPokemon.transform.forward;
-
+        //플레이어가 이동 안했을시 예외처리
         if (player.transform.position != playerPokemon.transform.position + offset * 4f)
         {
             player.transform.position = playerPokemon.transform.position + offset * 4f;
@@ -138,28 +130,7 @@ public class BattleManager : MonoBehaviour
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
 
-        //Transform playerTransform = playerPokemon.transform;
-        //Renderer renderer = playerPokemon.GetComponentInChildren<Renderer>();
-
-        //Vector3 playerPosition = playerTransform.position + playerTransform.up * renderer.bounds.size.y * 0.5f;
-        //Quaternion playerRotation = playerTransform.rotation;
-        //Vector3 playerScale = playerTransform.localScale;
-
-        //Transform enemyTransform = enemyPokemon.transform;
-        //Vector3 enemyPosition = enemyTransform.position;
-        //Quaternion enemyRotation = enemyTransform.rotation;
-        //Vector3 enemyScale = enemyTransform.localScale;
-
-        //Vector3 midPosition = (playerPosition + enemyPosition) * 0.5f;
-        //Quaternion midRotation = Quaternion.Lerp(playerRotation, enemyRotation, 0.5f);
-        //Vector3 midScale = (playerScale + enemyScale) * 0.5f;
-
-        //// PlayerPokemon 쪽으로 이동할 벡터 계산
-        //Vector3 obj_offset = playerPosition - midPosition;
-        //midPosition += obj_offset * 0.6f; // 이 값을 조정하여 더 가까이 이동시킬 수 있습니다.
-
-        //Debug.Log(renderer.bounds.size.z);
-
+        //카메라 타겟을 가운데쯤으로
         Transform playerTransform = playerPokemon.transform;
         Renderer renderer = playerPokemon.GetComponentInChildren<Renderer>();
 
@@ -167,28 +138,29 @@ public class BattleManager : MonoBehaviour
         Quaternion py_rotation = playerTransform.rotation;
         Vector3 scale = playerTransform.localScale;
 
-        Transform newTransform = new GameObject().transform;
+        //if (newTransform == null)
+        //{
+            Transform newTransform = new GameObject().transform;
+        //}
+        //else
+        //{
+        //    newTransform.gameObject.SetActive(true);
+        //}
         newTransform.position = position;
         newTransform.rotation = py_rotation;
         newTransform.localScale = scale;
 
 
-        Debug.Log(renderer.bounds.size);
-
         if (renderer.bounds.size.y >= 2)
         {
-            PlayerCamera.m_Orbits[1].m_Radius = renderer.bounds.size.z * 1.4f;
+            PlayerCamera.m_Orbits[1].m_Radius = renderer.bounds.size.z * 1.65f;
         }
         else if (renderer.bounds.size.y < 2)
         {
             PlayerCamera.m_Orbits[1].m_Radius = 4;
         }
 
-
-        //Transform newTransform = new GameObject().transform;
-        //newTransform.position = midPosition;
-        //newTransform.rotation = midRotation;
-        //newTransform.localScale = midScale;
+        Debug.Log(renderer.bounds.size);
 
         //PlayerPokemon을 쳐다보도록
         //PlayerCamera.Follow = playerPokemon.transform;
@@ -203,10 +175,7 @@ public class BattleManager : MonoBehaviour
 
         //플레이어 카메라의 값
         PlayerCamera.m_XAxis.Value = cameraXAngle;
-        PlayerCamera.m_YAxis.Value = 0.4f;
-
-
-
+        PlayerCamera.m_YAxis.Value = 0.45f;
 
         yield return new WaitForSeconds(1.5f);
 
@@ -231,7 +200,6 @@ public class BattleManager : MonoBehaviour
 
             yield return new WaitUntil(() => playerskillnum != -1);
 
-
             //스피드 비교
             CompareSpeed(Enemy_pokemon_Stats, Player_pokemon_Stats, out first_attack_pokemon, out next_tattacker_pokemon);
 
@@ -239,16 +207,47 @@ public class BattleManager : MonoBehaviour
             Debug.Log("선공 : " + first_attack_pokemon.Name + "/ 후공 :" + next_tattacker_pokemon.Name);
 
             yield return new WaitForSeconds(1f);
+
             //공격 페이즈
+            if (!islose)
+            {
+                break;
+            }
             AttackPhase(first_attack_pokemon, next_tattacker_pokemon);
 
             yield return new WaitForSeconds(3f);
-
+            if (!islose)
+            {
+                break;
+            }
             AttackPhase(next_tattacker_pokemon, first_attack_pokemon);
 
             turn++;
+
+            yield return new WaitForSeconds(3f);
+            if (!islose)
+            {
+                break;
+            }
         }
 
+
+        Battle_UI.gameObject.SetActive(false);
+        enemyPokemon.GetComponent<PokemonBattleMode>().enabled = false;
+        enemyPokemon.GetComponent<PokemonBattleMode>().anim.SetBool("Battle", false);
+        enemyPokemon.GetComponent<PokemonBattleMode>().anim.SetBool("Walk", true);
+        enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+
+
+        player.GetComponent<PlayerMovement>().isBattle = false;
+
+        playerPokemon.SetActive(false);
+
+        newTransform.gameObject.SetActive(false);
+
+        PlayerCamera.m_Orbits[1].m_Radius = 5f;
+        PlayerCamera.Follow = player.transform;
+        PlayerCamera.LookAt = player.transform;
     }
 
     //스피드 비교
