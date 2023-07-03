@@ -18,6 +18,7 @@ public class PokemonStats : MonoBehaviour
 
     //객체별 개체값
     [SerializeField] public string Name;
+    [SerializeField] public Sprite image;
     [SerializeField] public int MaxHp;
     [SerializeField] public int Attack;
     [SerializeField] public int Defence;
@@ -88,6 +89,7 @@ public class PokemonStats : MonoBehaviour
 public class PokemonData
 {
     public string Name;
+    public Sprite image;
     public int Num;
     public int MaxHp;
     public int Hp;

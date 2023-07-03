@@ -103,14 +103,14 @@ public class BattleManager : MonoBehaviour
         player.transform.LookAt(enemyPokemon.transform.position);
 
         //카메라 연출 시작(아직 야생만)
-        StartCoroutine(Wild_BattleCamera_co(enemyPokemon));
+        StartCoroutine(Wild_BattleCamera_co());
 
         //과 동시에 배틀 시작
         StartCoroutine(Battle(enemyPokemon, playerPokemon, player));
     }
 
     //카메라 연출(아직 야생만)
-    IEnumerator Wild_BattleCamera_co(GameObject enemyPokemon)
+    IEnumerator Wild_BattleCamera_co()
     {
         //플레이어 위치
         Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
@@ -126,10 +126,10 @@ public class BattleManager : MonoBehaviour
         virtualCamera.Priority = 15;
 
         //적 포켓몬의 중심
-        Vector3 targetCenter = this.enemyPokemon.transform.position + this.enemyPokemon.transform.up * enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
+        Vector3 targetCenter = enemyPokemon.transform.position + enemyPokemon.transform.up * enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
 
         //중심을 바라보도록
-        virtualCamera.transform.position = targetCenter + this.enemyPokemon.transform.forward * 3f;
+        virtualCamera.transform.position = targetCenter + enemyPokemon.transform.forward * 3f;
         virtualCamera.transform.rotation = Quaternion.LookRotation(targetCenter - virtualCamera.transform.position);
 
         //3초 딜레이
@@ -138,19 +138,75 @@ public class BattleManager : MonoBehaviour
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
 
+        //Transform playerTransform = playerPokemon.transform;
+        //Renderer renderer = playerPokemon.GetComponentInChildren<Renderer>();
+
+        //Vector3 playerPosition = playerTransform.position + playerTransform.up * renderer.bounds.size.y * 0.5f;
+        //Quaternion playerRotation = playerTransform.rotation;
+        //Vector3 playerScale = playerTransform.localScale;
+
+        //Transform enemyTransform = enemyPokemon.transform;
+        //Vector3 enemyPosition = enemyTransform.position;
+        //Quaternion enemyRotation = enemyTransform.rotation;
+        //Vector3 enemyScale = enemyTransform.localScale;
+
+        //Vector3 midPosition = (playerPosition + enemyPosition) * 0.5f;
+        //Quaternion midRotation = Quaternion.Lerp(playerRotation, enemyRotation, 0.5f);
+        //Vector3 midScale = (playerScale + enemyScale) * 0.5f;
+
+        //// PlayerPokemon 쪽으로 이동할 벡터 계산
+        //Vector3 obj_offset = playerPosition - midPosition;
+        //midPosition += obj_offset * 0.6f; // 이 값을 조정하여 더 가까이 이동시킬 수 있습니다.
+
+        //Debug.Log(renderer.bounds.size.z);
+
+        Transform playerTransform = playerPokemon.transform;
+        Renderer renderer = playerPokemon.GetComponentInChildren<Renderer>();
+
+        Vector3 position = playerTransform.position + playerTransform.up * renderer.bounds.size.y * 0.65f;
+        Quaternion py_rotation = playerTransform.rotation;
+        Vector3 scale = playerTransform.localScale;
+
+        Transform newTransform = new GameObject().transform;
+        newTransform.position = position;
+        newTransform.rotation = py_rotation;
+        newTransform.localScale = scale;
+
+
+        Debug.Log(renderer.bounds.size);
+
+        if (renderer.bounds.size.y >= 2)
+        {
+            PlayerCamera.m_Orbits[1].m_Radius = renderer.bounds.size.z * 1.4f;
+        }
+        else if (renderer.bounds.size.y < 2)
+        {
+            PlayerCamera.m_Orbits[1].m_Radius = 4;
+        }
+
+
+        //Transform newTransform = new GameObject().transform;
+        //newTransform.position = midPosition;
+        //newTransform.rotation = midRotation;
+        //newTransform.localScale = midScale;
+
         //PlayerPokemon을 쳐다보도록
-        PlayerCamera.Follow = playerPokemon.transform;
-        PlayerCamera.LookAt = playerPokemon.transform;
+        //PlayerCamera.Follow = playerPokemon.transform;
+        PlayerCamera.Follow = newTransform;
+        PlayerCamera.LookAt = newTransform;
 
         //보고싶은 카메라의 각도 = 포켓몬 위치에서 10도
         float playerPokemonAngle = Quaternion.LookRotation(playerPokemon.transform.forward, Vector3.up).eulerAngles.y;
-        float cameraXAngle_local = 10f;
+        float cameraXAngle_local = 25f;
         //각도 계산
         float cameraXAngle = Mathf.Repeat(playerPokemonAngle - cameraXAngle_local + 180f, 360f) - 180f;
 
         //플레이어 카메라의 값
         PlayerCamera.m_XAxis.Value = cameraXAngle;
         PlayerCamera.m_YAxis.Value = 0.4f;
+
+
+
 
         yield return new WaitForSeconds(1.5f);
 

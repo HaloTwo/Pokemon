@@ -8,6 +8,7 @@ public class DataManager : MonoBehaviour
     PokemonData[] pokemonData;
     [SerializeField] GameObject[] pokemon;
     [SerializeField] SkillData[] PokemonSkill;
+    [SerializeField] Sprite[] pokemonImage;
     private void Awake()
     {
         pokemonStats = FindObjectOfType<PokemonStats>();
@@ -29,6 +30,7 @@ public class DataManager : MonoBehaviour
         for (int i = 0; i < pokemon.Length; i++)
         {
             pokemon[i].GetComponent<PokemonStats>().Name = pokemonData[i].Name;
+            pokemon[i].GetComponent<PokemonStats>().image = pokemonImage[i];
             pokemon[i].GetComponent<PokemonStats>().MaxHp = pokemonData[i].MaxHp;
             pokemon[i].GetComponent<PokemonStats>().Hp = pokemonData[i].Hp;
             pokemon[i].GetComponent<PokemonStats>().Attack = pokemonData[i].Attack;
