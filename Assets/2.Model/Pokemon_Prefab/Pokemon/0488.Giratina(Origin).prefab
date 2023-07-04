@@ -3436,9 +3436,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 22100000, guid: 11bae73d05c3f154fa777b585a1dd60e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_CullingMode: 1
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -3470,10 +3470,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 1.6
+  m_Height: 6
+  m_Direction: 2
+  m_Center: {x: 0.0000000034135446, y: 1, z: -0.42128944}
 --- !u!114 &5061590006922597705
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3486,7 +3486,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d132e12b7b5ca04894ce4ea93bb65df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  isDie: 0
   Name: "\uAE30\uB77C\uD2F0\uB098(origin)"
+  image: {fileID: 21300000, guid: 7d48341ca7156064a990c651f8227fc3, type: 3}
   MaxHp: 150
   Attack: 100
   Defence: 120

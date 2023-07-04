@@ -1126,9 +1126,9 @@ Animator:
   m_Enabled: 1
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 10b6c2f3562a78a408aeff2eaeba0081, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_CullingMode: 1
+  m_UpdateMode: 1
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -1176,7 +1176,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d132e12b7b5ca04894ce4ea93bb65df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  isDie: 0
   Name: "\uC774\uC0C1\uD574\uD480"
+  image: {fileID: 21300000, guid: 7daa1357391393049a47c7c082502727, type: 3}
   MaxHp: 60
   Attack: 62
   Defence: 63

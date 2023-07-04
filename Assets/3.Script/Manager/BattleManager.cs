@@ -47,10 +47,7 @@ public class BattleManager : MonoBehaviour
     public float TargetHitrateRank = 1;
 
     //최종 데미지
-    private float Damage = 0;
-
-    [Header("배틀 텍스트")]
-    [SerializeField] Text Explain_txt;
+    [SerializeField] private float Damage = 0;
 
     [Header("서로의 거리")]
     [SerializeField] private float distance = 8f;
@@ -73,7 +70,11 @@ public class BattleManager : MonoBehaviour
 
     [Header("배틀 턴")]
     [SerializeField] private int turn;
-    public bool islose = true;
+
+    public bool islose;
+    public bool isWin;
+    public bool isRun;
+
     public UnityEvent Battle_Ready;
 
     [SerializeField] Transform newTransform;
@@ -88,8 +89,22 @@ public class BattleManager : MonoBehaviour
 
         //포켓몬과 플레이어 위치 조정
         //포켓몬 위치
-        playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
-        playerPokemon.transform.LookAt(enemyPokemon.transform.position);
+        //playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
+        //playerPokemon.transform.LookAt(enemyPokemon.transform.position);
+
+        float enemySize = enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.z; // 상대 포켓몬의 크기 (z 축을 기준으로)
+        float playerSize = playerPokemon.GetComponentInChildren<Renderer>().bounds.size.z; // 자신의 포켓몬의 크기 (z 축을 기준으로)
+
+        float totalSize = enemySize + playerSize; // 두 포켓몬의 크기를 합친 값
+
+        float adjustedDistance = distance + totalSize; // 크기를 고려한 조정된 거리
+
+        Vector3 direction = enemyPokemon.transform.forward;
+        Vector3 targetPosition = enemyPokemon.transform.position + direction * adjustedDistance;
+        playerPokemon.transform.position = targetPosition;
+        playerPokemon.transform.rotation = Quaternion.LookRotation(-direction);
+
+
 
         //플레이어 위치
         Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
@@ -100,147 +115,232 @@ public class BattleManager : MonoBehaviour
         //카메라 연출 시작(아직 야생만)
         StartCoroutine(Wild_BattleCamera_co(offset));
 
-        //과 동시에 배틀 시작
+        //끝나면
         StartCoroutine(Battle(enemyPokemon, playerPokemon, player));
     }
 
     //카메라 연출(아직 야생만)
     IEnumerator Wild_BattleCamera_co(Vector3 offset)
     {
+
+        #region 이동을 안했을 시 예외처리
+        //내 포켓몬이 이동 안했을시 예외처리
+        if (playerPokemon.transform.position != enemyPokemon.transform.position + enemyPokemon.transform.forward * distance)
+        {
+            playerPokemon.transform.position = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance;
+            playerPokemon.transform.LookAt(enemyPokemon.transform.position);
+        }
+
         //플레이어가 이동 안했을시 예외처리
         if (player.transform.position != playerPokemon.transform.position + offset * 4f)
         {
             player.transform.position = playerPokemon.transform.position + offset * 4f;
             player.transform.LookAt(enemyPokemon.transform.position);
         }
+        #endregion
 
         //카메라 이동
         virtualCamera.Priority = 15;
 
-        //적 포켓몬의 중심
-        Vector3 targetCenter = enemyPokemon.transform.position + enemyPokemon.transform.up * enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
-
-        //중심을 바라보도록
-        virtualCamera.transform.position = targetCenter + enemyPokemon.transform.forward * 3f;
+        //적 포켓몬의 중심을 찾고, 크기에 따라 카메라 이동
+        #region 적 포켓몬 크기에 따라 카메라 이동
+        Renderer enemy_renderer = enemyPokemon.GetComponentInChildren<Renderer>();
+        Vector3 targetCenter = enemyPokemon.transform.position + enemyPokemon.transform.up * enemy_renderer.bounds.size.y * 0.55f;
+        if (enemy_renderer.bounds.size.y >= 5.8f)
+        {
+            targetCenter = enemyPokemon.transform.position + enemyPokemon.transform.up * enemy_renderer.bounds.size.y * 0.8f;
+            virtualCamera.transform.position = targetCenter + enemyPokemon.transform.forward * 8f;
+        }
+        else if (enemy_renderer.bounds.size.y > 3f)
+        {
+            virtualCamera.transform.position = targetCenter + enemyPokemon.transform.forward * 7f;
+        }
+        else
+        {
+            virtualCamera.transform.position = targetCenter + enemyPokemon.transform.forward * 3f;
+        }
         virtualCamera.transform.rotation = Quaternion.LookRotation(targetCenter - virtualCamera.transform.position);
 
-        //3초 딜레이
+        #endregion
+
+
+        //몬스터가 소리 지를때까지 구경, 3초
+        Debug.Log("상대 포켓몬 크기: " + enemy_renderer.bounds.size);
         yield return new WaitForSeconds(3f);
 
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
 
         //카메라 타겟을 가운데쯤으로
+        #region 내 포켓몬 크기에 따라 내 카메라 이동
         Transform playerTransform = playerPokemon.transform;
-        Renderer renderer = playerPokemon.GetComponentInChildren<Renderer>();
+        Renderer py_pokemon_renderer = playerPokemon.GetComponentInChildren<Renderer>();
 
-        Vector3 position = playerTransform.position + playerTransform.up * renderer.bounds.size.y * 0.65f;
+        Vector3 position = playerTransform.position + playerTransform.up * py_pokemon_renderer.bounds.size.y * 0.65f;
         Quaternion py_rotation = playerTransform.rotation;
         Vector3 scale = playerTransform.localScale;
 
-        //if (newTransform == null)
-        //{
-            Transform newTransform = new GameObject().transform;
-        //}
-        //else
-        //{
-        //    newTransform.gameObject.SetActive(true);
-        //}
+        if (newTransform == null)
+        {
+            newTransform = new GameObject().transform;
+        }
+        else
+        {
+            newTransform.gameObject.SetActive(true);
+        }
         newTransform.position = position;
         newTransform.rotation = py_rotation;
         newTransform.localScale = scale;
 
-
-        if (renderer.bounds.size.y >= 2)
+        if (py_pokemon_renderer.bounds.size.y >= 2)
         {
-            PlayerCamera.m_Orbits[1].m_Radius = renderer.bounds.size.z * 1.65f;
+            PlayerCamera.m_Orbits[1].m_Radius = py_pokemon_renderer.bounds.size.z * 1.65f;
         }
-        else if (renderer.bounds.size.y < 2)
+        else if (py_pokemon_renderer.bounds.size.y < 2)
         {
             PlayerCamera.m_Orbits[1].m_Radius = 4;
         }
 
-        Debug.Log(renderer.bounds.size);
-
         //PlayerPokemon을 쳐다보도록
-        //PlayerCamera.Follow = playerPokemon.transform;
         PlayerCamera.Follow = newTransform;
         PlayerCamera.LookAt = newTransform;
 
         //보고싶은 카메라의 각도 = 포켓몬 위치에서 10도
         float playerPokemonAngle = Quaternion.LookRotation(playerPokemon.transform.forward, Vector3.up).eulerAngles.y;
         float cameraXAngle_local = 25f;
+
         //각도 계산
         float cameraXAngle = Mathf.Repeat(playerPokemonAngle - cameraXAngle_local + 180f, 360f) - 180f;
 
         //플레이어 카메라의 값
         PlayerCamera.m_XAxis.Value = cameraXAngle;
         PlayerCamera.m_YAxis.Value = 0.45f;
+        #endregion
 
+        //카메라가 돌아온 다음, UI생성
+        Debug.Log("내 포켓몬 크기: " + py_pokemon_renderer.bounds.size);
         yield return new WaitForSeconds(1.5f);
 
-        //UI 시작!
+        //UI 생성
         Battle_UI.gameObject.SetActive(true);
+
     }
 
     //배틀 시작
     public IEnumerator Battle(GameObject enemyPokemon, GameObject playerPokemon, GameObject player)
     {
-        PokemonStats Enemy_pokemon_Stats = enemyPokemon.GetComponent<PokemonStats>();
-        PokemonStats Player_pokemon_Stats = playerPokemon.GetComponent<PokemonStats>();
+        PokemonStats enemy_pokemon_Stats = enemyPokemon.GetComponent<PokemonStats>();
+        PokemonStats player_pokemon_Stats = playerPokemon.GetComponent<PokemonStats>();
+
+        PokemonBattleMode enemy_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
+        PokemonBattleMode player_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
+
+        Slider player_pokemon_slider = FindObjectOfType<UIManger>().hPbar;
+        Slider enemy_pokemon_slider = enemy_pokemon_battlemode.pokemon_slider;
 
         PokemonStats first_attack_pokemon;
         PokemonStats next_tattacker_pokemon;
 
-        while (islose)
+        Slider first_attack_pokemon_slider;
+        Slider next_tattacker_pokemon_slider;
+
+
+        //초기화
+        islose = false;
+        isWin = false;
+        isRun = false;
+
+        while (true)
         {
 
             playerskillnum = -1;
             enemyskillnum = Random.Range(0, 4);
 
-            yield return new WaitUntil(() => playerskillnum != -1);
+            yield return new WaitUntil(() => playerskillnum != -1 || isRun);
+            //바로 빠져나가기
+            if (islose || isWin || isRun)
+            {
+                break;
+            }
 
             //스피드 비교
-            CompareSpeed(Enemy_pokemon_Stats, Player_pokemon_Stats, out first_attack_pokemon, out next_tattacker_pokemon);
-
-            //이제 공격을 해야되는데
-            Debug.Log("선공 : " + first_attack_pokemon.Name + "/ 후공 :" + next_tattacker_pokemon.Name);
+            CompareSpeed(enemy_pokemon_Stats, player_pokemon_Stats, enemy_pokemon_slider, player_pokemon_slider,
+                     out first_attack_pokemon, out next_tattacker_pokemon, out first_attack_pokemon_slider, out next_tattacker_pokemon_slider);
 
             yield return new WaitForSeconds(1f);
 
             //공격 페이즈
-            if (!islose)
-            {
-                break;
-            }
             AttackPhase(first_attack_pokemon, next_tattacker_pokemon);
 
-            yield return new WaitForSeconds(3f);
-            if (!islose)
+            yield return new WaitUntil(() =>
+            first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
+            first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
+
+            UpdateHpBar(next_tattacker_pokemon, next_tattacker_pokemon.GetComponent<UIManger>().hPbar);
+
+            //사망시 아웃
+            if (islose || isWin || isRun)
             {
                 break;
             }
+
+            yield return new WaitForSeconds(4f);
+
             AttackPhase(next_tattacker_pokemon, first_attack_pokemon);
+
+            yield return new WaitUntil(() =>
+            next_tattacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
+            next_tattacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
+
+            UpdateHpBar(first_attack_pokemon, first_attack_pokemon.GetComponent<UIManger>().hPbar);
+            //사망시 아웃
+            if (islose || isWin || isRun)
+            {
+                break;
+            }
+
+            yield return new WaitForSeconds(4f);
+
 
             turn++;
 
-            yield return new WaitForSeconds(3f);
-            if (!islose)
-            {
-                break;
-            }
+            //UI 리셋!
+            Battle_UI.gameObject.SetActive(true);
         }
 
 
-        Battle_UI.gameObject.SetActive(false);
-        enemyPokemon.GetComponent<PokemonBattleMode>().enabled = false;
-        enemyPokemon.GetComponent<PokemonBattleMode>().anim.SetBool("Battle", false);
-        enemyPokemon.GetComponent<PokemonBattleMode>().anim.SetBool("Walk", true);
-        enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+        if (isRun)
+        {
+            TextBox.instance.Textbox_OnOff(true);
+            TextBox.instance.TalkText.text = "무사히 도망갔습니다.";
+            yield return new WaitForSeconds(1f);
+            TextBox.instance.Textbox_OnOff(false);
 
+            enemy_pokemon_battlemode.enabled = false;
+            enemy_pokemon_battlemode.anim.SetBool("Battle", false);
+            enemy_pokemon_battlemode.anim.SetBool("Walk", true);
+
+            enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+        }
+        else if (islose)
+        {
+            player_pokemon_battlemode.anim.SetTrigger("Die");
+            TextBox.instance.Textbox_OnOff(true);
+
+            TextBox.instance.TalkText.text = "졌습니다.";
+            yield return new WaitForSeconds(1.5f);
+            TextBox.instance.Textbox_OnOff(false);
+
+            enemy_pokemon_battlemode.enabled = false;
+            enemy_pokemon_battlemode.anim.SetBool("Battle", false);
+            enemy_pokemon_battlemode.anim.SetBool("Walk", true);
+
+            enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+        }
+
+        Battle_UI.gameObject.SetActive(false);
 
         player.GetComponent<PlayerMovement>().isBattle = false;
-
         playerPokemon.SetActive(false);
 
         newTransform.gameObject.SetActive(false);
@@ -248,38 +348,55 @@ public class BattleManager : MonoBehaviour
         PlayerCamera.m_Orbits[1].m_Radius = 5f;
         PlayerCamera.Follow = player.transform;
         PlayerCamera.LookAt = player.transform;
+
     }
 
     //스피드 비교
-    void CompareSpeed(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon, out PokemonStats firstattcker, out PokemonStats nextattacker)
+    void CompareSpeed(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon, Slider Enemy_slider, Slider player_slider, 
+        out PokemonStats firstattcker, out PokemonStats nextattacker,
+        out Slider first_attack_pokemon_slider, out Slider next_tattacker_pokemon_slider)
     {
         #region 속도 체크
         firstattcker = null;
         nextattacker = null;
+        first_attack_pokemon_slider = null;
+        next_tattacker_pokemon_slider = null;
 
         //내 스킬의 우선도가 더 높을때
         if (Player_pokemon.skills[playerskillnum].Priority > Enemy_pokemon.skills[enemyskillnum].Priority)
         {
             firstattcker = Player_pokemon;
+            first_attack_pokemon_slider = player_slider;
+
             nextattacker = Enemy_pokemon;
+            next_tattacker_pokemon_slider = Enemy_slider;
         }
         //적의 스킬의 우선도가 더 높을때
         else if (Player_pokemon.skills[playerskillnum].Priority < Enemy_pokemon.skills[enemyskillnum].Priority)
         {
-            firstattcker = Enemy_pokemon;
+            firstattcker = Enemy_pokemon; 
+            first_attack_pokemon_slider = Enemy_slider;
+
             nextattacker = Player_pokemon;
+            next_tattacker_pokemon_slider = player_slider;
         }
         //내 포켓몬의 속도가 더 높을때
         else if (Player_pokemon.Speed > Enemy_pokemon.Speed)
         {
             firstattcker = Player_pokemon;
+            first_attack_pokemon_slider = player_slider;
+
             nextattacker = Enemy_pokemon;
+            next_tattacker_pokemon_slider = Enemy_slider;
         }
         //적의 스피드가 더 높을 때
         else if (Player_pokemon.Speed < Enemy_pokemon.Speed)
         {
             firstattcker = Enemy_pokemon;
+            first_attack_pokemon_slider = Enemy_slider;
+
             nextattacker = Player_pokemon;
+            next_tattacker_pokemon_slider = player_slider;
         }
         //스피드가 똑같을때는 랜덤으로 결정
         else if (Enemy_pokemon.Speed == Player_pokemon.Speed)
@@ -290,13 +407,19 @@ public class BattleManager : MonoBehaviour
             if (randomStart == 1)
             {
                 firstattcker = Player_pokemon;
+                first_attack_pokemon_slider = player_slider;
+
                 nextattacker = Enemy_pokemon;
+                next_tattacker_pokemon_slider = Enemy_slider;
             }
             //적 먼저
             else if (randomStart == 2)
             {
                 firstattcker = Enemy_pokemon;
+                first_attack_pokemon_slider = Enemy_slider;
+
                 nextattacker = Player_pokemon;
+                next_tattacker_pokemon_slider = player_slider;
             }
         }
         #endregion
@@ -310,23 +433,49 @@ public class BattleManager : MonoBehaviour
         //스킬 판별
         CompareSkillType(attacker, out skillnum, out skilltype);
 
-        //데미지 주기
+        //데미지 계산
         OnDamage(attacker.skills[skillnum], attacker, target);
 
         //4번째 지속 공격은 이상함
         attacker.GetComponent<PokemonBattleMode>().anim.SetFloat("AttackNum", skilltype);
         attacker.GetComponent<PokemonBattleMode>().anim.SetTrigger("Attack");
+        TextBox.instance.Textbox_OnOff(true);
+        TextBox.instance.TalkText.text = $" {attacker.Name}의 {attacker.skills[skillnum].Name} 공격!!";
 
-        Explain_txt.gameObject.SetActive(true);
-        Explain_txt.text = $" {attacker.Name}의 {attacker.skills[skillnum].Name}!!";
+        Invoke("setoff", 2f);
+    }
 
-        Invoke("setoff", 1.5f);
 
+    public void UpdateHpBar(PokemonStats Target, Slider Target_Slider) //자연스럽게 Hpbar를 내리기위한 메서드
+    {
+        Target.Hp -= (int)Damage;
+        Debug.Log($"{Target.Name}에게 {(int)Damage}만큼의 데미지를 주었다!");
+
+        float targetHp_Value = (float)Target.Hp / Target.MaxHp;
+        float durationTime = 1f;
+
+        StartCoroutine(HpUpdate_Co(targetHp_Value, durationTime, Target_Slider));
+    }
+    private IEnumerator HpUpdate_Co(float targetHp_Value, float durationTime, Slider Target) //자연스럽게 HPbar를 내리기위한 코루틴
+    {
+        float elapsedTime = 0f;
+        float startHpValue = Target.value;
+        while (elapsedTime < durationTime)
+        {
+            elapsedTime += Time.deltaTime;
+            float t = Mathf.Clamp01(elapsedTime / durationTime);
+            float smoothedValue = Mathf.Lerp(startHpValue, targetHp_Value, t);
+            Target.value = smoothedValue;
+            yield return null;
+
+        }
+        Target.value = targetHp_Value;
     }
 
     void setoff()
     {
-        Explain_txt.gameObject.SetActive(false);
+        TextBox.instance.TalkText.text = "";
+        TextBox.instance.Textbox_OnOff(false);
     }
 
     //스킬 판별
@@ -398,16 +547,16 @@ public class BattleManager : MonoBehaviour
 
         if (DamageRank > 1)
         {
-            Explain_txt.text = "효과가 굉장했다!";
+            TextBox.instance.TalkText.text = "효과가 굉장했다!";
         }
         else if (DamageRank < 1)
         {
 
-            Explain_txt.text = "효과가 별로인듯하다...";
+            TextBox.instance.TalkText.text = "효과가 별로인듯하다...";
         }
         else if (DamageRank == 0)
         {
-            Explain_txt.text = "효과가 없는거같다.";
+            TextBox.instance.TalkText.text = "효과가 없는거같다.";
             Damage = 0;
         }
         else
@@ -415,8 +564,8 @@ public class BattleManager : MonoBehaviour
 
         }
 
-        target.Hp -= (int)Damage;
-        Debug.Log($"{target.Name}에게 {(int)Damage}만큼의 데미지를 주었다!");
+        //target.Hp -= (int)Damage;
+        //Debug.Log($"{target.Name}에게 {(int)Damage}만큼의 데미지를 주었다!");
 
         //배틀 변수값들 초기화
         PropertyRank = 1;
@@ -1508,6 +1657,10 @@ public class BattleManager : MonoBehaviour
     public void Player_Choise_Skill(int num)
     {
         playerskillnum = num;
+
+        //UI 끔!
+        Battle_UI.gameObject.SetActive(false);
+
     }
 }
 

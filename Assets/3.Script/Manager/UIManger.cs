@@ -14,11 +14,11 @@ public class UIManger : MonoBehaviour
     [Header("HP관련 UI")]
     [SerializeField] private GameObject HP_UI;
     [SerializeField] private Text pokemon_name;
-    [SerializeField] private Slider hPbar;
+    public Slider hPbar;
     [SerializeField] private Text hp_txt;
+
     [Header("싸운다 -> 스킬 UI")]
     [SerializeField] private GameObject Skill_UI;
-
     [Header("배틀 할 때, 스킬UI")]
     [SerializeField] private Text[] Inbattle_skill_txt;
     [SerializeField] private Text[] Inbattle_skill_pp_txt;
@@ -43,14 +43,11 @@ public class UIManger : MonoBehaviour
     [Header("스킬속성 이미지를 넣어주세요")]
     [SerializeField] private Sprite[] propertyType_skill_img;
 
-
     private void OnEnable()
     {
-        Debug.Log("들어감?");
-        UI_stack.Push(Default_UI);
-        Debug.Log(UI_stack.Peek());
         playerBag = FindObjectOfType<PlayerBag>();
 
+        Reset_UI();
     }
 
     private void OnDisable()
@@ -60,11 +57,11 @@ public class UIManger : MonoBehaviour
 
     private void Update()
     {
-        PokemonStats pokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
+        PokemonStats playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
 
-        pokemon_name.text = pokemon.Name;
-        hp_txt.text = pokemon.Hp + "/" + pokemon.MaxHp;
-
+        pokemon_name.text = playerpokemon.Name;
+        hp_txt.text = playerpokemon.Hp + "/" + playerpokemon.MaxHp;
+        hPbar.value = (float)playerpokemon.Hp / playerpokemon.MaxHp;
 
         if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI)
         {
@@ -127,6 +124,7 @@ public class UIManger : MonoBehaviour
                 change_pokemon_img[i].color = Color.white;
                 change_pokemon_img[i].sprite = pokemon.image;
                 change_pokemon_Lv_txt[i].text = "Lv " + pokemon.Level;
+                change_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
             }
             else
             {
@@ -159,6 +157,7 @@ public class UIManger : MonoBehaviour
                 bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
                 //bag_pokemon_img[i].color = Color.white;
                 bag_pokemon_img[i].sprite = pokemon.image;
+                bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
             }
             else
             {
@@ -171,7 +170,23 @@ public class UIManger : MonoBehaviour
     }
     public void UI_Run()
     {
-        //gameObject.SetActive(false);
+        BattleManager.instance.isRun = true;
+        gameObject.SetActive(false);
+    }
+
+
+    public void Reset_UI()
+    {
+        if (!Default_UI.activeSelf)
+        {
+            Default_UI.SetActive(true);
+        }
+
+        UI_stack.Push(Default_UI);
+
+        Skill_UI.SetActive(false);
+        Change_UI.SetActive(false);
+        Bag_UI.SetActive(false);
     }
 
     void TypeCheck_propertyType(PokemonStats pokemonskills, Text[] skill_txt, Text[] skill_pp_txt, Image[] skill_img)

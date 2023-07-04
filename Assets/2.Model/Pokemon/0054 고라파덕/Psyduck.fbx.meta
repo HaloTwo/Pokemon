@@ -1,11 +1,14 @@
 fileFormatVersion: 2
-guid: fadd052289c3b98479a61886ed7899aa
+guid: 6aefa350869022e4e8f8e9e2e15ba468
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
   - first:
       74: 4378373359086249572
     second: pm0054_00_00.trmdl|pm0054_00_00_00000_defaultwait01_loop.gfbanm
+  - first:
+      74: -4804307885749676263
+    second: pm0054_00_00.trmdl|pm0054_00_00_00000_defaultwait01_loop.gfbanm.001
   - first:
       74: -2708390311473409065
     second: pm0054_00_00.trmdl|pm0054_00_00_00010_defaultidle01.gfbanm
@@ -114,13 +117,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: l_eye.006
-    second: {fileID: 2100000, guid: 68c936ee1e6ee4647b9ba70d243a36ee, type: 2}
+      name: l_eye
+    second: {fileID: 2100000, guid: bcf7b4cecfe17a84c90d4642952b3f28, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: r_eye.006
-    second: {fileID: 2100000, guid: 0537fa49d0c89014985b8486d3ade25d, type: 2}
+      name: r_eye
+    second: {fileID: 2100000, guid: 964cee1e0bb747246a719aee6ce373e0, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -189,7 +192,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -218,7 +221,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
@@ -276,8 +279,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0
@@ -392,8 +395,8 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
+      loopTime: 1
+      loopBlend: 1
       loopBlendOrientation: 0
       loopBlendPositionY: 0
       loopBlendPositionXZ: 0

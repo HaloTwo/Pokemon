@@ -5744,7 +5744,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d132e12b7b5ca04894ce4ea93bb65df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  isDie: 0
   Name: "\uC800\uC2B9\uAC13\uC22D"
+  image: {fileID: 21300000, guid: bd8cb5ff9151691428a1c036f8002634, type: 3}
   MaxHp: 110
   Attack: 115
   Defence: 80
@@ -5765,7 +5768,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0fa2fb3246aca03499d2a9b66502cf75, type: 2}
   - {fileID: 11400000, guid: ee000a7a976d9a14fa1f205cd5890ce1, type: 2}
   - {fileID: 11400000, guid: 553f94065b4c61b47b850df7628a28fc, type: 2}
-  - {fileID: 11400000, guid: 61a4fb1655831e34cb0e6bc20b868272, type: 2}
+  - {fileID: 11400000, guid: 2f5f7defbdc70c6419e8629314bfdc06, type: 2}
 --- !u!114 &2194435821593671949
 MonoBehaviour:
   m_ObjectHideFlags: 0

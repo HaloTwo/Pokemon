@@ -5,17 +5,30 @@ using LitJson;
 
 public class PokemonStats : MonoBehaviour
 {
+    PokemonBattleMode pokemonBattle;
     System.Random random = new System.Random();
-    private int hp;
+    [SerializeField] private int hp;
     public int Hp
     {
         get { return hp; }
         set
         {
-            hp = value;
+            if (value <= 0)
+            {
+                hp = 0;
+                isDie = true;
+                pokemonBattle.OnDie();
+            }
+            else if (value > 0 && value <= MaxHp)
+            {
+                hp = value;
+            }
         }
     }
 
+    public bool isDie;
+
+    [Header("받은 능력치")]
     //객체별 개체값
     [SerializeField] public string Name;
     [SerializeField] public Sprite image;
@@ -79,7 +92,10 @@ public class PokemonStats : MonoBehaviour
     {
         TextAsset jsonFile = Resources.Load<TextAsset>(jsonFileName);
         pokemonArray = JsonMapper.ToObject<PokemonData[]>(jsonFile.text);
+        TryGetComponent(out pokemonBattle);
+        Hp = MaxHp;
     }
+
 
     public PokemonData[] GetPokemonArray()
     {
