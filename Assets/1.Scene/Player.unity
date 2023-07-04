@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3664,6 +3664,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 488879488}
   m_CullTransparentMesh: 1
+--- !u!114 &490084979 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2545082498457115565, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+  m_PrefabInstance: {fileID: 776335587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &491564786
 GameObject:
   m_ObjectHideFlags: 0
@@ -5604,8 +5615,51 @@ PrefabInstance:
       propertyPath: isWild
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1855586496885224812, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: pokemon_name
+      value: 
+      objectReference: {fileID: 490084979}
+    - target: {fileID: 1855586496885224812, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: pokemon_slider
+      value: 
+      objectReference: {fileID: 776335588}
+    - target: {fileID: 2545082498368978027, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545082498368978027, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545082498457115565, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: m_FontData.m_Font
+      value: 
+      objectReference: {fileID: 12800000, guid: 31854dd11d7c445419d6eb80ea08264f, type: 3}
+    - target: {fileID: 2545082498567775974, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: m_Value
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545082498567775974, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: m_Interactable
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2545082498571816720, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+--- !u!114 &776335588 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2545082498567775974, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+  m_PrefabInstance: {fileID: 776335587}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &791211803
 GameObject:
   m_ObjectHideFlags: 0
@@ -14518,11 +14572,11 @@ PrefabInstance:
     - target: {fileID: 2141166183439624893, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: PlayerPokemon.Array.data[0]
       value: 
-      objectReference: {fileID: 6511886606920090132, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
+      objectReference: {fileID: 6067346591068029317, guid: 75ec478d59929a543a5d9dca35a94ef9, type: 3}
     - target: {fileID: 2141166183439624893, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: PlayerPokemon.Array.data[1]
       value: 
-      objectReference: {fileID: 6067346591068029317, guid: 75ec478d59929a543a5d9dca35a94ef9, type: 3}
+      objectReference: {fileID: 6511886606920090132, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
     - target: {fileID: 2141166183439624893, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: PlayerPokemon.Array.data[2]
       value: 

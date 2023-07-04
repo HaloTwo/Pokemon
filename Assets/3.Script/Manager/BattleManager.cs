@@ -235,7 +235,7 @@ public class BattleManager : MonoBehaviour
         PokemonBattleMode enemy_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
         PokemonBattleMode player_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
 
-        Slider player_pokemon_slider = FindObjectOfType<UIManger>().hPbar;
+        Slider player_pokemon_slider = Battle_UI.GetComponent<UIManger>().hPbar;
         Slider enemy_pokemon_slider = enemy_pokemon_battlemode.pokemon_slider;
 
         PokemonStats first_attack_pokemon;
@@ -276,10 +276,10 @@ public class BattleManager : MonoBehaviour
             first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
             first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
 
-            UpdateHpBar(next_tattacker_pokemon, next_tattacker_pokemon.GetComponent<UIManger>().hPbar);
+            UpdateHpBar(next_tattacker_pokemon, next_tattacker_pokemon_slider);
 
             //사망시 아웃
-            if (islose || isWin || isRun)
+            if (islose || isWin || isRun || next_tattacker_pokemon.isDie)
             {
                 break;
             }
@@ -292,9 +292,9 @@ public class BattleManager : MonoBehaviour
             next_tattacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
             next_tattacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
 
-            UpdateHpBar(first_attack_pokemon, first_attack_pokemon.GetComponent<UIManger>().hPbar);
+            UpdateHpBar(first_attack_pokemon, first_attack_pokemon_slider);
             //사망시 아웃
-            if (islose || isWin || isRun)
+            if (islose || isWin || isRun || first_attack_pokemon.isDie)
             {
                 break;
             }
@@ -305,7 +305,16 @@ public class BattleManager : MonoBehaviour
             turn++;
 
             //UI 리셋!
-            Battle_UI.gameObject.SetActive(true);
+
+            if (!Battle_UI.gameObject.transform.GetChild(1).gameObject.activeSelf)
+            {
+                Battle_UI.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+            }
+            else if (!Battle_UI.gameObject.activeSelf)
+            {
+                Battle_UI.gameObject.SetActive(true);
+            }
+
         }
 
 
@@ -352,7 +361,7 @@ public class BattleManager : MonoBehaviour
     }
 
     //스피드 비교
-    void CompareSpeed(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon, Slider Enemy_slider, Slider player_slider, 
+    void CompareSpeed(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon, Slider Enemy_slider, Slider player_slider,
         out PokemonStats firstattcker, out PokemonStats nextattacker,
         out Slider first_attack_pokemon_slider, out Slider next_tattacker_pokemon_slider)
     {
@@ -374,7 +383,7 @@ public class BattleManager : MonoBehaviour
         //적의 스킬의 우선도가 더 높을때
         else if (Player_pokemon.skills[playerskillnum].Priority < Enemy_pokemon.skills[enemyskillnum].Priority)
         {
-            firstattcker = Enemy_pokemon; 
+            firstattcker = Enemy_pokemon;
             first_attack_pokemon_slider = Enemy_slider;
 
             nextattacker = Player_pokemon;
@@ -440,7 +449,7 @@ public class BattleManager : MonoBehaviour
         attacker.GetComponent<PokemonBattleMode>().anim.SetFloat("AttackNum", skilltype);
         attacker.GetComponent<PokemonBattleMode>().anim.SetTrigger("Attack");
         TextBox.instance.Textbox_OnOff(true);
-        TextBox.instance.TalkText.text = $" {attacker.Name}의 {attacker.skills[skillnum].Name} 공격!!";
+        TextBox.instance.TalkText.text = $" {attacker.Name}의 {attacker.skills[skillnum].Name}!!";
 
         Invoke("setoff", 2f);
     }
@@ -448,8 +457,16 @@ public class BattleManager : MonoBehaviour
 
     public void UpdateHpBar(PokemonStats Target, Slider Target_Slider) //자연스럽게 Hpbar를 내리기위한 메서드
     {
+        if (Target == playerPokemon.GetComponent<PokemonStats>())
+        {
+            Battle_UI.gameObject.SetActive(true);
+            Battle_UI.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+        }
+
         Target.Hp -= (int)Damage;
         Debug.Log($"{Target.Name}에게 {(int)Damage}만큼의 데미지를 주었다!");
+        Target.gameObject.GetComponent<PokemonBattleMode>().anim.SetTrigger("Hit");
+
 
         float targetHp_Value = (float)Target.Hp / Target.MaxHp;
         float durationTime = 1f;
@@ -470,6 +487,8 @@ public class BattleManager : MonoBehaviour
 
         }
         Target.value = targetHp_Value;
+
+        Damage = 0f;
     }
 
     void setoff()
