@@ -93,8 +93,7 @@ public class UIManger : MonoBehaviour
     {
         //현재 플레이어 포켓몬의 상태 확인
         PokemonStats playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
-
-        //현재 플레이어 포켓몬 UI체크
+        //현재 플레이어 포켓몬 볼 이미지로 체크
         Current_Playerpokemon_Check(playerpokemon);
 
 
@@ -259,13 +258,13 @@ public class UIManger : MonoBehaviour
         // 선택된 버튼의 RectTransform을 가져옵니다.
         RectTransform selectedButtonRect = selectedButton.GetComponent<RectTransform>();
 
+        //절대값으로 하면 안됌./////////////////////////////
         Vector3 newPosition = selectedButtonRect.position;
-        newPosition.x -= (selectedButtonRect.rect.width / 2f + 5f);
 
         // "Select" 이미지의 위치를 갱신합니다.
         selectImage.position = newPosition;
 
-        StartCoroutine(SelectedMove_co(newPosition));
+       // StartCoroutine(SelectedMove_co(newPosition));
     }
 
     //아직 안됌
