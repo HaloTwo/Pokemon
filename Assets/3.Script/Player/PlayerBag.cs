@@ -41,14 +41,20 @@ public class PlayerBag : MonoBehaviour
             Debug.Log("현재 포켓몬이 없어서 필드로 꺼낸다");
             for (int i = 0; i < PlayerPokemon.Count; i++)
             {
+                if (PlayerPokemon[i] == null)
+                {
+                    NowPokemon.Add(null);
+                    continue;
+                }
+
                 GameObject newPokemon = Instantiate(PlayerPokemon[i]);
 
                 NowPokemon.Add(newPokemon);
                 newPokemon.GetComponent<PokemonMove>().enabled = false;
 
                 PokemonBattleMode newPokemonBattleMode = newPokemon.GetComponent<PokemonBattleMode>();
-                newPokemonBattleMode.enabled = true;
                 newPokemonBattleMode.isWild = false;
+                newPokemonBattleMode.enabled = true;
                 newPokemon.SetActive(false);
             }
         }

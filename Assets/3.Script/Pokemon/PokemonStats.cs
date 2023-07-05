@@ -42,6 +42,7 @@ public class PokemonStats : MonoBehaviour
     [SerializeField] public int Exp;
     [SerializeField] public Type Type1;
     [SerializeField] public Type Type2;
+    [SerializeField] public int[] SkillPP;
     public enum Type
     {
         Normal, Fight, Poison, Earth, Flight, Bug, Rock, Ghost, Steel, Fire, Water, Electricty, Grass, Ice, Esper, Dragon, Evil, Fairy, None
@@ -93,7 +94,6 @@ public class PokemonStats : MonoBehaviour
         TextAsset jsonFile = Resources.Load<TextAsset>(jsonFileName);
         pokemonArray = JsonMapper.ToObject<PokemonData[]>(jsonFile.text);
         TryGetComponent(out pokemonBattle);
-        Hp = MaxHp;
     }
 
 

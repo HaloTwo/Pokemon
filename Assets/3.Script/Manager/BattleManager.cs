@@ -176,7 +176,7 @@ public class BattleManager : MonoBehaviour
         Transform playerTransform = playerPokemon.transform;
         Renderer py_pokemon_renderer = playerPokemon.GetComponentInChildren<Renderer>();
 
-        Vector3 position = playerTransform.position + playerTransform.up * py_pokemon_renderer.bounds.size.y * 0.65f;
+        Vector3 position = playerTransform.position + playerTransform.up * py_pokemon_renderer.bounds.size.y * 0.5f;
         Quaternion py_rotation = playerTransform.rotation;
         Vector3 scale = playerTransform.localScale;
 
@@ -272,11 +272,13 @@ public class BattleManager : MonoBehaviour
             //공격 페이즈
             AttackPhase(first_attack_pokemon, next_tattacker_pokemon);
 
+            //공격 모션 중간쯤에 피격 맞음
             yield return new WaitUntil(() =>
             first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
             first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
 
-            UpdateHpBar(next_tattacker_pokemon, next_tattacker_pokemon_slider);
+            //피격맞고 체력바 떨어짐
+            HitPhase(next_tattacker_pokemon, next_tattacker_pokemon_slider);
 
             //사망시 아웃
             if (islose || isWin || isRun || next_tattacker_pokemon.isDie)
@@ -284,36 +286,42 @@ public class BattleManager : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(3f);
 
+            //다음 포켓몬 공격
             AttackPhase(next_tattacker_pokemon, first_attack_pokemon);
 
+            //공격 모션 중간쯤에 피격 맞음
             yield return new WaitUntil(() =>
             next_tattacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
             next_tattacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
 
-            UpdateHpBar(first_attack_pokemon, first_attack_pokemon_slider);
-            //사망시 아웃
+            //피격맞고 체력바 떨어짐
+            HitPhase(first_attack_pokemon, first_attack_pokemon_slider);
+
+            //조건 검사
             if (islose || isWin || isRun || first_attack_pokemon.isDie)
             {
                 break;
             }
 
-            yield return new WaitForSeconds(4f);
+            yield return new WaitForSeconds(3f);
 
 
             turn++;
 
             //UI 리셋!
-
+            #region UI 리셋
             if (!Battle_UI.gameObject.transform.GetChild(1).gameObject.activeSelf)
             {
+                Battle_UI.gameObject.transform.Find("Select").gameObject.SetActive(true);
                 Battle_UI.gameObject.transform.GetChild(1).gameObject.SetActive(true);
             }
             else if (!Battle_UI.gameObject.activeSelf)
             {
                 Battle_UI.gameObject.SetActive(true);
             }
+            #endregion
 
         }
 
@@ -453,14 +461,21 @@ public class BattleManager : MonoBehaviour
 
         Invoke("setoff", 2f);
     }
+    void setoff()
+    {
+        TextBox.instance.TalkText.text = "";
+        TextBox.instance.Textbox_OnOff(false);
+    }
 
 
-    public void UpdateHpBar(PokemonStats Target, Slider Target_Slider) //자연스럽게 Hpbar를 내리기위한 메서드
+    //맞는 판정
+    public void HitPhase(PokemonStats Target, Slider Target_Slider) 
     {
         if (Target == playerPokemon.GetComponent<PokemonStats>())
         {
             Battle_UI.gameObject.SetActive(true);
             Battle_UI.gameObject.transform.GetChild(1).gameObject.SetActive(false);
+            Battle_UI.gameObject.transform.Find("Select").gameObject.SetActive(false);
         }
 
         Target.Hp -= (int)Damage;
@@ -473,16 +488,33 @@ public class BattleManager : MonoBehaviour
 
         StartCoroutine(HpUpdate_Co(targetHp_Value, durationTime, Target_Slider));
     }
-    private IEnumerator HpUpdate_Co(float targetHp_Value, float durationTime, Slider Target) //자연스럽게 HPbar를 내리기위한 코루틴
+
+    //자연스럽게 HPbar를 내리기위한 코루틴
+    private IEnumerator HpUpdate_Co(float targetHp_Value, float durationTime, Slider Target) 
     {
         float elapsedTime = 0f;
         float startHpValue = Target.value;
         while (elapsedTime < durationTime)
         {
+            //체력 소모시 색상 변경
+            if (Target.value < 0.3f)
+            {
+                Target.gameObject.transform.Find("Fill Area/Fill").GetComponent<Image>().color = Color.red;
+            }
+            else if (Target.value < 0.6f)
+            {
+                Target.gameObject.transform.Find("Fill Area/Fill").GetComponent<Image>().color = Color.yellow;
+            }
+            else
+            {
+                Target.gameObject.transform.Find("Fill Area/Fill").GetComponent<Image>().color = Color.green;
+            }
+
             elapsedTime += Time.deltaTime;
             float t = Mathf.Clamp01(elapsedTime / durationTime);
             float smoothedValue = Mathf.Lerp(startHpValue, targetHp_Value, t);
             Target.value = smoothedValue;
+
             yield return null;
 
         }
@@ -491,24 +523,64 @@ public class BattleManager : MonoBehaviour
         Damage = 0f;
     }
 
-    void setoff()
-    {
-        TextBox.instance.TalkText.text = "";
-        TextBox.instance.Textbox_OnOff(false);
-    }
 
     //스킬 판별
     void CompareSkillType(PokemonStats firstpokemon, out int num, out int type)
     {
+        #region 스킬 판명
         num = 0;
         type = 0;
 
-        if (firstpokemon == enemyPokemon.GetComponent<PokemonStats>()) num = enemyskillnum;
+        firstpokemon.SkillPP[num]--;
+
+
+        if (firstpokemon == enemyPokemon.GetComponent<PokemonStats>())
+        {
+            if (firstpokemon.SkillPP[num] <= 0)
+            {
+                List<int> randomskillnum = new List<int>();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i != enemyskillnum)
+                    {
+                        randomskillnum.Add(i);
+                    }
+                }
+
+                num = randomskillnum[Random.Range(0, randomskillnum.Count)];
+            }
+            else
+            {
+                num = enemyskillnum;
+            }
+
+        }
         else if (firstpokemon == playerPokemon.GetComponent<PokemonStats>())
         {
-            num = playerskillnum;
+
+            if (firstpokemon.SkillPP[num] <= 0)
+            {
+                List<int> randomskillnum = new List<int>();
+
+                for (int i = 0; i < 4; i++)
+                {
+                    if (i != playerskillnum)
+                    {
+                        randomskillnum.Add(i);
+                    }
+                }
+
+                num = randomskillnum[Random.Range(0, randomskillnum.Count)];
+            }
+            else
+            {
+                num = playerskillnum;
+            }
+
             player.GetComponent<Animator>().SetTrigger("Order");
         }
+
         if (firstpokemon.skills[num].AttackType == SkillData.attackType.Attack)
         {
 
@@ -541,8 +613,7 @@ public class BattleManager : MonoBehaviour
             type = 3;
         }
 
-        //type = (int)firstpokemon.skills[num].AttackType;
-
+        #endregion
     }
 
     //데미지 판별
@@ -1679,7 +1750,6 @@ public class BattleManager : MonoBehaviour
 
         //UI 끔!
         Battle_UI.gameObject.SetActive(false);
-
     }
 }
 

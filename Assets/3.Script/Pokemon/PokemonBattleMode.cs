@@ -11,7 +11,8 @@ public class PokemonBattleMode : MonoBehaviour
     public Animator anim;
 
     public Slider pokemon_slider;
-    [SerializeField]private Text pokemon_name;
+    [SerializeField] private Text pokemon_name;
+    [SerializeField] private Text pokemon_lv;
 
     PokemonStats pokemonStats;
     private GameObject maincamera;
@@ -32,20 +33,19 @@ public class PokemonBattleMode : MonoBehaviour
         if (isWild)
         {
             anim.SetTrigger("Roar");
-            pokemonStats.Hp = pokemonStats.MaxHp;
             pokemon_slider.transform.parent.gameObject.SetActive(true);
             pokemon_name.text = pokemonStats.Name;
         }
 
-        if (pokemonStats.isDie)
-        {
-
-        }
     }
 
     void Start()
     {
-
+        if (isWild)
+        {
+            pokemonStats.Level = Random.Range(10, 30);
+            pokemon_lv.text = "Lv." + pokemonStats.Level;
+        }
     }
 
     // Update is called once per frame
@@ -55,6 +55,14 @@ public class PokemonBattleMode : MonoBehaviour
         {
             Vector3 direction = maincamera.transform.position - pokemon_slider.transform.parent.position;
             pokemon_slider.transform.parent.rotation = Quaternion.LookRotation(-direction);
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (isWild)
+        {
+            pokemon_slider.transform.parent.gameObject.SetActive(false);
 
         }
     }
