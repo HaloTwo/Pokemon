@@ -9,6 +9,10 @@ public class PlayerBag : MonoBehaviour
 
     void Start()
     {
+
+        //필드에 플레이어 포켓몬 생성
+        Playerpokemon_Create();
+
         BattleManager.instance.Battle_Ready.AddListener(PlayerPokemon_Battle_go);
     }
 
@@ -18,11 +22,29 @@ public class PlayerBag : MonoBehaviour
 
     }
 
+
+    //포켓몬 추가
     public void AddPokemon(GameObject pokemon)
     {
         if (PlayerPokemon.Count < 6)
         {
-            PlayerPokemon.Add(pokemon);
+            for (int i = 0; i < PlayerPokemon.Count; i++)
+            {
+                if (PlayerPokemon[i] == null)
+                {
+                    PlayerPokemon.Add(pokemon);
+                    GameObject newPokemon = Instantiate(PlayerPokemon[i]);
+
+                    NowPokemon.Add(newPokemon);
+                    newPokemon.GetComponent<PokemonMove>().enabled = false;
+
+                    PokemonBattleMode newPokemonBattleMode = newPokemon.GetComponent<PokemonBattleMode>();
+                    newPokemonBattleMode.isWild = false;
+                    newPokemonBattleMode.enabled = true;
+                    newPokemon.SetActive(false);
+                    break;
+                }
+            }
         }
         else
         {
@@ -35,10 +57,17 @@ public class PlayerBag : MonoBehaviour
 
         Debug.Log("플레이어 포켓몬 배틀 이벤트 들간다!");
 
+
+        //첫번째 포켓몬 꺼내기
+        NowPokemon[0].SetActive(true);
+        BattleManager.instance.playerPokemon = NowPokemon[0];
+    }
+
+    void Playerpokemon_Create()
+    {
         //tudo 나중에 꼭 수정해야됌
         if (NowPokemon.Count <= 0)
         {
-            Debug.Log("현재 포켓몬이 없어서 필드로 꺼낸다");
             for (int i = 0; i < PlayerPokemon.Count; i++)
             {
                 if (PlayerPokemon[i] == null)
@@ -62,9 +91,5 @@ public class PlayerBag : MonoBehaviour
         {
             Debug.Log("소유한 포켓몬이 없습니다.");
         }
-
-        //첫번째 포켓몬 꺼내기
-        NowPokemon[0].SetActive(true);
-        BattleManager.instance.playerPokemon = NowPokemon[0];
     }
 }

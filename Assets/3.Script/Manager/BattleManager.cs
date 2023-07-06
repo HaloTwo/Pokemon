@@ -77,7 +77,7 @@ public class BattleManager : MonoBehaviour
 
     public UnityEvent Battle_Ready;
 
-    [SerializeField] Transform newTransform;
+     Transform newTransform;
     //배틀 시작!
     public void Battle_Start(GameObject enemyPokemon, GameObject player)
     {
@@ -305,7 +305,7 @@ public class BattleManager : MonoBehaviour
                 break;
             }
 
-            yield return new WaitForSeconds(3f);
+            yield return new WaitForSeconds(2f);
 
 
             turn++;
@@ -353,6 +353,16 @@ public class BattleManager : MonoBehaviour
             enemy_pokemon_battlemode.anim.SetBool("Walk", true);
 
             enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+        }
+        else if (player_pokemon_Stats.isDie)
+        {
+            Debug.Log("내 포켓몬 디짐..");
+        }
+        else if (enemy_pokemon_Stats.isDie)
+        {
+            yield return new WaitUntil(() => enemy_pokemon_Stats.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
+
+            Debug.Log("상대 포켓몬 디짐..");
         }
 
         Battle_UI.gameObject.SetActive(false);
@@ -469,7 +479,7 @@ public class BattleManager : MonoBehaviour
 
 
     //맞는 판정
-    public void HitPhase(PokemonStats Target, Slider Target_Slider) 
+    public void HitPhase(PokemonStats Target, Slider Target_Slider)
     {
         if (Target == playerPokemon.GetComponent<PokemonStats>())
         {
@@ -490,7 +500,7 @@ public class BattleManager : MonoBehaviour
     }
 
     //자연스럽게 HPbar를 내리기위한 코루틴
-    private IEnumerator HpUpdate_Co(float targetHp_Value, float durationTime, Slider Target) 
+    private IEnumerator HpUpdate_Co(float targetHp_Value, float durationTime, Slider Target)
     {
         float elapsedTime = 0f;
         float startHpValue = Target.value;

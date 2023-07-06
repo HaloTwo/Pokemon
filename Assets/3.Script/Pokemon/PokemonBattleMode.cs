@@ -63,13 +63,19 @@ public class PokemonBattleMode : MonoBehaviour
         if (isWild)
         {
             pokemon_slider.transform.parent.gameObject.SetActive(false);
-
         }
     }
 
     public void OnDie()
     {
         anim.SetTrigger("Die");
+
+        StartCoroutine(DieAnimation_co());
     }
 
+    IEnumerator DieAnimation_co()
+    {
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.5f && anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
+        gameObject.SetActive(false);
+    }
 }
