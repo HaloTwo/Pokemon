@@ -6,24 +6,28 @@ using UnityEngine;
 public class ItemData : ScriptableObject
 {
     [Header("아이템 이미지")]
-    [SerializeField] private Sprite Image;
+    public Sprite Image;
     [Header("아이템 이름")]
-    [SerializeField] private string Name;
+    public string Name;
     [Header("아이템 갯수")]
-    [SerializeField] private int Quantity;
+    public int Quantity;
     [Header("포획률")]
-    [SerializeField] private float Catchrate;
+    public float Catchrate;
     [Header("회복량")]
-    [SerializeField] private int HealingHp;
-    [SerializeField] private int HealingHpPercent;
-    [SerializeField] private int HealingPp;
-    [SerializeField] private int HealingPpPercent;
+    public int HealingHp;
+    public int HealingHpPercent;
+    public int HealingPp;
+    public int HealingPpPercent;
     [Header("가격")]
-    [SerializeField] private int Price;
-    [SerializeField] private int SellPrice;
+    public int Price;
+    public int SellPrice;
     //[SerializeField] private int MachineNum;
     [Header("아이템 타입")]
-    [SerializeField] private ItmeType Type;
+    public ItmeType Type;
+
+    [Multiline(5)]
+    [Header("아이템 설명")]
+    public string Explanation;
     public enum ItmeType
     {
         Portion, Important, Ball, SkillMachine, Equip, ETC

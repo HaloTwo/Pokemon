@@ -6,6 +6,13 @@ public class PlayerBag : MonoBehaviour
 {
     public List<GameObject> PlayerPokemon = new List<GameObject>();
     public List<GameObject> NowPokemon = new List<GameObject>();
+    public ItemData[] Itemdata;
+
+    private void Awake()
+    {
+        Itemdata = Resources.LoadAll<ItemData>("Item");
+    }
+
 
     void Start()
     {
@@ -91,5 +98,10 @@ public class PlayerBag : MonoBehaviour
         {
             Debug.Log("소유한 포켓몬이 없습니다.");
         }
+    }
+
+    void PlayerItem()
+    {
+
     }
 }

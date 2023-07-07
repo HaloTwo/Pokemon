@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6c9ada7b30126174fadeee7fb6f540f0, type: 3}
-  m_Name: Elixir
+  m_Name: MonsterBall
   m_EditorClassIdentifier: 
-  Image: {fileID: 21300000, guid: 281d3f3751b2d1244b40ce90517ca210, type: 3}
-  Name: "PP\uC5D0\uC774\uB354"
+  Image: {fileID: 21300000, guid: c962e25db1b8cc3438537e205bc46fac, type: 3}
+  Name: "\uBAAC\uC2A4\uD130\uBCFC"
   Quantity: 0
+  Catchrate: 1.5
   HealingHp: 0
   HealingHpPercent: 0
-  HealingPp: 10
+  HealingPp: 0
   HealingPpPercent: 0
-  Price: 3000
-  SellPrice: 1500
-  Type: 0
+  Price: 200
+  SellPrice: 100
+  Type: 2
+  Explanation: "\uC57C\uC0DD \uD3EC\uCF13\uBAAC\uC5D0\uAC8C \uB358\uC838\uC11C \uC7A1\uAE30
+    \uC704\uD55C \uBCFC.\n\uCEA1\uC290\uC2DD\uC73C\uB85C \uB418\uC5B4 \uC788\uB2E4."

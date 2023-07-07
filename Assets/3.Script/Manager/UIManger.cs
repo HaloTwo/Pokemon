@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -10,55 +10,56 @@ public class UIManger : MonoBehaviour
     private PlayerBag playerBag;
 
     public ScrollRect scrollRect;
-    public float scrollSpeed = 100f; // ½ºÅ©·Ñ ¼Óµµ¸¦ Á¶Á¤ÇÏ¼¼¿ä
 
-    [Header("½ºÅ³¼Ó¼º ÀÌ¹ÌÁö¸¦ ³Ö¾îÁÖ¼¼¿ä")]
+    PokemonStats playerpokemon;
+
+    [Header("ìŠ¤í‚¬ì†ì„± ì´ë¯¸ì§€ë¥¼ ë„£ì–´ì£¼ì„¸ìš”")]
     [SerializeField] private Sprite[] propertyType_skill_img;
-    [Header("Æ÷ÄÏ¸ó ¼Ó¼º ÀÌ¹ÌÁö¸¦ ³Ö¾îÁÖ¼¼¿ä")]
+    [Header("í¬ì¼“ëª¬ ì†ì„± ì´ë¯¸ì§€ë¥¼ ë„£ì–´ì£¼ì„¸ìš”")]
     [SerializeField] private Sprite[] propertyType_pokemon_img;
-    [Header("ÀÌµ¿ÇÏ´Â ¹öÆ° ÀÌ¹ÌÁö")]
+    [Header("ì´ë™í•˜ëŠ” ë²„íŠ¼ ì´ë¯¸ì§€")]
     [SerializeField] private RectTransform selectImage;
 
-    [Header("0. ±âº»UI")]
+    [Header("0. ê¸°ë³¸UI")]
     [Space(50f)]
     [SerializeField] private GameObject Default_UI;
 
-    [Header("HP°ü·Ã UI")]
+    [Header("HPê´€ë ¨ UI")]
     [SerializeField] private GameObject HP_UI;
     [SerializeField] private Text hp_txt;
     public Slider hPbar;
 
-    [Header("±âº»UI Æ÷ÄÏ¸ó ÀÌ¸§")]
+    [Header("ê¸°ë³¸UI í¬ì¼“ëª¬ ì´ë¦„")]
     [SerializeField] private Text pokemon_name;
-    [Header("±âº»UI Æ÷ÄÏ¸ó ·¹º§")]
+    [Header("ê¸°ë³¸UI í¬ì¼“ëª¬ ë ˆë²¨")]
     [SerializeField] private Text pokemon_lv;
-    [Header("±âº»UI ¼ÒÁöÇÑ Æ÷ÄÏ¸ó")]
+    [Header("ê¸°ë³¸UI ì†Œì§€í•œ í¬ì¼“ëª¬")]
     [SerializeField] private Image[] pokemon_ball;
     [SerializeField] private Sprite alive_ball_sprite;
     [SerializeField] private Sprite die_ball_sprite;
 
 
-    [Header("1. ½ºÅ³ UI")]
+    [Header("1. ìŠ¤í‚¬ UI")]
     [Space(50f)]
     [SerializeField] private GameObject Skill_UI;
-    [Header("¹èÆ² ÇÒ ¶§,ÇöÀç ½ºÅ³UI")]
+    [Header("ë°°í‹€ í•  ë•Œ,í˜„ì¬ ìŠ¤í‚¬UI")]
     [SerializeField] private Text[] Inbattle_skill_txt;
     [SerializeField] private Text[] Inbattle_skill_pp_txt;
     [SerializeField] private Image[] Inbattle_skill_img;
 
-    [Header("2. Æ÷ÄÏ¸ó ±³Ã¼UI")]
+
+    [Header("2. í¬ì¼“ëª¬ êµì²´UI")]
     [Space(50f)]
     [SerializeField] private GameObject Change_UI;
-    [Header("Æ÷ÄÏ¸ó ¼±ÅÃ½Ã ¸Ş´º")]
+    [Header("í¬ì¼“ëª¬ ì„ íƒì‹œ ë©”ë‰´")]
     [SerializeField] private GameObject Menu_UI;
-    [Header("±³Ã¼ °¡´ÉÇÑ Æ÷ÄÏ¸óUI")]
+    [Header("êµì²´ ê°€ëŠ¥í•œ í¬ì¼“ëª¬UI")]
     [SerializeField] private Text[] change_pokemon_name_txt;
     [SerializeField] private Text[] change_pokemon_Lv_txt;
-    [SerializeField] private Image[] change_pokemon_type_img;
     [SerializeField] private Image[] change_pokemon_img;
     [SerializeField] private Slider[] change_pokemon_hPbar;
     [SerializeField] private Text[] change_pokemon_hp_txt;
-    [Header("°Å±â¼­ ¸ŞÀÎ ÆäÀÌÁö UI")]
+    [Header("ê±°ê¸°ì„œ ë©”ì¸ í˜ì´ì§€ UI")]
     [SerializeField] private Text change_pokemon_stats_txt;
     [SerializeField] private Image change_pokemon_type1_img;
     [SerializeField] private Image change_pokemon_type2_img;
@@ -67,39 +68,33 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Text[] change_pokemon_skill_pp;
 
 
-    [Header("3. °¡¹æUI")]
+    [Header("3. ê°€ë°©UI")]
     [Space(50f)]
     [SerializeField] private GameObject Bag_UI;
     [SerializeField] private Image[] bag_pokemon_img;
     [SerializeField] private Slider[] bag_pokemon_hPbar;
     [SerializeField] private Text[] bag_pokemon_hp_txt;
     [SerializeField] private GameObject Menu_Choise_UI;
-    [SerializeField] private GameObject Item;
+    [SerializeField] private GameObject Item_prefab;
+    [SerializeField] private GameObject[] Item;
+    [SerializeField] private Text Item_name;
+    [SerializeField] private Text Item_explanation;
 
 
-    [SerializeField] private Button[] buttons;
-    private int currentIndex;
-    private int beforeIndex;
+    private Button[] buttons;
+    [SerializeField]private int currentIndex;
+    public int beforeIndex;
 
 
 
 
     private void OnEnable()
     {
-        // ÃÊ±â ¹öÆ° ¼±ÅÃ
+        // ì´ˆê¸° ë²„íŠ¼ ì„ íƒ
         playerBag = FindObjectOfType<PlayerBag>();
 
-        //Æ÷ÄÏº¼ »ö±ò
-        Current_pokemon_ball();
-
-        //½ºÅÃ ´Ù½Ã Á¤¸®
+        //ìŠ¤íƒ ë‹¤ì‹œ ì •ë¦¬
         Reset_UI();
-
-
-        //Ã¼·Â¹Ù È®ÀÎ
-        PokemonStats pokemon = playerBag.NowPokemon[0].GetComponent<PokemonStats>();
-        hPbar.value = (float)pokemon.Hp / pokemon.MaxHp;
-        Hpbar_Color(hPbar);
 
     }
 
@@ -111,14 +106,14 @@ public class UIManger : MonoBehaviour
     private void Update()
     {
 
-        //ÇöÀç ÇÃ·¹ÀÌ¾î Æ÷ÄÏ¸óÀÇ »óÅÂ È®ÀÎ¿Í ÇöÀç UI ¹öÆ° °´¼ö »óÅÂ È®ÀÎ
-        PokemonStats playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
+        //í˜„ì¬ í”Œë ˆì´ì–´ í¬ì¼“ëª¬ì˜ ìƒíƒœ í™•ì¸ì™€ í˜„ì¬ UI ë²„íŠ¼ ê°ìˆ˜ ìƒíƒœ í™•ì¸
+        playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
         Button[] currentbuttons;
-        //ÇöÀç ÇÃ·¹ÀÌ¾î Æ÷ÄÏ¸ó º¼ ÀÌ¹ÌÁö·Î Ã¼Å©
+        //í˜„ì¬ í”Œë ˆì´ì–´ í¬ì¼“ëª¬ ë³¼ ì´ë¯¸ì§€ë¡œ ì²´í¬
         Current_Playerpokemon_Check(playerpokemon);
 
 
-        //ÇöÀç UIÀÇ ¹öÆ° 
+        //í˜„ì¬ UIì˜ ë²„íŠ¼ 
         if (UI_stack.Peek() == Bag_UI)
         {
             currentbuttons = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>();
@@ -128,30 +123,33 @@ public class UIManger : MonoBehaviour
             currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
         }
 
-        //ÇöÀç ½ºÅÃ¿¡ ÀÖ´Â UIÀÇ ¹öÆ°µéÀ» ¼±ÅÃ°¡´É
+        //í˜„ì¬ ìŠ¤íƒì— ìˆëŠ” UIì˜ ë²„íŠ¼ë“¤ì„ ì„ íƒê°€ëŠ¥
         buttons = currentbuttons;
         buttons[currentIndex].Select();
 
-        //¹öÆ° ÀÌ¹ÌÁö ÀÌµ¿
+        //ë²„íŠ¼ ì´ë¯¸ì§€ ì´ë™
         OnButtonSelected(buttons[currentIndex]);
 
-        //Change_UIÀÏ¶§, Çàµ¿µé
-        Change_UI_Page(currentbuttons);
+        //Change_UI, Bag_UIì¼ë•Œ, í–‰ë™ë“¤
+        UI_Page(currentbuttons);
 
-        //À§ ¾Æ·¡·Î ÀÌµ¿ °¡´É
+        //Bag_UIì¼ë•Œ í–‰ë™
+        //Bag_UI_Page(currentbuttons);
+
+        //ìœ„ ì•„ë˜ë¡œ ì´ë™ ê°€ëŠ¥
         UpDownButton();
 
         if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI)
         {
-            //³ª°¡±â
+            //ë‚˜ê°€ê¸°
             ExitButton();
         }
     }
 
-    //½Ç½Ã°£ Ã¼Å©
-    #region ½Ç½Ã°£ Ã¼Å©
+    //ì‹¤ì‹œê°„ ì²´í¬
+    #region ì‹¤ì‹œê°„ ì²´í¬
 
-    //ÇöÀç ÀüÅõÁßÀÎ ÇÃ·¹ÀÌ¾î Æ÷ÄÏ¸ó Ã¼Å©
+    //í˜„ì¬ ì „íˆ¬ì¤‘ì¸ í”Œë ˆì´ì–´ í¬ì¼“ëª¬ ì²´í¬
     void Current_Playerpokemon_Check(PokemonStats playerpokemon)
     {
         pokemon_name.text = playerpokemon.Name;
@@ -160,8 +158,8 @@ public class UIManger : MonoBehaviour
         hPbar.value = (float)playerpokemon.Hp / playerpokemon.MaxHp;
     }
 
-    //ÇöÀç Æ÷ÄÏ¸ó ±³Ã¼ ÆäÀÌÁö¿¡¼­ È®ÀÎÇÒ Ã¢ Ã¼Å©
-    void Change_UI_Page(Button[] currentbuttons)
+    //í˜„ì¬ í¬ì¼“ëª¬ êµì²´ í˜ì´ì§€ì—ì„œ í™•ì¸í•  ì°½ ì²´í¬
+    void UI_Page(Button[] currentbuttons)
     {
         if (UI_stack.Peek() == Change_UI)
         {
@@ -171,24 +169,29 @@ public class UIManger : MonoBehaviour
                 {
                     PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
 
-                    //Æ÷ÄÏ¸ó Å¸ÀÔ È®ÀÎ
+                    //í¬ì¼“ëª¬ íƒ€ì… í™•ì¸
                     PokemonTypeCheck(pokemon);
                     TypeCheck_propertyType(pokemon, change_pokemon_skill_name, change_pokemon_skill_pp, change_pokemon_skill_img);
 
                     if (pokemon.Hp > 0)
                     {
-                        change_pokemon_stats_txt.text = "½Î¿ï ¼ö ÀÖ´Ù.";
+                        change_pokemon_stats_txt.text = "ì‹¸ìš¸ ìˆ˜ ìˆë‹¤.";
                     }
                     else
                     {
-                        change_pokemon_stats_txt.text = "»óÅÂ ºÒ´É";
+                        change_pokemon_stats_txt.text = "ìƒíƒœ ë¶ˆëŠ¥";
                     }
                 }
             }
         }
+        else if (UI_stack.Peek() == Bag_UI)
+        {
+            Item_name.text = playerBag.Itemdata[currentIndex].Name;
+            Item_explanation.text = playerBag.Itemdata[currentIndex].Explanation;
+        }
     }
 
-    //ÇöÀç ³²¾ÆÀÖ´Â ÇÃ·¹ÀÌ¾îÀÇ Æ÷ÄÏ¸ó ¼ıÀÚ¸¦ ¸ó½ºÅÍº¼ ÀÌ¹ÌÁö·Î ÆÇ´Ü
+    //í˜„ì¬ ë‚¨ì•„ìˆëŠ” í”Œë ˆì´ì–´ì˜ í¬ì¼“ëª¬ ìˆ«ìë¥¼ ëª¬ìŠ¤í„°ë³¼ ì´ë¯¸ì§€ë¡œ íŒë‹¨
     void Current_pokemon_ball()
     {
         for (int i = 0; i < 6; i++)
@@ -199,7 +202,7 @@ public class UIManger : MonoBehaviour
             }
             else if (playerBag.NowPokemon[i].GetComponent<PokemonStats>().Hp <= 0)
             {
-                //¸¸¾à ²¨Á®ÀÖÀ¸¸é Å°°í
+                //ë§Œì•½ êº¼ì ¸ìˆìœ¼ë©´ í‚¤ê³ 
                 if (!pokemon_ball[i].gameObject.activeSelf)
                 {
                     pokemon_ball[i].gameObject.SetActive(true);
@@ -209,7 +212,7 @@ public class UIManger : MonoBehaviour
             }
             else if (playerBag.NowPokemon[i].GetComponent<PokemonStats>().Hp > 0)
             {
-                //¸¸¾à ²¨Á®ÀÖÀ¸¸é Å°°í
+                //ë§Œì•½ êº¼ì ¸ìˆìœ¼ë©´ í‚¤ê³ 
                 if (!pokemon_ball[i].gameObject.activeSelf)
                 {
                     pokemon_ball[i].gameObject.SetActive(true);
@@ -219,41 +222,12 @@ public class UIManger : MonoBehaviour
             }
         }
     }
+
     #endregion
 
-    //public void Scroll(float offset)
-    //{
-    //    // °³Ã¼ ¼ö¿Í ½ºÅ©·Ñ ¿µ¿ªÀÇ ³ôÀÌ¸¦ °í·ÁÇÏ¿© ÀÌµ¿ ¹üÀ§ °è»ê
-    //    float scrollRange = Mathf.Max(1f, buttons.Length) * offset;
 
-    //    float targetPosition = scrollRect.normalizedPosition.y + scrollRange; // ½ºÅ©·Ñ À§Ä¡ ¼³Á¤
-
-    //    // ÀÌµ¿ ¹üÀ§¸¦ À¯È¿ ¹üÀ§ ³»·Î Á¦ÇÑ
-    //    targetPosition = Mathf.Clamp(targetPosition, 0f, 1f);
-
-    //    // ½ºÅ©·Ñ ÀÌµ¿
-    //    scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, targetPosition);
-    //}
-
-    public void Scroll(float buttonSize)
-    {
-        // ¹öÆ°ÀÇ °³¼ö¿Í ¹öÆ°ÀÇ Å©±â¸¦ °í·ÁÇÏ¿© ÀÌµ¿ ¹üÀ§ °è»ê
-        float scrollRange = Mathf.Max(1f, buttons.Length) * buttonSize;
-
-        float targetPosition = scrollRect.normalizedPosition.y + scrollRange; // ½ºÅ©·Ñ À§Ä¡ ¼³Á¤
-
-        // ÀÌµ¿ ¹üÀ§¸¦ À¯È¿ ¹üÀ§ ³»·Î Á¦ÇÑ
-        targetPosition = Mathf.Clamp(targetPosition, 0f, 1f);
-
-        // ½ºÅ©·Ñ ÀÌµ¿
-        scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, targetPosition);
-    }
-
-
-
-
-    //¹öÆ° ÀÌµ¿
-    #region ¹öÆ°ÀÌµ¿
+    //ë²„íŠ¼ ì´ë™
+    #region ë²„íŠ¼ì´ë™
     void UpDownButton()
     {
         if (UI_stack.Peek() == Bag_UI)
@@ -269,7 +243,7 @@ public class UIManger : MonoBehaviour
                 }
                 buttons[currentIndex].Select();
 
-                if (currentIndex < 6)
+                if (currentIndex <= 6)
                 {
                     Scroll(0.17f);
                 }
@@ -285,7 +259,7 @@ public class UIManger : MonoBehaviour
                 }
                 buttons[currentIndex].Select();
 
-                // ÇöÀç currentIndex°¡ 7º¸´Ù Å©¸é ½ºÅ©·ÑÀ» ¾Æ·¡·Î ÀÌµ¿
+                // í˜„ì¬ currentIndexê°€ 10ë³´ë‹¤ í¬ë©´ ìŠ¤í¬ë¡¤ì„ ì•„ë˜ë¡œ ì´ë™
                 if (currentIndex >= 10)
                 {
                     Scroll(-0.17f);
@@ -322,7 +296,7 @@ public class UIManger : MonoBehaviour
         RectTransform selectedButtonRect = selectedButton.GetComponent<RectTransform>();
 
         Vector3 newPosition = selectedButtonRect.position;
-        float offsetX = -(selectedButtonRect.rect.width / 2f); // ¹öÆ°ÀÇ ³ÊºñÀÇ Àı¹İ¸¸Å­ ¿ŞÂÊÀ¸·Î ÀÌµ¿
+        float offsetX = -(selectedButtonRect.rect.width / 2f); // ë²„íŠ¼ì˜ ë„ˆë¹„ì˜ ì ˆë°˜ë§Œí¼ ì™¼ìª½ìœ¼ë¡œ ì´ë™
 
         newPosition.x += offsetX;
 
@@ -331,7 +305,7 @@ public class UIManger : MonoBehaviour
         StartCoroutine(SelectedMove_co(newPosition));
     }
 
-    //ÁÂ¿ì·Î ÀÌµ¿ÇÏ´Â ¾Ö´Ï¸ŞÀÌ¼Ç
+    //ì¢Œìš°ë¡œ ì´ë™í•˜ëŠ” ì• ë‹ˆë©”ì´ì…˜
     IEnumerator SelectedMove_co(Vector3 newPosition)
     {
         float startX = newPosition.x - 10f;
@@ -343,7 +317,7 @@ public class UIManger : MonoBehaviour
         float t = 0f;
         while (true)
         {
-            //ÀÌµ¿ÇÏ¸é ÄÚ·çÆ¾ Á¾·á
+            //ì´ë™í•˜ë©´ ì½”ë£¨í‹´ ì¢…ë£Œ
             if (startPosition.y != selectImage.position.y)
             {
                 yield break;
@@ -363,12 +337,12 @@ public class UIManger : MonoBehaviour
     #endregion
 
 
-    //¼Ó¼º Ã£±â ¸Ş¼­µå
-    #region ¼Ó¼º Ã£±â
-    //½ºÅ³ ¼Ó¼º Ã£±â
+    //ì†ì„± ì°¾ê¸° ë©”ì„œë“œ
+    #region ì†ì„± ì°¾ê¸°
+    //ìŠ¤í‚¬ ì†ì„± ì°¾ê¸°
     void TypeCheck_propertyType(PokemonStats pokemonskills, Text[] skill_txt, Text[] skill_pp_txt, Image[] skill_img)
     {
-        #region ¼Ó¼ºÃ£±â~
+        #region ì†ì„±ì°¾ê¸°~
         for (int i = 0; i < pokemonskills.skills.Count; i++)
         {
             skill_txt[i].text = pokemonskills.skills[i].Name;
@@ -438,7 +412,7 @@ public class UIManger : MonoBehaviour
         #endregion
     }
 
-    //Æ÷ÄÏ¸ó ¼Ó¼º Ã£±â
+    //í¬ì¼“ëª¬ ì†ì„± ì°¾ê¸°
     void PokemonTypeCheck(PokemonStats Pokemonstats)
     {
         switch ((int)Pokemonstats.Type1)
@@ -572,9 +546,11 @@ public class UIManger : MonoBehaviour
 
     #endregion 
 
-    //ÅÍÄ¡ ÀÌº¥Æ®
-    #region ¿Â Å¬¸¯ ÀÌº¥Æ®
-    //ÀüÅõ·Î ÀÌµ¿ , ½ºÅ³ »ç¿ëÃ¢
+    //í„°ì¹˜ ì´ë²¤íŠ¸
+    #region ì˜¨ í´ë¦­ ì´ë²¤íŠ¸
+
+
+    //ì „íˆ¬ë¡œ ì´ë™ , ìŠ¤í‚¬ ì‚¬ìš©ì°½
     public void UI_Fight()
     {
         beforeIndex = currentIndex;
@@ -588,12 +564,14 @@ public class UIManger : MonoBehaviour
         Debug.Log(UI_stack.Peek());
         PokemonStats pokemonskills = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
 
-        //¼Ó¼ºÀÌ¶û ÀÌ¸§ ÆÄ¾ÇÇØ¼­ ³Ö°í ppµµ ³Ö±â
+        //ì†ì„±ì´ë‘ ì´ë¦„ íŒŒì•…í•´ì„œ ë„£ê³  ppë„ ë„£ê¸°
         TypeCheck_propertyType(pokemonskills, Inbattle_skill_txt, Inbattle_skill_pp_txt, Inbattle_skill_img);
 
     }
 
-    //Æ÷ÄÏ¸ó ±³È¯Ã¢À¸·Î ÀÌµ¿
+
+
+    //í¬ì¼“ëª¬ êµí™˜ì°½ìœ¼ë¡œ ì´ë™
     public void UI_Change()
     {
         beforeIndex = currentIndex;
@@ -609,20 +587,20 @@ public class UIManger : MonoBehaviour
         for (int i = 0; i < playerBag.NowPokemon.Count; i++)
         {
 
-            //²¨Á®ÀÖÀ¸¸é ´Ù½Ã Å´
+            //êº¼ì ¸ìˆìœ¼ë©´ ë‹¤ì‹œ í‚´
             if (!change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.activeSelf)
             {
                 change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(true);
             }
 
-            //nullÀÌ¸é ²û
+            //nullì´ë©´ ë”
             if (playerBag.NowPokemon[i] == null)
             {
                 change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(false);
                 continue;
             }
 
-            // Æ÷ÄÏ¸óÀÌ ÀÖ´Â ½½·ÔÀÏ °æ¿ì
+            // í¬ì¼“ëª¬ì´ ìˆëŠ” ìŠ¬ë¡¯ì¼ ê²½ìš°
             PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
 
             change_pokemon_name_txt[i].text = pokemon.Name;
@@ -634,21 +612,76 @@ public class UIManger : MonoBehaviour
             Hpbar_Color(change_pokemon_hPbar[i]);
         }
     }
-
-    //°¡¹æÀ¸·Î ÀÌµ¿
-    public void UI_Bag()
+    //í¬ì¼“ëª¬ ì‚¬ìš© ë©”ë‰´ë¡œ ì´ë™
+    public void UI_Change_Pokemon(RectTransform transform)
     {
         beforeIndex = currentIndex;
         currentIndex = 0;
 
+        Menu_UI.gameObject.SetActive(true);
+        Menu_UI.gameObject.transform.position = transform.position + new Vector3(450f, -80f, 0f);
+
+        UI_stack.Push(Menu_UI);
+    }
+    public void UI_Next_Pokemon()
+    {
+
+        BattleManager.instance.player_pokemon_change = true;
+
+        GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+        clickedObject.transform.parent.gameObject.SetActive(false);
+
+        //Reset_UI();
+
+        //BattleManager.instance.playerPokemon.SetActive(false);
+
+        //BattleManager.instance.playerPokemon = playerBag.NowPokemon[beforeIndex];
+        //BattleManager.instance.playerPokemon.SetActive(true);
+    }
+
+
+
+
+    //ê°€ë°©ìœ¼ë¡œ ì´ë™
+    public void UI_Bag()
+    {
         HP_UI.SetActive(false);
         Default_UI.SetActive(false);
         Bag_UI.SetActive(true);
 
+        Item = new GameObject[playerBag.Itemdata.Length];
+        for (int i = 0; i < playerBag.Itemdata.Length; i++)
+        {
+            if (Item[i] == null)
+            {
+                //ì•„ì´í…œì˜ ê°¯ìˆ˜ê°€ 0ê°œë©´ ìƒì„±ì•ˆí•¨
+                if (playerBag.Itemdata[i].Quantity == 0)
+                {
+                    continue;
+                }
+                else
+                {
+                    Item[i] = Instantiate(Item_prefab, Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                    Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                    Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                    Item[i].transform.GetChild(2).GetComponent<Text>().text = "âœ• " + playerBag.Itemdata[i].Quantity;
+                    Item[i].GetComponent<Button>().onClick.AddListener(UI_Item_Pokemon);
+                }
+            }
+            else
+            {
+                Item[i].SetActive(true);
+            }
+        }
+
+
+
         UI_stack.Push(Bag_UI);
+        scrollRect.verticalScrollbar.value = 1f;
+        beforeIndex = currentIndex;
+        currentIndex = 0;
 
 
-        Instantiate(Item, Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
 
 
 
@@ -661,7 +694,7 @@ public class UIManger : MonoBehaviour
                 continue;
             }
 
-            // Æ÷ÄÏ¸óÀÌ ÀÖ´Â ½½·ÔÀÏ °æ¿ì
+            // í¬ì¼“ëª¬ì´ ìˆëŠ” ìŠ¬ë¡¯ì¼ ê²½ìš°
             PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
 
             bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
@@ -674,26 +707,7 @@ public class UIManger : MonoBehaviour
         }
     }
 
-
-    //µµ¸Á°¡±â
-    public void UI_Run()
-    {
-        BattleManager.instance.isRun = true;
-        gameObject.SetActive(false);
-    }
-
-    //Æ÷ÄÏ¸ó »ç¿ë ¸Ş´º
-    public void UI_Change_Pokemon(RectTransform transform)
-    {
-        beforeIndex = currentIndex;
-        currentIndex = 0;
-        Menu_UI.gameObject.SetActive(true);
-        Menu_UI.gameObject.transform.position = transform.position + new Vector3(450f, -80f, 0f);
-
-        UI_stack.Push(Menu_UI);
-    }
-
-    //¾ÆÀÌÅÛ »ç¿ë ¸Ş´º 
+    //ì•„ì´í…œ ì‚¬ìš© ë©”ë‰´ë¡œ ì´ë™
     public void UI_Item_Pokemon()
     {
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
@@ -708,7 +722,30 @@ public class UIManger : MonoBehaviour
 
     }
 
-    //³ª°¡±â ÀÔ·Â
+    public void UI_Use_Item()
+    {
+        //ì•„ì´í…œ ì‚¬ìš©
+        BattleManager.instance.player_using_Item = true;
+
+        playerpokemon.Hp += playerBag.Itemdata[beforeIndex].HealingHp;
+
+        Reset_UI();
+
+        HP_UI.SetActive(true);
+        Default_UI.SetActive(false);
+        selectImage.gameObject.SetActive(false);
+    }
+
+
+
+    //ë„ë§ê°€ê¸°
+    public void UI_Run()
+    {
+        BattleManager.instance.isRun = true;
+        gameObject.SetActive(false);
+    }
+
+    //ë’¤ë¡œê°€ê¸°
     public void ExitButton()
     {
         currentIndex = beforeIndex;
@@ -734,17 +771,30 @@ public class UIManger : MonoBehaviour
 
     #endregion
 
-    //¸®¼Â
+
+
+    //ë¦¬ì…‹
     public void Reset_UI()
     {
         beforeIndex = currentIndex;
         currentIndex = 0;
+
 
         if (!Default_UI.activeSelf)
         {
             Default_UI.SetActive(true);
         }
 
+        //í¬ì¼“ë³¼ ìƒ‰ê¹”
+        Current_pokemon_ball();
+
+        //ì²´ë ¥ë°” í™•ì¸
+        PokemonStats pokemon = playerBag.NowPokemon[0].GetComponent<PokemonStats>();
+        hPbar.value = (float)pokemon.Hp / pokemon.MaxHp;
+        Hpbar_Color(hPbar);
+
+
+        //ìŠ¤íƒ ë‹¤ì‹œ ì´ìš©
         UI_stack.Push(Default_UI);
 
         selectImage.gameObject.SetActive(true);
@@ -753,7 +803,26 @@ public class UIManger : MonoBehaviour
         Bag_UI.SetActive(false);
     }
 
-    //Ã¼·Â È®ÀÎ
+    //ê°€ë°©ì—ì„œ ìŠ¤í¬ë¡¤
+    void Scroll(float offset)
+    {
+        float scrollbarSize = scrollRect.verticalScrollbar.size;
+
+        // ìŠ¤í¬ë¡¤ ë°” í¬ê¸°ì— ë”°ë¥¸ ë¹„ìœ¨ ê³„ì‚°
+        float ratio = scrollbarSize / 0.6f;
+
+        float scrollRange = offset * ratio;
+
+        float targetPosition = scrollRect.normalizedPosition.y + scrollRange; // ìŠ¤í¬ë¡¤ ìœ„ì¹˜ ì„¤ì •
+
+        // ìœ íš¨ ë²”ìœ„ ë‚´ì—ì„œ ìŠ¤í¬ë¡¤ ìœ„ì¹˜ ì œí•œ
+        targetPosition = Mathf.Clamp(targetPosition, 0f, 1f);
+
+        // ìŠ¤í¬ë¡¤ ì´ë™
+        scrollRect.normalizedPosition = new Vector2(scrollRect.normalizedPosition.x, targetPosition);
+    }
+
+    //ì²´ë ¥ í™•ì¸
     void Hpbar_Color(Slider hpbar)
     {
         if (hpbar.value < 0.3f)
