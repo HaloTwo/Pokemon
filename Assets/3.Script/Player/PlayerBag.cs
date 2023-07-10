@@ -87,6 +87,7 @@ public class PlayerBag : MonoBehaviour
 
                 NowPokemon.Add(newPokemon);
                 newPokemon.GetComponent<PokemonMove>().enabled = false;
+                newPokemon.GetComponent<PokemonStats>().PlayerOwned = true;
 
                 PokemonBattleMode newPokemonBattleMode = newPokemon.GetComponent<PokemonBattleMode>();
                 newPokemonBattleMode.isWild = false;

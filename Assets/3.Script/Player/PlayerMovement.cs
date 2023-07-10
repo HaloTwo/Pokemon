@@ -53,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
         if (groundCheck == null) groundCheck = transform.Find("groundCheck");
         if (ball_loc == null) ball_loc = transform.Find("tr0050_00.trmdl/origin/foot_base/waist/spine_01/spine_02/spine_03/right_shoulder/right_arm_width/right_arm_01/right_arm_02/right_hand/right_attach_on");
         if (FollowCamera == null) FollowCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        
+
         ball_prefab.TryGetComponent(out ball_rb);
         TryGetComponent(out controller);
         TryGetComponent(out animator);
@@ -123,7 +123,7 @@ public class PlayerMovement : MonoBehaviour
 
         return isGrounded;
     }
-    
+
     public IEnumerator apply_motion_wait(float wait)
     {
         animator.applyRootMotion = false;
@@ -197,7 +197,20 @@ public class PlayerMovement : MonoBehaviour
         int PokemonLayer = LayerMask.GetMask("Pokemon");
         colls = Physics.OverlapBox(position, size, rotation, PokemonLayer);
 
-        if (colls.Length > 0)
+        //전투중에 포켓몬을 잡으려고 할 때, 상대 포켓몬 조준
+        if (BattleManager.instance.ball_throw)
+        {
+            ball_rb.useGravity = false;
+
+            GameObject target = BattleManager.instance.enemyPokemon;
+
+            Vector3 targetCenter = target.transform.position + target.transform.up * target.GetComponentInChildren<Renderer>().bounds.size.y * 0.8f;
+
+            Vector3 forceDirection = (targetCenter - ball_loc.position).normalized;
+            ball_rb.AddForce(forceDirection * ThrowPower, ForceMode.Impulse);
+        }
+        //포켓몬과 전투하려고 할 때, 가장 가까운 포켓몬 조준
+        else if (colls.Length > 0)
         {
             Collider closestPokemon = null;
             float closestDistance = Mathf.Infinity;
@@ -223,18 +236,32 @@ public class PlayerMovement : MonoBehaviour
 
                 Vector3 forceDirection = (targetCenter - ball_loc.position).normalized;
                 ball_rb.AddForce(forceDirection * ThrowPower, ForceMode.Impulse);
+
+
+                Invoke("DisableBallPrefab", 1f);
             }
         }
+        //조준할 게 없을 때, 그냥 앞에 날림
         else
         {
             ball_rb.AddForce(transform.forward * ThrowPower / 2, ForceMode.Impulse);
+
+
+            Invoke("DisableBallPrefab", 1f);
         }
 
-        Invoke("DisableBallPrefab", 1.2f);
     }
     void DisableBallPrefab()
     {
         ball_prefab.SetActive(false);
+    }
+
+    IEnumerator StopBallBeforeCollision(Collider target, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        ball_rb.velocity = Vector3.zero;
+        ball_rb.angularVelocity = Vector3.zero;
+        ball_rb.useGravity = true;
     }
 
     #endregion

@@ -22,6 +22,13 @@ public class UIManger : MonoBehaviour
 
     [Header("0. 기본UI")]
     [Space(50f)]
+    [SerializeField] private GameObject ball_image;
+    [SerializeField] private GameObject ball_button;
+    [SerializeField] private GameObject Ball_UI;
+
+
+    [Header("0. 기본UI")]
+    [Space(50f)]
     [SerializeField] private GameObject Default_UI;
 
     [Header("HP관련 UI")]
@@ -82,7 +89,7 @@ public class UIManger : MonoBehaviour
 
 
     private Button[] buttons;
-    [SerializeField]private int currentIndex;
+    [SerializeField] private int currentIndex;
     public int beforeIndex;
 
 
@@ -109,6 +116,7 @@ public class UIManger : MonoBehaviour
         //현재 플레이어 포켓몬의 상태 확인와 현재 UI 버튼 객수 상태 확인
         playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
         Button[] currentbuttons;
+
         //현재 플레이어 포켓몬 볼 이미지로 체크
         Current_Playerpokemon_Check(playerpokemon);
 
@@ -133,8 +141,8 @@ public class UIManger : MonoBehaviour
         //Change_UI, Bag_UI일때, 행동들
         UI_Page(currentbuttons);
 
-        //Bag_UI일때 행동
-        //Bag_UI_Page(currentbuttons);
+        //포켓몬 볼 UI 들어가기
+        BallUI_Input();
 
         //위 아래로 이동 가능
         UpDownButton();
@@ -228,6 +236,20 @@ public class UIManger : MonoBehaviour
 
     //버튼 이동
     #region 버튼이동
+
+    void BallUI_Input()
+    {
+        if (UI_stack.Peek() == Default_UI)
+        {
+            if (Input.GetKeyDown(KeyCode.X) && BattleManager.instance.enemyPokemon.GetComponent<PokemonBattleMode>().isWild)
+            {
+                currentIndex = 0;
+                ball_button.SetActive(true);
+                UI_stack.Push(ball_button);
+            }
+
+        }
+    }
     void UpDownButton()
     {
         if (UI_stack.Peek() == Bag_UI)
@@ -631,13 +653,10 @@ public class UIManger : MonoBehaviour
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         clickedObject.transform.parent.gameObject.SetActive(false);
 
-        //Reset_UI();
-
-        //BattleManager.instance.playerPokemon.SetActive(false);
-
-        //BattleManager.instance.playerPokemon = playerBag.NowPokemon[beforeIndex];
-        //BattleManager.instance.playerPokemon.SetActive(true);
+        gameObject.SetActive(false);
     }
+
+
 
 
 
@@ -722,6 +741,7 @@ public class UIManger : MonoBehaviour
 
     }
 
+    //아이템 사용
     public void UI_Use_Item()
     {
         //아이템 사용
@@ -735,6 +755,17 @@ public class UIManger : MonoBehaviour
         Default_UI.SetActive(false);
         selectImage.gameObject.SetActive(false);
     }
+
+
+    public void UI_Use_ball()
+    {
+        BattleManager.instance.ball_throw = true;
+
+        ball_button.SetActive(false);
+        gameObject.SetActive(false);
+    }
+
+
 
 
 
@@ -796,6 +827,11 @@ public class UIManger : MonoBehaviour
 
         //스택 다시 이용
         UI_stack.Push(Default_UI);
+
+        if (BattleManager.instance.enemyPokemon.GetComponent<PokemonBattleMode>().isWild)
+        {
+            Ball_UI.SetActive(true);
+        }
 
         selectImage.gameObject.SetActive(true);
         Skill_UI.SetActive(false);

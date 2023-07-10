@@ -30,6 +30,7 @@ public class PokemonStats : MonoBehaviour
 
     [Header("받은 능력치")]
     //객체별 개체값
+    [SerializeField] public bool PlayerOwned;
     [SerializeField] public string Name;
     [SerializeField] public Sprite image;
     [SerializeField] public int MaxHp;

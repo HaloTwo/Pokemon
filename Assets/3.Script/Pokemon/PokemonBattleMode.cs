@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PokemonBattleMode : MonoBehaviour
 {
-    BattleManager battlemaneger = BattleManager.instance;
 
     public bool isWild = true;
     public Animator anim;
@@ -77,5 +76,23 @@ public class PokemonBattleMode : MonoBehaviour
     {
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.5f && anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
         gameObject.SetActive(false);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ball") && BattleManager.instance.ball_throw)
+        {
+            gameObject.SetActive(false);
+
+            Rigidbody ballRigidbody = collision.gameObject.GetComponent<Rigidbody>();
+
+            ballRigidbody.velocity = Vector3.zero;
+            ballRigidbody.angularVelocity = Vector3.zero;
+            ballRigidbody.useGravity = true;
+
+            collision.gameObject.transform.LookAt(BattleManager.instance.playerPokemon.transform);
+            //ballRigidbody.AddForce(new Vector3(0f, 0f, 0f), ForceMode.Impulse);
+        }
+
     }
 }
