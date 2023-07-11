@@ -521,6 +521,8 @@ public class BattleManager : MonoBehaviour
             if (iscatch)
             {
                 playerbag.AddPokemon(enemyPokemon);
+                yield return new WaitForSeconds(2f);
+                ball.SetActive(false);
                 break;
             }
             else if (isRun)

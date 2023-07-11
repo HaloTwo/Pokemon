@@ -20,11 +20,12 @@ public class UIManger : MonoBehaviour
     [Header("이동하는 버튼 이미지")]
     [SerializeField] private RectTransform selectImage;
 
-    [Header("0. 기본UI")]
+    [Header("0. 볼UI")]
     [Space(50f)]
     [SerializeField] private GameObject ball_image;
     [SerializeField] private GameObject ball_button;
     [SerializeField] private GameObject Ball_UI;
+    [SerializeField] private Text ball_number_txt;
 
 
     [Header("0. 기본UI")]
@@ -131,9 +132,11 @@ public class UIManger : MonoBehaviour
             currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
         }
 
+
         //현재 스택에 있는 UI의 버튼들을 선택가능
         buttons = currentbuttons;
         buttons[currentIndex].Select();
+        Debug.Log(currentIndex);
 
         //버튼 이미지 이동
         OnButtonSelected(buttons[currentIndex]);
@@ -246,6 +249,7 @@ public class UIManger : MonoBehaviour
                 currentIndex = 0;
                 ball_button.SetActive(true);
                 UI_stack.Push(ball_button);
+                ball_number_txt.text = playerBag.ball.Quantity.ToString();
             }
 
         }
@@ -703,7 +707,6 @@ public class UIManger : MonoBehaviour
 
 
 
-
         for (int i = 0; i < playerBag.NowPokemon.Count; i++)
         {
 
@@ -757,12 +760,22 @@ public class UIManger : MonoBehaviour
     }
 
 
+    //볼 사용
     public void UI_Use_ball()
     {
-        BattleManager.instance.ball_throw = true;
+        if (playerBag.ball.Quantity <= 0)
+        {
+            Debug.Log("볼이없습니다.");
+        }
+        else
+        {
+            BattleManager.instance.ball_throw = true;
+            ball_button.SetActive(false);
+            gameObject.SetActive(false);
+            playerBag.ball.Quantity--;
+        }
 
-        ball_button.SetActive(false);
-        gameObject.SetActive(false);
+
     }
 
 
@@ -791,6 +804,10 @@ public class UIManger : MonoBehaviour
             HP_UI.SetActive(true);
         }
 
+        if (UI_stack.Peek() == Bag_UI)
+        {
+            currentIndex = 0;
+        }
 
         GameObject topUI = UI_stack.Peek();
         topUI.SetActive(false);

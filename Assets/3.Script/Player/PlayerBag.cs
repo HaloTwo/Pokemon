@@ -8,6 +8,7 @@ public class PlayerBag : MonoBehaviour
     public List<GameObject> NowPokemon = new List<GameObject>();
     public List<GameObject> PokemonBox = new List<GameObject>();
     public ItemData[] Itemdata;
+    public ItemData ball;
 
     private void Awake()
     {
@@ -34,38 +35,38 @@ public class PlayerBag : MonoBehaviour
     //포켓몬 추가
     public void AddPokemon(GameObject pokemon)
     {
-        if (NowPokemon.Count < 6)
+
+        for (int i = 0; i < NowPokemon.Count; i++)
         {
-            for (int i = 0; i < NowPokemon.Count; i++)
+
+            if (NowPokemon[i] == null)
             {
-                if (NowPokemon[i] == null)
-                {
-                    PlayerPokemon.RemoveAt(i);
-                    PlayerPokemon.Insert(i, pokemon);
-                    //GameObject newPokemon = Instantiate(PlayerPokemon[i]);
+                PlayerPokemon.RemoveAt(i);
+                PlayerPokemon.Insert(i, pokemon);
+                //GameObject newPokemon = Instantiate(PlayerPokemon[i]);
 
-                    NowPokemon.RemoveAt(i);
-                    NowPokemon.Insert(i, pokemon);
-                    pokemon.GetComponent<PokemonMove>().enabled = false;
+                NowPokemon.RemoveAt(i);
+                NowPokemon.Insert(i, pokemon);
+                pokemon.GetComponent<PokemonMove>().enabled = false;
 
-                    PokemonBattleMode newPokemonBattleMode = pokemon.GetComponent<PokemonBattleMode>();
-                    newPokemonBattleMode.isWild = false;
-                    newPokemonBattleMode.enabled = true;
-                    pokemon.SetActive(false);
-                    break;
-                }
-                else
+                PokemonBattleMode newPokemonBattleMode = pokemon.GetComponent<PokemonBattleMode>();
+                newPokemonBattleMode.isWild = false;
+                newPokemonBattleMode.enabled = true;
+                pokemon.SetActive(false);
+                break;
+            }
+            else
+            {
+                if (i == 5)
                 {
-                    Debug.Log("null아니유");
-                    break;
+                    Debug.Log("자리가 없습니다. 박스로 가주세요~");
+                    PokemonBox.Add(pokemon);
                 }
             }
         }
-        else
-        {
-            Debug.Log("포켓몬 없다 박스로 간다.");
-            PokemonBox.Add(pokemon);
-        }
+
+
+
 
     }
 
