@@ -2465,10 +2465,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 2
-  m_Height: 6
-  m_Direction: 1
-  m_Center: {x: 0, y: 3, z: 0}
+  m_Radius: 2.4708407
+  m_Height: 5.9985223
+  m_Direction: 2
+  m_Center: {x: -0.000000009540351, y: 2.3335054, z: -0.3849752}
 --- !u!114 &3217538478542125785
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2483,6 +2483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hp: 0
   isDie: 0
+  PlayerOwned: 0
   Name: "\uB514\uC544\uB8E8\uAC00"
   image: {fileID: 21300000, guid: 8047c139370e80c479f4f32b8973a8d6, type: 3}
   MaxHp: 100
@@ -2495,6 +2496,7 @@ MonoBehaviour:
   Exp: 0
   Type1: 15
   Type2: 8
+  SkillPP: 
   AttackRank: 0
   SpAttackRank: 0
   DefenceRank: 0
@@ -2532,6 +2534,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isWild: 1
   anim: {fileID: 0}
+  pokemon_slider: {fileID: 0}
+  pokemon_name: {fileID: 0}
+  pokemon_lv: {fileID: 0}
 --- !u!1 &6557945221318425576
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class PlayerBag : MonoBehaviour
 {
     public List<GameObject> PlayerPokemon = new List<GameObject>();
     public List<GameObject> NowPokemon = new List<GameObject>();
+    public List<GameObject> PokemonBox = new List<GameObject>();
     public ItemData[] Itemdata;
 
     private void Awake()
@@ -33,30 +34,39 @@ public class PlayerBag : MonoBehaviour
     //포켓몬 추가
     public void AddPokemon(GameObject pokemon)
     {
-        if (PlayerPokemon.Count < 6)
+        if (NowPokemon.Count < 6)
         {
-            for (int i = 0; i < PlayerPokemon.Count; i++)
+            for (int i = 0; i < NowPokemon.Count; i++)
             {
-                if (PlayerPokemon[i] == null)
+                if (NowPokemon[i] == null)
                 {
-                    PlayerPokemon.Add(pokemon);
-                    GameObject newPokemon = Instantiate(PlayerPokemon[i]);
+                    PlayerPokemon.RemoveAt(i);
+                    PlayerPokemon.Insert(i, pokemon);
+                    //GameObject newPokemon = Instantiate(PlayerPokemon[i]);
 
-                    NowPokemon.Add(newPokemon);
-                    newPokemon.GetComponent<PokemonMove>().enabled = false;
+                    NowPokemon.RemoveAt(i);
+                    NowPokemon.Insert(i, pokemon);
+                    pokemon.GetComponent<PokemonMove>().enabled = false;
 
-                    PokemonBattleMode newPokemonBattleMode = newPokemon.GetComponent<PokemonBattleMode>();
+                    PokemonBattleMode newPokemonBattleMode = pokemon.GetComponent<PokemonBattleMode>();
                     newPokemonBattleMode.isWild = false;
                     newPokemonBattleMode.enabled = true;
-                    newPokemon.SetActive(false);
+                    pokemon.SetActive(false);
+                    break;
+                }
+                else
+                {
+                    Debug.Log("null아니유");
                     break;
                 }
             }
         }
         else
         {
-            Debug.Log("포켓몬을 더 이상 추가할 수 없습니다. 최대 6마리까지만 보유할 수 있습니다.");
+            Debug.Log("포켓몬 없다 박스로 간다.");
+            PokemonBox.Add(pokemon);
         }
+
     }
 
     public void PlayerPokemon_Battle_go()

@@ -90,7 +90,10 @@ public class PokemonBattleMode : MonoBehaviour
             ballRigidbody.angularVelocity = Vector3.zero;
             ballRigidbody.useGravity = true;
 
-            collision.gameObject.transform.LookAt(BattleManager.instance.playerPokemon.transform);
+            Debug.Log("충돌했어 돌려");
+            //collision.gameObject.transform.rotation =  Quaternion.Euler(new Vector3(0, -180f, 0));
+            collision.gameObject.transform.LookAt(BattleManager.instance.playerPokemon.transform.forward);
+            collision.gameObject.transform.rotation = Quaternion.LookRotation(-BattleManager.instance.playerPokemon.transform.forward);
             //ballRigidbody.AddForce(new Vector3(0f, 0f, 0f), ForceMode.Impulse);
         }
 

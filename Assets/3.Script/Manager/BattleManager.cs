@@ -169,8 +169,9 @@ public class BattleManager : MonoBehaviour
         //적 포켓몬의 중심을 찾고, 크기에 따라 카메라 이동
         EnemyLookatCamera(enemyPokemon, 0.55f);
 
-        //몬스터가 소리 지를때까지 구경, 3초
-        yield return new WaitForSeconds(3f);
+        //몬스터가 소리 지를때까지 
+        yield return new WaitUntil(() => enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("roar01")
+                                      && enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
 
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
@@ -193,8 +194,22 @@ public class BattleManager : MonoBehaviour
         Renderer target_renderer = target.GetComponentInChildren<Renderer>();
         Vector3 targetCenter = target.transform.position + target.transform.up * target_renderer.bounds.size.y * look_height;
 
-        if (target != ball)
+        if (target == ball)
         {
+
+            Debug.Log("lookat 지정해");
+            virtualCamera.LookAt = target.transform;
+
+            Vector3 targetPosition = ball.transform.position + ball.transform.forward * 1f;
+            targetPosition.y = enemyPokemon.transform.position.y;
+            Debug.Log("적의 앞에 위치해");
+            virtualCamera.transform.position = targetPosition;
+
+        }
+        else if (target != ball)
+        {
+            virtualCamera.LookAt = null;
+
             if (target_renderer.bounds.size.y >= 5.8f)
             {
                 targetCenter = target.transform.position + target.transform.up * target_renderer.bounds.size.y * 0.8f;
@@ -211,7 +226,6 @@ public class BattleManager : MonoBehaviour
         }
 
         virtualCamera.transform.rotation = Quaternion.LookRotation(targetCenter - virtualCamera.transform.position);
-
     }
 
     void CameraMove()
@@ -325,39 +339,52 @@ public class BattleManager : MonoBehaviour
                 //몬스터볼 투척
                 if (ball_throw)
                 {
-                    playerPokemon.SetActive(false);
-                    //player_anim.SetTrigger("MonsterBall");
-                    player_anim.SetTrigger("Throw");
-                    yield return new WaitUntil(() => player_anim.GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl_throw02_gfbanm")
-                    && player_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
-                    playerPokemon.SetActive(true);
                     //몬스터볼 던지는 과정
+                    playerPokemon.SetActive(false);
+                    player_anim.SetTrigger("Throw");
+                    yield return new WaitUntil(() => player_anim.GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl_throw02_gfbanm") && player_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
+                    playerPokemon.SetActive(true);
                     //---------------------------------------------
                     virtualCamera.Priority = 15;
                     //몬스터 볼로 카메라 이동
-                    EnemyLookatCamera(ball, 0.3f);
+                    EnemyLookatCamera(ball, 0.5f);
+
+                    while (ball.GetComponent<Rigidbody>().velocity == new Vector3(0, 0, 0))
+                    {
+                        yield return null;
+                    }
+                    yield return new WaitUntil(() => ball.GetComponent<Rigidbody>().velocity == new Vector3(0, 0, 0));
+                    //---------------볼 정지 후 계산-------------------------------
 
 
+                    yield return StartCoroutine(Catch_count_co());
+                    ball_throw = false;
 
 
+                    //잡으면
+                    if (iscatch)
+                    {
+                        if (ball_throw!)
+                        {
+                            ball_throw = false;
+                        }
+                        virtualCamera.Priority = 0;
+                        break;
+                    }//놓치면
+                    else
+                    {
+                        ball.SetActive(false);
+                        enemyPokemon.SetActive(true);
+                        EnemyLookatCamera(enemyPokemon, 0.55f);
+                        yield return new WaitUntil(() => enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("roar01")
+                                                      && enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
 
-                    // ---------------여기에 몬스터볼 확률 넣어야됌----
-                    yield return new WaitForSeconds(3f);
 
-                    //--------if 만약 탈출하면
-                    ball.SetActive(false);
-                    enemyPokemon.SetActive(true);
-
-                    //다시 카메라가 적에게로 돌아가고 
-                    EnemyLookatCamera(enemyPokemon, 0.55f);
-
-                    yield return new WaitForSeconds(3f);
+                        //다시 원래 카메라로
+                        virtualCamera.Priority = 0;
+                    }
 
 
-                    //다시 원래 카메라로
-                    virtualCamera.Priority = 0;             
-
-                    yield return new WaitForSeconds(0.5f);
                 }
 
                 //포켓몬 체인지
@@ -430,7 +457,7 @@ public class BattleManager : MonoBehaviour
                 }
 
                 //사망시 아웃
-                if (islose || isWin || isRun || iscatch || next_attacker_pokemon.isDie)
+                if (islose || isWin || isRun || iscatch || iscatch || next_attacker_pokemon.isDie)
                 {
                     break;
                 }
@@ -456,7 +483,7 @@ public class BattleManager : MonoBehaviour
                 HitPhase(first_attack_pokemon, first_attack_pokemon_slider);
 
                 //조건 검사
-                if (islose || isWin || isRun || first_attack_pokemon.isDie)
+                if (islose || isWin || isRun || iscatch || first_attack_pokemon.isDie)
                 {
                     break;
                 }
@@ -485,14 +512,16 @@ public class BattleManager : MonoBehaviour
                 player_pokemon_change = false;
                 enemy_pokemon_change = false;
                 ball_throw = false;
+                iscatch = false;
 
                 turn++;
-            }
+            }//첫번째 while문 나감
+
 
             if (iscatch)
             {
-                playerbag.PlayerPokemon.Add(enemyPokemon);
-                playerbag.NowPokemon.Add(enemyPokemon);
+                playerbag.AddPokemon(enemyPokemon);
+                break;
             }
             else if (isRun)
             {
@@ -506,6 +535,7 @@ public class BattleManager : MonoBehaviour
                 enemy_pokemon_battlemode.anim.SetBool("Walk", true);
 
                 enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+                break;
             }
             else if (islose)
             {
@@ -521,39 +551,126 @@ public class BattleManager : MonoBehaviour
                 enemy_pokemon_battlemode.anim.SetBool("Walk", true);
 
                 enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+                break;
             }
             else if (player_pokemon_Stats.isDie)
             {
                 Debug.Log("내 포켓몬 디짐..");
+                break;
             }
             else if (enemy_pokemon_Stats.isDie)
             {
                 yield return new WaitUntil(() => enemy_pokemon_Stats.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
 
                 Debug.Log("상대 포켓몬 디짐..");
+                break;
             }
+        }//두번째 while문 나감
 
-            Battle_UI.gameObject.SetActive(false);
+        Battle_UI.gameObject.SetActive(false);
 
-            player.GetComponent<PlayerMovement>().isBattle = false;
-            playerPokemon.SetActive(false);
+        player.GetComponent<PlayerMovement>().isBattle = false;
+        playerPokemon.SetActive(false);
 
-            newTransform.gameObject.SetActive(false);
+        newTransform.gameObject.SetActive(false);
 
-            PlayerCamera.m_Orbits[1].m_Radius = 5f;
-            PlayerCamera.Follow = player.transform;
-            PlayerCamera.LookAt = player.transform;
+        PlayerCamera.m_Orbits[1].m_Radius = 5f;
+        PlayerCamera.Follow = player.transform;
+        PlayerCamera.LookAt = player.transform;
+    }
+
+
+
+    //잡는 확률
+    IEnumerator Catch_count_co()
+    {
+
+        Debug.Log("코루틴 들어왔냐");
+        //포획률
+        float catchRate_1 = 0.9f;
+        float catchRate_2 = 0.8f;
+
+        // 회전 애니메이션 시작
+        Debug.Log("첫번째 회전");
+        yield return StartCoroutine(SwingAnimation(40f, -40f, 0.55f));
+        yield return new WaitForSeconds(0.5f);
+
+        if (Random.value <= catchRate_1)
+        {
+            Debug.Log("두번째 통과");
+            yield return StartCoroutine(SwingAnimation(40f, -40f, 0.6f));
+            yield return new WaitForSeconds(0.5f);
+
+            if (Random.value <= catchRate_2)
+            {
+                Debug.Log("세번째 통과 추카합니다.");
+                yield return StartCoroutine(SwingAnimation(40f, -40f, 0.6f));
+                yield return new WaitForSeconds(0.5f);
+
+                iscatch = true;
+            }
+        }
+    }
+
+
+    IEnumerator SwingAnimation(float fromAngle, float toAngle, float duration)
+    {
+        Transform target = ball.GetComponentInChildren<Transform>();
+
+        Quaternion startRotation = target.localRotation; // 시작 회전값 저장
+        Vector3 startPosition = target.localPosition;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // interpolate rotation angle over time
+            float t = elapsedTime / duration;
+            float angle = Mathf.Lerp(fromAngle, toAngle, t);
+
+            // update current rotation value
+            Quaternion currentRotation = Quaternion.Euler(target.localRotation.eulerAngles.x, target.localRotation.eulerAngles.y, angle);
+            target.localRotation = currentRotation;
+
+            // interpolate position left and right over time
+            float xPosition = Mathf.Lerp(0f, -0.03f, t);
+            Vector3 currentPosition = startPosition + new Vector3(xPosition, 0f, 0f);
+            target.localPosition = currentPosition;
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
 
+        // 애니메이션 완료 후 원래 위치로 돌아오는 애니메이션 추가
+        float returnDuration = duration / 3f; // 돌아오는 애니메이션의 시간
+        float returnElapsedTime = 0f;
 
+        Vector3 returnStartPosition = target.localPosition;
+        Quaternion returnStartRotation = target.localRotation;
+
+        while (returnElapsedTime < returnDuration)
+        {
+            float t = returnElapsedTime / returnDuration;
+            Vector3 returnPosition = Vector3.Lerp(returnStartPosition, startPosition, t);
+            Quaternion returnRotation = Quaternion.Lerp(returnStartRotation, startRotation, t);
+
+            target.localPosition = returnPosition;
+            target.localRotation = returnRotation;
+
+            returnElapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // 애니메이션 완료 후 원래 회전값으로 복원
+        target.localRotation = startRotation;
     }
 
 
 
     //스피드 비교
     void CompareSpeed(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon, Slider Enemy_slider, Slider player_slider,
-                      bool player_using_Item, bool enemy_using_Item, bool player_pokemon_change, bool enemy_pokemon_change,
-                  out PokemonStats firstattcker, out PokemonStats nextattacker, out Slider first_attack_pokemon_slider, out Slider next_tattacker_pokemon_slider)
+                  bool player_using_Item, bool enemy_using_Item, bool player_pokemon_change, bool enemy_pokemon_change,
+              out PokemonStats firstattcker, out PokemonStats nextattacker, out Slider first_attack_pokemon_slider, out Slider next_tattacker_pokemon_slider)
     {
         #region 속도 체크
         firstattcker = null;
@@ -757,7 +874,6 @@ public class BattleManager : MonoBehaviour
             else
             {
                 num = enemyskillnum;
-
             }
 
         }

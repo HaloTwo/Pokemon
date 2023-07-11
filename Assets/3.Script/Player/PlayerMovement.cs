@@ -198,8 +198,9 @@ public class PlayerMovement : MonoBehaviour
         colls = Physics.OverlapBox(position, size, rotation, PokemonLayer);
 
         //전투중에 포켓몬을 잡으려고 할 때, 상대 포켓몬 조준
-        if (BattleManager.instance.ball_throw)
+        if (BattleManager.instance.ball_throw && isBattle)
         {
+            Debug.Log("포켓몬 조준 전투중");
             ball_rb.useGravity = false;
 
             GameObject target = BattleManager.instance.enemyPokemon;
@@ -212,6 +213,7 @@ public class PlayerMovement : MonoBehaviour
         //포켓몬과 전투하려고 할 때, 가장 가까운 포켓몬 조준
         else if (colls.Length > 0)
         {
+            Debug.Log("포켓몬 조준 싸우자");
             Collider closestPokemon = null;
             float closestDistance = Mathf.Infinity;
 
@@ -229,6 +231,7 @@ public class PlayerMovement : MonoBehaviour
 
             if (closestPokemon != null)
             {
+                Debug.Log("허공 땅볼");
                 Debug.Log("타겟 포켓몬 : " + closestPokemon.name);
                 ball_rb.useGravity = false;
 
