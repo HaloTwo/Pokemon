@@ -23,21 +23,18 @@ public class DataManager : MonoBehaviour
             int index = skillData.Num;
             PokemonSkill[index] = skillData;
         }
-
-
-        
+    
 
         for (int i = 0; i < pokemon.Length; i++)
         {
             pokemon[i].GetComponent<PokemonStats>().Name = pokemonData[i].Name;
             pokemon[i].GetComponent<PokemonStats>().image = pokemonImage[i];
-            pokemon[i].GetComponent<PokemonStats>().MaxHp = pokemonData[i].MaxHp;
-            pokemon[i].GetComponent<PokemonStats>().Hp = pokemonData[i].MaxHp;
-            pokemon[i].GetComponent<PokemonStats>().Attack = pokemonData[i].Attack;
-            pokemon[i].GetComponent<PokemonStats>().Defence = pokemonData[i].Defence;
-            pokemon[i].GetComponent<PokemonStats>().SpAttack = pokemonData[i].SpAttack;
-            pokemon[i].GetComponent<PokemonStats>().SpDefence = pokemonData[i].SpDefence;
-            pokemon[i].GetComponent<PokemonStats>().Speed = pokemonData[i].Speed;
+            pokemon[i].GetComponent<PokemonStats>().Default_MaxHp = pokemonData[i].MaxHp;
+            pokemon[i].GetComponent<PokemonStats>().Default_Attack = pokemonData[i].Attack;
+            pokemon[i].GetComponent<PokemonStats>().Default_Defence = pokemonData[i].Defence;
+            pokemon[i].GetComponent<PokemonStats>().Default_SpAttack = pokemonData[i].SpAttack;
+            pokemon[i].GetComponent<PokemonStats>().Default_SpDefence = pokemonData[i].SpDefence;
+            pokemon[i].GetComponent<PokemonStats>().Default_Speed = pokemonData[i].Speed;
             pokemon[i].GetComponent<PokemonStats>().Type1 = (PokemonStats.Type)pokemonData[i].Type1;
             pokemon[i].GetComponent<PokemonStats>().Type2 = (PokemonStats.Type)pokemonData[i].Type2;
             pokemon[i].GetComponent<PokemonStats>().SkillPP = new int[4];

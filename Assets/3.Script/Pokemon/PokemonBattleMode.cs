@@ -45,6 +45,9 @@ public class PokemonBattleMode : MonoBehaviour
             pokemonStats.Level = Random.Range(10, 30);
             pokemon_lv.text = "Lv." + pokemonStats.Level;
         }
+
+        //Æ÷ÄÏ¸ó ½ºÅÝ
+        pokemonStats.LevelUp(pokemonStats);
     }
 
     // Update is called once per frame

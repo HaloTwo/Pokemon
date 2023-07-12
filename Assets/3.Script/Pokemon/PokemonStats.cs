@@ -27,6 +27,14 @@ public class PokemonStats : MonoBehaviour
     }
 
     public bool isDie;
+    [Header("기본 능력치")]
+    [SerializeField] public int Default_MaxHp;
+    [SerializeField] public int Default_Attack;
+    [SerializeField] public int Default_Defence;
+    [SerializeField] public int Default_SpAttack;
+    [SerializeField] public int Default_SpDefence;
+    [SerializeField] public int Default_Speed;
+    [SerializeField] public int Default_Level;
 
     [Header("받은 능력치")]
     //객체별 개체값
@@ -56,21 +64,16 @@ public class PokemonStats : MonoBehaviour
     public float SpDefenceRank = 0;
     public float SpeedRank = 0;
     public float HitrateRank = 0;
-    //레벨업 랜덤 계수
-    private int LevelUpHp = 0;
-    private int LevelUpAttack = 0;
-    private int LevelUpDefence = 0;
-    private int LevelUpSpAttack = 0;
-    private int LevelUpSpDefence = 0;
-    private int LevelUpSpeed = 0;
-    public void LevelUp()
+
+    public void LevelUp(PokemonStats target)
     {
-        LevelUpHp += random.Next(1, 3);
-        LevelUpAttack += random.Next(1, 3);
-        LevelUpDefence += random.Next(1, 3);
-        LevelUpSpAttack += random.Next(1, 3);
-        LevelUpSpDefence += random.Next(1, 3);
-        LevelUpSpeed += random.Next(1, 3);
+        target.MaxHp = target.Default_MaxHp + (target.Level * 2);
+        target.Hp = target.MaxHp;
+        target.Attack = target.Default_Attack + (target.Level * 2);
+        target.Defence = target.Default_Defence + (target.Level * 2);
+        target.SpAttack = target.Default_MaxHp + (target.Level * 2);
+        target.SpDefence = target.Default_SpAttack + (target.Level * 2);
+        target.Default_Speed = target.Default_Speed + (target.Level * 2);
     }
 
     //스킬들

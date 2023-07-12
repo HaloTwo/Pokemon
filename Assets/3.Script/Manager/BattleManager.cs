@@ -69,10 +69,10 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private GameObject ball;
 
     private PlayerBag playerbag;
-    private UIManger uIManger;
+    [SerializeField]private UIManger uIManger;
 
     [Header("플레이어 UI")]
-    [SerializeField] private Canvas Battle_UI;
+    [SerializeField] private GameObject Battle_UI;
 
     [Header("배틀 턴")]
     [SerializeField] private int turn;
@@ -92,6 +92,11 @@ public class BattleManager : MonoBehaviour
 
     Transform newTransform;
     //배틀 시작!
+
+    private void Start()
+    {
+        uIManger = Battle_UI.transform.parent.GetComponent<UIManger>();
+    }
     public void Battle_Start(GameObject enemyPokemon, GameObject player)
     {
         this.enemyPokemon = enemyPokemon;
@@ -183,8 +188,8 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
 
         //UI 생성
-        Battle_UI.gameObject.SetActive(true);
-        uIManger = Battle_UI.GetComponent<UIManger>();
+        Battle_UI.SetActive(true);
+
 
     }
 
@@ -296,7 +301,7 @@ public class BattleManager : MonoBehaviour
             PokemonStats player_pokemon_Stats = playerPokemon.GetComponent<PokemonStats>();
             PokemonBattleMode enemy_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
             PokemonBattleMode player_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
-            Slider player_pokemon_slider = Battle_UI.GetComponent<UIManger>().hPbar;
+            Slider player_pokemon_slider = uIManger.hPbar;
             Slider enemy_pokemon_slider = enemy_pokemon_battlemode.pokemon_slider;
             PokemonStats first_attack_pokemon;
             PokemonStats next_attacker_pokemon;
@@ -459,6 +464,7 @@ public class BattleManager : MonoBehaviour
                 //사망시 아웃
                 if (islose || isWin || isRun || iscatch || iscatch || next_attacker_pokemon.isDie)
                 {
+                    yield return new WaitForSeconds(2f);
                     break;
                 }
                 //=============================================================================================================================================================
@@ -485,24 +491,28 @@ public class BattleManager : MonoBehaviour
                 //조건 검사
                 if (islose || isWin || isRun || iscatch || first_attack_pokemon.isDie)
                 {
+                    yield return new WaitForSeconds(2f);
                     break;
                 }
 
                 yield return new WaitForSeconds(2f);
                 //=================================================================== 턴 종료 =================================================================================
 
-
-
                 //UI 리셋!
                 #region UI 리셋
-                if (!Battle_UI.gameObject.transform.GetChild(1).gameObject.activeSelf)
+                if (!Battle_UI.transform.GetChild(1).gameObject.activeSelf)
                 {
-                    Battle_UI.gameObject.transform.Find("Select").gameObject.SetActive(true);
-                    Battle_UI.gameObject.transform.GetChild(1).gameObject.SetActive(true);
+                    Debug.Log("부분켜기");
+                    uIManger.currentIndex = 0;
+                    Battle_UI.SetActive(true);
+                    Battle_UI.transform.Find("Select").gameObject.SetActive(true);
+                    Battle_UI.transform.GetChild(1).gameObject.SetActive(true);
                 }
-                else if (!Battle_UI.gameObject.activeSelf)
+                else if (!Battle_UI.activeSelf)
                 {
-                    Battle_UI.gameObject.SetActive(true);
+                    Debug.Log("켜져");
+                    uIManger.currentIndex = 0;
+                    Battle_UI.SetActive(true);
                 }
                 #endregion
 
@@ -523,6 +533,11 @@ public class BattleManager : MonoBehaviour
                 playerbag.AddPokemon(enemyPokemon);
                 yield return new WaitForSeconds(2f);
                 ball.SetActive(false);
+
+                TextBox.instance.Textbox_OnOff(true);
+                TextBox.instance.TalkText.text = enemy_pokemon_Stats.Name+"을 잡았습니다";
+                yield return new WaitForSeconds(1f);
+                TextBox.instance.Textbox_OnOff(false);
                 break;
             }
             else if (isRun)
@@ -569,7 +584,7 @@ public class BattleManager : MonoBehaviour
             }
         }//두번째 while문 나감
 
-        Battle_UI.gameObject.SetActive(false);
+        Battle_UI.SetActive(false);
 
         player.GetComponent<PlayerMovement>().isBattle = false;
         playerPokemon.SetActive(false);
@@ -790,15 +805,18 @@ public class BattleManager : MonoBehaviour
     }
 
 
+
     //맞는 판정
     void HitPhase(PokemonStats Target, Slider Target_Slider)
     {
+        Debug.Log("플레이어가 맞았다");
         if (Target == playerPokemon.GetComponent<PokemonStats>())
         {
-            Battle_UI.gameObject.SetActive(true);
-            Battle_UI.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-            Battle_UI.gameObject.transform.GetChild(1).gameObject.SetActive(false);
-            Battle_UI.gameObject.transform.Find("Select").gameObject.SetActive(false);
+            Debug.Log("플레이어가 맞았다, 체력바만 켜");
+
+            Battle_UI.transform.GetChild(0).gameObject.SetActive(true);
+            Battle_UI.transform.GetChild(1).gameObject.SetActive(false);
+            Battle_UI.transform.Find("Select").gameObject.SetActive(false);
         }
 
         Target.Hp -= (int)Damage;
@@ -2075,7 +2093,13 @@ public class BattleManager : MonoBehaviour
         playerskillnum = num;
 
         //UI 끔!
-        Battle_UI.gameObject.SetActive(false);
+        Battle_UI.transform.GetChild(0).gameObject.SetActive(false);
+        Battle_UI.transform.GetChild(1).gameObject.SetActive(false);
+        Battle_UI.transform.GetChild(2).gameObject.SetActive(false);
+        Battle_UI.transform.GetChild(5).gameObject.SetActive(false);
+
+        //스택 다시 이용
+        uIManger.UI_stack.Push(Battle_UI.transform.GetChild(1).gameObject);
     }
 }
 

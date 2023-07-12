@@ -6,22 +6,62 @@ using UnityEngine.EventSystems;
 
 public class UIManger : MonoBehaviour
 {
-    private Stack<GameObject> UI_stack = new Stack<GameObject>();
-    private PlayerBag playerBag;
 
-    public ScrollRect scrollRect;
-
-    PokemonStats playerpokemon;
-
+    public Stack<GameObject> UI_stack;
     [Header("스킬속성 이미지를 넣어주세요")]
     [SerializeField] private Sprite[] propertyType_skill_img;
     [Header("포켓몬 속성 이미지를 넣어주세요")]
     [SerializeField] private Sprite[] propertyType_pokemon_img;
     [Header("이동하는 버튼 이미지")]
-    [SerializeField] private RectTransform selectImage;
+    [SerializeField] private RectTransform selectImage_battle;
+    [SerializeField] private RectTransform selectImage_main;
+
+
+    [HideInInspector] public int currentIndex;
+    [HideInInspector] public int beforeIndex;
+    private Button[] buttons;
+    private PlayerBag playerBag;
+    private PokemonStats playerpokemon;
+
+
+
+    [Header("메인메뉴 UI")]
+    [Space(50f)]
+    [SerializeField] private GameObject Main_UI;
+    [HideInInspector] public bool main_bool;
+
+    [Header("교체 가능한 포켓몬UI")]
+    [Space(20f)]
+    [SerializeField] private Text[] mainUI_pokemon_name_txt;
+    [SerializeField] private Text[] mainUI_change_pokemon_Lv_txt;
+    [SerializeField] private Image[] mainUI_change_pokemon_img;
+    [SerializeField] private Slider[] mainUI_change_pokemon_hPbar;
+    [SerializeField] private Text[] mainUI_change_pokemon_hp_txt;
+
+    [Header("메인메뉴 가방UI")]
+    [Space(20f)]
+    [SerializeField] private GameObject mainUI_Bag_UI;
+    [SerializeField] private Image[] mainUI_bag_pokemon_img;
+    [SerializeField] private Slider[] mainUI_bag_pokemon_hPbar;
+    [SerializeField] private Text[] mainUI_bag_pokemon_hp_txt;
+    [SerializeField] private GameObject mainUI_Menu_Choise_UI;
+    [SerializeField] private GameObject[] mainUI_Item;
+    [SerializeField] private Text mainUI_Item_name;
+    [SerializeField] private Text mainUI_Item_explanation;
+    [SerializeField] private ScrollRect mainUI_scrollRect;
+
+    [Header("박스UI")]
+    [Space(20f)]
+    [SerializeField] private GameObject Box_UI;
+
+    [Header("배틀메뉴 UI")]
+    [Space(50f)]
+    [SerializeField] private GameObject Battle_UI;
+    [HideInInspector] public bool isBattle;
+
 
     [Header("0. 볼UI")]
-    [Space(50f)]
+    [Space(20f)]
     [SerializeField] private GameObject ball_image;
     [SerializeField] private GameObject ball_button;
     [SerializeField] private GameObject Ball_UI;
@@ -29,7 +69,7 @@ public class UIManger : MonoBehaviour
 
 
     [Header("0. 기본UI")]
-    [Space(50f)]
+    [Space(20f)]
     [SerializeField] private GameObject Default_UI;
 
     [Header("HP관련 UI")]
@@ -48,7 +88,7 @@ public class UIManger : MonoBehaviour
 
 
     [Header("1. 스킬 UI")]
-    [Space(50f)]
+    [Space(20f)]
     [SerializeField] private GameObject Skill_UI;
     [Header("배틀 할 때,현재 스킬UI")]
     [SerializeField] private Text[] Inbattle_skill_txt;
@@ -57,7 +97,7 @@ public class UIManger : MonoBehaviour
 
 
     [Header("2. 포켓몬 교체UI")]
-    [Space(50f)]
+    [Space(20f)]
     [SerializeField] private GameObject Change_UI;
     [Header("포켓몬 선택시 메뉴")]
     [SerializeField] private GameObject Menu_UI;
@@ -77,7 +117,7 @@ public class UIManger : MonoBehaviour
 
 
     [Header("3. 가방UI")]
-    [Space(50f)]
+    [Space(20f)]
     [SerializeField] private GameObject Bag_UI;
     [SerializeField] private Image[] bag_pokemon_img;
     [SerializeField] private Slider[] bag_pokemon_hPbar;
@@ -87,73 +127,135 @@ public class UIManger : MonoBehaviour
     [SerializeField] private GameObject[] Item;
     [SerializeField] private Text Item_name;
     [SerializeField] private Text Item_explanation;
-
-
-    private Button[] buttons;
-    [SerializeField] private int currentIndex;
-    public int beforeIndex;
+    [SerializeField] private ScrollRect scrollRect;
 
 
 
 
-    private void OnEnable()
+    private void Start()
     {
-        // 초기 버튼 선택
         playerBag = FindObjectOfType<PlayerBag>();
-
-        //스택 다시 정리
-        Reset_UI();
-
     }
 
-    private void OnDisable()
-    {
-        UI_stack.Clear();
-    }
 
     private void Update()
     {
-
-        //현재 플레이어 포켓몬의 상태 확인와 현재 UI 버튼 객수 상태 확인
-        playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
         Button[] currentbuttons;
 
-        //현재 플레이어 포켓몬 볼 이미지로 체크
-        Current_Playerpokemon_Check(playerpokemon);
 
-
-        //현재 UI의 버튼 
-        if (UI_stack.Peek() == Bag_UI)
+        #region 배틀UI
+        if (Battle_UI.activeSelf)
         {
-            currentbuttons = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>();
+            UI_stack = new Stack<GameObject>();
+
+            if (!isBattle)
+            {
+                isBattle = true;
+                UI_stack.Clear();
+
+                //스택 다시 정리
+
+                Reset_BattleUI();
+
+
+            }
+
+            //현재 플레이어 포켓몬의 상태 확인와 현재 UI 버튼 객수 상태 확인
+            playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
+
+
+            //현재 플레이어 포켓몬 볼 이미지로 체크
+            Current_Playerpokemon_Check(playerpokemon);
+
+
+
+
+            //현재 UI의 버튼 
+            if (UI_stack.Peek() == Bag_UI)
+            {
+                currentbuttons = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>();
+            }
+            else
+            {
+                currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
+            }
+
+
+            //현재 스택에 있는 UI의 버튼들을 선택가능
+            buttons = currentbuttons;
+            buttons[currentIndex].Select();
+
+
+            //버튼 이미지 이동
+            OnButtonSelected(buttons[currentIndex], selectImage_battle);
+
+            //위 아래로 이동 가능
+            BattleButton_Move();
+
+            //Change_UI, Bag_UI일때, 행동들
+            UI_Page(currentbuttons);
+
+            //포켓몬 볼 UI 들어가기
+            BallUI_Input();
+
+
+            if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Main_UI)
+            {
+                //나가기
+                ExitButton();
+            }
         }
+        #endregion
         else
         {
-            currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
-        }
+
+            if (Input.GetKeyDown(KeyCode.Tab))
+            {
+                UI_stack = new Stack<GameObject>();
+                Main_UI.SetActive(true);
+                currentIndex = 0;
+                UI_stack.Push(Main_UI);
+            }
+            else if (Main_UI.activeSelf)
+            {
 
 
-        //현재 스택에 있는 UI의 버튼들을 선택가능
-        buttons = currentbuttons;
-        buttons[currentIndex].Select();
-        Debug.Log(currentIndex);
+                //if (!main_bool)
+                //{
+                //    main_bool = true;
+                //    Reset_UI();
 
-        //버튼 이미지 이동
-        OnButtonSelected(buttons[currentIndex]);
+                //}
 
-        //Change_UI, Bag_UI일때, 행동들
-        UI_Page(currentbuttons);
+                MainUI_pokemon();
 
-        //포켓몬 볼 UI 들어가기
-        BallUI_Input();
 
-        //위 아래로 이동 가능
-        UpDownButton();
+                currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
 
-        if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI)
-        {
-            //나가기
-            ExitButton();
+                //현재 스택에 있는 UI의 버튼들을 선택가능
+                buttons = currentbuttons;
+                buttons[currentIndex].Select();
+
+
+                //버튼 이미지 이동
+                OnButtonSelected(buttons[currentIndex], selectImage_main);
+
+                //위 아래로 이동 가능
+                MainButton_Move(buttons);
+
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    if (UI_stack.Peek() == Main_UI)
+                    {
+                        UI_stack = null;
+                    }
+                    else
+                    {
+
+                        ExitButton();
+                    }
+                }
+            }
         }
     }
 
@@ -254,8 +356,9 @@ public class UIManger : MonoBehaviour
 
         }
     }
-    void UpDownButton()
+    void BattleButton_Move()
     {
+
         if (UI_stack.Peek() == Bag_UI)
         {
 
@@ -267,7 +370,7 @@ public class UIManger : MonoBehaviour
                     currentIndex = buttons.Length - 1;
                     Scroll(-10f);
                 }
-                buttons[currentIndex].Select();
+
 
                 if (currentIndex <= 6)
                 {
@@ -283,7 +386,7 @@ public class UIManger : MonoBehaviour
                     currentIndex = 0;
                     Scroll(10f);
                 }
-                buttons[currentIndex].Select();
+
 
                 // 현재 currentIndex가 10보다 크면 스크롤을 아래로 이동
                 if (currentIndex >= 10)
@@ -303,7 +406,7 @@ public class UIManger : MonoBehaviour
                 {
                     currentIndex = buttons.Length - 1;
                 }
-                buttons[currentIndex].Select();
+
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -312,12 +415,44 @@ public class UIManger : MonoBehaviour
                 {
                     currentIndex = 0;
                 }
-                buttons[currentIndex].Select();
+
             }
         }
     }
 
-    void OnButtonSelected(Button selectedButton)
+    void MainButton_Move(Button[] buttons)
+    {
+
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            currentIndex--;
+            if (currentIndex < 0)
+            {
+                currentIndex = buttons.Length - 1;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            currentIndex++;
+            if (currentIndex >= buttons.Length)
+            {
+                currentIndex = 0;
+            }
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftArrow))
+        {
+
+            currentIndex = 0;
+        }
+        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            int num = UI_stack.Peek().transform.GetChild(0).GetComponentsInChildren<Button>().Length;
+
+            currentIndex = num;
+        }
+    }
+
+    void OnButtonSelected(Button selectedButton, RectTransform selectimg)
     {
         RectTransform selectedButtonRect = selectedButton.GetComponent<RectTransform>();
 
@@ -326,13 +461,13 @@ public class UIManger : MonoBehaviour
 
         newPosition.x += offsetX;
 
-        selectImage.position = newPosition;
+        selectimg.position = newPosition;
 
-        StartCoroutine(SelectedMove_co(newPosition));
+        StartCoroutine(SelectedMove_co(newPosition, selectimg));
     }
 
     //좌우로 이동하는 애니메이션
-    IEnumerator SelectedMove_co(Vector3 newPosition)
+    IEnumerator SelectedMove_co(Vector3 newPosition, RectTransform selectimg)
     {
         float startX = newPosition.x - 10f;
         float endX = newPosition.x + 10f;
@@ -344,7 +479,7 @@ public class UIManger : MonoBehaviour
         while (true)
         {
             //이동하면 코루틴 종료
-            if (startPosition.y != selectImage.position.y)
+            if (startPosition.y != selectimg.position.y)
             {
                 yield break;
             }
@@ -355,7 +490,7 @@ public class UIManger : MonoBehaviour
             Vector3 updatedPosition = newPosition;
             updatedPosition.x = newX;
 
-            selectImage.position = updatedPosition;
+            selectimg.position = updatedPosition;
 
             yield return null;
         }
@@ -572,7 +707,7 @@ public class UIManger : MonoBehaviour
 
     #endregion 
 
-    //터치 이벤트
+    //배틀UI 터치 이벤트
     #region 온 클릭 이벤트
 
 
@@ -657,7 +792,7 @@ public class UIManger : MonoBehaviour
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         clickedObject.transform.parent.gameObject.SetActive(false);
 
-        gameObject.SetActive(false);
+        Battle_UI.SetActive(false);
     }
 
 
@@ -668,44 +803,50 @@ public class UIManger : MonoBehaviour
     //가방으로 이동
     public void UI_Bag()
     {
-        HP_UI.SetActive(false);
-        Default_UI.SetActive(false);
-        Bag_UI.SetActive(true);
+        if (Battle_UI.activeSelf)
+        {
+            HP_UI.SetActive(false);
+            Default_UI.SetActive(false);
+            Bag_UI.SetActive(true);
+        }
 
-        Item = new GameObject[playerBag.Itemdata.Length];
         for (int i = 0; i < playerBag.Itemdata.Length; i++)
         {
-            if (Item[i] == null)
+
+            if (playerBag.Itemdata[i].Quantity == 0)
             {
-                //아이템의 갯수가 0개면 생성안함
-                if (playerBag.Itemdata[i].Quantity == 0)
+                if (Item[i].activeSelf)
                 {
-                    continue;
+                    Item[i].SetActive(false);
                 }
-                else
-                {
-                    Item[i] = Instantiate(Item_prefab, Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
-                    Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
-                    Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
-                    Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
-                    Item[i].GetComponent<Button>().onClick.AddListener(UI_Item_Pokemon);
-                }
+                continue;
+            }
+            else if (Item[i] == null)
+            {
+                Debug.Log("아이템 생성");
+                Item[i] = Instantiate(Item_prefab, Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                Item[i].name = "Item" + i;
+
+                Item[i].GetComponent<Button>().onClick.AddListener(UI_Item_Pokemon);
+
+                Debug.Log(Item[i].name);
             }
             else
             {
                 Item[i].SetActive(true);
             }
+
+
+
         }
-
-
 
         UI_stack.Push(Bag_UI);
         scrollRect.verticalScrollbar.value = 1f;
         beforeIndex = currentIndex;
         currentIndex = 0;
-
-
-
 
         for (int i = 0; i < playerBag.NowPokemon.Count; i++)
         {
@@ -752,11 +893,11 @@ public class UIManger : MonoBehaviour
 
         playerpokemon.Hp += playerBag.Itemdata[beforeIndex].HealingHp;
 
-        Reset_UI();
+        Reset_BattleUI();
 
         HP_UI.SetActive(true);
         Default_UI.SetActive(false);
-        selectImage.gameObject.SetActive(false);
+        selectImage_battle.gameObject.SetActive(false);
     }
 
 
@@ -771,10 +912,13 @@ public class UIManger : MonoBehaviour
         {
             BattleManager.instance.ball_throw = true;
             ball_button.SetActive(false);
-            gameObject.SetActive(false);
+            Battle_UI.SetActive(false);
             playerBag.ball.Quantity--;
         }
 
+        UI_stack.Clear();
+        UI_stack.Push(Default_UI);
+        currentIndex = 0;
 
     }
 
@@ -786,7 +930,7 @@ public class UIManger : MonoBehaviour
     public void UI_Run()
     {
         BattleManager.instance.isRun = true;
-        gameObject.SetActive(false);
+        Battle_UI.SetActive(false);
     }
 
     //뒤로가기
@@ -794,20 +938,21 @@ public class UIManger : MonoBehaviour
     {
         currentIndex = beforeIndex;
 
-        if (UI_stack.Peek() == Bag_UI)
+        if (UI_stack.Peek() == Bag_UI || mainUI_Bag_UI)
         {
             currentIndex = 2;
         }
 
-        if (!HP_UI.activeSelf)
+        if (UI_stack.Peek() == Change_UI)
+        {
+            currentIndex = 1;
+        }
+
+        if (!HP_UI.activeSelf && Battle_UI.activeSelf)
         {
             HP_UI.SetActive(true);
         }
 
-        if (UI_stack.Peek() == Bag_UI)
-        {
-            currentIndex = 0;
-        }
 
         GameObject topUI = UI_stack.Peek();
         topUI.SetActive(false);
@@ -820,10 +965,141 @@ public class UIManger : MonoBehaviour
     #endregion
 
 
+    //메인UI 터치 이벤트
+
+
+    void MainUI_pokemon()
+    {
+
+        for (int i = 0; i < playerBag.NowPokemon.Count; i++)
+        {
+
+            //꺼져있으면 다시 킴
+            if (!mainUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.activeSelf)
+            {
+                mainUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(true);
+            }
+
+            //null이면 끔
+            if (playerBag.NowPokemon[i] == null)
+            {
+                mainUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(false);
+                continue;
+            }
+
+            // 포켓몬이 있는 슬롯일 경우
+            PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
+
+            mainUI_pokemon_name_txt[i].text = pokemon.Name;
+            mainUI_change_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
+            mainUI_change_pokemon_img[i].color = Color.white;
+            mainUI_change_pokemon_img[i].sprite = pokemon.image;
+            mainUI_change_pokemon_Lv_txt[i].text = "Lv " + pokemon.Level;
+            mainUI_change_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
+            Hpbar_Color(mainUI_change_pokemon_hPbar[i]);
+        }
+    }
+
+    public void MainUI_Box()
+    {
+        beforeIndex = currentIndex;
+        currentIndex = 0;
+
+        Box_UI.SetActive(true);
+
+        UI_stack.Push(Box_UI);
+    }
+
+    public void MainUI_Bag()
+    {
+
+        for (int i = 0; i < playerBag.Itemdata.Length; i++)
+        {
+
+            if (playerBag.Itemdata[i].Quantity == 0)
+            {
+                if (mainUI_Item[i].activeSelf)
+                {
+                    mainUI_Item[i].SetActive(false);
+                }
+                continue;
+            }
+            else if (mainUI_Item[i] == null)
+            {
+                Debug.Log("아이템 생성");
+                mainUI_Item[i] = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                mainUI_Item[i].name = "Item" + i;
+
+                mainUI_Item[i].GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
+            }
+            else
+            {
+                mainUI_Item[i].SetActive(true);
+            }
+
+
+
+        }
+
+        UI_stack.Push(mainUI_Bag_UI);
+        mainUI_scrollRect.verticalScrollbar.value = 1f;
+        beforeIndex = currentIndex;
+        currentIndex = 0;
+
+        for (int i = 0; i < playerBag.NowPokemon.Count; i++)
+        {
+
+            if (playerBag.NowPokemon[i] == null)
+            {
+                bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
+                continue;
+            }
+
+            // 포켓몬이 있는 슬롯일 경우
+            PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
+
+            bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
+            //bag_pokemon_img[i].color = Color.white;
+            bag_pokemon_img[i].sprite = pokemon.image;
+            bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
+
+            Hpbar_Color(bag_pokemon_hPbar[i]);
+
+        }
+    }
+
+    //아이템 사용 메뉴로 이동
+    public void MainUI_Item_Pokemon()
+    {
+        GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+        RectTransform transform = clickedObject.GetComponent<RectTransform>();
+
+        beforeIndex = currentIndex;
+        currentIndex = 0;
+        mainUI_Menu_Choise_UI.gameObject.transform.position = transform.position + new Vector3(300f, -80f, 0f);
+
+        UI_stack.Push(mainUI_Menu_Choise_UI);
+
+    }
+
+    void Reset_UI()
+    {
+        UI_stack.Clear();
+
+        currentIndex = 0;
+
+        //스택 다시 이용
+        UI_stack.Push(Main_UI);
+    }
 
     //리셋
-    public void Reset_UI()
+    void Reset_BattleUI()
     {
+        Item = new GameObject[playerBag.Itemdata.Length];
+
         beforeIndex = currentIndex;
         currentIndex = 0;
 
@@ -849,11 +1125,12 @@ public class UIManger : MonoBehaviour
         {
             Ball_UI.SetActive(true);
         }
-
-        selectImage.gameObject.SetActive(true);
+        Debug.Log("킨다");
+        selectImage_battle.gameObject.SetActive(true);
         Skill_UI.SetActive(false);
         Change_UI.SetActive(false);
         Bag_UI.SetActive(false);
+        Debug.Log("끈다");
     }
 
     //가방에서 스크롤
