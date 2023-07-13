@@ -6,7 +6,7 @@ public class DataManager : MonoBehaviour
 {
     PokemonStats pokemonStats;
     PokemonData[] pokemonData;
-    [SerializeField] GameObject[] pokemon;
+    public GameObject[] pokemon;
     [SerializeField] SkillData[] PokemonSkill;
     [SerializeField] Sprite[] pokemonImage;
     private void Awake()

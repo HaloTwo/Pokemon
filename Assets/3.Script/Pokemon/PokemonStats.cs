@@ -65,15 +65,15 @@ public class PokemonStats : MonoBehaviour
     public float SpeedRank = 0;
     public float HitrateRank = 0;
 
-    public void LevelUp(PokemonStats target)
+    public void LevelUp()
     {
-        target.MaxHp = target.Default_MaxHp + (target.Level * 2);
-        target.Hp = target.MaxHp;
-        target.Attack = target.Default_Attack + (target.Level * 2);
-        target.Defence = target.Default_Defence + (target.Level * 2);
-        target.SpAttack = target.Default_MaxHp + (target.Level * 2);
-        target.SpDefence = target.Default_SpAttack + (target.Level * 2);
-        target.Default_Speed = target.Default_Speed + (target.Level * 2);
+        MaxHp = Default_MaxHp + (Level * 2);
+        Hp = MaxHp;
+        Attack = Default_Attack + (Level * 2);
+        Defence = Default_Defence + (Level * 2);
+        SpAttack = Default_MaxHp + (Level * 2);
+        SpDefence = Default_SpAttack + (Level * 2);
+        Default_Speed = Default_Speed + (Level * 2);
     }
 
     //스킬들
@@ -98,6 +98,17 @@ public class PokemonStats : MonoBehaviour
         TextAsset jsonFile = Resources.Load<TextAsset>(jsonFileName);
         pokemonArray = JsonMapper.ToObject<PokemonData[]>(jsonFile.text);
         TryGetComponent(out pokemonBattle);
+
+        if (pokemonBattle.isWild)
+        {
+            //포켓몬 스텟
+            Level = Random.Range(10, 30);
+        }
+
+        LevelUp();
+    }
+    private void Start()
+    {
     }
 
 

@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class PokemonBattleMode : MonoBehaviour
 {
-
     public bool isWild = true;
-    public Animator anim;
+    [HideInInspector]public Animator anim;
 
     public Slider pokemon_slider;
-    [SerializeField] private Text pokemon_name;
-    [SerializeField] private Text pokemon_lv;
+    [SerializeField]private Text pokemon_name;
+    [SerializeField]private Text pokemon_lv;
+    [SerializeField] private GameObject UI;
 
-    PokemonStats pokemonStats;
+   [HideInInspector]public PokemonStats pokemonStats;
     private GameObject maincamera;
 
     private void Awake()
@@ -33,8 +33,12 @@ public class PokemonBattleMode : MonoBehaviour
         {
             anim.SetTrigger("Roar");
             pokemon_slider.transform.parent.gameObject.SetActive(true);
+            pokemon_lv.text = "Lv." + pokemonStats.Level;
             pokemon_name.text = pokemonStats.Name;
         }
+
+
+
 
     }
 
@@ -42,12 +46,16 @@ public class PokemonBattleMode : MonoBehaviour
     {
         if (isWild)
         {
-            pokemonStats.Level = Random.Range(10, 30);
-            pokemon_lv.text = "Lv." + pokemonStats.Level;
+
+        }
+        else
+        {
+            if (pokemon_slider.transform.parent.gameObject != null)
+            {
+                pokemon_slider.transform.parent.gameObject.SetActive(false);
+            }
         }
 
-        //Æ÷ÄÏ¸ó ½ºÅÝ
-        pokemonStats.LevelUp(pokemonStats);
     }
 
     // Update is called once per frame
@@ -72,7 +80,10 @@ public class PokemonBattleMode : MonoBehaviour
     {
         anim.SetTrigger("Die");
 
-        StartCoroutine(DieAnimation_co());
+        if (isWild)
+        {
+            StartCoroutine(DieAnimation_co());
+        }
     }
 
     IEnumerator DieAnimation_co()

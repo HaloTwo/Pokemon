@@ -308,7 +308,6 @@ public class BattleManager : MonoBehaviour
             Slider first_attack_pokemon_slider;
             Slider next_attacker_pokemon_slider;
 
-
             //=====================================================================포켓몬 등장=================================================================================
 
             while (true)
@@ -345,12 +344,19 @@ public class BattleManager : MonoBehaviour
                 if (ball_throw)
                 {
                     //몬스터볼 던지는 과정
+                    //GameObject Ball_Cam_pos = new GameObject("Transform");
+                    //Ball_Cam_pos.transform.position = (player.transform.position + enemyPokemon.transform.position) / 2f;
+
+                    //virtualCamera.Priority = 15;
+                    //virtualCamera.Follow = Ball_Cam_pos.transform;
+                    //virtualCamera.LookAt = ball.transform;
+
                     playerPokemon.SetActive(false);
                     player_anim.SetTrigger("Throw");
                     yield return new WaitUntil(() => player_anim.GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl_throw02_gfbanm") && player_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
                     playerPokemon.SetActive(true);
                     //---------------------------------------------
-                    virtualCamera.Priority = 15;
+                    //virtualCamera.Priority = 15;
                     //몬스터 볼로 카메라 이동
                     EnemyLookatCamera(ball, 0.5f);
 
@@ -407,7 +413,7 @@ public class BattleManager : MonoBehaviour
 
                     Vector3 pokemon_loc = playerPokemon.transform.position;
                     Quaternion pokemon_rot = playerPokemon.transform.rotation;
-                    playerPokemon = playerbag.NowPokemon[uIManger.beforeIndex];
+                    playerPokemon = playerbag.PlayerPokemon[uIManger.beforeIndex];
 
 
                     yield return new WaitUntil(() => player_anim.GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl|tr0050_00_01002_battlewait01_loop_gfbanm"));
@@ -503,10 +509,11 @@ public class BattleManager : MonoBehaviour
                 if (!Battle_UI.transform.GetChild(1).gameObject.activeSelf)
                 {
                     Debug.Log("부분켜기");
-                    uIManger.currentIndex = 0;
-                    Battle_UI.SetActive(true);
+
+                    uIManger.Reset_BattleUI();
                     Battle_UI.transform.Find("Select").gameObject.SetActive(true);
                     Battle_UI.transform.GetChild(1).gameObject.SetActive(true);
+                    
                 }
                 else if (!Battle_UI.activeSelf)
                 {
@@ -573,7 +580,10 @@ public class BattleManager : MonoBehaviour
             else if (player_pokemon_Stats.isDie)
             {
                 Debug.Log("내 포켓몬 디짐..");
-                break;
+                
+                uIManger.UI_Change();
+                uIManger.beforeIndex = 0;
+                
             }
             else if (enemy_pokemon_Stats.isDie)
             {

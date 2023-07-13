@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class PokemonMove : MonoBehaviour
 {
-    Animator anim;
-    PokemonBattleMode pokemonbattle;
+    private Animator anim;
+    private PokemonBattleMode pokemonbattle;
+    private PokemonStats pokemonStats;
 
     private void Awake()
     {
         TryGetComponent(out anim);
         TryGetComponent(out pokemonbattle);
+        TryGetComponent(out pokemonStats);
     }
 
     private void Start()

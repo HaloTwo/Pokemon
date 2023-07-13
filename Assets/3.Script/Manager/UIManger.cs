@@ -17,8 +17,8 @@ public class UIManger : MonoBehaviour
     [SerializeField] private RectTransform selectImage_main;
 
 
-    [HideInInspector] public int currentIndex;
-    [HideInInspector] public int beforeIndex;
+    public int currentIndex;
+    public int beforeIndex;
     private Button[] buttons;
     private PlayerBag playerBag;
     private PokemonStats playerpokemon;
@@ -140,23 +140,23 @@ public class UIManger : MonoBehaviour
 
     private void Update()
     {
+
         Button[] currentbuttons;
 
 
         #region 배틀UI
         if (Battle_UI.activeSelf)
         {
-            UI_stack = new Stack<GameObject>();
+
 
             if (!isBattle)
             {
                 isBattle = true;
-                UI_stack.Clear();
+                UI_stack = new Stack<GameObject>();
+                //UI_stack.Clear();
 
                 //스택 다시 정리
-
                 Reset_BattleUI();
-
 
             }
 
@@ -168,7 +168,7 @@ public class UIManger : MonoBehaviour
             Current_Playerpokemon_Check(playerpokemon);
 
 
-
+            Debug.Log(UI_stack.Peek());
 
             //현재 UI의 버튼 
             if (UI_stack.Peek() == Bag_UI)
@@ -199,7 +199,7 @@ public class UIManger : MonoBehaviour
             BallUI_Input();
 
 
-            if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Main_UI)
+            if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI)
             {
                 //나가기
                 ExitButton();
@@ -211,14 +211,14 @@ public class UIManger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
-                UI_stack = new Stack<GameObject>();
                 Main_UI.SetActive(true);
                 currentIndex = 0;
+                UI_stack = new Stack<GameObject>();
                 UI_stack.Push(Main_UI);
             }
             else if (Main_UI.activeSelf)
             {
-
+                Debug.Log(UI_stack.Peek());
 
                 //if (!main_bool)
                 //{
@@ -247,7 +247,8 @@ public class UIManger : MonoBehaviour
                 {
                     if (UI_stack.Peek() == Main_UI)
                     {
-                        UI_stack = null;
+                        UI_stack = new Stack<GameObject>();
+                        Main_UI.SetActive(false);
                     }
                     else
                     {
@@ -280,7 +281,7 @@ public class UIManger : MonoBehaviour
             {
                 if (currentbuttons[i].gameObject == EventSystem.current.currentSelectedGameObject)
                 {
-                    PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
+                    PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
                     //포켓몬 타입 확인
                     PokemonTypeCheck(pokemon);
@@ -309,11 +310,11 @@ public class UIManger : MonoBehaviour
     {
         for (int i = 0; i < 6; i++)
         {
-            if (playerBag.NowPokemon[i] == null)
+            if (playerBag.PlayerPokemon[i] == null)
             {
                 pokemon_ball[i].gameObject.SetActive(false);
             }
-            else if (playerBag.NowPokemon[i].GetComponent<PokemonStats>().Hp <= 0)
+            else if (playerBag.PlayerPokemon[i].GetComponent<PokemonStats>().Hp <= 0)
             {
                 //만약 꺼져있으면 키고
                 if (!pokemon_ball[i].gameObject.activeSelf)
@@ -323,7 +324,7 @@ public class UIManger : MonoBehaviour
 
                 pokemon_ball[i].sprite = die_ball_sprite;
             }
-            else if (playerBag.NowPokemon[i].GetComponent<PokemonStats>().Hp > 0)
+            else if (playerBag.PlayerPokemon[i].GetComponent<PokemonStats>().Hp > 0)
             {
                 //만약 꺼져있으면 키고
                 if (!pokemon_ball[i].gameObject.activeSelf)
@@ -744,8 +745,7 @@ public class UIManger : MonoBehaviour
 
         UI_stack.Push(Change_UI);
 
-
-        for (int i = 0; i < playerBag.NowPokemon.Count; i++)
+        for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
         {
 
             //꺼져있으면 다시 킴
@@ -755,14 +755,14 @@ public class UIManger : MonoBehaviour
             }
 
             //null이면 끔
-            if (playerBag.NowPokemon[i] == null)
+            if (playerBag.PlayerPokemon[i] == null)
             {
                 change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(false);
                 continue;
             }
 
             // 포켓몬이 있는 슬롯일 경우
-            PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
+            PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
             change_pokemon_name_txt[i].text = pokemon.Name;
             change_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
@@ -774,8 +774,11 @@ public class UIManger : MonoBehaviour
         }
     }
     //포켓몬 사용 메뉴로 이동
-    public void UI_Change_Pokemon(RectTransform transform)
+    public void UI_Change_Pokemon()
     {
+        GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+        RectTransform transform = clickedObject.GetComponent<RectTransform>();
+
         beforeIndex = currentIndex;
         currentIndex = 0;
 
@@ -787,12 +790,15 @@ public class UIManger : MonoBehaviour
     public void UI_Next_Pokemon()
     {
 
-        BattleManager.instance.player_pokemon_change = true;
+        if (playerBag.PlayerPokemon[beforeIndex].GetComponent<PokemonStats>().Hp > 0)
+        {
+            Menu_UI.SetActive(false);
+            Change_UI.SetActive(false);
 
-        GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
-        clickedObject.transform.parent.gameObject.SetActive(false);
+            BattleManager.instance.player_pokemon_change = true;
+        }
 
-        Battle_UI.SetActive(false);
+
     }
 
 
@@ -848,17 +854,17 @@ public class UIManger : MonoBehaviour
         beforeIndex = currentIndex;
         currentIndex = 0;
 
-        for (int i = 0; i < playerBag.NowPokemon.Count; i++)
+        for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
         {
 
-            if (playerBag.NowPokemon[i] == null)
+            if (playerBag.PlayerPokemon[i] == null)
             {
                 bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
                 continue;
             }
 
             // 포켓몬이 있는 슬롯일 경우
-            PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
+            PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
             bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
             //bag_pokemon_img[i].color = Color.white;
@@ -938,10 +944,10 @@ public class UIManger : MonoBehaviour
     {
         currentIndex = beforeIndex;
 
-        if (UI_stack.Peek() == Bag_UI || mainUI_Bag_UI)
-        {
-            currentIndex = 2;
-        }
+        //if (UI_stack.Peek() == Bag_UI || mainUI_Bag_UI)
+        //{
+        //    currentIndex = 2;
+        //}
 
         if (UI_stack.Peek() == Change_UI)
         {
@@ -964,14 +970,14 @@ public class UIManger : MonoBehaviour
 
     #endregion
 
-
     //메인UI 터치 이벤트
+    #region 메인 온 클릭 이벤트
 
-
+    //기본 창 포켓몬
     void MainUI_pokemon()
     {
 
-        for (int i = 0; i < playerBag.NowPokemon.Count; i++)
+        for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
         {
 
             //꺼져있으면 다시 킴
@@ -981,14 +987,14 @@ public class UIManger : MonoBehaviour
             }
 
             //null이면 끔
-            if (playerBag.NowPokemon[i] == null)
+            if (playerBag.PlayerPokemon[i] == null)
             {
                 mainUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(false);
                 continue;
             }
 
             // 포켓몬이 있는 슬롯일 경우
-            PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
+            PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
             mainUI_pokemon_name_txt[i].text = pokemon.Name;
             mainUI_change_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
@@ -1000,16 +1006,7 @@ public class UIManger : MonoBehaviour
         }
     }
 
-    public void MainUI_Box()
-    {
-        beforeIndex = currentIndex;
-        currentIndex = 0;
-
-        Box_UI.SetActive(true);
-
-        UI_stack.Push(Box_UI);
-    }
-
+    //아이템 메뉴
     public void MainUI_Bag()
     {
 
@@ -1049,17 +1046,17 @@ public class UIManger : MonoBehaviour
         beforeIndex = currentIndex;
         currentIndex = 0;
 
-        for (int i = 0; i < playerBag.NowPokemon.Count; i++)
+        for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
         {
 
-            if (playerBag.NowPokemon[i] == null)
+            if (playerBag.PlayerPokemon[i] == null)
             {
                 bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
                 continue;
             }
 
             // 포켓몬이 있는 슬롯일 경우
-            PokemonStats pokemon = playerBag.NowPokemon[i].GetComponent<PokemonStats>();
+            PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
             bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
             //bag_pokemon_img[i].color = Color.white;
@@ -1085,6 +1082,30 @@ public class UIManger : MonoBehaviour
 
     }
 
+    //박스 메뉴
+    public void MainUI_Box()
+    {
+        beforeIndex = currentIndex;
+        currentIndex = 0;
+
+        Box_UI.SetActive(true);
+
+        UI_stack.Push(Box_UI);
+    }
+
+    public void MainUI_Report_Save()
+    {
+        playerBag.PlayerInfo_Save();
+    }
+
+    public void MainUI_GameExit()
+    {
+        playerBag.PlayerInfo_Save();
+        Application.Quit();
+    }
+
+    #endregion
+
     void Reset_UI()
     {
         UI_stack.Clear();
@@ -1096,7 +1117,7 @@ public class UIManger : MonoBehaviour
     }
 
     //리셋
-    void Reset_BattleUI()
+    public void Reset_BattleUI()
     {
         Item = new GameObject[playerBag.Itemdata.Length];
 
@@ -1113,7 +1134,7 @@ public class UIManger : MonoBehaviour
         Current_pokemon_ball();
 
         //체력바 확인
-        PokemonStats pokemon = playerBag.NowPokemon[0].GetComponent<PokemonStats>();
+        PokemonStats pokemon = playerBag.PlayerPokemon[0].GetComponent<PokemonStats>();
         hPbar.value = (float)pokemon.Hp / pokemon.MaxHp;
         Hpbar_Color(hPbar);
 
@@ -1125,13 +1146,13 @@ public class UIManger : MonoBehaviour
         {
             Ball_UI.SetActive(true);
         }
-        Debug.Log("킨다");
         selectImage_battle.gameObject.SetActive(true);
         Skill_UI.SetActive(false);
         Change_UI.SetActive(false);
         Bag_UI.SetActive(false);
-        Debug.Log("끈다");
     }
+
+
 
     //가방에서 스크롤
     void Scroll(float offset)
