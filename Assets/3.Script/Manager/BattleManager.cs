@@ -69,7 +69,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private GameObject ball;
 
     private PlayerBag playerbag;
-    [SerializeField]private UIManger uIManger;
+    [SerializeField] private UIManger uIManger;
 
     [Header("플레이어 UI")]
     [SerializeField] private GameObject Battle_UI;
@@ -318,6 +318,7 @@ public class BattleManager : MonoBehaviour
                 playerskillnum = -1;
                 enemyskillnum = Random.Range(0, 4);
 
+                yield return null;
                 yield return new WaitUntil(() =>
                 playerskillnum != -1
                 || isRun
@@ -326,6 +327,7 @@ public class BattleManager : MonoBehaviour
                 || player_using_Item
                 || enemy_using_Item
                 || ball_throw);
+                yield return null;
 
                 //도망가기
                 if (isRun)
@@ -341,6 +343,7 @@ public class BattleManager : MonoBehaviour
                 //================================================================선공 포켓몬 턴===============================================================================
 
                 //몬스터볼 투척
+                yield return null;
                 if (ball_throw)
                 {
                     //몬스터볼 던지는 과정
@@ -367,7 +370,7 @@ public class BattleManager : MonoBehaviour
                     yield return new WaitUntil(() => ball.GetComponent<Rigidbody>().velocity == new Vector3(0, 0, 0));
                     //---------------볼 정지 후 계산-------------------------------
 
-
+                    yield return null;
                     yield return StartCoroutine(Catch_count_co());
                     ball_throw = false;
 
@@ -387,9 +390,10 @@ public class BattleManager : MonoBehaviour
                         ball.SetActive(false);
                         enemyPokemon.SetActive(true);
                         EnemyLookatCamera(enemyPokemon, 0.55f);
+                        yield return null;
                         yield return new WaitUntil(() => enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("roar01")
                                                       && enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
-
+                        yield return null;
 
                         //다시 원래 카메라로
                         virtualCamera.Priority = 0;
@@ -461,6 +465,7 @@ public class BattleManager : MonoBehaviour
                     yield return new WaitUntil(() =>
                     first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
                     first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
+                    yield return null;
 
                     //피격맞고 체력바 떨어짐
                     HitPhase(next_attacker_pokemon, next_attacker_pokemon_slider);
@@ -476,9 +481,9 @@ public class BattleManager : MonoBehaviour
                 //=============================================================================================================================================================
 
 
-
+                yield return null;
                 yield return new WaitForSeconds(2f);
-
+                yield return null;
 
 
                 //================================================================후공 포켓몬 턴===============================================================================
@@ -487,9 +492,11 @@ public class BattleManager : MonoBehaviour
                 AttackPhase(next_attacker_pokemon, first_attack_pokemon);
 
                 //공격 모션 중간쯤에 피격 맞음
+                yield return null;
                 yield return new WaitUntil(() =>
                 next_attacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
                 next_attacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
+                yield return null;
 
                 //피격맞고 체력바 떨어짐
                 HitPhase(first_attack_pokemon, first_attack_pokemon_slider);
@@ -513,7 +520,7 @@ public class BattleManager : MonoBehaviour
                     uIManger.Reset_BattleUI();
                     Battle_UI.transform.Find("Select").gameObject.SetActive(true);
                     Battle_UI.transform.GetChild(1).gameObject.SetActive(true);
-                    
+
                 }
                 else if (!Battle_UI.activeSelf)
                 {
@@ -542,7 +549,7 @@ public class BattleManager : MonoBehaviour
                 ball.SetActive(false);
 
                 TextBox.instance.Textbox_OnOff(true);
-                TextBox.instance.TalkText.text = enemy_pokemon_Stats.Name+"을 잡았습니다";
+                TextBox.instance.TalkText.text = enemy_pokemon_Stats.Name + "을 잡았습니다";
                 yield return new WaitForSeconds(1f);
                 TextBox.instance.Textbox_OnOff(false);
                 break;
@@ -579,12 +586,45 @@ public class BattleManager : MonoBehaviour
             }
             else if (player_pokemon_Stats.isDie)
             {
-                Debug.Log("내 포켓몬 디짐..");
-                
-                uIManger.UI_Change();
-                uIManger.beforeIndex = 0;
-                
+                bool allPokemonsDead = true; // 모든 포켓몬이 사망한 상태인지 여부를 나타내는 변수
+
+                // playerbag.PlayerPokemon의 포켓몬들을 검사
+                for (int i = 0; i < playerbag.PlayerPokemon.Count; i++)
+                {
+                    // 생존한 포켓몬 없음
+                    if (playerbag.PlayerPokemon[i] == null)
+                    {
+                        allPokemonsDead = false;
+                        break;
+                    }
+                    else
+                    {
+                        PokemonStats pokemonStats = playerbag.PlayerPokemon[i].GetComponent<PokemonStats>();
+
+                        // 예외처리 생존한 포켓몬 없음
+                        if (pokemonStats.Hp > 0)
+                        {
+                            allPokemonsDead = false; 
+                            break;
+                        }
+                    }
+                }
+
+                if (!allPokemonsDead)
+                {
+                    Debug.Log("My Pokemon digim...");
+
+                    // 추가적인 처리를 수행
+                    uIManger.UI_Change();
+                    uIManger.beforeIndex = 0;
+                }
+                else
+                {
+                    Debug.Log("다 주금");
+                    break;
+                }
             }
+
             else if (enemy_pokemon_Stats.isDie)
             {
                 yield return new WaitUntil(() => enemy_pokemon_Stats.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
@@ -594,6 +634,7 @@ public class BattleManager : MonoBehaviour
             }
         }//두번째 while문 나감
 
+        yield return null;
         Battle_UI.SetActive(false);
 
         player.GetComponent<PlayerMovement>().isBattle = false;

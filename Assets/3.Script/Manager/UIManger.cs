@@ -17,11 +17,11 @@ public class UIManger : MonoBehaviour
     [SerializeField] private RectTransform selectImage_main;
 
 
+    [SerializeField]private PokemonStats playerpokemon;
     public int currentIndex;
     public int beforeIndex;
-    private Button[] buttons;
+    [SerializeField]private Button[] buttons;
     private PlayerBag playerBag;
-    private PokemonStats playerpokemon;
 
 
 
@@ -167,9 +167,6 @@ public class UIManger : MonoBehaviour
             //현재 플레이어 포켓몬 볼 이미지로 체크
             Current_Playerpokemon_Check(playerpokemon);
 
-
-            Debug.Log(UI_stack.Peek());
-
             //현재 UI의 버튼 
             if (UI_stack.Peek() == Bag_UI)
             {
@@ -199,7 +196,7 @@ public class UIManger : MonoBehaviour
             BallUI_Input();
 
 
-            if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI)
+            if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI && !playerpokemon.isDie)
             {
                 //나가기
                 ExitButton();
@@ -270,6 +267,8 @@ public class UIManger : MonoBehaviour
         pokemon_lv.text = "Lv." + playerpokemon.Level;
         hp_txt.text = playerpokemon.Hp + "/" + playerpokemon.MaxHp;
         hPbar.value = (float)playerpokemon.Hp / playerpokemon.MaxHp;
+
+        Hpbar_Color(this.hPbar);
     }
 
     //현재 포켓몬 교체 페이지에서 확인할 창 체크
@@ -954,7 +953,7 @@ public class UIManger : MonoBehaviour
             currentIndex = 1;
         }
 
-        if (!HP_UI.activeSelf && Battle_UI.activeSelf)
+        if (!HP_UI.activeSelf && Battle_UI.activeSelf && !Change_UI.activeSelf)
         {
             HP_UI.SetActive(true);
         }
