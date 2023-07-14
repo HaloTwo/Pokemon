@@ -13,6 +13,7 @@ public class PokemonMove : MonoBehaviour
         TryGetComponent(out anim);
         TryGetComponent(out pokemonbattle);
         TryGetComponent(out pokemonStats);
+
     }
 
     private void Start()

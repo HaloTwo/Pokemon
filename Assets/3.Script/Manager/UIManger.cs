@@ -17,10 +17,10 @@ public class UIManger : MonoBehaviour
     [SerializeField] private RectTransform selectImage_main;
 
 
-    [SerializeField]private PokemonStats playerpokemon;
+    [SerializeField] private PokemonStats playerpokemon;
     public int currentIndex;
     public int beforeIndex;
-    [SerializeField]private Button[] buttons;
+    [SerializeField] private Button[] buttons;
     private PlayerBag playerBag;
 
 
@@ -53,6 +53,11 @@ public class UIManger : MonoBehaviour
     [Header("박스UI")]
     [Space(20f)]
     [SerializeField] private GameObject Box_UI;
+    [SerializeField] private Image[] BoxUI_pokemon_img;
+    [SerializeField] private Text[] BoxUI_pokemon_name_txt;
+    [SerializeField] private Text[] BoxUI_change_pokemon_Lv_txt;
+
+    [SerializeField] private Image[] BoxUI_inbox_pokemon_img;
 
     [Header("배틀메뉴 UI")]
     [Space(50f)]
@@ -147,17 +152,21 @@ public class UIManger : MonoBehaviour
         #region 배틀UI
         if (Battle_UI.activeSelf)
         {
-
+            if (UI_stack == null)
+            {
+                UI_stack = new Stack<GameObject>();
+            }
 
             if (!isBattle)
             {
                 isBattle = true;
-                UI_stack = new Stack<GameObject>();
-                //UI_stack.Clear();
+                if (Main_UI.activeSelf)
+                {
+                    Main_UI.SetActive(false);
+                }
 
                 //스택 다시 정리
                 Reset_BattleUI();
-
             }
 
             //현재 플레이어 포켓몬의 상태 확인와 현재 UI 버튼 객수 상태 확인
@@ -200,6 +209,7 @@ public class UIManger : MonoBehaviour
             {
                 //나가기
                 ExitButton();
+                isBattle = false;
             }
         }
         #endregion
@@ -215,8 +225,6 @@ public class UIManger : MonoBehaviour
             }
             else if (Main_UI.activeSelf)
             {
-                Debug.Log(UI_stack.Peek());
-
                 //if (!main_bool)
                 //{
                 //    main_bool = true;
@@ -441,14 +449,140 @@ public class UIManger : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
+            if (UI_stack.Peek() == Main_UI)
+            {
+                int subtractnum = UI_stack.Peek().transform.GetChild(0).GetComponentsInChildren<Button>().Length;
 
-            currentIndex = 0;
+
+                if (currentIndex < subtractnum)
+                {
+                    currentIndex += subtractnum;
+
+                    if (currentIndex >= buttons.Length)
+                    {
+                        currentIndex = buttons.Length - 1;
+                    }
+
+                }
+                else if (currentIndex >= subtractnum)
+                {
+                    currentIndex -= subtractnum;
+
+                    if (currentIndex >= buttons.Length)
+                    {
+                        currentIndex = buttons.Length - 1;
+                    }
+                }
+
+
+            }
+            else if (UI_stack.Peek() == Box_UI)
+            {
+                int pokemonNum = 6;
+                int boxNum = 5;
+
+                if (currentIndex < pokemonNum)
+                {
+                    currentIndex -= boxNum;
+
+                    if (currentIndex < 0)
+                    {
+                        currentIndex += 31;
+                    }
+                }
+                else if (currentIndex >= pokemonNum)
+                {
+                    if (currentIndex > 10)
+                    {
+                        currentIndex -= boxNum;
+                    }
+                    else
+                    {
+                        currentIndex -= pokemonNum;
+
+                    }
+
+                    if (currentIndex > buttons.Length)
+                    {
+                        currentIndex = buttons.Length - 6;
+                    }
+
+                }
+            }
+
         }
         else if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            int num = UI_stack.Peek().transform.GetChild(0).GetComponentsInChildren<Button>().Length;
+            if (UI_stack.Peek() == Main_UI)
+            {
+                int subtractnum = UI_stack.Peek().transform.GetChild(0).GetComponentsInChildren<Button>().Length;
 
-            currentIndex = num;
+                if (currentIndex < subtractnum)
+                {
+                    currentIndex += subtractnum;
+
+                    if (currentIndex >= buttons.Length)
+                    {
+                        currentIndex = buttons.Length - 1;
+                    }
+                }
+                else if (currentIndex >= subtractnum)
+                {
+                    currentIndex -= subtractnum;
+
+                    if (currentIndex >= buttons.Length)
+                    {
+                        currentIndex = buttons.Length - 1;
+                    }
+                }
+            }
+            else if (UI_stack.Peek() == Box_UI)
+            {
+                int pokemonNum = 6;
+                int boxNum = 5;
+
+                if (currentIndex < buttons.Length)
+                {
+
+                    if (currentIndex >= pokemonNum)
+                    {
+                        currentIndex += boxNum;
+                    }
+                    else
+                    {
+                        currentIndex += pokemonNum;
+                    }
+
+                    if (currentIndex < pokemonNum)
+                    {
+                        currentIndex += pokemonNum;
+                    }
+
+                    if (currentIndex >= buttons.Length)
+                    {
+                        currentIndex -= 31;
+                    }
+                }
+
+
+
+                else if (currentIndex >= pokemonNum)
+                {
+                    currentIndex -= pokemonNum;
+
+                    if (currentIndex > 36)
+                    {
+                        currentIndex -= 31;
+                    }
+   
+                }
+
+
+
+
+            }
+
+
         }
     }
 
@@ -458,8 +592,10 @@ public class UIManger : MonoBehaviour
 
         Vector3 newPosition = selectedButtonRect.position;
         float offsetX = -(selectedButtonRect.rect.width / 2f); // 버튼의 너비의 절반만큼 왼쪽으로 이동
+        float offsetY = selectedButtonRect.rect.center.y; // 버튼의 너비의 절반만큼 왼쪽으로 이동
 
         newPosition.x += offsetX;
+        newPosition.y += offsetY;
 
         selectimg.position = newPosition;
 
@@ -1090,6 +1226,42 @@ public class UIManger : MonoBehaviour
         Box_UI.SetActive(true);
 
         UI_stack.Push(Box_UI);
+
+        for (int i = 0; i < playerBag.PokemonBox.Count; i++)
+        {
+            PokemonStats pokemon = playerBag.PokemonBox[i].GetComponent<PokemonStats>();
+
+            BoxUI_inbox_pokemon_img[i].color = Color.white;
+            BoxUI_inbox_pokemon_img[i].sprite = pokemon.image;
+        }
+
+
+        for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
+        {
+            //꺼져있으면 다시 킴
+            if (!BoxUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.activeSelf)
+            {
+                BoxUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(true);
+            }
+
+            //null이면 끔
+            if (playerBag.PlayerPokemon[i] == null)
+            {
+                BoxUI_pokemon_img[i].color = new Color(0, 0, 0, 0);
+                BoxUI_pokemon_name_txt[i].text = "";
+                BoxUI_change_pokemon_Lv_txt[i].text = "";
+            }
+            else
+            {
+                // 포켓몬이 있는 슬롯일 경우
+                PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
+
+                BoxUI_pokemon_name_txt[i].text = pokemon.Name;
+                BoxUI_pokemon_img[i].color = Color.white;
+                BoxUI_pokemon_img[i].sprite = pokemon.image;
+                BoxUI_change_pokemon_Lv_txt[i].text = "Lv " + pokemon.Level;
+            }
+        }
     }
 
     public void MainUI_Report_Save()

@@ -6,14 +6,14 @@ using UnityEngine.UI;
 public class PokemonBattleMode : MonoBehaviour
 {
     public bool isWild = true;
-    [HideInInspector]public Animator anim;
+    [HideInInspector] public Animator anim;
 
     public Slider pokemon_slider;
-    [SerializeField]private Text pokemon_name;
-    [SerializeField]private Text pokemon_lv;
+    [SerializeField] private Text pokemon_name;
+    [SerializeField] private Text pokemon_lv;
     [SerializeField] private GameObject UI;
 
-   [HideInInspector]public PokemonStats pokemonStats;
+    [HideInInspector] public PokemonStats pokemonStats;
     private GameObject maincamera;
 
     private void Awake()
@@ -21,6 +21,15 @@ public class PokemonBattleMode : MonoBehaviour
         maincamera = GameObject.FindWithTag("MainCamera");
         TryGetComponent(out pokemonStats);
         TryGetComponent(out anim);
+
+
+
+        UI = transform.Find("UI").gameObject;
+        pokemon_slider = UI.GetComponentInChildren<Slider>();
+        pokemon_name = UI.transform.GetChild(0).gameObject.GetComponent<Text>();
+        pokemon_lv = UI.transform.GetChild(2).gameObject.GetComponentInChildren<Text>();
+
+        UI.SetActive(false);
     }
 
 
@@ -31,15 +40,26 @@ public class PokemonBattleMode : MonoBehaviour
 
         if (isWild)
         {
-            anim.SetTrigger("Roar");
-            pokemon_slider.transform.parent.gameObject.SetActive(true);
+            RectTransform rectTransform = UI.GetComponent<RectTransform>();
+            Vector3 pokemonSize = GetComponentInChildren<Renderer>().bounds.size;
+
+            rectTransform.anchoredPosition3D = new Vector3(0, (pokemonSize.y + 0.08f), (pokemonSize.z * 0.5f));
+
+            StartCoroutine(StartAnim_co());
+
             pokemon_lv.text = "Lv." + pokemonStats.Level;
             pokemon_name.text = pokemonStats.Name;
         }
 
+    }
 
+    public IEnumerator StartAnim_co()
+    {
+        anim.SetTrigger("Roar");
 
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("roar01") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
 
+        UI.SetActive(true);
     }
 
     void Start()
@@ -72,7 +92,7 @@ public class PokemonBattleMode : MonoBehaviour
     {
         if (isWild)
         {
-            pokemon_slider.transform.parent.gameObject.SetActive(false);
+            UI.SetActive(false);
         }
     }
 
