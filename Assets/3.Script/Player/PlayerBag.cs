@@ -12,31 +12,22 @@ public class PlayerBag : MonoBehaviour
     public ItemData[] Itemdata;
     public ItemData ball;
 
-    private void Awake()
+
+    void Start()
     {
         Itemdata = Resources.LoadAll<ItemData>("Item");
 
         //필드에 플레이어 포켓몬 생성
         PlayerInfo_Road();
-    }
 
-
-    void Start()
-    {
         BattleManager.instance.Battle_Ready.AddListener(PlayerPokemon_Battle_go);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
 
     //포켓몬 추가
     public void AddPokemon(GameObject pokemon)
     {
-
+        Debug.Log("플레이어포켓몬 생성");
         for (int i = 0; i < PlayerPokemon.Count; i++)
         {
 

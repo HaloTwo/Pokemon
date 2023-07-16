@@ -51,7 +51,7 @@ public class BattleManager : MonoBehaviour
     [SerializeField] private float Damage = 0;
 
     [Header("서로의 거리")]
-    [SerializeField] private float distance = 3f;
+    [SerializeField] private float distance = 1f;
     private GameObject betweenObject;
 
     [Header("카메라")]
@@ -309,7 +309,6 @@ public class BattleManager : MonoBehaviour
 
             while (true)
             {
-                Debug.Log("시작");
                 //============================================================== UI에서 행동선택 ==============================================================================
 
                 playerskillnum = -1;
@@ -619,7 +618,7 @@ public class BattleManager : MonoBehaviour
 
                     // 추가적인 처리를 수행
                     uIManger.UI_Change();
-                    uIManger.beforeIndex = 0;
+                    uIManger.beforeIndex = 0;                          
                 }
                 else
                 {
@@ -1032,7 +1031,8 @@ public class BattleManager : MonoBehaviour
         {
             Damage = ((attacker.SpAttack * AttackerSpAttackRank) * skill.Damage * (attacker.Level * 2 / 5 + 2) / (target.SpDefence * TargetSpDefenceRank) / 50 + 2) * PropertyRank * DamageRank;
         }
-        if (Damage <= 0)
+
+        if (Damage <= 0 && skill.AttackType == SkillData.attackType.None)
         {
             Damage = 1;
         }

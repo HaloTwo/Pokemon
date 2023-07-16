@@ -28,6 +28,7 @@ public class UIManger : MonoBehaviour
     [Header("메인메뉴 UI")]
     [Space(50f)]
     [SerializeField] private GameObject Main_UI;
+    [SerializeField] private GameObject MainUI_Default_UI;
     [HideInInspector] public bool main_bool;
 
     [Header("교체 가능한 포켓몬UI")]
@@ -133,6 +134,8 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Text Item_name;
     [SerializeField] private Text Item_explanation;
     [SerializeField] private ScrollRect scrollRect;
+    [SerializeField] private int Item_index;
+    [SerializeField] private bool pokemon_choise;
 
 
 
@@ -175,9 +178,13 @@ public class UIManger : MonoBehaviour
 
             //현재 플레이어 포켓몬 볼 이미지로 체크
             Current_Playerpokemon_Check(playerpokemon);
-
+             
             //현재 UI의 버튼 
-            if (UI_stack.Peek() == Bag_UI)
+            if (pokemon_choise)
+            {
+                currentbuttons = UI_stack.Peek().transform.GetChild(2).GetComponentsInChildren<Button>();
+            }
+            else if (UI_stack.Peek() == Bag_UI)
             {
                 currentbuttons = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>();
             }
@@ -221,7 +228,8 @@ public class UIManger : MonoBehaviour
                 Main_UI.SetActive(true);
                 currentIndex = 0;
                 UI_stack = new Stack<GameObject>();
-                UI_stack.Push(Main_UI);
+                UI_stack.Push(MainUI_Default_UI);
+                mainUI_Item = new GameObject[playerBag.Itemdata.Length];
             }
             else if (Main_UI.activeSelf)
             {
@@ -231,6 +239,7 @@ public class UIManger : MonoBehaviour
                 //    Reset_UI();
 
                 //}
+
 
                 MainUI_pokemon();
 
@@ -248,9 +257,10 @@ public class UIManger : MonoBehaviour
                 //위 아래로 이동 가능
                 MainButton_Move(buttons);
 
+
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
-                    if (UI_stack.Peek() == Main_UI)
+                    if (UI_stack.Peek() == MainUI_Default_UI)
                     {
                         UI_stack = new Stack<GameObject>();
                         Main_UI.SetActive(false);
@@ -376,13 +386,13 @@ public class UIManger : MonoBehaviour
                 if (currentIndex < 0)
                 {
                     currentIndex = buttons.Length - 1;
-                    Scroll(-10f);
+                    Scroll(scrollRect, -10f);
                 }
 
 
-                if (currentIndex <= 6)
+                if (currentIndex <= 1)
                 {
-                    Scroll(0.17f);
+                    Scroll(scrollRect, 0.35f);
                 }
 
             }
@@ -392,14 +402,14 @@ public class UIManger : MonoBehaviour
                 if (currentIndex >= buttons.Length)
                 {
                     currentIndex = 0;
-                    Scroll(10f);
+                    Scroll(scrollRect, 10f);
                 }
 
 
                 // 현재 currentIndex가 10보다 크면 스크롤을 아래로 이동
                 if (currentIndex >= 10)
                 {
-                    Scroll(-0.17f);
+                    Scroll(scrollRect, -0.35f);
                 }
 
 
@@ -431,28 +441,29 @@ public class UIManger : MonoBehaviour
     void MainButton_Move(Button[] buttons)
     {
 
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+        //메인 일 때
+        if (UI_stack.Peek() == MainUI_Default_UI)
         {
-            currentIndex--;
-            if (currentIndex < 0)
-            {
-                currentIndex = buttons.Length - 1;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.DownArrow))
-        {
-            currentIndex++;
-            if (currentIndex >= buttons.Length)
-            {
-                currentIndex = 0;
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            if (UI_stack.Peek() == Main_UI)
-            {
-                int subtractnum = UI_stack.Peek().transform.GetChild(0).GetComponentsInChildren<Button>().Length;
+            int subtractnum = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>().Length;
 
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                currentIndex--;
+                if (currentIndex < 0)
+                {
+                    currentIndex = buttons.Length - 1;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentIndex++;
+                if (currentIndex >= buttons.Length)
+                {
+                    currentIndex = 0;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
 
                 if (currentIndex < subtractnum)
                 {
@@ -462,7 +473,6 @@ public class UIManger : MonoBehaviour
                     {
                         currentIndex = buttons.Length - 1;
                     }
-
                 }
                 else if (currentIndex >= subtractnum)
                 {
@@ -473,117 +483,197 @@ public class UIManger : MonoBehaviour
                         currentIndex = buttons.Length - 1;
                     }
                 }
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+
+                if (currentIndex < subtractnum)
+                {
+                    currentIndex += subtractnum;
+
+                    if (currentIndex >= buttons.Length)
+                    {
+                        currentIndex = buttons.Length - 1;
+                    }
+                }
+                else if (currentIndex >= subtractnum)
+                {
+                    currentIndex -= subtractnum;
+
+                    if (currentIndex >= buttons.Length)
+                    {
+                        currentIndex = buttons.Length - 1;
+                    }
+                }
+            }
+        }
+
+        //가방 일 때
+        else if (UI_stack.Peek() == mainUI_Bag_UI)
+        {
+            //체크
+            mainUI_Item_name.text = playerBag.Itemdata[currentIndex].Name;
+            mainUI_Item_explanation.text = playerBag.Itemdata[currentIndex].Explanation;
+
+
+            buttons = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>();
+
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                currentIndex--;
+                if (currentIndex < 0)
+                {
+                    currentIndex = buttons.Length - 1;
+                    Scroll(mainUI_scrollRect, -10f);
+                }
+
+
+                if (currentIndex <= 1)
+                {
+                    Scroll(mainUI_scrollRect, 0.35f);
+                }
+
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentIndex++;
+                if (currentIndex >= buttons.Length)
+                {
+                    currentIndex = 0;
+                    Scroll(mainUI_scrollRect, 10f);
+                }
+
+
+                // 현재 currentIndex가 10보다 크면 스크롤을 아래로 이동
+                if (currentIndex >= 10)
+                {
+                    Scroll(mainUI_scrollRect, -0.35f);
+                }
 
 
             }
-            else if (UI_stack.Peek() == Box_UI)
+        }
+
+        //박스 일 때
+        else if (UI_stack.Peek() == Box_UI)
+        {
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                currentIndex--;
+                if (currentIndex < 0)
+                {
+                    currentIndex = buttons.Length - 1;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentIndex++;
+                if (currentIndex >= buttons.Length)
+                {
+                    currentIndex = 0;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
                 int pokemonNum = 6;
                 int boxNum = 5;
+
 
                 if (currentIndex < pokemonNum)
                 {
-                    currentIndex -= boxNum;
-
-                    if (currentIndex < 0)
+                    if (currentIndex == 5)
+                    {
+                        currentIndex += 30;
+                    }
+                    else
                     {
                         currentIndex += 31;
+
                     }
                 }
-                else if (currentIndex >= pokemonNum)
-                {
-                    if (currentIndex > 10)
-                    {
-                        currentIndex -= boxNum;
-                    }
-                    else
-                    {
-                        currentIndex -= pokemonNum;
-
-                    }
-
-                    if (currentIndex > buttons.Length)
-                    {
-                        currentIndex = buttons.Length - 6;
-                    }
-
-                }
-            }
-
-        }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            if (UI_stack.Peek() == Main_UI)
-            {
-                int subtractnum = UI_stack.Peek().transform.GetChild(0).GetComponentsInChildren<Button>().Length;
-
-                if (currentIndex < subtractnum)
-                {
-                    currentIndex += subtractnum;
-
-                    if (currentIndex >= buttons.Length)
-                    {
-                        currentIndex = buttons.Length - 1;
-                    }
-                }
-                else if (currentIndex >= subtractnum)
-                {
-                    currentIndex -= subtractnum;
-
-                    if (currentIndex >= buttons.Length)
-                    {
-                        currentIndex = buttons.Length - 1;
-                    }
-                }
-            }
-            else if (UI_stack.Peek() == Box_UI)
-            {
-                int pokemonNum = 6;
-                int boxNum = 5;
-
-                if (currentIndex < buttons.Length)
-                {
-
-                    if (currentIndex >= pokemonNum)
-                    {
-                        currentIndex += boxNum;
-                    }
-                    else
-                    {
-                        currentIndex += pokemonNum;
-                    }
-
-                    if (currentIndex < pokemonNum)
-                    {
-                        currentIndex += pokemonNum;
-                    }
-
-                    if (currentIndex >= buttons.Length)
-                    {
-                        currentIndex -= 31;
-                    }
-                }
-
-
-
-                else if (currentIndex >= pokemonNum)
+                else if (currentIndex >= 6 && currentIndex <= 10)
                 {
                     currentIndex -= pokemonNum;
+                }
+                else if (currentIndex >= pokemonNum)
+                {
+                    currentIndex -= boxNum;
+                }
+                else
+                {
+                    currentIndex = 0;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            {
+                //포켓몬 세로 숫자
+                int pokemonNum = 6;
 
-                    if (currentIndex > 36)
+                //박스의 세로 숫자
+                int boxNum = 5;
+
+                //총 갯수는 36개인데
+                //6이 넘으면 +5
+
+                if (currentIndex > 30 && currentIndex <= 36)
+                {
+                    currentIndex -= 31;
+                }
+                else if (currentIndex < pokemonNum)
+                {
+                    if (currentIndex == 5)
                     {
-                        currentIndex -= 31;
+                        currentIndex += 10;
                     }
-   
+                    else
+                    {
+                        currentIndex += pokemonNum;
+
+                    }
+                }
+                else if (currentIndex >= pokemonNum)
+                {
+                    currentIndex += boxNum;
                 }
 
 
+                //if (currentIndex < buttons.Length)
+                //{
 
+                //    if (currentIndex >= pokemonNum)
+                //    {
+                //        currentIndex += boxNum;
+                //    }
+                //    else
+                //    {
+                //        currentIndex += pokemonNum;
+                //    }
 
+                //    if (currentIndex < pokemonNum)
+                //    {
+                //        currentIndex += pokemonNum;
+                //    }
+
+                //    if (currentIndex >= buttons.Length)
+                //    {
+                //        currentIndex -= 31;
+                //    }
+                //}
+
+                //else if (currentIndex >= pokemonNum)
+                //{
+                //    currentIndex -= pokemonNum;
+
+                //    if (currentIndex > 36)
+                //    {
+                //        currentIndex -= 31;
+                //    }
+
+                //}
             }
-
-
         }
+      
     }
 
     void OnButtonSelected(Button selectedButton, RectTransform selectimg)
@@ -615,7 +705,7 @@ public class UIManger : MonoBehaviour
         while (true)
         {
             //이동하면 코루틴 종료
-            if (startPosition.y != selectimg.position.y)
+            if (startPosition.y != selectimg.position.y || (selectimg.position.x < startX || selectimg.position.x > endX))
             {
                 yield break;
             }
@@ -841,10 +931,10 @@ public class UIManger : MonoBehaviour
 
     }
 
-    #endregion 
+    #endregion
 
     //배틀UI 터치 이벤트
-    #region 온 클릭 이벤트
+    #region 배틀 온 클릭 이벤트
 
 
     //전투로 이동 , 스킬 사용창
@@ -929,6 +1019,7 @@ public class UIManger : MonoBehaviour
         {
             Menu_UI.SetActive(false);
             Change_UI.SetActive(false);
+            selectImage_battle.gameObject.SetActive(false);
 
             BattleManager.instance.player_pokemon_change = true;
         }
@@ -1029,16 +1120,50 @@ public class UIManger : MonoBehaviour
     //아이템 사용
     public void UI_Use_Item()
     {
+        pokemon_choise = true;
+        Item_index = beforeIndex;
+        beforeIndex = 0;
+
+        GameObject topUI = UI_stack.Peek();
+        topUI.SetActive(false);
+        UI_stack.Pop();
+
+        GameObject nextUI = UI_stack.Peek();
+        nextUI.SetActive(true);
+
         //아이템 사용
-        BattleManager.instance.player_using_Item = true;
+        //BattleManager.instance.player_using_Item = true;
 
-        playerpokemon.Hp += playerBag.Itemdata[beforeIndex].HealingHp;
+        //playerpokemon.Hp += playerBag.Itemdata[beforeIndex].HealingHp;
 
+        //Reset_BattleUI();
+
+        //HP_UI.SetActive(true);
+        //Default_UI.SetActive(false);
+        //selectImage_battle.gameObject.SetActive(false);
+    }
+
+    public void UI_Use_Pokemon() 
+    {
+        //아이템 사용
+        PokemonStats choise_pokemon = playerBag.PlayerPokemon[currentIndex].GetComponent<PokemonStats>();
+
+
+        Debug.Log("체력: " + choise_pokemon.Hp +"체력회복" + playerBag.Itemdata[Item_index].HealingHp);
+        choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
+        choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+
+
+        Debug.Log("체력 회복 한 후체력: " + choise_pokemon.Hp);
         Reset_BattleUI();
 
         HP_UI.SetActive(true);
         Default_UI.SetActive(false);
         selectImage_battle.gameObject.SetActive(false);
+        pokemon_choise = false;
+
+        
+        BattleManager.instance.player_using_Item = true;
     }
 
 
@@ -1079,15 +1204,14 @@ public class UIManger : MonoBehaviour
     {
         currentIndex = beforeIndex;
 
-        //if (UI_stack.Peek() == Bag_UI || mainUI_Bag_UI)
-        //{
-        //    currentIndex = 2;
-        //}
-
-        if (UI_stack.Peek() == Change_UI)
+        if (UI_stack.Peek() == Bag_UI)
+        {
+            currentIndex = 2;
+        }else if (UI_stack.Peek() == Change_UI)
         {
             currentIndex = 1;
         }
+
 
         if (!HP_UI.activeSelf && Battle_UI.activeSelf && !Change_UI.activeSelf)
         {
@@ -1098,6 +1222,16 @@ public class UIManger : MonoBehaviour
         GameObject topUI = UI_stack.Peek();
         topUI.SetActive(false);
         UI_stack.Pop();
+
+        if (UI_stack.Peek() == mainUI_Bag_UI)
+        {
+            currentIndex = buttons.Length - 4;
+        }
+        else if (UI_stack.Peek() == Box_UI)
+        {
+            currentIndex = buttons.Length - 3;
+        }
+
 
         GameObject nextUI = UI_stack.Peek();
         nextUI.SetActive(true);
@@ -1144,6 +1278,13 @@ public class UIManger : MonoBehaviour
     //아이템 메뉴
     public void MainUI_Bag()
     {
+
+        if (Main_UI.activeSelf)
+        {
+            MainUI_Default_UI.SetActive(false);
+            mainUI_Bag_UI.SetActive(true);
+        }
+
 
         for (int i = 0; i < playerBag.Itemdata.Length; i++)
         {
@@ -1193,12 +1334,12 @@ public class UIManger : MonoBehaviour
             // 포켓몬이 있는 슬롯일 경우
             PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
-            bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
+            mainUI_bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
             //bag_pokemon_img[i].color = Color.white;
-            bag_pokemon_img[i].sprite = pokemon.image;
-            bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
+            mainUI_bag_pokemon_img[i].sprite = pokemon.image;
+            mainUI_bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
 
-            Hpbar_Color(bag_pokemon_hPbar[i]);
+            Hpbar_Color(mainUI_bag_pokemon_hPbar[i]);
 
         }
     }
@@ -1326,7 +1467,7 @@ public class UIManger : MonoBehaviour
 
 
     //가방에서 스크롤
-    void Scroll(float offset)
+    void Scroll(ScrollRect scrollRect, float offset)
     {
         float scrollbarSize = scrollRect.verticalScrollbar.size;
 

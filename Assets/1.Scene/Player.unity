@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.77233493, g: 0.9110178, b: 0.9959777, a: 1}
+  m_IndirectSpecularColor: {r: 0.772576, g: 0.9110399, b: 0.996044, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6162,7 +6162,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 732048389}
+        m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
+        m_MethodName: UI_Use_Pokemon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &318401751
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7587,7 +7599,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 389213982}
-  m_LocalRotation: {x: 0.14521314, y: 8.619646e-15, z: -9.284736e-16, w: 0.98940045}
+  m_LocalRotation: {x: 0.14521314, y: 1.6271901e-15, z: -2.6894993e-16, w: 0.98940045}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -10946,7 +10958,7 @@ RectTransform:
   - {fileID: 1694989699}
   - {fileID: 2053605998}
   m_Father: {fileID: 1530458150}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -11059,7 +11071,7 @@ RectTransform:
   - {fileID: 1229169129}
   - {fileID: 1445465972}
   m_Father: {fileID: 1530458150}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -12551,7 +12563,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 656755661}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 32.43, z: 57.03}
+  m_LocalPosition: {x: -10.8, y: 32.43, z: 57.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 389213984}
@@ -13194,7 +13206,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 18
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &705603122
 GameObject:
@@ -13549,7 +13561,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 732048389}
+        m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
+        m_MethodName: UI_Use_Pokemon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &710563634
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -13632,6 +13656,7 @@ MonoBehaviour:
   beforeIndex: 0
   buttons: []
   Main_UI: {fileID: 1530458145}
+  MainUI_Default_UI: {fileID: 1594220654}
   main_bool: 0
   mainUI_pokemon_name_txt:
   - {fileID: 585002733}
@@ -13868,6 +13893,8 @@ MonoBehaviour:
   Item_name: {fileID: 1859045944}
   Item_explanation: {fileID: 82970431}
   scrollRect: {fileID: 2010780195}
+  Item_index: 0
+  pokemon_choise: 0
 --- !u!4 &732048390
 Transform:
   m_ObjectHideFlags: 0
@@ -13882,7 +13909,7 @@ Transform:
   - {fileID: 109046586}
   - {fileID: 1530458150}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &735054050
 GameObject:
@@ -14239,7 +14266,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5432600578461204553, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5432600578461204553, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14724,7 +14751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 214742064415424273, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 214742064415424273, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -15547,7 +15574,7 @@ MonoBehaviour:
   TargetSpeedRank: 1
   TargetHitrateRank: 1
   Damage: 0
-  distance: 8
+  distance: 6
   virtualCamera: {fileID: 741681392}
   PlayerCamera: {fileID: 656755662}
   playerPokemon: {fileID: 0}
@@ -15583,7 +15610,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &814742949
 GameObject:
@@ -15746,7 +15773,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 732048389}
+        m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
+        m_MethodName: UI_Use_Pokemon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &816480807
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -16289,7 +16328,7 @@ PrefabInstance:
       objectReference: {fileID: 2145567018}
     - target: {fileID: 6335459958937819158, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6335459958937819158, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18278,7 +18317,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.18910754, y: -0.000000008447957, z: 0.0000000016269279, w: 0.9819564}
-  m_LocalPosition: {x: 0, y: 32.43, z: 57.03}
+  m_LocalPosition: {x: -10.8, y: 32.43, z: 57.03}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1421823765}
@@ -18404,8 +18443,8 @@ RectTransform:
   - {fileID: 435544050}
   - {fileID: 532972262}
   - {fileID: 1231155427}
-  m_Father: {fileID: 1530458150}
-  m_RootOrder: 0
+  m_Father: {fileID: 1594220655}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20205,7 +20244,7 @@ RectTransform:
   - {fileID: 1552061498}
   - {fileID: 2074279010}
   m_Father: {fileID: 1594220655}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -20256,9 +20295,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 732048389}
         m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
-        m_MethodName: UI_Fight
+        m_MethodName: MainUI_GameExit
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -22887,7 +22926,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 458874142776712124, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 458874142776712124, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -24878,7 +24917,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1530458150}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -26223,7 +26262,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389917396}
-  m_LocalRotation: {x: 0.004057381, y: 0.0000000027240243, z: -1.1052497e-11, w: 0.9999918}
+  m_LocalRotation: {x: 0.0040573976, y: -0.00000001014044, z: 4.1144133e-11, w: 0.9999918}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -26339,7 +26378,7 @@ RectTransform:
   m_Children:
   - {fileID: 1753704127}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -27322,7 +27361,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 732048389}
+        m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
+        m_MethodName: UI_Use_Pokemon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1419786084
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -27612,7 +27663,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 732048389}
+        m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
+        m_MethodName: UI_Use_Pokemon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1434959457
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28265,7 +28328,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 0}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 732048389}
+        m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
+        m_MethodName: UI_Use_Pokemon
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!222 &1465242057
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29163,7 +29238,7 @@ RectTransform:
   - {fileID: 231546631}
   - {fileID: 505760295}
   m_Father: {fileID: 1594220655}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -29841,7 +29916,6 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 963706978}
   - {fileID: 1594220655}
   - {fileID: 572118457}
   - {fileID: 575213966}
@@ -30250,7 +30324,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4696151807034765100, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_RootOrder
-      value: 13
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4696151807034765100, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -31235,25 +31309,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1576963556}
   m_CullTransparentMesh: 1
---- !u!1 &1581041283 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5870683151400662058, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
-  m_PrefabInstance: {fileID: 749251434}
-  m_PrefabAsset: {fileID: 0}
---- !u!64 &1581041286
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581041283}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4645716279655361466, guid: 50dce995625b234408669f96b3c37fd3, type: 3}
 --- !u!1 &1584111642
 GameObject:
   m_ObjectHideFlags: 0
@@ -31326,7 +31381,7 @@ RectTransform:
   - {fileID: 998796709}
   - {fileID: 258161853}
   m_Father: {fileID: 1594220655}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -31687,12 +31742,13 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 362231025}
+  - {fileID: 963706978}
   - {fileID: 1694811817}
   - {fileID: 1496373716}
   - {fileID: 1585903448}
   - {fileID: 1076711145}
   m_Father: {fileID: 1530458150}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -33100,7 +33156,7 @@ RectTransform:
   - {fileID: 388761071}
   - {fileID: 240693518}
   m_Father: {fileID: 1594220655}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -33925,7 +33981,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501935376399188176, guid: 8a38d0fd0fb455943aae07f8f7554bc5, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7501935376399188176, guid: 8a38d0fd0fb455943aae07f8f7554bc5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -37468,7 +37524,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1873103359
 GameObject:
@@ -38881,7 +38937,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5842592526504614062, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5842592526504614062, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42129,7 +42185,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2135342466022398560, guid: 00c9a30fcc0ddab45a5c53d3c8f187b1, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2135342466022398560, guid: 00c9a30fcc0ddab45a5c53d3c8f187b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -42801,7 +42857,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2702692607490369642, guid: 7be13177c0351614aa01c35beaab009e, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 2702692607490369642, guid: 7be13177c0351614aa01c35beaab009e, type: 3}
       propertyPath: m_LocalScale.x
@@ -43037,11 +43093,11 @@ PrefabInstance:
       objectReference: {fileID: 963194225}
     - target: {fileID: 2887830627955496487, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 2887830627955496487, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.8
       objectReference: {fileID: 0}
     - target: {fileID: 2887830627955496487, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: m_LocalPosition.y
@@ -43537,7 +43593,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6799867245836612589
 MonoBehaviour:

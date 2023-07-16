@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class DataManager : MonoBehaviour
 {
     PokemonStats pokemonStats;
@@ -9,8 +10,10 @@ public class DataManager : MonoBehaviour
     public GameObject[] pokemon;
     [SerializeField] SkillData[] PokemonSkill;
     [SerializeField] Sprite[] pokemonImage;
+
     private void Awake()
     {
+
         pokemonStats = FindObjectOfType<PokemonStats>();
         pokemonData = pokemonStats.GetPokemonArray();
 
@@ -42,9 +45,6 @@ public class DataManager : MonoBehaviour
             {
                 pokemon[i].GetComponent<PokemonStats>().SkillPP[k] = pokemon[i].GetComponent<PokemonStats>().skills[k].MaxPP;
             }
-
-
-
 
             pokemon[i].GetComponent<PokemonStats>().ClearSkill();
             pokemon[i].GetComponent<PokemonStats>().AddSkill(PokemonSkill[pokemonData[i].Skill1]);

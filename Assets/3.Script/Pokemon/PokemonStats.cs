@@ -23,6 +23,10 @@ public class PokemonStats : MonoBehaviour
             {
                 hp = value;
             }
+            else if (value <= MaxHp) 
+            {
+                hp = MaxHp;
+            }
         }
     }
 

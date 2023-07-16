@@ -23,12 +23,10 @@ public class PokemonBattleMode : MonoBehaviour
         TryGetComponent(out anim);
 
 
-
         UI = transform.Find("UI").gameObject;
         pokemon_slider = UI.GetComponentInChildren<Slider>();
         pokemon_name = UI.transform.GetChild(0).gameObject.GetComponent<Text>();
         pokemon_lv = UI.transform.GetChild(2).gameObject.GetComponentInChildren<Text>();
-
         UI.SetActive(false);
     }
 
