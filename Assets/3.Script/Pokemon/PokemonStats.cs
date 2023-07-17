@@ -19,14 +19,15 @@ public class PokemonStats : MonoBehaviour
                 isDie = true;
                 pokemonBattle.OnDie();
             }
-            else if (value > 0 && value <= MaxHp)
-            {
-                hp = value;
-            }
-            else if (value <= MaxHp) 
+            else if (value >= MaxHp)
             {
                 hp = MaxHp;
             }
+            else
+            {
+                hp = value;
+            }
+            
         }
     }
 

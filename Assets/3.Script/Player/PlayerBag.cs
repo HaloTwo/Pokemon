@@ -136,26 +136,36 @@ public class PlayerBag : MonoBehaviour
 
         for (int i = 0; i < playerPokemonData.inBox_Mypokemon_name.Length; i++)
         {
-            //아니면 데이터에 있는 몬스터중에서 같은 이름을 찾아서 추가한다.
-            for (int j = 0; j < dataManager.pokemon.Length; j++)
+            //우선 원본파일 이름을 찾는다.
+            string inbox_pokemon_name = playerPokemonData.inBox_Mypokemon_name[i];
+            //이름이 빈공백이면 빈공간을 추가한다.
+            if (inbox_pokemon_name == "")
             {
-                //우선 원본파일 이름을 찾는다.
-                string inbox_pokemon_name = playerPokemonData.inBox_Mypokemon_name[i];
-
-                if (inbox_pokemon_name.Contains(dataManager.pokemon[j].name))
+                //PlayerPokemon[i] = null;
+                Debug.Log("빈공간이오");
+                PokemonBox.Add(null);
+            }
+            else
+            {
+                //아니면 데이터에 있는 몬스터중에서 같은 이름을 찾아서 추가한다.
+                for (int j = 0; j < dataManager.pokemon.Length; j++)
                 {
-                    GameObject inbox_pokemon = dataManager.pokemon[j];
-                    PokemonStats mypokemonstates = inbox_pokemon.GetComponent<PokemonStats>();
-                    inbox_pokemon.GetComponent<PokemonMove>().enabled = false;
 
-                    mypokemonstates.PlayerOwned = true;
-                    mypokemonstates.Level = playerPokemonData.inBox_Mypokemon_level[i];
+                    if (inbox_pokemon_name.Contains(dataManager.pokemon[j].name))
+                    {
+                        GameObject inbox_pokemon = dataManager.pokemon[j];
+                        PokemonStats mypokemonstates = inbox_pokemon.GetComponent<PokemonStats>();
+                        inbox_pokemon.GetComponent<PokemonMove>().enabled = false;
 
-                    mypokemonstates.LevelUp();
-                    mypokemonstates.Name = playerPokemonData.inBox_Mypokemon_korean_name[i];
-                    mypokemonstates.Hp = playerPokemonData.inBox_Mypokemon_currenthp[i];
+                        mypokemonstates.PlayerOwned = true;
+                        mypokemonstates.Level = playerPokemonData.inBox_Mypokemon_level[i];
 
-                    PokemonBox.Add(inbox_pokemon);
+                        mypokemonstates.LevelUp();
+                        mypokemonstates.Name = playerPokemonData.inBox_Mypokemon_korean_name[i];
+                        mypokemonstates.Hp = playerPokemonData.inBox_Mypokemon_currenthp[i];
+
+                        PokemonBox.Add(inbox_pokemon);
+                    }
                 }
             }
         }
@@ -202,12 +212,22 @@ public class PlayerBag : MonoBehaviour
         //포켓몬 박스에 있는 데이터 저장
         for (int i = 0; i < PokemonBox.Count; i++)
         {
-            PokemonStats MypokemonStats = PokemonBox[i].GetComponent<PokemonStats>();
+            if (PokemonBox[i] == null)
+            {
+                playerData.inBox_Mypokemon_name[i] = null;
+                playerData.inBox_Mypokemon_korean_name[i] = null;
+                playerData.inBox_Mypokemon_level[i] = 0;
+                playerData.inBox_Mypokemon_currenthp[i] = 0;
+            }
+            else
+            {
+                PokemonStats MypokemonStats = PokemonBox[i].GetComponent<PokemonStats>();
 
-            playerData.inBox_Mypokemon_name[i] = MypokemonStats.name;
-            playerData.inBox_Mypokemon_korean_name[i] = MypokemonStats.Name;
-            playerData.inBox_Mypokemon_level[i] = MypokemonStats.Level;
-            playerData.inBox_Mypokemon_currenthp[i] = MypokemonStats.Hp;
+                playerData.inBox_Mypokemon_name[i] = MypokemonStats.name;
+                playerData.inBox_Mypokemon_korean_name[i] = MypokemonStats.Name;
+                playerData.inBox_Mypokemon_level[i] = MypokemonStats.Level;
+                playerData.inBox_Mypokemon_currenthp[i] = MypokemonStats.Hp;
+            }
         }
 
 

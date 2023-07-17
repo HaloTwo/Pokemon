@@ -20,6 +20,8 @@ public class UIManger : MonoBehaviour
     [SerializeField] private PokemonStats playerpokemon;
     public int currentIndex;
     public int beforeIndex;
+    [SerializeField] private int Item_index;
+    [SerializeField] private int pokemon_index;
     [SerializeField] private Button[] buttons;
     private PlayerBag playerBag;
 
@@ -31,13 +33,14 @@ public class UIManger : MonoBehaviour
     [SerializeField] private GameObject MainUI_Default_UI;
     [HideInInspector] public bool main_bool;
 
-    [Header("교체 가능한 포켓몬UI")]
+    [Header("메인메뉴 기본 포켓몬UI")]
     [Space(20f)]
     [SerializeField] private Text[] mainUI_pokemon_name_txt;
     [SerializeField] private Text[] mainUI_change_pokemon_Lv_txt;
     [SerializeField] private Image[] mainUI_change_pokemon_img;
     [SerializeField] private Slider[] mainUI_change_pokemon_hPbar;
     [SerializeField] private Text[] mainUI_change_pokemon_hp_txt;
+    [SerializeField] private GameObject mainUI_pokemon_menu;
 
     [Header("메인메뉴 가방UI")]
     [Space(20f)]
@@ -59,6 +62,9 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Text[] BoxUI_change_pokemon_Lv_txt;
 
     [SerializeField] private Image[] BoxUI_inbox_pokemon_img;
+    [SerializeField] private GameObject Box_UI_Choise_UI;
+    [SerializeField] private GameObject choise_pokemon;
+    [SerializeField] private bool choise_pokemon_move;
 
     [Header("배틀메뉴 UI")]
     [Space(50f)]
@@ -134,7 +140,6 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Text Item_name;
     [SerializeField] private Text Item_explanation;
     [SerializeField] private ScrollRect scrollRect;
-    [SerializeField] private int Item_index;
     [SerializeField] private bool pokemon_choise;
 
 
@@ -148,9 +153,7 @@ public class UIManger : MonoBehaviour
 
     private void Update()
     {
-
         Button[] currentbuttons;
-
 
         #region 배틀UI
         if (Battle_UI.activeSelf)
@@ -175,11 +178,11 @@ public class UIManger : MonoBehaviour
             //현재 플레이어 포켓몬의 상태 확인와 현재 UI 버튼 객수 상태 확인
             playerpokemon = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
 
-
             //현재 플레이어 포켓몬 볼 이미지로 체크
             Current_Playerpokemon_Check(playerpokemon);
-             
+
             //현재 UI의 버튼 
+
             if (pokemon_choise)
             {
                 currentbuttons = UI_stack.Peek().transform.GetChild(2).GetComponentsInChildren<Button>();
@@ -193,7 +196,6 @@ public class UIManger : MonoBehaviour
                 currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
             }
 
-
             //현재 스택에 있는 UI의 버튼들을 선택가능
             buttons = currentbuttons;
             buttons[currentIndex].Select();
@@ -203,14 +205,13 @@ public class UIManger : MonoBehaviour
             OnButtonSelected(buttons[currentIndex], selectImage_battle);
 
             //위 아래로 이동 가능
-            BattleButton_Move();
+            BattleButton_Move(buttons);
 
             //Change_UI, Bag_UI일때, 행동들
             UI_Page(currentbuttons);
 
             //포켓몬 볼 UI 들어가기
             BallUI_Input();
-
 
             if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI && !playerpokemon.isDie)
             {
@@ -220,6 +221,7 @@ public class UIManger : MonoBehaviour
             }
         }
         #endregion
+        #region 메인UI
         else
         {
 
@@ -244,7 +246,19 @@ public class UIManger : MonoBehaviour
                 MainUI_pokemon();
 
 
-                currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
+                if (pokemon_choise)
+                {
+                    currentbuttons = UI_stack.Peek().transform.GetChild(2).GetComponentsInChildren<Button>();
+                }
+                else if (UI_stack.Peek() == mainUI_Bag_UI)
+                {
+                    currentbuttons = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>();
+                }
+                else
+                {
+                    currentbuttons = UI_stack.Peek().GetComponentsInChildren<Button>();
+                }
+
 
                 //현재 스택에 있는 UI의 버튼들을 선택가능
                 buttons = currentbuttons;
@@ -257,22 +271,22 @@ public class UIManger : MonoBehaviour
                 //위 아래로 이동 가능
                 MainButton_Move(buttons);
 
-
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     if (UI_stack.Peek() == MainUI_Default_UI)
                     {
                         UI_stack = new Stack<GameObject>();
+                        choise_pokemon_move = false;
                         Main_UI.SetActive(false);
                     }
                     else
                     {
-
                         ExitButton();
                     }
                 }
             }
         }
+        #endregion
     }
 
     //실시간 체크
@@ -317,8 +331,16 @@ public class UIManger : MonoBehaviour
         }
         else if (UI_stack.Peek() == Bag_UI)
         {
-            Item_name.text = playerBag.Itemdata[currentIndex].Name;
-            Item_explanation.text = playerBag.Itemdata[currentIndex].Explanation;
+            if (pokemon_choise)
+            {
+                Item_name.text = playerBag.Itemdata[Item_index].Name;
+                Item_explanation.text = playerBag.Itemdata[Item_index].Explanation;
+            }
+            else
+            {
+                Item_name.text = playerBag.Itemdata[currentIndex].Name;
+                Item_explanation.text = playerBag.Itemdata[currentIndex].Explanation;
+            }
         }
     }
 
@@ -374,9 +396,10 @@ public class UIManger : MonoBehaviour
 
         }
     }
-    void BattleButton_Move()
-    {
 
+    //배틀UI 움직임
+    void BattleButton_Move(Button[] buttons)
+    {
         if (UI_stack.Peek() == Bag_UI)
         {
 
@@ -438,86 +461,120 @@ public class UIManger : MonoBehaviour
         }
     }
 
+    //메인UI 움직임
     void MainButton_Move(Button[] buttons)
     {
 
         //메인 일 때
         if (UI_stack.Peek() == MainUI_Default_UI)
         {
-            int subtractnum = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>().Length;
-
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            if (choise_pokemon_move)
             {
-                currentIndex--;
-                if (currentIndex < 0)
-                {
-                    currentIndex = buttons.Length - 1;
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
-            {
-                currentIndex++;
-                if (currentIndex >= buttons.Length)
-                {
-                    currentIndex = 0;
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.LeftArrow))
-            {
+                buttons = UI_stack.Peek().transform.GetChild(1).transform.GetComponentsInChildren<Button>();
 
-                if (currentIndex < subtractnum)
+                if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    currentIndex += subtractnum;
-
-                    if (currentIndex >= buttons.Length)
+                    currentIndex--;
+                    if (currentIndex < 0)
                     {
                         currentIndex = buttons.Length - 1;
                     }
                 }
-                else if (currentIndex >= subtractnum)
+                else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    currentIndex -= subtractnum;
-
+                    currentIndex++;
                     if (currentIndex >= buttons.Length)
                     {
-                        currentIndex = buttons.Length - 1;
+                        currentIndex = 0;
                     }
                 }
             }
-            else if (Input.GetKeyDown(KeyCode.RightArrow))
+            else
             {
+                Image select_pokemon_img = selectImage_main.gameObject.transform.GetChild(0).GetComponent<Image>();
+                select_pokemon_img.gameObject.SetActive(false);
 
-                if (currentIndex < subtractnum)
+
+                int subtractnum = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>().Length;
+
+                if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
-                    currentIndex += subtractnum;
-
-                    if (currentIndex >= buttons.Length)
+                    currentIndex--;
+                    if (currentIndex < 0)
                     {
                         currentIndex = buttons.Length - 1;
                     }
                 }
-                else if (currentIndex >= subtractnum)
+                else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
-                    currentIndex -= subtractnum;
-
+                    currentIndex++;
                     if (currentIndex >= buttons.Length)
                     {
-                        currentIndex = buttons.Length - 1;
+                        currentIndex = 0;
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+
+                    if (currentIndex < subtractnum)
+                    {
+                        currentIndex += subtractnum;
+
+                        if (currentIndex >= buttons.Length)
+                        {
+                            currentIndex = buttons.Length - 1;
+                        }
+                    }
+                    else if (currentIndex >= subtractnum)
+                    {
+                        currentIndex -= subtractnum;
+
+                        if (currentIndex >= buttons.Length)
+                        {
+                            currentIndex = buttons.Length - 1;
+                        }
+                    }
+                }
+                else if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+
+                    if (currentIndex < subtractnum)
+                    {
+                        currentIndex += subtractnum;
+
+                        if (currentIndex >= buttons.Length)
+                        {
+                            currentIndex = buttons.Length - 1;
+                        }
+                    }
+                    else if (currentIndex >= subtractnum)
+                    {
+                        currentIndex -= subtractnum;
+
+                        if (currentIndex >= buttons.Length)
+                        {
+                            currentIndex = buttons.Length - 1;
+                        }
                     }
                 }
             }
+
         }
 
         //가방 일 때
         else if (UI_stack.Peek() == mainUI_Bag_UI)
         {
             //체크
-            mainUI_Item_name.text = playerBag.Itemdata[currentIndex].Name;
-            mainUI_Item_explanation.text = playerBag.Itemdata[currentIndex].Explanation;
-
-
-            buttons = UI_stack.Peek().transform.GetChild(1).GetComponentsInChildren<Button>();
-
+            if (pokemon_choise)
+            {
+                mainUI_Item_name.text = playerBag.Itemdata[Item_index].Name;
+                mainUI_Item_explanation.text = playerBag.Itemdata[Item_index].Explanation;
+            }
+            else
+            {
+                mainUI_Item_name.text = playerBag.Itemdata[currentIndex].Name;
+                mainUI_Item_explanation.text = playerBag.Itemdata[currentIndex].Explanation;
+            }
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
@@ -558,6 +615,14 @@ public class UIManger : MonoBehaviour
         //박스 일 때
         else if (UI_stack.Peek() == Box_UI)
         {
+
+            if (!choise_pokemon_move)
+            {
+                Image select_pokemon_img = selectImage_main.gameObject.transform.GetChild(0).GetComponent<Image>();
+                select_pokemon_img.gameObject.SetActive(false);
+            }
+
+
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
                 currentIndex--;
@@ -624,7 +689,7 @@ public class UIManger : MonoBehaviour
                 {
                     if (currentIndex == 5)
                     {
-                        currentIndex += 10;
+                        currentIndex += 5;
                     }
                     else
                     {
@@ -636,49 +701,44 @@ public class UIManger : MonoBehaviour
                 {
                     currentIndex += boxNum;
                 }
-
-
-                //if (currentIndex < buttons.Length)
-                //{
-
-                //    if (currentIndex >= pokemonNum)
-                //    {
-                //        currentIndex += boxNum;
-                //    }
-                //    else
-                //    {
-                //        currentIndex += pokemonNum;
-                //    }
-
-                //    if (currentIndex < pokemonNum)
-                //    {
-                //        currentIndex += pokemonNum;
-                //    }
-
-                //    if (currentIndex >= buttons.Length)
-                //    {
-                //        currentIndex -= 31;
-                //    }
-                //}
-
-                //else if (currentIndex >= pokemonNum)
-                //{
-                //    currentIndex -= pokemonNum;
-
-                //    if (currentIndex > 36)
-                //    {
-                //        currentIndex -= 31;
-                //    }
-
-                //}
             }
         }
-      
+        else
+        {
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                currentIndex--;
+                if (currentIndex < 0)
+                {
+                    currentIndex = buttons.Length - 1;
+                }
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentIndex++;
+                if (currentIndex >= buttons.Length)
+                {
+                    currentIndex = 0;
+                }
+            }
+        }
+
     }
 
     void OnButtonSelected(Button selectedButton, RectTransform selectimg)
     {
-        RectTransform selectedButtonRect = selectedButton.GetComponent<RectTransform>();
+        RectTransform selectedButtonRect;
+
+        if (UI_stack.Peek() == Box_UI)
+        {
+            selectedButtonRect = selectedButton.transform.GetChild(0).GetComponent<RectTransform>();
+        }
+        else
+        {
+            selectedButtonRect = selectedButton.GetComponent<RectTransform>();
+
+        }
 
         Vector3 newPosition = selectedButtonRect.position;
         float offsetX = -(selectedButtonRect.rect.width / 2f); // 버튼의 너비의 절반만큼 왼쪽으로 이동
@@ -722,7 +782,6 @@ public class UIManger : MonoBehaviour
         }
     }
     #endregion
-
 
     //속성 찾기 메서드
     #region 속성 찾기
@@ -1029,9 +1088,6 @@ public class UIManger : MonoBehaviour
 
 
 
-
-
-
     //가방으로 이동
     public void UI_Bag()
     {
@@ -1114,7 +1170,6 @@ public class UIManger : MonoBehaviour
         Menu_Choise_UI.gameObject.transform.position = transform.position + new Vector3(300f, -80f, 0f);
 
         UI_stack.Push(Menu_Choise_UI);
-
     }
 
     //아이템 사용
@@ -1143,13 +1198,13 @@ public class UIManger : MonoBehaviour
         //selectImage_battle.gameObject.SetActive(false);
     }
 
-    public void UI_Use_Pokemon() 
+    //아이템 사용할 포켓몬 선택
+    public void UI_Use_Pokemon()
     {
         //아이템 사용
         PokemonStats choise_pokemon = playerBag.PlayerPokemon[currentIndex].GetComponent<PokemonStats>();
 
-
-        Debug.Log("체력: " + choise_pokemon.Hp +"체력회복" + playerBag.Itemdata[Item_index].HealingHp);
+        Debug.Log("체력: " + choise_pokemon.Hp + "체력회복" + playerBag.Itemdata[Item_index].HealingHp);
         choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
         choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
 
@@ -1162,10 +1217,8 @@ public class UIManger : MonoBehaviour
         selectImage_battle.gameObject.SetActive(false);
         pokemon_choise = false;
 
-        
         BattleManager.instance.player_using_Item = true;
     }
-
 
     //볼 사용
     public void UI_Use_ball()
@@ -1191,7 +1244,6 @@ public class UIManger : MonoBehaviour
 
 
 
-
     //도망가기
     public void UI_Run()
     {
@@ -1199,53 +1251,15 @@ public class UIManger : MonoBehaviour
         Battle_UI.SetActive(false);
     }
 
-    //뒤로가기
-    public void ExitButton()
-    {
-        currentIndex = beforeIndex;
-
-        if (UI_stack.Peek() == Bag_UI)
-        {
-            currentIndex = 2;
-        }else if (UI_stack.Peek() == Change_UI)
-        {
-            currentIndex = 1;
-        }
-
-
-        if (!HP_UI.activeSelf && Battle_UI.activeSelf && !Change_UI.activeSelf)
-        {
-            HP_UI.SetActive(true);
-        }
-
-
-        GameObject topUI = UI_stack.Peek();
-        topUI.SetActive(false);
-        UI_stack.Pop();
-
-        if (UI_stack.Peek() == mainUI_Bag_UI)
-        {
-            currentIndex = buttons.Length - 4;
-        }
-        else if (UI_stack.Peek() == Box_UI)
-        {
-            currentIndex = buttons.Length - 3;
-        }
-
-
-        GameObject nextUI = UI_stack.Peek();
-        nextUI.SetActive(true);
-    }
-
     #endregion
 
     //메인UI 터치 이벤트
     #region 메인 온 클릭 이벤트
 
+
     //기본 창 포켓몬
     void MainUI_pokemon()
     {
-
         for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
         {
 
@@ -1274,6 +1288,64 @@ public class UIManger : MonoBehaviour
             Hpbar_Color(mainUI_change_pokemon_hPbar[i]);
         }
     }
+
+    //포켓몬 선택
+    public void MainUI_pokemon_Choise()
+    {
+        if (choise_pokemon_move)
+        {
+            Button[] btns = UI_stack.Peek().transform.GetComponentsInChildren<Button>();
+
+            GameObject changed_pokemon_img = btns[currentIndex].gameObject.transform.GetChild(0).GetComponent<GameObject>();
+            Image select_pokemon_img = btns[pokemon_index].gameObject.transform.GetChild(0).GetComponent<Image>();
+
+
+            GameObject Obejct = playerBag.PlayerPokemon[currentIndex];
+            playerBag.PlayerPokemon[currentIndex] = playerBag.PlayerPokemon[pokemon_index];
+            playerBag.PlayerPokemon[pokemon_index] = Obejct;
+
+            choise_pokemon_move = false;
+        }
+        else
+        {
+            GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+            RectTransform transform = clickedObject.GetComponent<RectTransform>();
+
+            beforeIndex = currentIndex;
+            currentIndex = 0;
+
+            mainUI_pokemon_menu.transform.position = transform.position + new Vector3(300f, -80f, 0f);
+            mainUI_pokemon_menu.SetActive(true);
+            UI_stack.Push(mainUI_pokemon_menu);
+        }
+    }
+    public void MainUI_pokemon_Move()
+    {
+        pokemon_index = beforeIndex;
+        currentIndex = beforeIndex;
+
+        GameObject topUI = UI_stack.Peek();
+        topUI.SetActive(false);
+        UI_stack.Pop();
+
+        GameObject nextUI = UI_stack.Peek();
+        nextUI.SetActive(true);
+
+        Button[] btns = nextUI.transform.GetComponentsInChildren<Button>();
+
+        Image select_pokemon_img = selectImage_main.gameObject.transform.GetChild(0).GetComponent<Image>();
+        Image choise_pokemon_img = btns[pokemon_index].gameObject.transform.GetChild(0).GetComponent<Image>();
+
+
+        select_pokemon_img.sprite = choise_pokemon_img.sprite;
+        choise_pokemon_img.color = new Color(0, 0, 0, 0);
+        select_pokemon_img.gameObject.SetActive(true);
+
+        choise_pokemon_move = true;
+    }
+
+
+
 
     //아이템 메뉴
     public void MainUI_Bag()
@@ -1311,10 +1383,11 @@ public class UIManger : MonoBehaviour
             else
             {
                 mainUI_Item[i].SetActive(true);
+                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                mainUI_Item[i].name = "Item" + i;
             }
-
-
-
         }
 
         UI_stack.Push(mainUI_Bag_UI);
@@ -1353,10 +1426,143 @@ public class UIManger : MonoBehaviour
         beforeIndex = currentIndex;
         currentIndex = 0;
         mainUI_Menu_Choise_UI.gameObject.transform.position = transform.position + new Vector3(300f, -80f, 0f);
-
+        mainUI_Menu_Choise_UI.gameObject.SetActive(true);
         UI_stack.Push(mainUI_Menu_Choise_UI);
-
     }
+
+    public void MainUI_Use_Item()
+    {
+        pokemon_choise = true;
+        Item_index = beforeIndex;
+        beforeIndex = 0;
+
+        GameObject topUI = UI_stack.Peek();
+        topUI.SetActive(false);
+        UI_stack.Pop();
+
+        GameObject nextUI = UI_stack.Peek();
+        nextUI.SetActive(true);
+    }
+
+    public void MainUI_Use_Pokemon()
+    {
+        if (playerBag.Itemdata[Item_index].Quantity > 0)
+        {
+            //아이템 사용
+            PokemonStats choise_pokemon = playerBag.PlayerPokemon[currentIndex].GetComponent<PokemonStats>();
+
+            if (choise_pokemon.isDie)
+            {
+                if (playerBag.Itemdata[Item_index].Name.Contains("기력"))
+                {
+                    Debug.Log("체력: " + choise_pokemon.Hp + "체력회복" + playerBag.Itemdata[Item_index].HealingHp);
+                    choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
+                    choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+
+                    choise_pokemon.isDie = false;
+                    pokemon_choise = false;
+                    playerBag.Itemdata[Item_index].Quantity--;
+                }
+            }
+            else if (playerBag.Itemdata[Item_index].Name == "이상한 사탕")
+            {
+                choise_pokemon.Level++;
+                choise_pokemon.LevelUp();
+
+                pokemon_choise = false;
+                playerBag.Itemdata[Item_index].Quantity--;
+            }
+            else
+            {
+
+                choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
+                choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+                for (int i = 0; i < choise_pokemon.skills.Count; i++)
+                {
+                    choise_pokemon.skills[i].PP += playerBag.Itemdata[Item_index].HealingPp;
+                    choise_pokemon.skills[i].PP += (int)(choise_pokemon.skills[i].MaxPP * (playerBag.Itemdata[Item_index].HealingPpPercent * 0.01));
+                }
+
+                for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
+                {
+
+                    if (playerBag.PlayerPokemon[i] == null)
+                    {
+                        bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
+                        continue;
+                    }
+
+                    // 포켓몬이 있는 슬롯일 경우
+                    PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
+
+                    mainUI_bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
+                    mainUI_bag_pokemon_img[i].sprite = pokemon.image;
+                    mainUI_bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
+
+                    Hpbar_Color(mainUI_bag_pokemon_hPbar[i]);
+                }
+
+                pokemon_choise = false;
+                playerBag.Itemdata[Item_index].Quantity--;
+            }
+        }
+        //아이템 확인
+        for (int i = 0; i < playerBag.Itemdata.Length; i++)
+        {
+
+            if (playerBag.Itemdata[i].Quantity == 0)
+            {
+                if (mainUI_Item[i].activeSelf)
+                {
+                    mainUI_Item[i].SetActive(false);
+                }
+                continue;
+            }
+            else if (mainUI_Item[i] == null)
+            {
+                Debug.Log("아이템 생성");
+                mainUI_Item[i] = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                mainUI_Item[i].name = "Item" + i;
+
+                mainUI_Item[i].GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
+            }
+            else
+            {
+                mainUI_Item[i].SetActive(true);
+                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                mainUI_Item[i].name = "Item" + i;
+            }
+        }
+
+        //포켓몬 체력 확인
+        for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
+        {
+
+            if (playerBag.PlayerPokemon[i] == null)
+            {
+                bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
+                continue;
+            }
+
+            // 포켓몬이 있는 슬롯일 경우
+            PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
+
+            mainUI_bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
+            //bag_pokemon_img[i].color = Color.white;
+            mainUI_bag_pokemon_img[i].sprite = pokemon.image;
+            mainUI_bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
+
+            Hpbar_Color(mainUI_bag_pokemon_hPbar[i]);
+
+        }
+    }
+
+
 
     //박스 메뉴
     public void MainUI_Box()
@@ -1370,10 +1576,18 @@ public class UIManger : MonoBehaviour
 
         for (int i = 0; i < playerBag.PokemonBox.Count; i++)
         {
-            PokemonStats pokemon = playerBag.PokemonBox[i].GetComponent<PokemonStats>();
+            if (playerBag.PokemonBox[i] == null)
+            {
+                BoxUI_inbox_pokemon_img[i].color = new Color(0, 0, 0, 0);
+                //BoxUI_inbox_pokemon_img[i].sprite;
+            }
+            else
+            {
+                PokemonStats pokemon = playerBag.PokemonBox[i].GetComponent<PokemonStats>();
 
-            BoxUI_inbox_pokemon_img[i].color = Color.white;
-            BoxUI_inbox_pokemon_img[i].sprite = pokemon.image;
+                BoxUI_inbox_pokemon_img[i].color = Color.white;
+                BoxUI_inbox_pokemon_img[i].sprite = pokemon.image;
+            }
         }
 
 
@@ -1405,19 +1619,236 @@ public class UIManger : MonoBehaviour
         }
     }
 
+    public void MainUI_Box_Choise()
+    {
+
+        if (choise_pokemon_move)
+        {
+            Button[] btns = UI_stack.Peek().transform.GetComponentsInChildren<Button>();
+
+            GameObject changed_pokemon_img = btns[currentIndex].gameObject.transform.GetChild(0).GetComponent<GameObject>();
+            Image select_pokemon_img = btns[pokemon_index].gameObject.transform.GetChild(0).GetComponent<Image>();
+
+            //둘 다 박스에 있는 포켓몬 일 때,
+            if (currentIndex >= 6 && pokemon_index >= 6)
+            {
+                GameObject Obejct = playerBag.PokemonBox[currentIndex - 6];
+                playerBag.PokemonBox[currentIndex - 6] = playerBag.PokemonBox[pokemon_index - 6];
+                playerBag.PokemonBox[pokemon_index - 6] = Obejct;
+            }
+            //둘 다 가지고 있는 포켓몬 일 때,
+            else if (currentIndex < 6 && pokemon_index < 6)
+            {
+                GameObject Obejct = playerBag.PlayerPokemon[currentIndex];
+                playerBag.PlayerPokemon[currentIndex] = playerBag.PlayerPokemon[pokemon_index];
+                playerBag.PlayerPokemon[pokemon_index] = Obejct;
+            }
+            //바뀔 포켓몬은 박스에 있고, pokemon_index는 가지고 있는 포켓몬 일 때
+            else if (currentIndex >= 6 && pokemon_index < 6)
+            {
+                GameObject Obejct = playerBag.PokemonBox[currentIndex - 6];
+                playerBag.PokemonBox[currentIndex - 6] = playerBag.PlayerPokemon[pokemon_index];
+                playerBag.PlayerPokemon[pokemon_index] = Obejct;
+            }
+            //바뀔 포켓몬은 가지고 있고, pokemon_index는 박스에 있는 포켓몬 일 때
+            else if (currentIndex < 6 && pokemon_index >= 6)
+            {
+                GameObject Obejct = playerBag.PlayerPokemon[currentIndex];
+                playerBag.PlayerPokemon[currentIndex] = playerBag.PokemonBox[pokemon_index - 6];
+                playerBag.PokemonBox[pokemon_index - 6] = Obejct;
+            }
+
+
+            choise_pokemon_move = false;
+
+            for (int i = 0; i < playerBag.PokemonBox.Count; i++)
+            {
+                if (playerBag.PokemonBox[i] == null)
+                {
+                    BoxUI_inbox_pokemon_img[i].color = new Color(0, 0, 0, 0);
+                    //BoxUI_inbox_pokemon_img[i].sprite;
+                }
+                else
+                {
+                    PokemonStats pokemon = playerBag.PokemonBox[i].GetComponent<PokemonStats>();
+
+                    BoxUI_inbox_pokemon_img[i].color = Color.white;
+                    BoxUI_inbox_pokemon_img[i].sprite = pokemon.image;
+                }
+            }
+            for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
+            {
+                //꺼져있으면 다시 킴
+                if (!BoxUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.activeSelf)
+                {
+                    BoxUI_change_pokemon_Lv_txt[i].gameObject.transform.parent.gameObject.SetActive(true);
+                }
+
+                //null이면 끔
+                if (playerBag.PlayerPokemon[i] == null)
+                {
+                    for (int j = i; j < playerBag.PlayerPokemon.Count; j++)
+                    {
+                        //null이 아닌것을 발견했다면?
+                        if (playerBag.PlayerPokemon[j] != null)
+                        {
+                            PokemonStats pokemon = playerBag.PlayerPokemon[j].GetComponent<PokemonStats>();
+
+                            //가져와서 자리변경
+                            GameObject Change_pokemon = playerBag.PlayerPokemon[j];
+                            playerBag.PlayerPokemon[j] = playerBag.PlayerPokemon[i];
+                            playerBag.PlayerPokemon[i] = Change_pokemon;
+
+                            BoxUI_pokemon_name_txt[i].text = pokemon.Name;
+                            BoxUI_pokemon_img[i].color = Color.white;
+                            BoxUI_pokemon_img[i].sprite = pokemon.image;
+                            BoxUI_change_pokemon_Lv_txt[i].text = "Lv " + pokemon.Level;
+
+                            break;
+                        }
+                        else if (playerBag.PlayerPokemon[j] == null)
+                        {
+                            BoxUI_pokemon_name_txt[i].text = "";
+                            BoxUI_pokemon_img[i].color = new Color(0, 0, 0, 0);
+                            BoxUI_change_pokemon_Lv_txt[i].text = "";
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    // 포켓몬이 있는 슬롯일 경우
+                    PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
+
+                    BoxUI_pokemon_name_txt[i].text = pokemon.Name;
+                    BoxUI_pokemon_img[i].color = Color.white;
+                    BoxUI_pokemon_img[i].sprite = pokemon.image;
+                    BoxUI_change_pokemon_Lv_txt[i].text = "Lv " + pokemon.Level;
+                }
+            }
+
+        }
+        else if (currentIndex >= 6)
+        {
+            if (playerBag.PokemonBox[currentIndex - 6] == null)
+            {
+                Debug.Log(playerBag.PokemonBox[currentIndex - 6]);
+                return;
+            }
+            else
+            {
+                GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+                RectTransform transform = clickedObject.GetComponent<RectTransform>();
+
+                beforeIndex = currentIndex;
+                currentIndex = 0;
+                Box_UI_Choise_UI.gameObject.SetActive(true);
+                Box_UI_Choise_UI.gameObject.transform.position = transform.position + new Vector3(100f, -80f, 0f);
+
+                UI_stack.Push(Box_UI_Choise_UI);
+            }
+        }
+        else
+        {
+            GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+            RectTransform transform = clickedObject.GetComponent<RectTransform>();
+
+            beforeIndex = currentIndex;
+            currentIndex = 0;
+            Box_UI_Choise_UI.gameObject.SetActive(true);
+            Box_UI_Choise_UI.gameObject.transform.position = transform.position + new Vector3(100f, -80f, 0f);
+
+            UI_stack.Push(Box_UI_Choise_UI);
+        }
+    }
+
+    public void MainUI_Box_Move()
+    {
+        pokemon_index = beforeIndex;
+        currentIndex = beforeIndex;
+
+        GameObject topUI = UI_stack.Peek();
+        topUI.SetActive(false);
+        UI_stack.Pop();
+
+        GameObject nextUI = UI_stack.Peek();
+        nextUI.SetActive(true);
+
+        Button[] btns = nextUI.transform.GetComponentsInChildren<Button>();
+
+        Image select_pokemon_img = selectImage_main.gameObject.transform.GetChild(0).GetComponent<Image>();
+        Image choise_pokemon_img = btns[pokemon_index].gameObject.transform.GetChild(0).GetComponent<Image>();
+
+
+        select_pokemon_img.sprite = choise_pokemon_img.sprite;
+        choise_pokemon_img.color = new Color(0, 0, 0, 0);
+        select_pokemon_img.gameObject.SetActive(true);
+
+        choise_pokemon_move = true;
+    }
+
+
+
+    //저장
     public void MainUI_Report_Save()
     {
         playerBag.PlayerInfo_Save();
     }
 
+
+    //게임 나가기
     public void MainUI_GameExit()
     {
-        playerBag.PlayerInfo_Save();
         Application.Quit();
     }
 
     #endregion
 
+    //리셋, 나가기, 체력 확인, 스크롤
+    #region 리셋과 나가기 버튼
+
+    //나가기
+    public void ExitButton()
+    {
+        pokemon_choise = false;
+        choise_pokemon_move = false;
+        currentIndex = beforeIndex;
+
+        if (UI_stack.Peek() == Bag_UI)
+        {
+            currentIndex = 2;
+        }
+        else if (UI_stack.Peek() == Change_UI)
+        {
+            currentIndex = 1;
+        }
+        else if (UI_stack.Peek() == Box_UI)
+        {
+            currentIndex = MainUI_Default_UI.GetComponentsInChildren<Button>().Length - 3;
+        }
+
+
+        if (!HP_UI.activeSelf && Battle_UI.activeSelf && !Change_UI.activeSelf)
+        {
+            HP_UI.SetActive(true);
+        }
+
+
+        GameObject topUI = UI_stack.Peek();
+        topUI.SetActive(false);
+        UI_stack.Pop();
+
+        if (UI_stack.Peek() == mainUI_Bag_UI)
+        {
+            currentIndex = buttons.Length - 4;
+        }
+
+
+        GameObject nextUI = UI_stack.Peek();
+        nextUI.SetActive(true);
+    }
+
+    //리셋
     void Reset_UI()
     {
         UI_stack.Clear();
@@ -1428,7 +1859,6 @@ public class UIManger : MonoBehaviour
         UI_stack.Push(Main_UI);
     }
 
-    //리셋
     public void Reset_BattleUI()
     {
         Item = new GameObject[playerBag.Itemdata.Length];
@@ -1463,8 +1893,6 @@ public class UIManger : MonoBehaviour
         Change_UI.SetActive(false);
         Bag_UI.SetActive(false);
     }
-
-
 
     //가방에서 스크롤
     void Scroll(ScrollRect scrollRect, float offset)
@@ -1501,4 +1929,7 @@ public class UIManger : MonoBehaviour
             hpbar.gameObject.transform.Find("Fill Area/Fill").GetComponent<Image>().color = Color.green;
         }
     }
+    #endregion
+
+
 }
