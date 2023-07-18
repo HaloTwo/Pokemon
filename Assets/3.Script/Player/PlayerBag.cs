@@ -52,7 +52,17 @@ public class PlayerBag : MonoBehaviour
                 if (i == 5)
                 {
                     Debug.Log("자리가 없습니다. 박스로 가주세요~");
-                    PokemonBox.Add(pokemon);
+                    for (int j = 0; j < PokemonBox.Count; j++)
+                    {
+
+                        if (PokemonBox[j] == null)
+                        {
+                            PokemonBox.Add(pokemon);
+                            
+                        }
+                    }
+
+                    //수정해야됌
                 }
             }
         }
@@ -141,8 +151,6 @@ public class PlayerBag : MonoBehaviour
             //이름이 빈공백이면 빈공간을 추가한다.
             if (inbox_pokemon_name == "")
             {
-                //PlayerPokemon[i] = null;
-                Debug.Log("빈공간이오");
                 PokemonBox.Add(null);
             }
             else

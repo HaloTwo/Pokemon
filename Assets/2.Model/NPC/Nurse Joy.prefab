@@ -9951,6 +9951,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8179995954203072940}
+  - component: {fileID: 399740756}
   m_Layer: 0
   m_Name: Nurse Joy
   m_TagString: Untagged
@@ -9989,6 +9990,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!65 &399740756
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8849289969606869782}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.5224313, y: 2.708931, z: 5.15662}
+  m_Center: {x: 0.029416325, y: 0.8544655, z: -0.5589938}
 --- !u!1 &8938924035471786261
 GameObject:
   m_ObjectHideFlags: 0
