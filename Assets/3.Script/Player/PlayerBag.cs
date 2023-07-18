@@ -49,7 +49,7 @@ public class PlayerBag : MonoBehaviour
             }
             else
             {
-                if (i == 5)
+                if (i <= 5)
                 {
                     Debug.Log("자리가 없습니다. 박스로 가주세요~");
                     for (int j = 0; j < PokemonBox.Count; j++)
@@ -57,8 +57,13 @@ public class PlayerBag : MonoBehaviour
 
                         if (PokemonBox[j] == null)
                         {
-                            PokemonBox.Add(pokemon);
-                            
+                            PokemonBox.RemoveAt(j);
+                            PokemonBox.Insert(j , pokemon);
+                            return;
+                        }
+                        else
+                        {
+
                         }
                     }
 

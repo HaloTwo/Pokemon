@@ -132,9 +132,14 @@ public class BattleManager : MonoBehaviour
         Vector3 direction = enemyPokemon.transform.forward;
         Vector3 targetPosition = enemyPokemon.transform.position + direction * adjustedDistance;
         Vector3 LookRotation = player.transform.position - enemyPokemon.transform.position;
+        Vector3 lookDirection = -LookRotation;
+
+        lookDirection.y = playerPokemon.transform.rotation.eulerAngles.y;
+        playerPokemon.transform.rotation = Quaternion.LookRotation(lookDirection);
 
 
-        playerPokemon.transform.rotation = Quaternion.LookRotation(-LookRotation);
+        targetPosition.y = player.transform.position.y;
+
         playerPokemon.transform.position = targetPosition;
 
         if (betweenObject == null)
@@ -157,8 +162,12 @@ public class BattleManager : MonoBehaviour
         offset = rotation * -playerPokemon.transform.forward;
         player.transform.position = playerPokemon.transform.position + offset * 4f;
 
-        Vector3 loc = this.player.transform.position - enemyPokemon.transform.position;
-        player.transform.rotation = Quaternion.LookRotation(-loc);
+        Vector3 loc = player.transform.position - enemyPokemon.transform.position;
+        Vector3 lookDirection = -loc;
+
+        lookDirection.x = 0;
+        lookDirection.z = 0;
+        player.transform.rotation = Quaternion.LookRotation(lookDirection);
     }
 
 
