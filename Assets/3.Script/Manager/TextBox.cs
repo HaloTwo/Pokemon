@@ -8,7 +8,16 @@ public class TextBox : MonoBehaviour
     public static TextBox instance = null;
 
     public Text TalkText;
+    public Text NPC_TalkText;
 
+    public int currentIndex;
+    public int beforeIndex;
+
+    public GameObject Menu;
+    public GameObject Shop;
+    public RectTransform select;
+
+    [SerializeField]private UIManger uIManger;
     private void Awake()
     {
         if (instance == null) //instance가 null. 즉, 시스템상에 존재하고 있지 않을때
@@ -23,9 +32,47 @@ public class TextBox : MonoBehaviour
         }
     }
 
+    private void Update()
+    {
+        if (Menu.activeSelf)
+        {
+            uIManger.UI_stack = new Stack<GameObject>();
+            uIManger.UI_stack.Push(Menu);
+
+            Button[] currentbuttons = uIManger.UI_stack.Peek().GetComponentsInChildren<Button>();
+
+            currentbuttons[currentIndex].Select();
+
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                currentIndex--;
+                if (currentIndex < 0)
+                {
+                    currentIndex = currentbuttons.Length - 1;
+                }
+
+            }
+            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                currentIndex++;
+                if (currentIndex >= currentbuttons.Length)
+                {
+                    currentIndex = 0;
+                }
+
+            }
+
+            uIManger.OnButtonSelected(currentbuttons[currentIndex], select);
+        }
+    }
+
     public void Textbox_OnOff(bool onoff)
     {
         TalkText.gameObject.SetActive(onoff);
+    }
+    public void NPC_Textbox_OnOff(bool onoff)
+    {
+        NPC_TalkText.transform.parent.gameObject.SetActive(onoff);
     }
 
 }

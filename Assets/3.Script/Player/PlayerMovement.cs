@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public bool ismove = true;
     [Header("회전 속도")]
     [SerializeField] private float rotationSpeed = 5f;
     [Header("몬스터 볼 관련")]
@@ -68,33 +69,40 @@ public class PlayerMovement : MonoBehaviour
 
         hasControl = (moveDirection != Vector3.zero);
 
-        // 회전
-        Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
-        Vector3 cameraForward = Vector3.Scale(FollowCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
-        moveDirection = (input.x * FollowCamera.transform.right + input.y * cameraForward).normalized;
-
-        if (hasControl && isGrounded && !isLookon && !isBattle)
+        if (ismove)
         {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+            // 회전
+            Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
+            Vector3 cameraForward = Vector3.Scale(FollowCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
+            moveDirection = (input.x * FollowCamera.transform.right + input.y * cameraForward).normalized;
 
-            //controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
-
-            if (isWalking)
+            if (hasControl && isGrounded && !isLookon && !isBattle)
             {
-                animator.SetFloat("Velocity", 1);
+                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
+
+                //controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
+
+                if (isWalking)
+                {
+                    animator.SetFloat("Velocity", 1);
+                }
+                else if (animator.GetFloat("Velocity") != 1)
+                {
+                    animator.SetFloat("Velocity", 2);
+                }
             }
-            else if (animator.GetFloat("Velocity") != 1)
+            else
             {
-                animator.SetFloat("Velocity", 2);
+                if (animator.GetFloat("Velocity") != 1)
+                {
+                    animator.SetFloat("Velocity", 0);
+                }
             }
         }
         else
         {
-            if (animator.GetFloat("Velocity") != 1)
-            {
-                animator.SetFloat("Velocity", 0);
-            }
+            animator.SetFloat("Velocity", 0);
         }
 
     }

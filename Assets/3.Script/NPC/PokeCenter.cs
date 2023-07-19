@@ -1,0 +1,122 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class PokeCenter : MonoBehaviour
+{
+    private string myname;
+    private PlayerMovement playerMovement;
+    private PlayerBag playerbag;
+    private UIManger uIManger;
+    public bool isTalk = false;
+    [TextArea]
+    public List<string> fullText = new List<string>();
+
+    private void Start()
+    {
+        uIManger = FindObjectOfType<UIManger>();
+        myname = gameObject.name;
+    }
+
+    void Talk()
+    {
+        TextBox.instance.NPC_Textbox_OnOff(true);
+        StartCoroutine(TypeText(0));
+    }
+
+    private IEnumerator TypeText(int num)
+    {
+        for (int j = 0; j < fullText.Count; j++)
+        {
+            for (int i = 0; i <= fullText[num + j].Length; i++)
+            {
+                string displayedText = fullText[num + j].Substring(0, i);
+                TextBox.instance.NPC_TalkText.text = displayedText;
+
+                yield return new WaitForSeconds(0.05f);
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    TextBox.instance.NPC_TalkText.text = fullText[num + j];
+                    break;
+                }
+
+            }
+
+            yield return null;
+        }
+
+        if (myname == "Nurse Joy")
+        {
+            TextBox.instance.Menu.transform.GetComponentInChildren<Text>().text = "쉬게한다";
+        }
+        else if (myname == "shop Boy")
+        {
+            TextBox.instance.Menu.transform.GetComponentInChildren<Text>().text = "사러왔다";
+        }
+        TextBox.instance.select.gameObject.SetActive(true);
+        TextBox.instance.Menu.SetActive(true);
+
+    }
+
+    public void PokemonCenter()
+    {
+        //간호순
+        if (myname == "Nurse Joy")
+        {
+            for (int i = 0; i < playerbag.PlayerPokemon.Count; i++)
+            {
+                if (playerbag.PlayerPokemon[i] != null)
+                {
+                    PokemonStats pokemon = playerbag.PlayerPokemon[i].GetComponent<PokemonStats>();
+
+                    pokemon.Hp = pokemon.MaxHp;
+                }
+            }
+
+            uIManger.main_bool = true;
+            playerMovement.ismove = true;
+
+            isTalk = false;
+            TextBox.instance.select.gameObject.SetActive(false);
+        }
+        //상점
+        else if (myname == "shop Boy")
+        {
+            TextBox.instance.Shop.gameObject.SetActive(true);
+        }
+
+        TextBox.instance.Menu.SetActive(false);
+        TextBox.instance.NPC_Textbox_OnOff(false);
+    }
+
+    public void TalkExit()
+    {
+        uIManger.main_bool = true;
+        playerMovement.ismove = true;
+
+        isTalk = false;
+
+        TextBox.instance.select.gameObject.SetActive(false);
+        TextBox.instance.Menu.SetActive(false);
+        TextBox.instance.NPC_Textbox_OnOff(false);
+    }
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            if (Input.GetKeyDown(KeyCode.Space) && !isTalk)
+            {
+                playerMovement = other.GetComponent<PlayerMovement>();
+                playerbag = other.GetComponent<PlayerBag>();
+
+                playerMovement.ismove = false;
+                uIManger.main_bool = false;
+
+                isTalk = true;
+                Talk();
+            }
+        }
+    }
+}

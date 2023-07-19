@@ -132,10 +132,11 @@ public class BattleManager : MonoBehaviour
         Vector3 direction = enemyPokemon.transform.forward;
         Vector3 targetPosition = enemyPokemon.transform.position + direction * adjustedDistance;
         Vector3 LookRotation = player.transform.position - enemyPokemon.transform.position;
-        Vector3 lookDirection = -LookRotation;
 
-        lookDirection.y = playerPokemon.transform.rotation.eulerAngles.y;
-        playerPokemon.transform.rotation = Quaternion.LookRotation(lookDirection);
+        Quaternion pokemonLook = Quaternion.LookRotation(-LookRotation);
+        pokemonLook.x = 0;
+        pokemonLook.z = 0;
+        playerPokemon.transform.rotation = pokemonLook;
 
 
         targetPosition.y = player.transform.position.y;
@@ -163,11 +164,15 @@ public class BattleManager : MonoBehaviour
         player.transform.position = playerPokemon.transform.position + offset * 4f;
 
         Vector3 loc = player.transform.position - enemyPokemon.transform.position;
-        Vector3 lookDirection = -loc;
+        //Vector3 lookDirection = -loc;
 
-        lookDirection.x = 0;
-        lookDirection.z = 0;
-        player.transform.rotation = Quaternion.LookRotation(lookDirection);
+        //lookDirection.x = 0;
+        //lookDirection.z = 0;
+
+        Quaternion playerLook = Quaternion.LookRotation(-loc);
+        playerLook.x = 0;
+        playerLook.z = 0;
+        player.transform.rotation = playerLook;
     }
 
 
@@ -542,6 +547,7 @@ public class BattleManager : MonoBehaviour
                     enemy_pokemon_change = false;
                     ball_throw = false;
                     iscatch = false;
+                    uIManger.isBattle = false;
 
                     yield return null;
                 }

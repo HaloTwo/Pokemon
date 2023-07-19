@@ -24,14 +24,14 @@ public class UIManger : MonoBehaviour
     [SerializeField] private int pokemon_index;
     [SerializeField] private Button[] buttons;
     private PlayerBag playerBag;
-
+    private PlayerMovement playermovement;
 
 
     [Header("메인메뉴 UI")]
     [Space(50f)]
     [SerializeField] private GameObject Main_UI;
     [SerializeField] private GameObject MainUI_Default_UI;
-    [HideInInspector] public bool main_bool;
+    public bool main_bool = true;
 
     [Header("메인메뉴 기본 포켓몬UI")]
     [Space(20f)]
@@ -142,12 +142,33 @@ public class UIManger : MonoBehaviour
     [SerializeField] private ScrollRect scrollRect;
     [SerializeField] private bool pokemon_choise;
 
-
+    [Header("스탯 UI")]
+    [SerializeField] private GameObject Status_UI;
+    [Header("포켓몬 정보")]
+    [SerializeField] private Text status_pokemon_name_txt;
+    [SerializeField] private Image[] status_pokemon_img;
+    [Header("포켓몬 스텟 정보")]
+    [SerializeField] private Text status_pokemon_Lv_txt;
+    [SerializeField] private Text status_pokemon_in_name_txt;
+    [SerializeField] private Text status_pokemon_hp_txt;
+    [SerializeField] private Text status_pokemon_spatk_txt;
+    [SerializeField] private Text status_pokemon_spdef_txt;
+    [SerializeField] private Text status_pokemon_speed_txt;
+    [SerializeField] private Text status_pokemon_atk_txt;
+    [SerializeField] private Text status_pokemon_def_txt;
+    [SerializeField] private Image status_pokemon_type_img;
+    [SerializeField] private Image status_pokemon_type2_img;
+    [Header("스탯UI의 스킬")]
+    [SerializeField] private Text[] status_skill_txt;
+    [SerializeField] private Text[] status_skill_pp_txt;
+    [SerializeField] private Image[] status_skill_img;
 
 
     private void Start()
     {
-        playerBag = FindObjectOfType<PlayerBag>();
+        playerBag = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBag>();
+        playermovement = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerMovement>();
+        playermovement.ismove = true;
     }
 
 
@@ -200,6 +221,7 @@ public class UIManger : MonoBehaviour
             buttons = currentbuttons;
             buttons[currentIndex].Select();
 
+            Debug.Log(UI_stack.Peek());
 
             //버튼 이미지 이동
             OnButtonSelected(buttons[currentIndex], selectImage_battle);
@@ -213,20 +235,23 @@ public class UIManger : MonoBehaviour
             //포켓몬 볼 UI 들어가기
             BallUI_Input();
 
-            if (Input.GetKeyDown(KeyCode.Escape) && UI_stack.Peek() != Default_UI && !playerpokemon.isDie)
+            if (Input.GetKeyDown(KeyCode.Escape)
+                && UI_stack.Peek() != Default_UI
+                && (!playerpokemon.isDie || (playerpokemon.isDie && (UI_stack.Peek() == Status_UI))))
             {
                 //나가기
                 ExitButton();
-                isBattle = false;
+                //isBattle = false;
             }
         }
         #endregion
         #region 메인UI
-        else
+        else if (main_bool)
         {
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
+                playermovement.ismove = false;
                 Main_UI.SetActive(true);
                 currentIndex = 0;
                 UI_stack = new Stack<GameObject>();
@@ -277,6 +302,8 @@ public class UIManger : MonoBehaviour
                     {
                         UI_stack = new Stack<GameObject>();
                         choise_pokemon_move = false;
+                        playermovement.ismove = true;
+                        main_bool = true;
                         Main_UI.SetActive(false);
                     }
                     else
@@ -315,7 +342,7 @@ public class UIManger : MonoBehaviour
                     PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
                     //포켓몬 타입 확인
-                    PokemonTypeCheck(pokemon);
+                    PokemonTypeCheck(pokemon, change_pokemon_type1_img, change_pokemon_type2_img);
                     TypeCheck_propertyType(pokemon, change_pokemon_skill_name, change_pokemon_skill_pp, change_pokemon_skill_img);
 
                     if (pokemon.Hp > 0)
@@ -386,6 +413,7 @@ public class UIManger : MonoBehaviour
     {
         if (UI_stack.Peek() == Default_UI)
         {
+
             if (Input.GetKeyDown(KeyCode.X) && BattleManager.instance.enemyPokemon.GetComponent<PokemonBattleMode>().isWild)
             {
                 currentIndex = 0;
@@ -393,8 +421,9 @@ public class UIManger : MonoBehaviour
                 UI_stack.Push(ball_button);
                 ball_number_txt.text = playerBag.ball.Quantity.ToString();
             }
-
         }
+
+
     }
 
     //배틀UI 움직임
@@ -448,6 +477,11 @@ public class UIManger : MonoBehaviour
                     currentIndex = buttons.Length - 1;
                 }
 
+                if (UI_stack.Peek() == Status_UI)
+                {
+                    Status_UI_Update();
+                }
+
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -455,6 +489,11 @@ public class UIManger : MonoBehaviour
                 if (currentIndex >= buttons.Length)
                 {
                     currentIndex = 0;
+                }
+
+                if (UI_stack.Peek() == Status_UI)
+                {
+                    Status_UI_Update();
                 }
 
             }
@@ -713,6 +752,11 @@ public class UIManger : MonoBehaviour
                 {
                     currentIndex = buttons.Length - 1;
                 }
+
+                if (UI_stack.Peek() == Status_UI)
+                {
+                    Status_UI_Update();
+                }
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
@@ -721,12 +765,17 @@ public class UIManger : MonoBehaviour
                 {
                     currentIndex = 0;
                 }
+
+                if (UI_stack.Peek() == Status_UI)
+                {
+                    Status_UI_Update();
+                }
             }
         }
 
     }
 
-    void OnButtonSelected(Button selectedButton, RectTransform selectimg)
+    public void OnButtonSelected(Button selectedButton, RectTransform selectimg)
     {
         RectTransform selectedButtonRect;
 
@@ -859,132 +908,132 @@ public class UIManger : MonoBehaviour
     }
 
     //포켓몬 속성 찾기
-    void PokemonTypeCheck(PokemonStats Pokemonstats)
+    void PokemonTypeCheck(PokemonStats Pokemonstats, Image pokemon_type_img, Image pokemon_type2_img)
     {
         switch ((int)Pokemonstats.Type1)
         {
             case 0:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[0];
+                pokemon_type_img.sprite = propertyType_pokemon_img[0];
                 break;
             case 1:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[1];
+                pokemon_type_img.sprite = propertyType_pokemon_img[1];
                 break;
             case 2:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[2];
+                pokemon_type_img.sprite = propertyType_pokemon_img[2];
                 break;
             case 3:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[3];
+                pokemon_type_img.sprite = propertyType_pokemon_img[3];
                 break;
             case 4:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[4];
+                pokemon_type_img.sprite = propertyType_pokemon_img[4];
                 break;
             case 5:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[5];
+                pokemon_type_img.sprite = propertyType_pokemon_img[5];
                 break;
             case 6:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[6];
+                pokemon_type_img.sprite = propertyType_pokemon_img[6];
                 break;
             case 7:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[7];
+                pokemon_type_img.sprite = propertyType_pokemon_img[7];
                 break;
             case 8:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[8];
+                pokemon_type_img.sprite = propertyType_pokemon_img[8];
                 break;
             case 9:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[9];
+                pokemon_type_img.sprite = propertyType_pokemon_img[9];
                 break;
             case 10:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[10];
+                pokemon_type_img.sprite = propertyType_pokemon_img[10];
                 break;
             case 11:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[11];
+                pokemon_type_img.sprite = propertyType_pokemon_img[11];
                 break;
             case 12:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[12];
+                pokemon_type_img.sprite = propertyType_pokemon_img[12];
                 break;
             case 13:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[13];
+                pokemon_type_img.sprite = propertyType_pokemon_img[13];
                 break;
             case 14:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[14];
+                pokemon_type_img.sprite = propertyType_pokemon_img[14];
                 break;
             case 15:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[15];
+                pokemon_type_img.sprite = propertyType_pokemon_img[15];
                 break;
             case 16:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[16];
+                pokemon_type_img.sprite = propertyType_pokemon_img[16];
                 break;
             case 17:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[17];
+                pokemon_type_img.sprite = propertyType_pokemon_img[17];
                 break;
             default:
-                change_pokemon_type1_img.sprite = propertyType_pokemon_img[0];
+                pokemon_type_img.sprite = propertyType_pokemon_img[0];
                 break;
         }
 
 
         if (Pokemonstats.Type2 != PokemonStats.Type.None)
         {
-            change_pokemon_type2_img.gameObject.SetActive(true);
+            pokemon_type2_img.gameObject.SetActive(true);
         }
         switch ((int)Pokemonstats.Type2)
         {
             case 0:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[0];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[0];
                 break;
             case 1:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[1];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[1];
                 break;
             case 2:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[2];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[2];
                 break;
             case 3:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[3];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[3];
                 break;
             case 4:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[4];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[4];
                 break;
             case 5:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[5];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[5];
                 break;
             case 6:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[6];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[6];
                 break;
             case 7:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[7];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[7];
                 break;
             case 8:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[8];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[8];
                 break;
             case 9:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[9];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[9];
                 break;
             case 10:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[10];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[10];
                 break;
             case 11:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[11];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[11];
                 break;
             case 12:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[12];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[12];
                 break;
             case 13:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[13];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[13];
                 break;
             case 14:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[14];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[14];
                 break;
             case 15:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[15];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[15];
                 break;
             case 16:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[16];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[16];
                 break;
             case 17:
-                change_pokemon_type2_img.sprite = propertyType_pokemon_img[17];
+                pokemon_type2_img.sprite = propertyType_pokemon_img[17];
                 break;
             case 18:
-                change_pokemon_type2_img.gameObject.SetActive(false);
+                pokemon_type2_img.gameObject.SetActive(false);
                 break;
         }
 
@@ -1787,6 +1836,26 @@ public class UIManger : MonoBehaviour
         choise_pokemon_move = true;
     }
 
+    public void MainUI_Box_Delect()
+    {
+        if (beforeIndex < 6)
+        {
+            playerBag.PlayerPokemon.RemoveAt(beforeIndex);
+            playerBag.PlayerPokemon.Insert(beforeIndex, null);
+        }
+        else
+        {
+            playerBag.PokemonBox.RemoveAt(beforeIndex - 6);
+            playerBag.PokemonBox.Insert(beforeIndex - 6, null);
+        }
+
+        GameObject topUI = UI_stack.Peek();
+        topUI.SetActive(false);
+        UI_stack.Pop();
+
+        GameObject nextUI = UI_stack.Peek();
+        nextUI.SetActive(true);
+    }
 
 
     //저장
@@ -1932,4 +2001,55 @@ public class UIManger : MonoBehaviour
     #endregion
 
 
+    //정보UI
+    public void Status_UI_Button()
+    {
+        GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+        clickedObject.transform.parent.gameObject.SetActive(false);
+        UI_stack.Pop();
+
+        if (beforeIndex < 6)
+        {
+            currentIndex = beforeIndex;
+
+            UI_stack.Push(Status_UI);
+            Status_UI.SetActive(true);
+
+            Status_UI_Update();
+
+            for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
+            {
+                if (playerBag.PlayerPokemon[i] == null)
+                {
+                    status_pokemon_img[i].transform.parent.gameObject.SetActive(false);
+                }
+                else
+                {
+                    status_pokemon_img[i].transform.parent.gameObject.SetActive(true);
+                    status_pokemon_img[i].sprite = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>().image;
+                }
+            }
+        }
+    }
+
+    void Status_UI_Update()
+    {
+        PokemonStats pokemon = playerBag.PlayerPokemon[currentIndex].GetComponent<PokemonStats>();
+
+        //포켓몬 타입 확인
+        PokemonTypeCheck(pokemon, status_pokemon_type_img, status_pokemon_type2_img);
+        TypeCheck_propertyType(pokemon, status_skill_txt, status_skill_pp_txt, status_skill_img);
+
+        status_pokemon_in_name_txt.text = $"{pokemon.Name}";
+        status_pokemon_name_txt.text = $"{pokemon.Name}";
+
+        status_pokemon_Lv_txt.text = $"{pokemon.Level}";
+
+        status_pokemon_hp_txt.text = $"{pokemon.Hp} / {pokemon.MaxHp}";
+        status_pokemon_atk_txt.text = $"{pokemon.Attack}";
+        status_pokemon_def_txt.text = $"{pokemon.Defence}";
+        status_pokemon_speed_txt.text = $"{pokemon.Speed}";
+        status_pokemon_spatk_txt.text = $"{pokemon.SpAttack}";
+        status_pokemon_spdef_txt.text = $"{pokemon.SpDefence}";
+    }
 }
