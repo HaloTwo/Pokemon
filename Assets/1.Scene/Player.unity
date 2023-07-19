@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.39589646, g: 0.4341852, b: 0.4992023, a: 1}
+  m_IndirectSpecularColor: {r: 0.39622456, g: 0.43436068, b: 0.49929178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: 2aea4e2a244e78c4a86898be3e7f11bd, type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: 160cb986e8b36ea4899683c7287bc72a, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -714,7 +714,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -203, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &34763298
@@ -1226,19 +1226,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 52719202}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1438453186}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &52719202
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4789,7 +4777,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -203, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &185654388
@@ -9898,7 +9886,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -203, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &403603113
@@ -10799,7 +10787,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -203, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428215472
@@ -14082,8 +14070,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 550}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 157.11804, y: 550}
+  m_SizeDelta: {x: 1214.2361, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582706911
 MonoBehaviour:
@@ -14129,10 +14117,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602122596}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 3
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_Choise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -14833,7 +14821,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 493, y: 0}
+  m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &601971087
@@ -16775,9 +16763,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 732048389}
-        m_TargetAssemblyTypeName: UIManger, Assembly-CSharp
-        m_MethodName: MainUI_Use_Item
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_pay
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -19996,6 +19984,65 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "\uD30C\uC774\uB9AC"
+--- !u!1 &816310413
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 816310416}
+  - component: {fileID: 816310415}
+  - component: {fileID: 816310414}
+  m_Layer: 0
+  m_Name: go
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &816310414
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816310413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14cc8d9b6cb65bb46a66013ba0cac207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_obj: {fileID: 816310413}
+  out_obj: {fileID: 1383869230}
+--- !u!65 &816310415
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816310413}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &816310416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816310413}
+  m_LocalRotation: {x: -0, y: -0.9510566, z: 0, w: -0.30901685}
+  m_LocalPosition: {x: 2502.25, y: 86.64, z: -707.53}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: -216, z: 0}
 --- !u!1 &816480804
 GameObject:
   m_ObjectHideFlags: 0
@@ -20283,7 +20330,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -203, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825771993
@@ -24934,7 +24981,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 493, y: 0}
+  m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1045809701
@@ -25727,7 +25774,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 493, y: 0}
+  m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1070585367
@@ -28683,7 +28730,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 493, y: 0}
+  m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1196312312
@@ -29606,8 +29653,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 250}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 157.11804, y: 250}
+  m_SizeDelta: {x: 1214.2361, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246497771
 MonoBehaviour:
@@ -29653,10 +29700,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602122596}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 3
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_Choise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -33431,6 +33478,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383664927}
   m_CullTransparentMesh: 1
+--- !u!1 &1383869230
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1383869233}
+  - component: {fileID: 1383869232}
+  - component: {fileID: 1383869231}
+  m_Layer: 0
+  m_Name: out
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1383869231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383869230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14cc8d9b6cb65bb46a66013ba0cac207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  go_obj: {fileID: 1383869230}
+  out_obj: {fileID: 816310413}
+--- !u!65 &1383869232
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383869230}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!4 &1383869233
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1383869230}
+  m_LocalRotation: {x: 0, y: -0.3090171, z: 0, w: 0.95105654}
+  m_LocalPosition: {x: 2594.34, y: 86.64, z: -640.65}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: -36, z: 0}
 --- !u!1 &1389459135
 GameObject:
   m_ObjectHideFlags: 0
@@ -33708,7 +33814,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389917396}
-  m_LocalRotation: {x: 0.004054201, y: -0.039663427, z: 0.00016093145, w: 0.9992049}
+  m_LocalRotation: {x: 0.004054197, y: -0.039663423, z: 0.00016093129, w: 0.9992049}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -33909,11 +34015,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TalkText: {fileID: 1753704128}
   NPC_TalkText: {fileID: 791228670}
+  Item_name: {fileID: 246063335}
+  Item_explanation: {fileID: 143573495}
   currentIndex: 0
   beforeIndex: 0
   Menu: {fileID: 1091583116}
   Shop: {fileID: 1047377474}
+  Shop_Menu: {fileID: 1623590577}
   select: {fileID: 353269213}
+  Itemdata:
+  - {fileID: 11400000, guid: ed5b68ed938832d4e9b87198f6ff39ac, type: 2}
+  - {fileID: 11400000, guid: 938022bfa772b8e46936dd90a6a680b9, type: 2}
+  - {fileID: 11400000, guid: 54c2bdb690850cc4ab0943866c4aa981, type: 2}
+  - {fileID: 11400000, guid: 90014fd3a0a147c439a6d8dfa83d8f78, type: 2}
+  - {fileID: 11400000, guid: b605cc53742f53940a040c19d44e1449, type: 2}
+  - {fileID: 11400000, guid: dda62a054ddab384894d814bd37e5d03, type: 2}
+  - {fileID: 11400000, guid: f8c22c8449400a34db742c5ffa3892fe, type: 2}
   uIManger: {fileID: 732048389}
 --- !u!1 &1395975261
 GameObject:
@@ -35367,28 +35484,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1434959454}
   m_CullTransparentMesh: 1
---- !u!1 &1438453183 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2986791388239329379, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+--- !u!114 &1438453186 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5934578675360823948, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
   m_PrefabInstance: {fileID: 6034199693275516571}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1438453186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1438453183}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 33c374dc2502dec428d5168bb2104ae1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isTalk: 0
-  fullText:
-  - "\uC548\uB155\uD558\uC138\uC694\n\uD3EC\uCF13\uBAAC \uC13C\uD130\uC785\uB2C8\uB2E4."
-  - "\uC18C\uC911\uD55C \uD3EC\uCF13\uBAAC\uC744\n\uC26C\uAC8C \uD574 \uC8FC\uACA0\uC2B5\uB2C8\uAE4C
-    ?"
 --- !u!1 &1438675118
 GameObject:
   m_ObjectHideFlags: 0
@@ -35777,8 +35883,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 450}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 157.11804, y: 450}
+  m_SizeDelta: {x: 1214.2361, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1454965770
 MonoBehaviour:
@@ -35824,10 +35930,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602122596}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 3
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_Choise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -38977,7 +39083,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5361471049838753174, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5874436023764567353, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_Enabled
@@ -38985,11 +39091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413862263056640150, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6413862263056640150, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8914606713664090144, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_Enabled
@@ -40489,7 +40595,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 493, y: 0}
+  m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1601388426
@@ -40534,27 +40640,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1601388424}
   m_CullTransparentMesh: 1
---- !u!1 &1602122593 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 670704338642650247, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
-  m_PrefabInstance: {fileID: 6034199693275516571}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1602122596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1602122593}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33c374dc2502dec428d5168bb2104ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  isTalk: 0
-  fullText:
-  - "\uD504\uB79C\uB4E4\uB9AC\uC20D\uC5D0 \uC5B4\uC11C \uC624\uC138\uC694!\n\uBB34\uC5C7\uC744
-    \uB3C4\uC640\uB4DC\uB9B4\uAE4C\uC694?"
 --- !u!1 &1605669667
 GameObject:
   m_ObjectHideFlags: 0
@@ -40929,7 +41014,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\uC0AC\uC6A9\uD55C\uB2E4"
+  m_Text: "\uAD6C\uB9E4\uD558\uAE30"
 --- !u!222 &1616884551
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -41186,7 +41271,7 @@ GameObject:
   - component: {fileID: 1623590580}
   - component: {fileID: 1623590579}
   m_Layer: 5
-  m_Name: Bag_Menu
+  m_Name: Shop_Menu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43052,7 +43137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -203, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1720201891
@@ -43176,6 +43261,99 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1725307968}
   m_CullTransparentMesh: 1
+--- !u!1 &1729531787
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1729531789}
+  - component: {fileID: 1729531788}
+  m_Layer: 0
+  m_Name: Directional Light (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!108 &1729531788
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729531787}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 1
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Intensity: 1
+  m_Range: 10
+  m_SpotAngle: 30
+  m_InnerSpotAngle: 21.80208
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 2
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 0
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 1
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
+--- !u!4 &1729531789
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1729531787}
+  m_LocalRotation: {x: 0.17072481, y: -0.71215075, z: -0.017843768, w: 0.68071723}
+  m_LocalPosition: {x: 3456, y: 181, z: -906}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 26
+  m_LocalEulerAnglesHint: {x: 11.948, y: -94.256, z: -15.865}
 --- !u!1 &1733498666
 GameObject:
   m_ObjectHideFlags: 0
@@ -47512,8 +47690,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 150}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 157.11804, y: 150}
+  m_SizeDelta: {x: 1214.2361, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865683202
 MonoBehaviour:
@@ -47559,10 +47737,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602122596}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 3
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_Choise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -49913,11 +50091,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413862264761897143, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6413862264761897143, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090132, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_Name
@@ -49925,7 +50103,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090132, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090133, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -50745,8 +50923,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 157.11804, y: 50}
+  m_SizeDelta: {x: 1214.2361, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1986865991
 MonoBehaviour:
@@ -50792,10 +50970,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602122596}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 3
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_Choise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -51993,8 +52171,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: 350}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 157.11804, y: 350}
+  m_SizeDelta: {x: 1214.2361, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030521600
 MonoBehaviour:
@@ -52040,10 +52218,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602122596}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 3
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_Choise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -53418,7 +53596,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 493, y: 0}
+  m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2085747951
@@ -55057,7 +55235,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2210308903301515420, guid: 3ab866c3769c7404ab9584b266328d22, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ab866c3769c7404ab9584b266328d22, type: 3}
@@ -55247,7 +55425,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2546910981996907677, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2546910981996907683, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: walkSpeed
@@ -55435,6 +55613,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 145525476099333693, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.147
+      objectReference: {fileID: 0}
+    - target: {fileID: 145525476099333693, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.064
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465974087261037273, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.051
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465974087261037273, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.016
+      objectReference: {fileID: 0}
     - target: {fileID: 3980738868664485467, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -55486,6 +55680,50 @@ PrefabInstance:
     - target: {fileID: 4356595221654805729, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5934578675360823948, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: myname
+      value: Nurse Joy
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199694274318795, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Size.x
+      value: 1.8794563
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199694274318795, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Size.z
+      value: 4.718639
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199694274318795, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Center.x
+      value: -0.053109657
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199694274318795, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Center.y
+      value: 0.85444826
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199694274318795, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Center.z
+      value: -0.08877636
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199695150593057, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Size.x
+      value: 2.0288537
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199695150593057, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Size.z
+      value: 5.075894
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199695150593057, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Center.x
+      value: 0.23289664
+      objectReference: {fileID: 0}
+    - target: {fileID: 6034199695150593057, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: m_Center.z
+      value: -0.18116994
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122021627771540222, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: myname
+      value: shop Boy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
@@ -55621,8 +55859,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50, y: -50}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: 157.11804, y: -50}
+  m_SizeDelta: {x: 1214.2361, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6291818745871157515
 MonoBehaviour:
@@ -55668,10 +55906,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1602122596}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: PokemonCenter
-        m_Mode: 3
+      - m_Target: {fileID: 1391964917}
+        m_TargetAssemblyTypeName: TextBox, Assembly-CSharp
+        m_MethodName: Shop_Choise
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -55723,7 +55961,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -203, y: 0}
+  m_AnchoredPosition: {x: 325, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6291818746303771983
@@ -55854,7 +56092,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 493, y: 0}
+  m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6799867245836612587

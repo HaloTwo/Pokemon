@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using static UnityEngine.InputManagerEntry;
 
 public class PokeCenter : MonoBehaviour
 {
-    private string myname;
     private PlayerMovement playerMovement;
     private PlayerBag playerbag;
     private UIManger uIManger;
     public bool isTalk = false;
     [TextArea]
     public List<string> fullText = new List<string>();
+    [SerializeField]private string myname;
 
     private void Start()
     {
         uIManger = FindObjectOfType<UIManger>();
-        myname = gameObject.name;
     }
 
     void Talk()
@@ -27,6 +28,7 @@ public class PokeCenter : MonoBehaviour
 
     private IEnumerator TypeText(int num)
     {
+ 
         for (int j = 0; j < fullText.Count; j++)
         {
             for (int i = 0; i <= fullText[num + j].Length; i++)
@@ -47,23 +49,24 @@ public class PokeCenter : MonoBehaviour
             yield return null;
         }
 
-        if (myname == "Nurse Joy")
+        if (gameObject.name == "Nurse Joy")
         {
             TextBox.instance.Menu.transform.GetComponentInChildren<Text>().text = "쉬게한다";
         }
-        else if (myname == "shop Boy")
+        else if (gameObject.name == "shop Boy")
         {
             TextBox.instance.Menu.transform.GetComponentInChildren<Text>().text = "사러왔다";
         }
         TextBox.instance.select.gameObject.SetActive(true);
-        TextBox.instance.Menu.SetActive(true);
+        TextBox.instance.MenuOpen(true);
 
     }
 
     public void PokemonCenter()
     {
+
         //간호순
-        if (myname == "Nurse Joy")
+        if (name.Equals("Nurse Joy"))
         {
             for (int i = 0; i < playerbag.PlayerPokemon.Count; i++)
             {
@@ -82,9 +85,9 @@ public class PokeCenter : MonoBehaviour
             TextBox.instance.select.gameObject.SetActive(false);
         }
         //상점
-        else if (myname == "shop Boy")
+        else if (name.Equals("shop Boy"))
         {
-            TextBox.instance.Shop.gameObject.SetActive(true);
+            TextBox.instance.ShopOpen();
         }
 
         TextBox.instance.Menu.SetActive(false);
@@ -108,6 +111,7 @@ public class PokeCenter : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && !isTalk)
             {
+
                 playerMovement = other.GetComponent<PlayerMovement>();
                 playerbag = other.GetComponent<PlayerBag>();
 
@@ -116,6 +120,9 @@ public class PokeCenter : MonoBehaviour
 
                 isTalk = true;
                 Talk();
+
+                TextBox.instance.Menu.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
+                TextBox.instance.Menu.GetComponentInChildren<Button>().onClick.AddListener(PokemonCenter);
             }
         }
     }

@@ -8564,6 +8564,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5888678618181666838}
   - component: {fileID: 1971210208}
+  - component: {fileID: 524672220175746261}
   m_Layer: 0
   m_Name: shop Boy
   m_TagString: Untagged
@@ -8620,6 +8621,22 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.4856764, y: 2.708931, z: 4.866718}
   m_Center: {x: -0.24283855, y: 0.8544562, z: -0.36836547}
+--- !u!114 &524672220175746261
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6553611210596045484}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c374dc2502dec428d5168bb2104ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTalk: 0
+  fullText:
+  - "\uD504\uB79C\uB4E4\uB9AC\uC20D\uC5D0 \uC5B4\uC11C \uC624\uC138\uC694!\n\uBB34\uC5C7\uC744
+    \uB3C4\uC640\uB4DC\uB9B4\uAE4C\uC694?"
 --- !u!1 &6580916344707359439
 GameObject:
   m_ObjectHideFlags: 0
