@@ -59,6 +59,12 @@ public class PlayerBag : MonoBehaviour
                         {
                             PokemonBox.RemoveAt(j);
                             PokemonBox.Insert(j, pokemon);
+                            pokemon.GetComponent<PokemonMove>().enabled = false;
+
+                            PokemonBattleMode newPokemonBattleMode = pokemon.GetComponent<PokemonBattleMode>();
+                            newPokemonBattleMode.isWild = false;
+                            newPokemonBattleMode.enabled = true;
+                            pokemon.SetActive(false);
                             return;
                         }
                         else

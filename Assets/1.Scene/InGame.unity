@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.39589646, g: 0.4341852, b: 0.4992023, a: 1}
+  m_IndirectSpecularColor: {r: 0.39622456, g: 0.43436068, b: 0.49929178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -217,6 +217,82 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5608573}
   m_CullTransparentMesh: 1
+--- !u!1 &12273021
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 12273022}
+  - component: {fileID: 12273024}
+  - component: {fileID: 12273023}
+  m_Layer: 5
+  m_Name: Lv
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &12273022
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12273021}
+  m_LocalRotation: {x: -0, y: -0, z: 0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 74.72}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 248566120}
+  m_Father: {fileID: 1416157024}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 669.5856, y: 416.26547}
+  m_SizeDelta: {x: 41.3308, y: 142.8106}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &12273023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12273021}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.078431375, g: 0.14901961, b: 0.23137257, a: 0.78431374}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: -9095717837082945937, guid: bd3cb4af8406d4436a2ae8c2aafe1f8d, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &12273024
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 12273021}
+  m_CullTransparentMesh: 1
 --- !u!1 &17384747
 GameObject:
   m_ObjectHideFlags: 0
@@ -305,8 +381,7 @@ GameObject:
   - component: {fileID: 17737368}
   - component: {fileID: 17737367}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -331,7 +406,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 413.6}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &17737367
 MonoBehaviour:
@@ -947,7 +1022,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 325, y: 0}
+  m_AnchoredPosition: {x: 189, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &34763298
@@ -1081,8 +1156,7 @@ GameObject:
   - component: {fileID: 41465906}
   - component: {fileID: 41465905}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1107,7 +1181,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 200}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &41465905
 MonoBehaviour:
@@ -3054,8 +3128,7 @@ GameObject:
   - component: {fileID: 87416327}
   - component: {fileID: 87416326}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (17)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3080,7 +3153,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 626}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &87416326
 MonoBehaviour:
@@ -3531,8 +3604,7 @@ GameObject:
   - component: {fileID: 98943181}
   - component: {fileID: 98943180}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (23)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3557,7 +3629,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 200}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &98943180
 MonoBehaviour:
@@ -3781,7 +3853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &103294585
@@ -3875,7 +3947,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &105718782
@@ -4086,6 +4158,7 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 1416157024}
   - {fileID: 1485456938}
   - {fileID: 615059893}
   - {fileID: 1584111643}
@@ -4761,8 +4834,7 @@ GameObject:
   - component: {fileID: 116245239}
   - component: {fileID: 116245238}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (31)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4787,7 +4859,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 485}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &116245238
 MonoBehaviour:
@@ -4917,7 +4989,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &124561888
@@ -5011,7 +5083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &133939033
@@ -5610,8 +5682,7 @@ GameObject:
   - component: {fileID: 157053536}
   - component: {fileID: 157053535}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (7)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5636,7 +5707,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 485}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &157053535
 MonoBehaviour:
@@ -6679,7 +6750,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 325, y: 0}
+  m_AnchoredPosition: {x: 189, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &185654388
@@ -6812,8 +6883,7 @@ GameObject:
   - component: {fileID: 197310126}
   - component: {fileID: 197310125}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (35)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6838,7 +6908,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 200}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &197310125
 MonoBehaviour:
@@ -7036,13 +7106,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 204987954}
-  m_LocalRotation: {x: -0, y: -0.4848096, z: 0, w: -0.8746197}
-  m_LocalPosition: {x: 2282.33, y: 93.9, z: -830.49}
+  m_LocalRotation: {x: -0, y: -0.4617489, z: 0, w: -0.8870107}
+  m_LocalPosition: {x: 2282.02, y: 93.76, z: -830.04}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 29
-  m_LocalEulerAnglesHint: {x: 0, y: -302, z: 0}
+  m_RootOrder: 25
+  m_LocalEulerAnglesHint: {x: 0, y: -305, z: 0}
 --- !u!1 &212562084
 GameObject:
   m_ObjectHideFlags: 0
@@ -7533,6 +7603,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 221433380}
   m_CullTransparentMesh: 1
+--- !u!1 &224012187
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 224012188}
+  - component: {fileID: 224012189}
+  - component: {fileID: 224012190}
+  m_Layer: 5
+  m_Name: HP_txt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &224012188
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224012187}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 288185810}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -321.70013, y: -1.4000244}
+  m_SizeDelta: {x: 920, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &224012189
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224012187}
+  m_CullTransparentMesh: 1
+--- !u!114 &224012190
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 224012187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 46afd1e58501e854fb2390c2ef62df5a, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 300
+    m_Alignment: 5
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 120/120
 --- !u!1 &224374781
 GameObject:
   m_ObjectHideFlags: 0
@@ -7622,8 +7771,7 @@ GameObject:
   - component: {fileID: 224468129}
   - component: {fileID: 224468128}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (49)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7648,7 +7796,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 626}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &224468128
 MonoBehaviour:
@@ -7868,7 +8016,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &226057275
@@ -8801,7 +8949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &242373871
@@ -9225,6 +9373,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 247942838}
   m_CullTransparentMesh: 1
+--- !u!1 &248566119
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 248566120}
+  - component: {fileID: 248566121}
+  - component: {fileID: 248566122}
+  m_Layer: 5
+  m_Name: Text
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &248566120
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248566119}
+  m_LocalRotation: {x: -0, y: -0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 12273022}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.8001292, y: -0.00001335144}
+  m_SizeDelta: {x: 10, y: 10}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &248566121
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248566119}
+  m_CullTransparentMesh: 1
+--- !u!114 &248566122
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 248566119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 35
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 1
+    m_MaxSize: 50
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: Lv.0
 --- !u!1 &250356333 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2883243657534683281, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
@@ -9661,7 +9888,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &262769740
@@ -10559,6 +10786,96 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &288185809
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 288185810}
+  - component: {fileID: 288185811}
+  m_Layer: 5
+  m_Name: Slider
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &288185810
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288185809}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 429653015}
+  - {fileID: 319077622}
+  - {fileID: 224012188}
+  m_Father: {fileID: 1416157024}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 742, y: 312}
+  m_SizeDelta: {x: 300, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &288185811
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 288185809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_WrapAround: 0
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_FillRect: {fileID: 419197465}
+  m_HandleRect: {fileID: 0}
+  m_Direction: 0
+  m_MinValue: 0
+  m_MaxValue: 1
+  m_WholeNumbers: 0
+  m_Value: 1
+  m_OnValueChanged:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &288421301 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2883243658474605227, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
@@ -10760,8 +11077,7 @@ GameObject:
   - component: {fileID: 296321873}
   - component: {fileID: 296321872}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (48)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10786,7 +11102,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: -13.200001}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &296321872
 MonoBehaviour:
@@ -10972,8 +11288,7 @@ GameObject:
   - component: {fileID: 300012577}
   - component: {fileID: 300012576}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (39)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10998,7 +11313,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: -153.9}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &300012576
 MonoBehaviour:
@@ -11245,7 +11560,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -95, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &301568307
@@ -11619,6 +11934,42 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 318401748}
   m_CullTransparentMesh: 1
+--- !u!1 &319077621
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 319077622}
+  m_Layer: 5
+  m_Name: Fill Area
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &319077622
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 319077621}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 419197465}
+  m_Father: {fileID: 288185810}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &320715382 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1356976622752588566, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
@@ -12098,8 +12449,7 @@ GameObject:
   - component: {fileID: 347181655}
   - component: {fileID: 347181654}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12124,7 +12474,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 485}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &347181654
 MonoBehaviour:
@@ -12233,8 +12583,7 @@ GameObject:
   - component: {fileID: 348237830}
   - component: {fileID: 348237829}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (29)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12259,7 +12608,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 626}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &348237829
 MonoBehaviour:
@@ -12368,8 +12717,7 @@ GameObject:
   - component: {fileID: 351227502}
   - component: {fileID: 351227501}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12394,7 +12742,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 555.5}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &351227501
 MonoBehaviour:
@@ -12579,8 +12927,7 @@ GameObject:
   - component: {fileID: 358655528}
   - component: {fileID: 358655527}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (26)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -12605,7 +12952,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: -13}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &358655527
 MonoBehaviour:
@@ -12831,7 +13178,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &362989734
@@ -13881,7 +14228,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &389208829
@@ -14028,8 +14375,7 @@ GameObject:
   - component: {fileID: 392409697}
   - component: {fileID: 392409696}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (14)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -14054,7 +14400,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: -13}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &392409696
 MonoBehaviour:
@@ -14625,7 +14971,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 325, y: 0}
+  m_AnchoredPosition: {x: 189, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &403603113
@@ -14670,6 +15016,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 403603111}
   m_CullTransparentMesh: 1
+--- !u!114 &408211246 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2546910981996907683, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
+  m_PrefabInstance: {fileID: 3429803217327292739}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d92cf84cf61b414eb109f569b82280a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &408656462
 GameObject:
   m_ObjectHideFlags: 0
@@ -14704,7 +15061,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &408656464
@@ -14878,6 +15235,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 409184070}
   m_CullTransparentMesh: 1
+--- !u!1 &410800143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 410800144}
+  m_Layer: 0
+  m_Name: PlayerPokemonPos
+  m_TagString: Untagged
+  m_Icon: {fileID: 3936346786652291628, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &410800144
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 410800143}
+  m_LocalRotation: {x: -0, y: -0.8760072, z: -0, w: 0.482298}
+  m_LocalPosition: {x: 2286.56, y: 93.9, z: -825.76}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: -122.329, z: 0}
 --- !u!1 &410897155
 GameObject:
   m_ObjectHideFlags: 0
@@ -15038,7 +15425,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &414070599
@@ -15376,7 +15763,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &416226038
@@ -15416,6 +15803,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 416226036}
+  m_CullTransparentMesh: 1
+--- !u!1 &419197464
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 419197465}
+  - component: {fileID: 419197467}
+  - component: {fileID: 419197466}
+  m_Layer: 5
+  m_Name: Fill
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &419197465
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419197464}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 319077622}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &419197466
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419197464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0.18823531, g: 0.8000001, b: 0.19607845, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &419197467
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 419197464}
   m_CullTransparentMesh: 1
 --- !u!1 &419766071
 GameObject:
@@ -15789,7 +16251,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &427293830
@@ -15864,7 +16326,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 325, y: 0}
+  m_AnchoredPosition: {x: 189, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &428215472
@@ -15987,6 +16449,81 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 429263983}
+  m_CullTransparentMesh: 1
+--- !u!1 &429653014
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 429653015}
+  - component: {fileID: 429653017}
+  - component: {fileID: 429653016}
+  m_Layer: 5
+  m_Name: Background
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &429653015
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429653014}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 288185810}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0.25}
+  m_AnchorMax: {x: 1, y: 0.75}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &429653016
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429653014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.3137255}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Type: 1
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &429653017
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 429653014}
   m_CullTransparentMesh: 1
 --- !u!1 &431200522
 GameObject:
@@ -16581,7 +17118,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &451619464
@@ -16714,8 +17251,7 @@ GameObject:
   - component: {fileID: 455889342}
   - component: {fileID: 455889341}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (42)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16740,7 +17276,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 412}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &455889341
 MonoBehaviour:
@@ -17020,7 +17556,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &462775008
@@ -17174,7 +17710,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &465318393
@@ -17326,8 +17862,7 @@ GameObject:
   - component: {fileID: 473913940}
   - component: {fileID: 473913939}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (30)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -17352,7 +17887,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 555.5}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &473913939
 MonoBehaviour:
@@ -17561,7 +18096,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &478751746
@@ -17940,7 +18475,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &497364789
@@ -18394,8 +18929,7 @@ GameObject:
   - component: {fileID: 511899950}
   - component: {fileID: 511899949}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (37)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -18420,7 +18954,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 58}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &511899949
 MonoBehaviour:
@@ -19546,7 +20080,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &538785318
@@ -19619,8 +20153,7 @@ GameObject:
   - component: {fileID: 549502702}
   - component: {fileID: 549502701}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (41)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -19645,7 +20178,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 484}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &549502701
 MonoBehaviour:
@@ -20678,8 +21211,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.11804, y: 550}
-  m_SizeDelta: {x: 1214.2361, y: 100}
+  m_AnchoredPosition: {x: 258.5144, y: 550}
+  m_SizeDelta: {x: 1011.4434, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &582706911
 MonoBehaviour:
@@ -20863,8 +21396,7 @@ GameObject:
   - component: {fileID: 584956427}
   - component: {fileID: 584956426}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (18)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -20889,7 +21421,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 555.5}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &584956426
 MonoBehaviour:
@@ -21892,7 +22424,7 @@ RectTransform:
   - {fileID: 1224282821}
   - {fileID: 1122866323}
   m_Father: {fileID: 109046586}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -22600,8 +23132,7 @@ GameObject:
   - component: {fileID: 639495679}
   - component: {fileID: 639495678}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (27)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22626,7 +23157,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: -83}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &639495678
 MonoBehaviour:
@@ -22992,7 +23523,7 @@ Transform:
   - {fileID: 809470917}
   - {fileID: 1389917398}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 4.546, z: 0}
 --- !u!114 &656755664
 MonoBehaviour:
@@ -23574,8 +24105,7 @@ GameObject:
   - component: {fileID: 678461569}
   - component: {fileID: 678461568}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -23600,7 +24130,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 271}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &678461568
 MonoBehaviour:
@@ -23882,7 +24412,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &683296967
@@ -24535,7 +25065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &700789078
@@ -24662,13 +25192,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 705507993}
-  m_LocalRotation: {x: 0.16264802, y: -0.36399138, z: 0.054872327, w: 0.91544795}
-  m_LocalPosition: {x: 2718, y: 537, z: -1451}
+  m_LocalRotation: {x: 0.52594364, y: -0.30890524, z: 0.20019564, w: 0.766735}
+  m_LocalPosition: {x: 2178, y: 1581, z: -848}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 19.739, y: -43.557, z: -1.092}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 68.466, y: -45.794, z: -2.801}
 --- !u!1 &705603122
 GameObject:
   m_ObjectHideFlags: 0
@@ -25089,7 +25619,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &711766868
@@ -25418,8 +25948,7 @@ GameObject:
   - component: {fileID: 728089586}
   - component: {fileID: 728089585}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (44)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25444,7 +25973,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 271}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &728089585
 MonoBehaviour:
@@ -25758,6 +26287,12 @@ MonoBehaviour:
   - {fileID: 1105696230}
   alive_ball_sprite: {fileID: 21300000, guid: 20e7e869007ed5f4ab02dbd10a33002f, type: 3}
   die_ball_sprite: {fileID: 21300000, guid: 8e7dc7f3c1fe3ba4386d2bdc6990fd03, type: 3}
+  enemypokemon: {fileID: 0}
+  enemy_HP_UI: {fileID: 1416157023}
+  enemy_hp_txt: {fileID: 224012190}
+  enemy_hPbar: {fileID: 288185811}
+  enemy_pokemon_name: {fileID: 2096580355}
+  enemy_pokemon_lv: {fileID: 248566122}
   Skill_UI: {fileID: 1584111642}
   Inbattle_skill_txt:
   - {fileID: 1895576410}
@@ -25928,7 +26463,7 @@ Transform:
   - {fileID: 1530458150}
   - {fileID: 885391884}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &732312938
 GameObject:
@@ -26152,7 +26687,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &736724070
@@ -26413,7 +26948,7 @@ Transform:
   m_Children:
   - {fileID: 1089083070}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 4.546, z: 0}
 --- !u!114 &741681394
 MonoBehaviour:
@@ -26764,17 +27299,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4625102113271405298, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4625102113271405299, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_Name
       value: 0485.Palkia(Origin)
       objectReference: {fileID: 0}
     - target: {fileID: 4625102113271405299, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5432600578461204553, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_RootOrder
-      value: 19
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 5432600578461204553, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_LocalPosition.x
@@ -26822,11 +27361,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413862263470751592, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6413862263470751592, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6413862264742579223, guid: a792e5d7944500e48aab4fcd9542cb13, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -27059,8 +27598,7 @@ GameObject:
   - component: {fileID: 759167374}
   - component: {fileID: 759167373}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (46)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27085,7 +27623,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 128.29999}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &759167373
 MonoBehaviour:
@@ -27684,7 +28222,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &776251532
@@ -27758,7 +28296,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 214742064415424273, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_RootOrder
-      value: 20
+      value: 18
       objectReference: {fileID: 0}
     - target: {fileID: 214742064415424273, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_LocalPosition.x
@@ -27800,13 +28338,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 698403642169943464, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 698403642169943467, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_Name
       value: 0004.Charmander
       objectReference: {fileID: 0}
     - target: {fileID: 698403642169943467, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 859389214884390951, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: Level
@@ -27826,11 +28368,11 @@ PrefabInstance:
       objectReference: {fileID: 1576909176}
     - target: {fileID: 2545082498368978027, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2545082498368978027, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2545082498571816720, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
       propertyPath: m_Name
@@ -27982,7 +28524,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &787494893
@@ -28496,8 +29038,7 @@ GameObject:
   - component: {fileID: 809063609}
   - component: {fileID: 809063608}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28522,7 +29063,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 129}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &809063608
 MonoBehaviour:
@@ -29023,11 +29564,13 @@ MonoBehaviour:
   TargetSpeedRank: 1
   TargetHitrateRank: 1
   Damage: 0
-  distance: 3
+  distance_wild: 3
+  distance_battle: 20
   virtualCamera: {fileID: 741681392}
   PlayerCamera: {fileID: 656755662}
   playerPokemon: {fileID: 0}
   playerskillnum: 0
+  enemyPokemon_List: []
   enemyPokemon: {fileID: 0}
   enemyskillnum: 0
   player: {fileID: 0}
@@ -29060,7 +29603,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &813267418
 GameObject:
@@ -29272,12 +29815,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 816310413}
-  m_LocalRotation: {x: -0, y: -0.9510566, z: 0, w: -0.30901685}
-  m_LocalPosition: {x: 2502.25, y: 86.64, z: -707.53}
+  m_LocalRotation: {x: -0, y: 0.009552121, z: -0, w: -0.9999544}
+  m_LocalPosition: {x: -241.10641, y: -19.96, z: 275.45068}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 26
+  m_Father: {fileID: 1534472862}
+  m_RootOrder: 29
   m_LocalEulerAnglesHint: {x: 0, y: -216, z: 0}
 --- !u!1 &816480804
 GameObject:
@@ -29585,7 +30128,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 325, y: 0}
+  m_AnchoredPosition: {x: 189, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &825771993
@@ -29798,7 +30341,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 17}
+  m_AnchoredPosition: {x: -98, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &836152411
@@ -29892,7 +30435,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &845825848
@@ -29946,8 +30489,7 @@ GameObject:
   - component: {fileID: 848809187}
   - component: {fileID: 848809186}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (9)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -29972,7 +30514,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 342.3}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &848809186
 MonoBehaviour:
@@ -30608,7 +31150,7 @@ PrefabInstance:
       objectReference: {fileID: 2145567018}
     - target: {fileID: 6335459958937819158, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
       propertyPath: m_RootOrder
-      value: 22
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 6335459958937819158, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
       propertyPath: m_LocalPosition.x
@@ -30665,6 +31207,10 @@ PrefabInstance:
     - target: {fileID: 6676520376207622828, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6696249602943808118, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ff3a135eab6adc4eb2d3bfcd7f1eb22, type: 3}
@@ -30781,7 +31327,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &879194207
@@ -31581,7 +32127,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &893357013
@@ -32142,8 +32688,7 @@ GameObject:
   - component: {fileID: 897014716}
   - component: {fileID: 897014715}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (22)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32168,7 +32713,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 271}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &897014715
 MonoBehaviour:
@@ -32936,7 +33481,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &935946025
@@ -33184,7 +33729,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 17}
+  m_AnchoredPosition: {x: -98, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &940841577
@@ -33259,7 +33804,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &943643170
@@ -33752,7 +34297,7 @@ Transform:
   m_Children:
   - {fileID: 1421823765}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 21.801, y: 0.525, z: 0.195}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -34171,8 +34716,7 @@ GameObject:
   - component: {fileID: 970215988}
   - component: {fileID: 970215987}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (19)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34197,7 +34741,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 485}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &970215987
 MonoBehaviour:
@@ -35639,8 +36183,7 @@ GameObject:
   - component: {fileID: 1017952549}
   - component: {fileID: 1017952548}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (20)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35665,7 +36208,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 413.6}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1017952548
 MonoBehaviour:
@@ -35793,8 +36336,7 @@ GameObject:
   - component: {fileID: 1023096335}
   - component: {fileID: 1023096334}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (50)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35819,7 +36361,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 555.5}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023096334
 MonoBehaviour:
@@ -35949,7 +36491,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1023307804
@@ -36235,8 +36777,7 @@ GameObject:
   - component: {fileID: 1033654992}
   - component: {fileID: 1033654991}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (5)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36261,7 +36802,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 626}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1033654991
 MonoBehaviour:
@@ -36988,7 +37529,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1048647334
@@ -37351,8 +37892,7 @@ GameObject:
   - component: {fileID: 1061411084}
   - component: {fileID: 1061411083}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (33)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37377,7 +37917,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 342.3}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061411083
 MonoBehaviour:
@@ -37486,8 +38026,7 @@ GameObject:
   - component: {fileID: 1061634719}
   - component: {fileID: 1061634718}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (1)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37512,7 +38051,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 58}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1061634718
 MonoBehaviour:
@@ -38070,8 +38609,7 @@ GameObject:
   - component: {fileID: 1073324489}
   - component: {fileID: 1073324488}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (10)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -38096,7 +38634,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 271}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1073324488
 MonoBehaviour:
@@ -39459,8 +39997,7 @@ GameObject:
   - component: {fileID: 1116472178}
   - component: {fileID: 1116472177}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (13)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39485,7 +40022,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 58}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1116472177
 MonoBehaviour:
@@ -39690,7 +40227,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1119073320
@@ -39887,7 +40424,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1120461502
@@ -40736,7 +41273,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -351.1, y: 0}
+  m_AnchoredPosition: {x: -393.1, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1143150254
@@ -40811,7 +41348,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 17}
+  m_AnchoredPosition: {x: -98, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1146833600
@@ -41238,7 +41775,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 17}
+  m_AnchoredPosition: {x: -98, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1171858346
@@ -41813,7 +42350,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -351.1, y: 0}
+  m_AnchoredPosition: {x: -393.1, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1193818668
@@ -42158,8 +42695,7 @@ GameObject:
   - component: {fileID: 1206736805}
   - component: {fileID: 1206736804}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42184,7 +42720,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 626}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1206736804
 MonoBehaviour:
@@ -42494,8 +43030,7 @@ GameObject:
   - component: {fileID: 1220187614}
   - component: {fileID: 1220187613}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (4)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -42520,7 +43055,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: -153.9}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1220187613
 MonoBehaviour:
@@ -43144,7 +43679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1231493098
@@ -43198,8 +43733,7 @@ GameObject:
   - component: {fileID: 1235375370}
   - component: {fileID: 1235375369}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (43)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43224,7 +43758,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 341.5}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1235375369
 MonoBehaviour:
@@ -43499,7 +44033,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 458874142776712124, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_RootOrder
-      value: 21
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 458874142776712124, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -43547,7 +44081,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 942922714868416774, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 942922714868416775, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5111162937648393398, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_RootOrder
@@ -43555,11 +44093,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5111162938922360777, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5111162938922360777, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7452940295900911368, guid: f54170201aad0f043895b33ca7cedbb2, type: 3}
       propertyPath: PlayerOwned
@@ -43684,8 +44222,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.11804, y: 250}
-  m_SizeDelta: {x: 1214.2361, y: 100}
+  m_AnchoredPosition: {x: 258.5144, y: 250}
+  m_SizeDelta: {x: 1011.4434, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1246497771
 MonoBehaviour:
@@ -44046,8 +44584,7 @@ GameObject:
   - component: {fileID: 1258499931}
   - component: {fileID: 1258499930}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (34)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44072,7 +44609,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 271}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1258499930
 MonoBehaviour:
@@ -44966,7 +45503,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1270654952
@@ -45195,7 +45732,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1273058350
@@ -45491,19 +46028,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1287029074}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1438453186}
-        m_TargetAssemblyTypeName: PokeCenter, Assembly-CSharp
-        m_MethodName: TalkExit
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1287029074
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -45824,7 +46349,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1297080508
@@ -46677,99 +47202,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1320281712}
   m_CullTransparentMesh: 1
---- !u!1 &1320311472
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1320311474}
-  - component: {fileID: 1320311473}
-  m_Layer: 0
-  m_Name: Directional Light (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &1320311473
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320311472}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &1320311474
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1320311472}
-  m_LocalRotation: {x: 0.15038297, y: 0.29414856, z: -0.019398887, w: 0.9436553}
-  m_LocalPosition: {x: 1338, y: 470, z: -1459}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 17.171, y: 35.096, z: 3.111}
 --- !u!1 &1320489022
 GameObject:
   m_ObjectHideFlags: 0
@@ -47651,7 +48083,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1344039093
@@ -48076,13 +48508,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1353451152}
-  m_LocalRotation: {x: -0, y: -0.8760072, z: -0, w: 0.482298}
-  m_LocalPosition: {x: 2298.43, y: 93.9, z: -818.25}
+  m_LocalRotation: {x: 0, y: -0.8870109, z: 0, w: 0.46174863}
+  m_LocalPosition: {x: 2298.43, y: 93.76, z: -818.25}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 28
-  m_LocalEulerAnglesHint: {x: 0, y: -122.329, z: 0}
+  m_RootOrder: 24
+  m_LocalEulerAnglesHint: {x: 0, y: -125, z: 0}
 --- !u!1 &1354627915
 GameObject:
   m_ObjectHideFlags: 0
@@ -48175,8 +48607,7 @@ GameObject:
   - component: {fileID: 1355304692}
   - component: {fileID: 1355304691}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (15)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -48201,7 +48632,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: -83}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1355304691
 MonoBehaviour:
@@ -48564,7 +48995,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1358790393
@@ -49290,7 +49721,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1381361941
@@ -49504,12 +49935,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1383869230}
-  m_LocalRotation: {x: 0, y: -0.3090171, z: 0, w: 0.95105654}
-  m_LocalPosition: {x: 2594.34, y: 86.64, z: -640.65}
+  m_LocalRotation: {x: -0, y: -0.99995446, z: -0, w: -0.00955236}
+  m_LocalPosition: {x: -354.89963, y: -19.96, z: 273.29858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 27
+  m_Father: {fileID: 1534472862}
+  m_RootOrder: 30
   m_LocalEulerAnglesHint: {x: 0, y: -36, z: 0}
 --- !u!1 &1385981764
 GameObject:
@@ -49882,7 +50313,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1389917396}
-  m_LocalRotation: {x: 0.0040542, y: -0.039663423, z: 0.0001609314, w: 0.9992049}
+  m_LocalRotation: {x: 0.0040541883, y: -0.039663415, z: 0.00016093091, w: 0.9992049}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -50021,7 +50452,7 @@ RectTransform:
   - {fileID: 431200523}
   - {fileID: 353269213}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -51053,7 +51484,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -95, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1414171456
@@ -51094,6 +51525,44 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1414171454}
   m_CullTransparentMesh: 1
+--- !u!1 &1416157023
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1416157024}
+  m_Layer: 5
+  m_Name: 0.enemyPokemon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!224 &1416157024
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1416157023}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 288185810}
+  - {fileID: 2096580353}
+  - {fileID: 12273022}
+  m_Father: {fileID: 109046586}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 1920, y: 1080}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1001 &1417010255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51123,7 +51592,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5842592526504614062, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_RootOrder
-      value: 18
+      value: 16
       objectReference: {fileID: 0}
     - target: {fileID: 5842592526504614062, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -51167,11 +51636,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413862264761897143, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6413862264761897143, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6477035820688690455, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_Constraints
@@ -51183,7 +51652,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090132, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511886606920090133, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090133, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -51199,6 +51672,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
+--- !u!4 &1417095803 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5699258530057711932, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
+  m_PrefabInstance: {fileID: 3429803217327292739}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1417289070
 GameObject:
   m_ObjectHideFlags: 0
@@ -51882,7 +52360,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1427557893
@@ -51936,8 +52414,7 @@ GameObject:
   - component: {fileID: 1428403632}
   - component: {fileID: 1428403631}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (8)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51962,7 +52439,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 413.6}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1428403631
 MonoBehaviour:
@@ -52250,8 +52727,7 @@ GameObject:
   - component: {fileID: 1437686936}
   - component: {fileID: 1437686935}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (6)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52276,7 +52752,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 555.5}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1437686935
 MonoBehaviour:
@@ -52447,17 +52923,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1437947537}
   m_CullTransparentMesh: 1
---- !u!114 &1438453186 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5934578675360823948, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
-  m_PrefabInstance: {fileID: 6034199693275516571}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 33c374dc2502dec428d5168bb2104ae1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1438675118
 GameObject:
   m_ObjectHideFlags: 0
@@ -53058,8 +53523,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.11804, y: 450}
-  m_SizeDelta: {x: 1214.2361, y: 100}
+  m_AnchoredPosition: {x: 258.5144, y: 450}
+  m_SizeDelta: {x: 1011.4434, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1454965770
 MonoBehaviour:
@@ -53322,7 +53787,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 328, y: 469.3}
+  m_AnchoredPosition: {x: 116.3, y: 403.4}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1458753811
@@ -53355,12 +53820,12 @@ MonoBehaviour:
       m_Calls: []
   m_FontData:
     m_Font: {fileID: 12800000, guid: 31854dd11d7c445419d6eb80ea08264f, type: 3}
-    m_FontSize: 35
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
     m_MaxSize: 50
-    m_Alignment: 4
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -53787,8 +54252,7 @@ GameObject:
   - component: {fileID: 1466396461}
   - component: {fileID: 1466396460}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (25)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -53813,7 +54277,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 58}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1466396460
 MonoBehaviour:
@@ -54173,7 +54637,7 @@ RectTransform:
   - {fileID: 1938559053}
   - {fileID: 2106139894}
   m_Father: {fileID: 109046586}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -54193,8 +54657,7 @@ GameObject:
   - component: {fileID: 1470568225}
   - component: {fileID: 1470568224}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (47)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -54219,7 +54682,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 57}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1470568224
 MonoBehaviour:
@@ -54963,7 +55426,7 @@ RectTransform:
   - {fileID: 537198683}
   - {fileID: 892258498}
   m_Father: {fileID: 109046586}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -54983,8 +55446,7 @@ GameObject:
   - component: {fileID: 1486352814}
   - component: {fileID: 1486352813}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (11)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -55009,7 +55471,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 200}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1486352813
 MonoBehaviour:
@@ -56410,7 +56872,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 4.546, z: 0}
 --- !u!1 &1524710041
 GameObject:
@@ -56838,6 +57300,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533764552}
   m_CullTransparentMesh: 1
+--- !u!4 &1534472862 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3980738868664485467, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+  m_PrefabInstance: {fileID: 6034199693275516571}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1535578633
 GameObject:
   m_ObjectHideFlags: 0
@@ -57159,7 +57626,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4696151807034765100, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_RootOrder
-      value: 16
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4696151807034765100, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_LocalPosition.x
@@ -57201,13 +57668,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5090945899444619460, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5361471049838753174, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_Name
       value: 0570.Zorua
       objectReference: {fileID: 0}
     - target: {fileID: 5361471049838753174, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5874436023764567353, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_Enabled
@@ -57215,11 +57686,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413862263056640150, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6413862263056640150, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7899651963179170204, guid: 2a48b0af928ec554887d30117551d9e8, type: 3}
       propertyPath: PlayerOwned
@@ -57409,8 +57880,7 @@ GameObject:
   - component: {fileID: 1547992721}
   - component: {fileID: 1547992720}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (16)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57435,7 +57905,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: -153.9}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1547992720
 MonoBehaviour:
@@ -57698,8 +58168,7 @@ GameObject:
   - component: {fileID: 1553348189}
   - component: {fileID: 1553348188}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (36)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -57724,7 +58193,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 129}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1553348188
 MonoBehaviour:
@@ -58138,8 +58607,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 196.40002, y: 534}
-  m_SizeDelta: {x: 453.2, y: 222.0189}
+  m_AnchoredPosition: {x: 196.4, y: 606.9}
+  m_SizeDelta: {x: 460, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1560997274
 MonoBehaviour:
@@ -58257,7 +58726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1561404035
@@ -58482,7 +58951,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 109046586}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -58636,7 +59105,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1570512229
@@ -59134,7 +59603,7 @@ RectTransform:
   - {fileID: 401403258}
   - {fileID: 1438675119}
   m_Father: {fileID: 109046586}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -59652,8 +60121,7 @@ GameObject:
   - component: {fileID: 1595954293}
   - component: {fileID: 1595954292}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (2)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -59678,7 +60146,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: -13}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1595954292
 MonoBehaviour:
@@ -60481,7 +60949,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -98, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1618718289
@@ -60869,7 +61337,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1627262732
@@ -61032,7 +61500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 30
+  m_RootOrder: 26
   m_LocalEulerAnglesHint: {x: 0, y: -122.329, z: 0}
 --- !u!1 &1631559473
 GameObject:
@@ -61485,7 +61953,7 @@ RectTransform:
   - {fileID: 981513151}
   - {fileID: 521354167}
   m_Father: {fileID: 109046586}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -61674,8 +62142,7 @@ GameObject:
   - component: {fileID: 1660185026}
   - component: {fileID: 1660185025}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (21)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -61700,7 +62167,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 342.3}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1660185025
 MonoBehaviour:
@@ -63579,7 +64046,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 325, y: 0}
+  m_AnchoredPosition: {x: 189, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1720201891
@@ -64210,7 +64677,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7501935376399188176, guid: 8a38d0fd0fb455943aae07f8f7554bc5, type: 3}
       propertyPath: m_RootOrder
-      value: 14
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 7501935376399188176, guid: 8a38d0fd0fb455943aae07f8f7554bc5, type: 3}
       propertyPath: m_LocalPosition.x
@@ -64251,6 +64718,10 @@ PrefabInstance:
     - target: {fileID: 7501935376399188176, guid: 8a38d0fd0fb455943aae07f8f7554bc5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8040758251484653369, guid: 8a38d0fd0fb455943aae07f8f7554bc5, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8a38d0fd0fb455943aae07f8f7554bc5, type: 3}
@@ -66815,7 +67286,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -64, y: 17}
+  m_AnchoredPosition: {x: -98, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1802505991
@@ -67152,8 +67623,7 @@ GameObject:
   - component: {fileID: 1812360846}
   - component: {fileID: 1812360845}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\";"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -67178,7 +67648,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: 342.3}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1812360845
 MonoBehaviour:
@@ -67274,99 +67744,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1812360843}
   m_CullTransparentMesh: 1
---- !u!1 &1813395956
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1813395958}
-  - component: {fileID: 1813395957}
-  m_Layer: 0
-  m_Name: Directional Light (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!108 &1813395957
-Light:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813395956}
-  m_Enabled: 1
-  serializedVersion: 10
-  m_Type: 1
-  m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
-  m_CookieSize: 10
-  m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
-    m_CustomResolution: -1
-    m_Strength: 1
-    m_Bias: 0.05
-    m_NormalBias: 0.4
-    m_NearPlane: 0.2
-    m_CullingMatrixOverride:
-      e00: 1
-      e01: 0
-      e02: 0
-      e03: 0
-      e10: 0
-      e11: 1
-      e12: 0
-      e13: 0
-      e20: 0
-      e21: 0
-      e22: 1
-      e23: 0
-      e30: 0
-      e31: 0
-      e32: 0
-      e33: 1
-    m_UseCullingMatrixOverride: 0
-  m_Cookie: {fileID: 0}
-  m_DrawHalo: 0
-  m_Flare: {fileID: 0}
-  m_RenderMode: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingLayerMask: 1
-  m_Lightmapping: 4
-  m_LightShadowCasterMode: 0
-  m_AreaSize: {x: 1, y: 1}
-  m_BounceIntensity: 1
-  m_ColorTemperature: 6570
-  m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
-  m_UseBoundingSphereOverride: 0
-  m_UseViewFrustumForShadowCasterCull: 1
-  m_ShadowRadius: 0
-  m_ShadowAngle: 0
---- !u!4 &1813395958
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1813395956}
-  m_LocalRotation: {x: 0.05356435, y: -0.9154974, z: 0.14936724, w: 0.36970904}
-  m_LocalPosition: {x: 3452, y: 542, z: 659}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 18.246, y: -135.899, z: 0.746}
 --- !u!1 &1814660479 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2883243658724546917, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
@@ -68010,7 +68387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 210, y: 198}
+  m_AnchoredPosition: {x: 284.2, y: 198}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1830351073
@@ -68040,7 +68417,7 @@ MonoBehaviour:
     m_BestFit: 0
     m_MinSize: 3
     m_MaxSize: 40
-    m_Alignment: 5
+    m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 1
@@ -68068,8 +68445,7 @@ GameObject:
   - component: {fileID: 1831985607}
   - component: {fileID: 1831985606}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (12)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68094,7 +68470,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 234.5, y: 129}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1831985606
 MonoBehaviour:
@@ -68637,8 +69013,7 @@ GameObject:
   - component: {fileID: 1840560815}
   - component: {fileID: 1840560814}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (38)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -68663,7 +69038,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: -13}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1840560814
 MonoBehaviour:
@@ -68965,7 +69340,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1847448384
@@ -69505,8 +69880,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.11804, y: 150}
-  m_SizeDelta: {x: 1214.2361, y: 100}
+  m_AnchoredPosition: {x: 258.5144, y: 150}
+  m_SizeDelta: {x: 1011.4434, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865683202
 MonoBehaviour:
@@ -69892,7 +70267,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1873103359
 GameObject:
@@ -70195,8 +70570,7 @@ GameObject:
   - component: {fileID: 1880874953}
   - component: {fileID: 1880874952}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (28)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70221,7 +70595,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: -153.9}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1880874952
 MonoBehaviour:
@@ -70351,7 +70725,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -351.1, y: 0}
+  m_AnchoredPosition: {x: -393.1, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1882287274
@@ -71244,7 +71618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1908289798
@@ -71490,7 +71864,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 4.546, z: 0}
 --- !u!1 &1914673006
 GameObject:
@@ -71734,8 +72108,7 @@ GameObject:
   - component: {fileID: 1922848874}
   - component: {fileID: 1922848873}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (45)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71760,7 +72133,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 1122.5, y: 199.6}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1922848873
 MonoBehaviour:
@@ -72165,7 +72538,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1937124726
@@ -72240,7 +72613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1937365004
@@ -72621,8 +72994,7 @@ GameObject:
   - component: {fileID: 1953708519}
   - component: {fileID: 1953708518}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (40)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -72647,7 +73019,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: -83}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1953708518
 MonoBehaviour:
@@ -72847,7 +73219,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5842592526504614062, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_RootOrder
-      value: 17
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 5842592526504614062, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -72891,11 +73263,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6413862264761897143, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6413862264761897143, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090132, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_Name
@@ -72903,7 +73275,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090132, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6511886606920090133, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6511886606920090133, guid: 4b33004a33cb4e34f8e50c3cb67adde9, type: 3}
       propertyPath: m_ApplyRootMotion
@@ -73938,8 +74314,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.11804, y: 50}
-  m_SizeDelta: {x: 1214.2361, y: 100}
+  m_AnchoredPosition: {x: 258.5144, y: 50}
+  m_SizeDelta: {x: 1011.4434, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1986865991
 MonoBehaviour:
@@ -74303,7 +74679,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -351.1, y: 0}
+  m_AnchoredPosition: {x: -393.1, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1993559773
@@ -74457,7 +74833,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -351.1, y: 0}
+  m_AnchoredPosition: {x: -393.1, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1996492922
@@ -74703,8 +75079,7 @@ GameObject:
   - component: {fileID: 2011489341}
   - component: {fileID: 2011489340}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (3)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74729,7 +75104,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: -56, y: -83}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2011489340
 MonoBehaviour:
@@ -74895,7 +75270,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -63.99997, y: 17}
+  m_AnchoredPosition: {x: -97.99997, y: 17}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2016328293
@@ -75396,8 +75771,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.11804, y: 350}
-  m_SizeDelta: {x: 1214.2361, y: 100}
+  m_AnchoredPosition: {x: 258.5144, y: 350}
+  m_SizeDelta: {x: 1011.4434, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2030521600
 MonoBehaviour:
@@ -76468,7 +76843,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -351.1, y: 0}
+  m_AnchoredPosition: {x: -393.1, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2059398624
@@ -76541,8 +76916,7 @@ GameObject:
   - component: {fileID: 2060230232}
   - component: {fileID: 2060230231}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (24)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76567,7 +76941,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 533.5, y: 129}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2060230231
 MonoBehaviour:
@@ -77851,6 +78225,85 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2095650271}
   m_CullTransparentMesh: 1
+--- !u!1 &2096580352
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2096580353}
+  - component: {fileID: 2096580354}
+  - component: {fileID: 2096580355}
+  m_Layer: 5
+  m_Name: Name_txt
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2096580353
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096580352}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1416157024}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 679.1, y: 376.60007}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2096580354
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096580352}
+  m_CullTransparentMesh: 1
+--- !u!114 &2096580355
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2096580352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 12800000, guid: 469efe6d17b78d74ea9afd1334c5f3ca, type: 3}
+    m_FontSize: 40
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 3
+    m_MaxSize: 50
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: "\uD30C\uC774\uB9AC"
 --- !u!1 &2098175278
 GameObject:
   m_ObjectHideFlags: 0
@@ -78419,9 +78872,13 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1885033339382873494, guid: 00c9a30fcc0ddab45a5c53d3c8f187b1, type: 3}
+      propertyPath: m_CullingMode
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2135342466022398560, guid: 00c9a30fcc0ddab45a5c53d3c8f187b1, type: 3}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 2135342466022398560, guid: 00c9a30fcc0ddab45a5c53d3c8f187b1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -78994,8 +79451,7 @@ GameObject:
   - component: {fileID: 2137082374}
   - component: {fileID: 2137082373}
   m_Layer: 5
-  m_Name: "pokemonTextBox.instance.Menu.transform.GetComponentInChildren<Text>().text
-    = \"\uC0AC\uB7EC\uC654\uB2E4\"; (32)"
+  m_Name: pokemon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -79020,7 +79476,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 824, y: 413.6}
-  m_SizeDelta: {x: 180, y: 70}
+  m_SizeDelta: {x: 250, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2137082373
 MonoBehaviour:
@@ -79363,6 +79819,145 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2146763426}
   m_CullTransparentMesh: 1
+--- !u!4 &437147098075029106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9126889019586180850}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8091471140709874524}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &521050314167433421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7640115441052457788}
+  - component: {fileID: 3042111536942660233}
+  - component: {fileID: 521050314167433422}
+  m_Layer: 0
+  m_Name: lowerobj_mesh_shape
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!96 &521050314167433422
+TrailRenderer:
+  serializedVersion: 2
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521050314167433421}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 0
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3539e2c74df83074a8d55010011219f6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Time: 0.1
+  m_Parameters:
+    serializedVersion: 3
+    widthMultiplier: 1
+    widthCurve:
+      serializedVersion: 2
+      m_Curve:
+      - serializedVersion: 3
+        time: 0
+        value: 0.051280975
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 1
+        value: 0
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    colorGradient:
+      serializedVersion: 2
+      key0: {r: 1, g: 1, b: 1, a: 1}
+      key1: {r: 1, g: 1, b: 1, a: 1}
+      key2: {r: 0, g: 0, b: 0, a: 0}
+      key3: {r: 0, g: 0, b: 0, a: 0}
+      key4: {r: 0, g: 0, b: 0, a: 0}
+      key5: {r: 0, g: 0, b: 0, a: 0}
+      key6: {r: 0, g: 0, b: 0, a: 0}
+      key7: {r: 0, g: 0, b: 0, a: 0}
+      ctime0: 0
+      ctime1: 65535
+      ctime2: 0
+      ctime3: 0
+      ctime4: 0
+      ctime5: 0
+      ctime6: 0
+      ctime7: 0
+      atime0: 0
+      atime1: 65535
+      atime2: 0
+      atime3: 0
+      atime4: 0
+      atime5: 0
+      atime6: 0
+      atime7: 0
+      m_Mode: 0
+      m_NumColorKeys: 2
+      m_NumAlphaKeys: 2
+    numCornerVertices: 0
+    numCapVertices: 0
+    alignment: 0
+    textureMode: 0
+    shadowBias: 0.5
+    generateLightingData: 0
+  m_MinVertexDistance: 0.1
+  m_Autodestruct: 0
+  m_Emitting: 1
 --- !u!4 &543450653394917220 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2887830627955496487, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
@@ -80401,7 +80996,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8932625825629747501, guid: 24fe74e59a3fd8449aaf753a621f583c, type: 3}
       propertyPath: m_RootOrder
-      value: 24
+      value: 22
       objectReference: {fileID: 0}
     - target: {fileID: 8932625825629747501, guid: 24fe74e59a3fd8449aaf753a621f583c, type: 3}
       propertyPath: m_LocalPosition.x
@@ -80469,6 +81064,113 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 24fe74e59a3fd8449aaf753a621f583c, type: 3}
+--- !u!4 &955059547807135882
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9213442833448881620}
+  m_LocalRotation: {x: 0.00000001513399, y: 0.0000000032292422, z: 1.2029873e-16, w: 1}
+  m_LocalPosition: {x: 0.00035499997, y: -7.4505804e-11, z: -0.000025000028}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 7131115182851918245}
+  m_Father: {fileID: 6549419510054792185}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &978871320252371627
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8091471140709874524}
+  m_Layer: 0
+  m_Name: chara_root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &1203487418845241235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1225481987952166811}
+  m_Layer: 0
+  m_Name: upperobj_mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1225481987952166811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1203487418845241235}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 3816677966866280407}
+  m_Father: {fileID: 5432782790417111027}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1298962010576294908
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5089618108032566434}
+  m_Layer: 0
+  m_Name: loc_attach
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1635282024061438773
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7478304780482058275}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2878091649867310974}
+  m_Father: {fileID: 5432782790417111027}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2053768556808289425
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7098591426434552686}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.0009999999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2806244449661929204}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &2092339234282212804
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80490,7 +81192,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2702692607490369642, guid: 7be13177c0351614aa01c35beaab009e, type: 3}
       propertyPath: m_RootOrder
-      value: 25
+      value: 23
       objectReference: {fileID: 0}
     - target: {fileID: 2702692607490369642, guid: 7be13177c0351614aa01c35beaab009e, type: 3}
       propertyPath: m_LocalScale.x
@@ -80574,6 +81276,171 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7be13177c0351614aa01c35beaab009e, type: 3}
+--- !u!4 &2806244449661929204
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5636790453381853815}
+  m_LocalRotation: {x: 0.00000001862645, y: -8.141879e-16, z: 3.970467e-23, w: 1}
+  m_LocalPosition: {x: -8.2718056e-26, y: -1.4901161e-10, z: -0.00038}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2053768556808289425}
+  m_Father: {fileID: 6549419510054792185}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &2878091649867310974
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3264944095554862037}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1635282024061438773}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!137 &2998933038026978574
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4645916024187542200}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0787e81a924c55f45b904885f8fef880, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: -8055522027765986451, guid: f175523857870404a929c2d4a51d112d, type: 3}
+  m_Bones:
+  - {fileID: 8091471140709874524}
+  - {fileID: 8914980496159951452}
+  - {fileID: 5089618108032566434}
+  - {fileID: 6549419510054792185}
+  - {fileID: 955059547807135882}
+  - {fileID: 2806244449661929204}
+  - {fileID: 1225481987952166811}
+  - {fileID: 1635282024061438773}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 8914980496159951452}
+  m_AABB:
+    m_Center: {x: 5.820766e-11, y: 0.00013584987, z: -0.000010580377}
+    m_Extent: {x: 0.0003809555, y: 0.00024838722, z: 0.00036647829}
+  m_DirtyAABB: 0
+--- !u!137 &3042111536942660233
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521050314167433421}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 3
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 0787e81a924c55f45b904885f8fef880, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 79344247699400171, guid: f175523857870404a929c2d4a51d112d, type: 3}
+  m_Bones:
+  - {fileID: 8091471140709874524}
+  - {fileID: 8914980496159951452}
+  - {fileID: 5089618108032566434}
+  - {fileID: 6549419510054792185}
+  - {fileID: 955059547807135882}
+  - {fileID: 2806244449661929204}
+  - {fileID: 1225481987952166811}
+  - {fileID: 1635282024061438773}
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 8914980496159951452}
+  m_AABB:
+    m_Center: {x: 0, y: -0.00020014586, z: -0.000010978401}
+    m_Extent: {x: 0.00038095546, y: 0.00017933144, z: 0.00036608023}
+  m_DirtyAABB: 0
+--- !u!1 &3264944095554862037
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2878091649867310974}
+  m_Layer: 0
+  m_Name: lowerobj_mesh_end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &3429803217327292739
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80590,6 +81457,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 2546910981996907683, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
+      propertyPath: show_Ball
+      value: 
+      objectReference: {fileID: 9146409953161028395}
+    - target: {fileID: 2546910981996907683, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: ball_prefab
       value: 
       objectReference: {fileID: 3729912075594039060}
@@ -80599,7 +81470,7 @@ PrefabInstance:
       objectReference: {fileID: 963194225}
     - target: {fileID: 2887830627955496487, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: m_RootOrder
-      value: 23
+      value: 21
       objectReference: {fileID: 0}
     - target: {fileID: 2887830627955496487, guid: cc6b0d438c01f5b4f81f5b5fd7a410e0, type: 3}
       propertyPath: m_LocalPosition.x
@@ -80648,6 +81519,84 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3371564686099739344, guid: 7be13177c0351614aa01c35beaab009e, type: 3}
   m_PrefabInstance: {fileID: 2092339234282212804}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &3816677966866280407
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8715746292296043684}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.001, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1225481987952166811}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4355268726325030118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7131115182851918245}
+  m_Layer: 0
+  m_Name: upper_parts_end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &4623591426396828264
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6549419510054792185}
+  m_Layer: 0
+  m_Name: waist
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &4645916024187542200
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6268374415773736924}
+  - component: {fileID: 2998933038026978574}
+  m_Layer: 0
+  m_Name: upperobj_mesh_shape
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5089618108032566434
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298962010576294908}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 6549419510054792185}
+  m_Father: {fileID: 8914980496159951452}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5338727782282454258 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6277881349960722742, guid: 7be13177c0351614aa01c35beaab009e, type: 3}
@@ -80760,6 +81709,40 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!4 &5432782790417111027
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8103721146057034089}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_Children:
+  - {fileID: 8091471140709874524}
+  - {fileID: 1635282024061438773}
+  - {fileID: 8914980496159951452}
+  - {fileID: 1225481987952166811}
+  m_Father: {fileID: 8477256400386587025}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &5636790453381853815
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2806244449661929204}
+  m_Layer: 0
+  m_Name: lower_parts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1001 &6034199693275516571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80851,6 +81834,14 @@ PrefabInstance:
       propertyPath: myname
       value: Nurse Joy
       objectReference: {fileID: 0}
+    - target: {fileID: 5934578675360823948, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: playerbag
+      value: 
+      objectReference: {fileID: 281274386}
+    - target: {fileID: 5934578675360823948, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 408211246}
     - target: {fileID: 6034199694274318795, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
       propertyPath: m_Size.x
       value: 1.7416644
@@ -80891,8 +81882,38 @@ PrefabInstance:
       propertyPath: myname
       value: shop Boy
       objectReference: {fileID: 0}
+    - target: {fileID: 6122021627771540222, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: playerbag
+      value: 
+      objectReference: {fileID: 281274386}
+    - target: {fileID: 6122021627771540222, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 408211246}
+    - target: {fileID: 8614419188383090303, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: playerbag
+      value: 
+      objectReference: {fileID: 281274386}
+    - target: {fileID: 8614419188383090303, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+      propertyPath: playerMovement
+      value: 
+      objectReference: {fileID: 408211246}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 145a22be1abe2f34b9837cc494278d09, type: 3}
+--- !u!4 &6268374415773736924
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4645916024187542200}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_Children: []
+  m_Father: {fileID: 8477256400386587025}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!222 &6291818744858794618
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -80917,7 +81938,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -351.1, y: 0}
+  m_AnchoredPosition: {x: -393.1, y: 0}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6291818744858794621
@@ -81025,8 +82046,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 157.11804, y: -50}
-  m_SizeDelta: {x: 1214.2361, y: 100}
+  m_AnchoredPosition: {x: 258.5144, y: -50}
+  m_SizeDelta: {x: 1011.4434, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6291818745871157515
 MonoBehaviour:
@@ -81127,7 +82148,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 325, y: 0}
+  m_AnchoredPosition: {x: 189, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6291818746303771983
@@ -81261,6 +82282,22 @@ RectTransform:
   m_AnchoredPosition: {x: -57, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!4 &6549419510054792185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4623591426396828264}
+  m_LocalRotation: {x: 0.50000006, y: -0.49999997, z: -0.5, w: -0.5}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 0.99999994, z: 1}
+  m_Children:
+  - {fileID: 2806244449661929204}
+  - {fileID: 955059547807135882}
+  m_Father: {fileID: 5089618108032566434}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6799867245836612587
 GameObject:
   m_ObjectHideFlags: 0
@@ -81290,7 +82327,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &6799867245836612589
 MonoBehaviour:
@@ -81423,6 +82460,130 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 669f8bb24c16e854d9c1535f852d8738, type: 3}
   - {fileID: 21300000, guid: bd8cb5ff9151691428a1c036f8002634, type: 3}
   - {fileID: 21300000, guid: 71cf4570936f74744a3ec6374027b85c, type: 3}
+--- !u!1 &7098591426434552686
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2053768556808289425}
+  m_Layer: 0
+  m_Name: lower_parts_end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &7126040969086590312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8914980496159951452}
+  m_Layer: 0
+  m_Name: origin
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7131115182851918245
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4355268726325030118}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.0009999999, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 955059547807135882}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7478304780482058275
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1635282024061438773}
+  m_Layer: 0
+  m_Name: lowerobj_mesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7640115441052457788
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 521050314167433421}
+  m_LocalRotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 100, y: 100, z: 100}
+  m_Children: []
+  m_Father: {fileID: 8477256400386587025}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &8091471140709874524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978871320252371627}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 437147098075029106}
+  m_Father: {fileID: 5432782790417111027}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &8103721146057034089
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5432782790417111027}
+  m_Layer: 0
+  m_Name: ob0204_00.trmdl
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8477256400386587025
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9146409953161028395}
+  m_LocalRotation: {x: 0.47290367, y: 0.4918531, z: 0.31436008, w: 0.66001546}
+  m_LocalPosition: {x: -0.000112, y: 0.000042, z: 0.000004}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
+  m_Children:
+  - {fileID: 5432782790417111027}
+  - {fileID: 7640115441052457788}
+  - {fileID: 6268374415773736924}
+  m_Father: {fileID: 1417095803}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 18.361, y: 85.838, z: 68.03}
 --- !u!1 &8686620899372874961 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8123613500444795799, guid: 24fe74e59a3fd8449aaf753a621f583c, type: 3}
@@ -81442,6 +82603,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Talk:
   - "\uB9CE\uC774 \uAE30\uB2E4\uB838\uC796\uC544\n\uBC30\uD2C0\uD558\uC790!"
+  - "\uADF8\uB7FC \uBC30\uD2C0\uC744 \uC2DC\uC791\uD574\uBCF4\uC790\uACE0"
   FriendPokemono:
   - {fileID: 698403642169943467, guid: f137a9d0730aa114f8a8dfde3479db8f, type: 3}
   - {fileID: 5873734831523692835, guid: b2211bf2df053244eb007aa0eb06b7b1, type: 3}
@@ -81506,3 +82668,82 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
+--- !u!1 &8715746292296043684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3816677966866280407}
+  m_Layer: 0
+  m_Name: upperobj_mesh_end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8914980496159951452
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7126040969086590312}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 5089618108032566434}
+  m_Father: {fileID: 5432782790417111027}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &9126889019586180850
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 437147098075029106}
+  m_Layer: 0
+  m_Name: chara_root_end
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &9146409953161028395
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8477256400386587025}
+  m_Layer: 0
+  m_Name: Ball_Show
+  m_TagString: Ball
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!1 &9213442833448881620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 955059547807135882}
+  m_Layer: 0
+  m_Name: upper_parts
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1

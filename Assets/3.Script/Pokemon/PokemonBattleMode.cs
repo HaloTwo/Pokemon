@@ -12,6 +12,8 @@ public class PokemonBattleMode : MonoBehaviour
     [SerializeField] private Text pokemon_name;
     [SerializeField] private Text pokemon_lv;
     [SerializeField] private GameObject UI;
+    public GameObject Eiscue_head;
+    public GameObject Eiscue_broken_head;
 
     [HideInInspector] public PokemonStats pokemonStats;
     private GameObject maincamera;
@@ -28,6 +30,12 @@ public class PokemonBattleMode : MonoBehaviour
         pokemon_name = UI.transform.GetChild(0).gameObject.GetComponent<Text>();
         pokemon_lv = UI.transform.GetChild(2).gameObject.GetComponentInChildren<Text>();
         UI.SetActive(false);
+
+        if (name.Contains("0975.Eiscue"))
+        {
+            Eiscue_head = GameObject.Find("Head");
+            Eiscue_broken_head = GameObject.Find("Broken_Head");
+        }
     }
 
 
@@ -129,5 +137,20 @@ public class PokemonBattleMode : MonoBehaviour
             //ballRigidbody.AddForce(new Vector3(0f, 0f, 0f), ForceMode.Impulse);
         }
 
+    }
+
+    public void Eiscue_head_broken()
+    {
+        if (Eiscue_head != null)
+        {
+            Eiscue_head.SetActive(false);
+        }
+    }
+    public void Eiscue_head_broken_last()
+    {
+        if (Eiscue_head != null)
+        {
+            Eiscue_broken_head.SetActive(false);
+        }
     }
 }

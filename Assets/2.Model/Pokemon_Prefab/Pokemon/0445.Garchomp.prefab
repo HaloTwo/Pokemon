@@ -427,25 +427,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d132e12b7b5ca04894ce4ea93bb65df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 0
+  hp: 148
   isDie: 0
   Default_MaxHp: 108
   Default_Attack: 130
   Default_Defence: 95
   Default_SpAttack: 80
   Default_SpDefence: 85
-  Default_Speed: 102
+  Default_Speed: 142
   Default_Level: 0
-  PlayerOwned: 0
+  PlayerOwned: 1
   Name: "\uD55C\uCE74\uB9AC\uC544\uC2A4"
   image: {fileID: 21300000, guid: b4daa04fbbb036b47a6b9405f74d1b2f, type: 3}
-  MaxHp: 108
-  Attack: 130
-  Defence: 95
-  SpAttack: 80
-  SpDefence: 85
+  MaxHp: 148
+  Attack: 170
+  Defence: 135
+  SpAttack: 148
+  SpDefence: 120
   Speed: 102
-  Level: 0
+  Level: 20
   Exp: 0
   Type1: 15
   Type2: 3
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599588303973228438}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3826459dc78667f4ca549160f5cff500, type: 3}
   m_Name: 
@@ -491,6 +491,8 @@ MonoBehaviour:
   pokemon_name: {fileID: 0}
   pokemon_lv: {fileID: 0}
   UI: {fileID: 0}
+  Eiscue_head: {fileID: 0}
+  Eiscue_broken_head: {fileID: 0}
   pokemonStats: {fileID: 0}
 --- !u!1 &689810906807684170
 GameObject:

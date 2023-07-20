@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Friend : MonoBehaviour
 {
@@ -12,6 +13,7 @@ public class Friend : MonoBehaviour
     [SerializeField] GameObject playerPos;
     [SerializeField] GameObject enemyPos;
     [SerializeField] GameObject enemyPokemonPos;
+    bool isBattle;
 
     private void Awake()
     {
@@ -31,64 +33,51 @@ public class Friend : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !isBattle)
         {
-            anim.SetTrigger("Walk");
+            isBattle = true;
+            anim.SetBool("Walk", true);
+            transform.rotation = Quaternion.LookRotation(other.transform.position - transform.position);
 
             StartCoroutine(FriendBattle(other.gameObject));
-
-
-
-            if (anim.GetBool("Battle"))
-            {
-                other.transform.rotation = playerPos.transform.rotation;
-                other.transform.position = playerPos.transform.position;
-                other.GetComponent<PlayerMovement>().isBattle = true;
-            }
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            if (anim.GetBool("Battle"))
-            {
-                other.transform.rotation = playerPos.transform.rotation;
-                other.transform.position = playerPos.transform.position;
-                other.GetComponent<PlayerMovement>().isBattle = true;
 
-                BattleManager.instance.Battle_Start(in_FriendPokemono[0], other.gameObject, gameObject);
-                in_FriendPokemono[0].SetActive(true);
-            }
-        }
-    }
 
     IEnumerator FriendBattle(GameObject player)
     {
         player.GetComponent<PlayerMovement>().ismove = false;
         yield return new WaitForSeconds(4f);
-        anim.SetTrigger("Walk");
+
+
+        anim.SetBool("Walk", false);
+        yield return new WaitForSeconds(0.5f);
 
         TextBox.instance.NPC_Textbox_OnOff(true);
         yield return StartCoroutine(TextBox.instance.TypeText(Talk));
+
+        StartCoroutine(player.GetComponent<PlayerMovement>().apply_motion_wait(10f));
         TextBox.instance.NPC_Textbox_OnOff(false);
 
 
-        //player.transform.position = playerPos.transform.position + new Vector3(0, 5f, 0);
+        //StopCoroutine(player.GetComponent<PlayerMovement>().apply_motion_wait(1f));
+        //player.transform.position = playerPos.transform.position;
         //player.transform.rotation = playerPos.transform.rotation;
 
-        anim.SetBool("Battle", true);
+        anim.SetBool("Battle", isBattle);
+        player.GetComponent<PlayerMovement>().isBattle = true;
 
         transform.position = enemyPos.transform.position;
         transform.rotation = enemyPos.transform.rotation;
+
+
+        BattleManager.instance.Battle_Start(in_FriendPokemono, player, gameObject);
+
+        yield break;
     }
 }
+

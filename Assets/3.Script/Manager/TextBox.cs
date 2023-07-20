@@ -12,7 +12,7 @@ public class TextBox : MonoBehaviour
     public Text TalkText;
     public Text NPC_TalkText;
 
-    [SerializeField] private int currentIndex;
+    public int currentIndex;
     [SerializeField] private int beforeIndex;
 
     [Header("Shop UI")]
@@ -68,46 +68,88 @@ public class TextBox : MonoBehaviour
             currentbuttons[currentIndex].Select();
             uIManger.OnButtonSelected(currentbuttons[currentIndex], select);
 
-            if (Input.GetKeyDown(KeyCode.UpArrow))
+            //버튼 움직임
+            Button_Move(currentbuttons);
+
+            //나가기 버튼
+            inputButton_Exit();
+
+        }
+    }
+
+    void Button_Move(Button[] buttons)
+    {
+        if (Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            currentIndex--;
+            if (currentIndex < 0)
             {
-                currentIndex--;
+                currentIndex = buttons.Length - 1;
+            }
+
+        }
+        else if (Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            currentIndex++;
+            if (currentIndex >= buttons.Length)
+            {
+                currentIndex = 0;
+            }
+
+        }
+
+        if (uIManger.UI_stack.Peek() == Pokemon_Shop)
+        {
+
+            if (Input.GetKeyDown(KeyCode.LeftArrow))
+            {
+
+
+                currentIndex -= 12;
+
                 if (currentIndex < 0)
                 {
-                    currentIndex = currentbuttons.Length - 1;
+                    int num = currentIndex;
+                    currentIndex = num + 12;
                 }
 
             }
-            else if (Input.GetKeyDown(KeyCode.DownArrow))
+            else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-                currentIndex++;
-                if (currentIndex >= currentbuttons.Length)
-                {
-                    currentIndex = 0;
-                }
 
+
+                currentIndex += 12;
+
+                if (currentIndex >= buttons.Length)
+                {
+                    int num = currentIndex;
+                    currentIndex = num - 12;
+                }
             }
-            else if (Input.GetKeyDown(KeyCode.Escape))
+        }
+    }
+
+
+
+    void inputButton_Exit()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            currentIndex = beforeIndex;
+            beforeIndex = 0;
+
+            GameObject topUI = uIManger.UI_stack.Peek();
+            topUI.SetActive(false);
+            uIManger.UI_stack.Pop();
+
+            GameObject nextUI = uIManger.UI_stack.Peek();
+            nextUI.SetActive(true);
+
+            if (uIManger.UI_stack.Peek() == Menu)
             {
-                currentIndex = beforeIndex;
-                beforeIndex = 0;
-
-                GameObject topUI = uIManger.UI_stack.Peek();
-                topUI.SetActive(false);
-                uIManger.UI_stack.Pop();
-
-                GameObject nextUI = uIManger.UI_stack.Peek();
-                nextUI.SetActive(true);
-
-                if (uIManger.UI_stack.Peek() == Menu)
-                {
-                    currentIndex = 0;
-                    Shop_MenuOpen(false);
-                }
+                currentIndex = 0;
+                Shop_MenuOpen(false);
             }
-
-
-
-
         }
     }
 
@@ -141,7 +183,10 @@ public class TextBox : MonoBehaviour
         else
         {
             uIManger.UI_stack = null;
+            uIManger.main_bool = true;
             FindObjectOfType<PlayerMovement>().ismove = true;
+
+            select.gameObject.SetActive(false);
         }
     }
 
@@ -184,7 +229,7 @@ public class TextBox : MonoBehaviour
         for (int i = 0; i < dataManager.pokemon.Length; i++)
         {
             pokemon_img[i].sprite = dataManager.pokemon[i].GetComponent<PokemonStats>().image;
-            pokemon_name[i].text = $"{i+1}.{dataManager.pokemon[i].GetComponent<PokemonStats>().Name}";
+            pokemon_name[i].text = $"{i + 1}.{dataManager.pokemon[i].GetComponent<PokemonStats>().Name}";
         }
     }
 
@@ -203,13 +248,14 @@ public class TextBox : MonoBehaviour
 
     public void PokemonShop_pay()
     {
-        GameObject pokemon = dataManager.pokemon[beforeIndex];
+        GameObject pokemon = Instantiate(dataManager.pokemon[beforeIndex]);
         pokemon.GetComponent<PokemonStats>().Level = 20;
+        pokemon.GetComponent<PokemonStats>().LevelUp();
 
         playerbag.AddPokemon(pokemon);
 
         uIManger.UI_stack.Pop();
-        Pokemon_Shop.SetActive(false);
+        Pokemon_Shop_Menu.SetActive(false);
 
         currentIndex = beforeIndex;
     }
@@ -223,11 +269,11 @@ public class TextBox : MonoBehaviour
                 string displayedText = fullText[j].Substring(0, i);
                 NPC_TalkText.text = displayedText;
 
+                yield return null;
                 yield return new WaitForSeconds(0.02f);
             }
-
+            Debug.Log("돕니다");
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-
         }
     }
 }

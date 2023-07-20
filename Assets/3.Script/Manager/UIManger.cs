@@ -29,7 +29,7 @@ public class UIManger : MonoBehaviour
 
     [Header("메인메뉴 UI")]
     [Space(50f)]
-    [SerializeField] private GameObject Main_UI;
+    public GameObject Main_UI;
     [SerializeField] private GameObject MainUI_Default_UI;
     public bool main_bool = true;
 
@@ -41,6 +41,7 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Slider[] mainUI_change_pokemon_hPbar;
     [SerializeField] private Text[] mainUI_change_pokemon_hp_txt;
     [SerializeField] private GameObject mainUI_pokemon_menu;
+
 
     [Header("메인메뉴 가방UI")]
     [Space(20f)]
@@ -97,6 +98,19 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Image[] pokemon_ball;
     [SerializeField] private Sprite alive_ball_sprite;
     [SerializeField] private Sprite die_ball_sprite;
+
+
+    [Header("적 HP관련 UI")]
+    public PokemonStats enemypokemon;
+    [SerializeField] private GameObject enemy_HP_UI;
+    [SerializeField] private Text enemy_hp_txt;
+    public Slider enemy_hPbar;
+
+    [Header("적 트레이너 포켓몬 이름")]
+    [SerializeField] private Text enemy_pokemon_name;
+    [Header("적 트레이너 포켓몬 레벨")]
+    [SerializeField] private Text enemy_pokemon_lv;
+
 
 
     [Header("1. 스킬 UI")]
@@ -217,6 +231,11 @@ public class UIManger : MonoBehaviour
             //현재 플레이어 포켓몬 볼 이미지로 체크
             Current_Playerpokemon_Check(playerpokemon);
 
+            if (enemypokemon != null)
+            {
+                Current_Enemypokemon_Check(enemypokemon);
+            }
+
             //현재 UI의 버튼 
 
             if (pokemon_choise)
@@ -333,6 +352,16 @@ public class UIManger : MonoBehaviour
 
     //실시간 체크
     #region 실시간 체크
+
+    void Current_Enemypokemon_Check(PokemonStats enemypokemon)
+    {
+        enemy_pokemon_name.text = enemypokemon.Name;
+        enemy_pokemon_lv.text = "Lv." + enemypokemon.Level;
+        enemy_hp_txt.text = enemypokemon.Hp + "/" + enemypokemon.MaxHp;
+        enemy_hPbar.value = (float)enemypokemon.Hp / enemypokemon.MaxHp;
+
+        Hpbar_Color(this.hPbar);
+    }
 
     //현재 전투중인 플레이어 포켓몬 체크
     void Current_Playerpokemon_Check(PokemonStats playerpokemon)
@@ -1514,6 +1543,7 @@ public class UIManger : MonoBehaviour
 
     public void MainUI_Use_Pokemon()
     {
+
         if (playerBag.Itemdata[Item_index].Quantity > 0)
         {
             //아이템 사용
@@ -1530,6 +1560,7 @@ public class UIManger : MonoBehaviour
                     choise_pokemon.isDie = false;
                     pokemon_choise = false;
                     playerBag.Itemdata[Item_index].Quantity--;
+                    currentIndex = Item_index;
                 }
             }
             else if (playerBag.Itemdata[Item_index].Name == "이상한 사탕")
@@ -1539,6 +1570,7 @@ public class UIManger : MonoBehaviour
 
                 pokemon_choise = false;
                 playerBag.Itemdata[Item_index].Quantity--;
+                currentIndex = Item_index;
             }
             else
             {
@@ -1572,6 +1604,7 @@ public class UIManger : MonoBehaviour
 
                 pokemon_choise = false;
                 playerBag.Itemdata[Item_index].Quantity--;
+                currentIndex = Item_index;
             }
         }
         //아이템 확인
@@ -1866,7 +1899,7 @@ public class UIManger : MonoBehaviour
         }
         else
         {
-            BoxUI_inbox_pokemon_img[beforeIndex-6].color = new Color(0, 0, 0, 0);
+            BoxUI_inbox_pokemon_img[beforeIndex - 6].color = new Color(0, 0, 0, 0);
             playerBag.PokemonBox.RemoveAt(beforeIndex - 6);
             playerBag.PokemonBox.Insert(beforeIndex - 6, null);
         }
@@ -1904,8 +1937,11 @@ public class UIManger : MonoBehaviour
         pokemon_choise = false;
         choise_pokemon_move = false;
         currentIndex = beforeIndex;
-
-        if (UI_stack.Peek() == Bag_UI)
+        if (UI_stack.Peek() == ball_button)
+        {
+            currentIndex = 0;
+        }
+        else if (UI_stack.Peek() == Bag_UI)
         {
             currentIndex = 2;
         }
@@ -1917,7 +1953,15 @@ public class UIManger : MonoBehaviour
         {
             currentIndex = MainUI_Default_UI.GetComponentsInChildren<Button>().Length - 3;
         }
-
+        else if (UI_stack.Peek() == mainUI_Menu_Choise_UI)
+        {
+            Item_index = beforeIndex;
+            currentIndex = Item_index;
+        }
+        else if (UI_stack.Peek() == mainUI_Bag_UI)
+        {
+            currentIndex = MainUI_Default_UI.GetComponentsInChildren<Button>().Length - 4;
+        }
 
         if (!HP_UI.activeSelf && Battle_UI.activeSelf && !Change_UI.activeSelf)
         {
@@ -1929,10 +1973,10 @@ public class UIManger : MonoBehaviour
         topUI.SetActive(false);
         UI_stack.Pop();
 
-        if (UI_stack.Peek() == mainUI_Bag_UI)
-        {
-            currentIndex = buttons.Length - 4;
-        }
+        //if (UI_stack.Peek() == mainUI_Bag_UI)
+        //{
+        //    currentIndex = buttons.Length - 3;
+        //}
 
 
         GameObject nextUI = UI_stack.Peek();
@@ -2024,6 +2068,7 @@ public class UIManger : MonoBehaviour
 
 
     //정보UI
+    #region 정보보는 UI
     public void Status_UI_Button()
     {
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
@@ -2107,4 +2152,5 @@ public class UIManger : MonoBehaviour
         inbox_status_pokemon_spatk_txt.text = $"{pokemon.SpAttack}";
         inbox_status_pokemon_spdef_txt.text = $"{pokemon.SpDefence}";
     }
+    #endregion
 }

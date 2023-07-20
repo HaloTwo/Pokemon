@@ -12,19 +12,20 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float ThrowPower = 20f;
     [SerializeField] private Transform ball_loc;
     [SerializeField] private GameObject ball_prefab;
+    [SerializeField] private GameObject show_Ball;
 
     [Header("체크")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private bool isGrounded = true;
     [SerializeField] private bool isLookon;
     public bool isBattle;
-    [SerializeField] private bool hasControl;
+    private bool hasControl;
     [SerializeField] private bool isWalking = false;
     [Header("카메라")]
     [SerializeField] private GameObject FollowCamera;
 
 
-    private Vector3 moveDirection;
+    public Vector3 moveDirection;
 
     private PlayerControlsButton inputActions;
     private CharacterController controller;
@@ -140,6 +141,18 @@ public class PlayerMovement : MonoBehaviour
         yield break;
     }
 
+    public void BallOn_Event(int num)
+    {
+        if (num == 1)
+        {
+            show_Ball.SetActive(true);
+        }
+        else
+        {
+            show_Ball.SetActive(false);
+        }
+    }
+
     #region 범위 시각화
 
     private void OnDrawGizmos()
@@ -220,9 +233,9 @@ public class PlayerMovement : MonoBehaviour
         else if (isBattle)
         {
             ball_rb.useGravity = false;
-            ball_rb.AddForce(transform.forward * ThrowPower / 2, ForceMode.Impulse);
+            ball_rb.AddForce(transform.forward * ThrowPower / 3, ForceMode.Impulse);
 
-            Invoke("DisableBallPrefab", 1f);
+            Invoke("DisableBallPrefab", 0.35f);
         }
         //포켓몬과 전투하려고 할 때, 가장 가까운 포켓몬 조준
         else if (colls.Length > 0)
@@ -260,7 +273,6 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             ball_rb.AddForce(transform.forward * ThrowPower / 2, ForceMode.Impulse);
-
 
             Invoke("DisableBallPrefab", 1f);
         }
