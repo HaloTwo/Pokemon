@@ -66,6 +66,7 @@ public class BattleManager : MonoBehaviour
 
     [Header("플레이어")]
     [SerializeField] private GameObject player;
+    [SerializeField] private GameObject enemyplayer;
     [Header("몬스터볼")]
     [SerializeField] private GameObject ball;
 
@@ -98,30 +99,51 @@ public class BattleManager : MonoBehaviour
     {
         uIManger = Battle_UI.transform.parent.GetComponent<UIManger>();
     }
-    public void Battle_Start(GameObject enemyPokemon, GameObject player)
+    public void Battle_Start(GameObject enemyPokemon, GameObject player, GameObject enemyplayer)
     {
         this.enemyPokemon = enemyPokemon;
         this.player = player;
 
         //포켓몬 생성 하고 playerPokemon을 채워줌
-        Battle_Ready.Invoke();
+        if (enemyPokemon.GetComponent<PokemonBattleMode>().isWild || enemyplayer == null)
+        {
+            //포켓몬과 플레이어 위치 조정
+            //포켓몬 위치 조정
 
-        //포켓몬과 플레이어 위치 조정
-        //포켓몬 위치 조정
-        pokemonMove();
+            Battle_Ready.Invoke();
 
-        //플레이어 위치
-        playerMove(out Vector3 offset);
+            Wild_pokemonMove();
 
+            //플레이어 위치
+            Wild_playerMove(out Vector3 offset);
 
-        //카메라 연출 시작(아직 야생만)
-        StartCoroutine(Wild_BattleCamera_co(offset));
+            //카메라 연출 시작(아직 야생만)
+            StartCoroutine(Wild_BattleCamera_co(offset));
+        }
+        else
+        {
+            this.enemyplayer = enemyplayer;
+            float distance = Vector3.Distance(player.transform.position, enemyplayer.transform.position);
+
+            // 거리 출력
+            Debug.Log("두 오브젝트 사이의 거리: " + distance);
+
+        }
 
         //끝나면
         StartCoroutine(Battle());
     }
 
-    void pokemonMove()
+    void trainerBattle_pokemonMove()
+    {
+
+    }
+
+
+
+
+    #region 야생 포켓몬 연출
+    void Wild_pokemonMove()
     {
         Bounds enemy = enemyPokemon.GetComponentInChildren<Renderer>().bounds;
         Bounds playerpokemonrender = playerPokemon.GetComponentInChildren<Renderer>().bounds;
@@ -156,7 +178,7 @@ public class BattleManager : MonoBehaviour
 
     }
 
-    void playerMove(out Vector3 offset)
+    void Wild_playerMove(out Vector3 offset)
     {
         // 플레이어 위치
         Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
@@ -174,8 +196,6 @@ public class BattleManager : MonoBehaviour
         playerLook.z = 0;
         player.transform.rotation = playerLook;
     }
-
-
 
     //카메라 연출(아직 야생만)
     IEnumerator Wild_BattleCamera_co(Vector3 offset)
@@ -197,12 +217,15 @@ public class BattleManager : MonoBehaviour
         CameraMove();
 
         //카메라가 돌아온 다음, UI생성
-        yield return new WaitForSeconds(1.5f);
+        yield return YieldInstructionCache.WaitForSeconds(1.5f);
 
         //UI 생성
         Battle_UI.SetActive(true);
     }
 
+    #endregion
+
+    //타겟의 높이를 찾아 카메라 조준하기
     void EnemyLookatCamera(GameObject target, float look_height)
     {
 
@@ -290,9 +313,14 @@ public class BattleManager : MonoBehaviour
         PlayerCamera.m_YAxis.Value = 0.45f;
     }
 
+
+
     //배틀 시작
     IEnumerator Battle()
     {
+        //UI 생성
+        Battle_UI.SetActive(true);
+
         while (true)
         {
             //=========================================================================배틀====================================================================================
@@ -307,6 +335,11 @@ public class BattleManager : MonoBehaviour
 
             playerbag = player.GetComponent<PlayerBag>();
             Animator player_anim = player.GetComponent<PlayerMovement>().animator;
+            if (enemyplayer != null)
+            {
+                Animator enemyplayer_anim = enemyplayer.GetComponent<Animator>();
+
+            }
 
             PokemonStats enemy_pokemon_Stats = enemyPokemon.GetComponent<PokemonStats>();
             PokemonStats player_pokemon_Stats = playerPokemon.GetComponent<PokemonStats>();
@@ -448,7 +481,7 @@ public class BattleManager : MonoBehaviour
                     #endregion
 
                     //플레이어 위치
-                    playerMove(out Vector3 offset);
+                    Wild_playerMove(out Vector3 offset);
 
                     //카메라 조정
                     CameraMove();
@@ -461,7 +494,7 @@ public class BattleManager : MonoBehaviour
                 //공격
                 else
                 {
-                    yield return new WaitForSeconds(1f);
+                    yield return YieldInstructionCache.WaitForSeconds(1f);
 
                     //공격 페이즈
                     AttackPhase(first_attack_pokemon, next_attacker_pokemon);
@@ -479,14 +512,14 @@ public class BattleManager : MonoBehaviour
                 //사망시 아웃
                 if (islose || isWin || isRun || iscatch || iscatch || next_attacker_pokemon.isDie)
                 {
-                    yield return new WaitForSeconds(2f);
+                    yield return YieldInstructionCache.WaitForSeconds(2f);
                     break;
                 }
                 //=============================================================================================================================================================
 
 
                 yield return null;
-                yield return new WaitForSeconds(2f);
+                yield return YieldInstructionCache.WaitForSeconds(2f);
                 yield return null;
 
 
@@ -508,11 +541,11 @@ public class BattleManager : MonoBehaviour
                 //조건 검사
                 if (islose || isWin || isRun || iscatch || first_attack_pokemon.isDie)
                 {
-                    yield return new WaitForSeconds(2f);
+                    yield return YieldInstructionCache.WaitForSeconds(2f);
                     break;
                 }
 
-                yield return new WaitForSeconds(2f);
+                yield return YieldInstructionCache.WaitForSeconds(2f);
                 //=================================================================== 턴 종료 =================================================================================
 
 
@@ -556,18 +589,20 @@ public class BattleManager : MonoBehaviour
                 #endregion
 
                 turn++;
+
+                Debug.Log("턴 끝남");
             }//첫번째 while문 나감
 
 
             if (iscatch)
             {
                 playerbag.AddPokemon(enemyPokemon);
-                yield return new WaitForSeconds(2f);
+                yield return YieldInstructionCache.WaitForSeconds(2f);
                 ball.SetActive(false);
 
                 TextBox.instance.Textbox_OnOff(true);
                 TextBox.instance.TalkText.text = enemy_pokemon_Stats.Name + "을 잡았습니다";
-                yield return new WaitForSeconds(1f);
+                yield return YieldInstructionCache.WaitForSeconds(1f);
                 TextBox.instance.Textbox_OnOff(false);
                 break;
             }
@@ -575,7 +610,7 @@ public class BattleManager : MonoBehaviour
             {
                 TextBox.instance.Textbox_OnOff(true);
                 TextBox.instance.TalkText.text = "무사히 도망갔습니다.";
-                yield return new WaitForSeconds(1f);
+                yield return YieldInstructionCache.WaitForSeconds(1f);
                 TextBox.instance.Textbox_OnOff(false);
 
                 enemy_pokemon_battlemode.enabled = false;
@@ -591,7 +626,7 @@ public class BattleManager : MonoBehaviour
                 TextBox.instance.Textbox_OnOff(true);
 
                 TextBox.instance.TalkText.text = "졌습니다.";
-                yield return new WaitForSeconds(1.5f);
+                yield return YieldInstructionCache.WaitForSeconds(1.5f);
                 TextBox.instance.Textbox_OnOff(false);
 
                 enemy_pokemon_battlemode.enabled = false;
@@ -633,7 +668,7 @@ public class BattleManager : MonoBehaviour
 
                     // 추가적인 처리를 수행
                     uIManger.UI_Change();
-                    uIManger.beforeIndex = 0;                          
+                    uIManger.beforeIndex = 0;
                 }
                 else
                 {
@@ -668,31 +703,28 @@ public class BattleManager : MonoBehaviour
 
 
 
+    #region 잡는거
+
     //잡는 확률
     IEnumerator Catch_count_co()
     {
-
-        Debug.Log("코루틴 들어왔냐");
         //포획률
         float catchRate_1 = 0.9f;
         float catchRate_2 = 0.8f;
 
         // 회전 애니메이션 시작
-        Debug.Log("첫번째 회전");
         yield return StartCoroutine(SwingAnimation(40f, -40f, 0.55f));
-        yield return new WaitForSeconds(0.5f);
+        yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
         if (Random.value <= catchRate_1)
         {
-            Debug.Log("두번째 통과");
             yield return StartCoroutine(SwingAnimation(40f, -40f, 0.6f));
-            yield return new WaitForSeconds(0.5f);
+            yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
             if (Random.value <= catchRate_2)
             {
-                Debug.Log("세번째 통과 추카합니다.");
                 yield return StartCoroutine(SwingAnimation(40f, -40f, 0.6f));
-                yield return new WaitForSeconds(0.5f);
+                yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
                 iscatch = true;
             }
@@ -752,7 +784,7 @@ public class BattleManager : MonoBehaviour
         target.localRotation = startRotation;
     }
 
-
+    #endregion
 
     //스피드 비교
     void CompareSpeed(PokemonStats Enemy_pokemon, PokemonStats Player_pokemon, Slider Enemy_slider, Slider player_slider,
@@ -879,7 +911,6 @@ public class BattleManager : MonoBehaviour
     //맞는 판정
     void HitPhase(PokemonStats Target, Slider Target_Slider)
     {
-        Debug.Log("플레이어가 맞았다");
         if (Target == playerPokemon.GetComponent<PokemonStats>())
         {
             Debug.Log("플레이어가 맞았다, 체력바만 켜");
@@ -934,7 +965,7 @@ public class BattleManager : MonoBehaviour
         Damage = 0f;
     }
 
-
+    #region 데미지 총 계산 공식
     //스킬 판별
     void CompareSkillType(PokemonStats firstpokemon, out int num, out int type)
     {
@@ -1030,8 +1061,6 @@ public class BattleManager : MonoBehaviour
         #endregion
     }
 
-
-
     //데미지 판별
     void OnDamage(SkillData skill, PokemonStats attacker, PokemonStats target)
     {
@@ -1054,16 +1083,16 @@ public class BattleManager : MonoBehaviour
 
         if (DamageRank > 1)
         {
-            TextBox.instance.TalkText.text = "효과가 굉장했다!";
+            //TextBox.instance.TalkText.text = "효과가 굉장했다!";
         }
         else if (DamageRank < 1)
         {
 
-            TextBox.instance.TalkText.text = "효과가 별로인듯하다...";
+            //TextBox.instance.TalkText.text = "효과가 별로인듯하다...";
         }
         else if (DamageRank == 0)
         {
-            TextBox.instance.TalkText.text = "효과가 없는거같다.";
+            //TextBox.instance.TalkText.text = "효과가 없는거같다.";
             Damage = 0;
         }
         else
@@ -2159,6 +2188,7 @@ public class BattleManager : MonoBehaviour
         #endregion
     }
 
+    #endregion
 
     //그냥 입력 이벤트
     public void Player_Choise_Skill(int num)
@@ -2174,5 +2204,37 @@ public class BattleManager : MonoBehaviour
         //스택 다시 이용
         uIManger.UI_stack.Push(Battle_UI.transform.GetChild(1).gameObject);
     }
+
+
+    //코루틴 캐싱 
+    #region 코루틴 캐싱
+    internal static class YieldInstructionCache
+    {
+        class FloatComparer : IEqualityComparer<float>
+        {
+            bool IEqualityComparer<float>.Equals(float x, float y)
+            {
+                return x == y;
+            }
+            int IEqualityComparer<float>.GetHashCode(float obj)
+            {
+                return obj.GetHashCode();
+            }
+        }
+
+        public static readonly WaitForEndOfFrame WaitForEndOfFrame = new WaitForEndOfFrame();
+        public static readonly WaitForFixedUpdate WaitForFixedUpdate = new WaitForFixedUpdate();
+
+        private static readonly Dictionary<float, WaitForSeconds> _timeInterval = new Dictionary<float, WaitForSeconds>(new FloatComparer());
+
+        public static WaitForSeconds WaitForSeconds(float seconds)
+        {
+            WaitForSeconds wfs;
+            if (!_timeInterval.TryGetValue(seconds, out wfs))
+                _timeInterval.Add(seconds, wfs = new WaitForSeconds(seconds));
+            return wfs;
+        }
+    }
+    #endregion
 }
 

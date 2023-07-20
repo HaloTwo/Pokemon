@@ -814,6 +814,68 @@ Transform:
   m_Father: {fileID: 2249746612511063565}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &417386810630046859
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8870030552432695833}
+  - component: {fileID: 1395468815893643330}
+  - component: {fileID: 2607962667542581943}
+  m_Layer: 3
+  m_Name: PokeBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8870030552432695833
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417386810630046859}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.4898996, y: 0.06900406, z: 0.060000956}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 3505215952817030265}
+  m_RootOrder: 56
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &1395468815893643330
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417386810630046859}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6296191, y: 2.602188, z: 5.3563757}
+  m_Center: {x: -0.020196611, y: 0.80109406, z: -0.06381916}
+--- !u!114 &2607962667542581943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417386810630046859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33c374dc2502dec428d5168bb2104ae1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isTalk: 0
+  fullText:
+  - "\uC6D0\uD558\uC2DC\uB294 \uD3EC\uCF13\uBAAC\uC744 \uC120\uD0DD\uD558\uC138\uC694!\n\uBC15\uC2A4\uC5D0
+    \uB123\uC5B4\uB4DC\uB9BD\uB2C8\uB2E4."
+  myname: PokeBox
 --- !u!1 &431984241128475884
 GameObject:
   m_ObjectHideFlags: 0
@@ -8123,6 +8185,7 @@ Transform:
   - {fileID: 5983020901142026472}
   - {fileID: 3853186083932382595}
   - {fileID: 2254366273676759717}
+  - {fileID: 8870030552432695833}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -171.406, z: 0}

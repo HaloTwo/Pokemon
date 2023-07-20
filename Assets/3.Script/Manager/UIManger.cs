@@ -163,6 +163,21 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Text[] status_skill_pp_txt;
     [SerializeField] private Image[] status_skill_img;
 
+    [Header("박스 안의 스텟 UI")]
+    [SerializeField] private GameObject inbox_Status_UI;
+    [SerializeField] private Text inbox_status_pokemon_Lv_txt;
+    [SerializeField] private Text inbox_status_pokemon_name_txt;
+    [SerializeField] private Text inbox_status_pokemon_hp_txt;
+    [SerializeField] private Text inbox_status_pokemon_spatk_txt;
+    [SerializeField] private Text inbox_status_pokemon_spdef_txt;
+    [SerializeField] private Text inbox_status_pokemon_speed_txt;
+    [SerializeField] private Text inbox_status_pokemon_atk_txt;
+    [SerializeField] private Text inbox_status_pokemon_def_txt;
+    [SerializeField] private Image inbox_status_pokemon_type_img;
+    [SerializeField] private Image inbox_status_pokemon_type2_img;
+    [Header("박스 안에있는 스탯UI의 스킬")]
+    [SerializeField] private Text[] inbox_status_skill_txt;
+    [SerializeField] private Image[] inbox_status_skill_img;
 
     private void Start()
     {
@@ -841,7 +856,10 @@ public class UIManger : MonoBehaviour
         for (int i = 0; i < pokemonskills.skills.Count; i++)
         {
             skill_txt[i].text = pokemonskills.skills[i].Name;
-            skill_pp_txt[i].text = pokemonskills.SkillPP[i] + "/" + pokemonskills.skills[i].MaxPP;
+            if (skill_pp_txt != null)
+            {
+                skill_pp_txt[i].text = pokemonskills.SkillPP[i] + "/" + pokemonskills.skills[i].MaxPP;
+            }
 
             switch ((int)pokemonskills.skills[i].propertyType)
             {
@@ -1449,7 +1467,8 @@ public class UIManger : MonoBehaviour
 
             if (playerBag.PlayerPokemon[i] == null)
             {
-                bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
+                mainUI_bag_pokemon_img[i].color = new Color(0, 0, 0, 0);
+                mainUI_bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(false);
                 continue;
             }
 
@@ -1457,7 +1476,7 @@ public class UIManger : MonoBehaviour
             PokemonStats pokemon = playerBag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
             mainUI_bag_pokemon_hp_txt[i].text = pokemon.Hp + "/" + pokemon.MaxHp;
-            //bag_pokemon_img[i].color = Color.white;
+            mainUI_bag_pokemon_img[i].color = Color.white;
             mainUI_bag_pokemon_img[i].sprite = pokemon.image;
             mainUI_bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
 
@@ -1840,11 +1859,14 @@ public class UIManger : MonoBehaviour
     {
         if (beforeIndex < 6)
         {
+            BoxUI_pokemon_img[beforeIndex].color = new Color(0, 0, 0, 0);
+            BoxUI_pokemon_name_txt[beforeIndex].text = "";
             playerBag.PlayerPokemon.RemoveAt(beforeIndex);
             playerBag.PlayerPokemon.Insert(beforeIndex, null);
         }
         else
         {
+            BoxUI_inbox_pokemon_img[beforeIndex-6].color = new Color(0, 0, 0, 0);
             playerBag.PokemonBox.RemoveAt(beforeIndex - 6);
             playerBag.PokemonBox.Insert(beforeIndex - 6, null);
         }
@@ -2030,6 +2052,15 @@ public class UIManger : MonoBehaviour
                 }
             }
         }
+        else if (beforeIndex >= 6)
+        {
+            currentIndex = beforeIndex;
+
+            UI_stack.Push(inbox_Status_UI);
+            inbox_Status_UI.SetActive(true);
+
+            inbox_Status_UI_Update();
+        }
     }
 
     void Status_UI_Update()
@@ -2043,7 +2074,7 @@ public class UIManger : MonoBehaviour
         status_pokemon_in_name_txt.text = $"{pokemon.Name}";
         status_pokemon_name_txt.text = $"{pokemon.Name}";
 
-        status_pokemon_Lv_txt.text = $"{pokemon.Level}";
+        status_pokemon_Lv_txt.text = $"LV.{pokemon.Level}";
 
         status_pokemon_hp_txt.text = $"{pokemon.Hp} / {pokemon.MaxHp}";
         status_pokemon_atk_txt.text = $"{pokemon.Attack}";
@@ -2051,5 +2082,29 @@ public class UIManger : MonoBehaviour
         status_pokemon_speed_txt.text = $"{pokemon.Speed}";
         status_pokemon_spatk_txt.text = $"{pokemon.SpAttack}";
         status_pokemon_spdef_txt.text = $"{pokemon.SpDefence}";
+    }
+
+    void inbox_Status_UI_Update()
+    {
+        int num = currentIndex - 6;
+        currentIndex = 0;
+
+        PokemonStats pokemon = playerBag.PokemonBox[num].GetComponent<PokemonStats>();
+
+        //포켓몬 타입 확인
+        PokemonTypeCheck(pokemon, inbox_status_pokemon_type_img, inbox_status_pokemon_type2_img);
+        TypeCheck_propertyType(pokemon, inbox_status_skill_txt, null, inbox_status_skill_img);
+
+        inbox_status_pokemon_name_txt.text = $"{pokemon.Name}";
+        inbox_status_pokemon_name_txt.text = $"{pokemon.Name}";
+
+        inbox_status_pokemon_Lv_txt.text = $"LV.{pokemon.Level}";
+
+        inbox_status_pokemon_hp_txt.text = $"{pokemon.Hp} / {pokemon.MaxHp}";
+        inbox_status_pokemon_atk_txt.text = $"{pokemon.Attack}";
+        inbox_status_pokemon_def_txt.text = $"{pokemon.Defence}";
+        inbox_status_pokemon_speed_txt.text = $"{pokemon.Speed}";
+        inbox_status_pokemon_spatk_txt.text = $"{pokemon.SpAttack}";
+        inbox_status_pokemon_spdef_txt.text = $"{pokemon.SpDefence}";
     }
 }

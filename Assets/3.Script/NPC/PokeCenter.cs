@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
-using static UnityEngine.InputManagerEntry;
 
 public class PokeCenter : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class PokeCenter : MonoBehaviour
     public bool isTalk = false;
     [TextArea]
     public List<string> fullText = new List<string>();
-    [SerializeField]private string myname;
+    [SerializeField] private string myname;
 
     private void Start()
     {
@@ -28,7 +27,7 @@ public class PokeCenter : MonoBehaviour
 
     private IEnumerator TypeText(int num)
     {
- 
+
         for (int j = 0; j < fullText.Count; j++)
         {
             for (int i = 0; i <= fullText[num + j].Length; i++)
@@ -57,8 +56,12 @@ public class PokeCenter : MonoBehaviour
         {
             TextBox.instance.Menu.transform.GetComponentInChildren<Text>().text = "사러왔다";
         }
+        else if (gameObject.name == "PokeBox")
+        {
+            TextBox.instance.Menu.transform.GetComponentInChildren<Text>().text = "구경한다";
+        }
         TextBox.instance.select.gameObject.SetActive(true);
-        TextBox.instance.MenuOpen(true);
+        TextBox.instance.Shop_MenuOpen(true);
 
     }
 
@@ -88,6 +91,10 @@ public class PokeCenter : MonoBehaviour
         else if (name.Equals("shop Boy"))
         {
             TextBox.instance.ShopOpen();
+        }
+        else if (name.Equals("PokeBox"))
+        {
+            TextBox.instance.Pokemon_ShopOpen();
         }
 
         TextBox.instance.Menu.SetActive(false);

@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
 
         hasControl = (moveDirection != Vector3.zero);
 
+
         if (ismove)
         {
             // 회전
@@ -187,7 +188,6 @@ public class PlayerMovement : MonoBehaviour
     //볼 날라가는 이벤트
     public void Bullthrow()
     {
-
         ball_prefab.SetActive(true);
 
         ball_rb.useGravity = true;
@@ -217,6 +217,13 @@ public class PlayerMovement : MonoBehaviour
             Vector3 forceDirection = (targetCenter - ball_loc.position).normalized;
             ball_rb.AddForce(forceDirection * ThrowPower, ForceMode.Impulse);
         }
+        else if (isBattle)
+        {
+            ball_rb.useGravity = false;
+            ball_rb.AddForce(transform.forward * ThrowPower / 2, ForceMode.Impulse);
+
+            Invoke("DisableBallPrefab", 1f);
+        }
         //포켓몬과 전투하려고 할 때, 가장 가까운 포켓몬 조준
         else if (colls.Length > 0)
         {
@@ -238,8 +245,6 @@ public class PlayerMovement : MonoBehaviour
 
             if (closestPokemon != null)
             {
-                Debug.Log("허공 땅볼");
-                Debug.Log("타겟 포켓몬 : " + closestPokemon.name);
                 ball_rb.useGravity = false;
 
                 Vector3 targetCenter = closestPokemon.transform.position + closestPokemon.transform.up * closestPokemon.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;

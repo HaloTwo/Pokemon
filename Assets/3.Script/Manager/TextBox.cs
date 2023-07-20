@@ -12,19 +12,33 @@ public class TextBox : MonoBehaviour
     public Text TalkText;
     public Text NPC_TalkText;
 
+    [SerializeField] private int currentIndex;
+    [SerializeField] private int beforeIndex;
+
+    [Header("Shop UI")]
     [SerializeField] private Text Item_name;
     [SerializeField] private Text Item_explanation;
-    [SerializeField] private int currentIndex;
-    [SerializeField]private int beforeIndex;
+    [SerializeField] private Text Item_num;
 
+    [Header("PokemonShop UI")]
+    [SerializeField] private Text[] pokemon_name;
+    [SerializeField] private Image[] pokemon_img;
+
+    [Header("UI Object")]
     public GameObject Menu;
     public GameObject Shop;
     public GameObject Shop_Menu;
+    public GameObject Pokemon_Shop;
+    public GameObject Pokemon_Shop_Menu;
     public RectTransform select;
 
+    [Header("Itemdata")]
     public ItemData[] Itemdata;
 
+    [Header("Component")]
     [SerializeField] private UIManger uIManger;
+    [SerializeField] private DataManager dataManager;
+    [SerializeField] private PlayerBag playerbag;
 
     private void Awake()
     {
@@ -42,7 +56,7 @@ public class TextBox : MonoBehaviour
 
     private void Update()
     {
-        if (Menu.activeSelf || Shop.activeSelf)
+        if (Menu.activeSelf || Shop.activeSelf || Pokemon_Shop.activeSelf)
         {
             if (uIManger.UI_stack.Peek() == Shop)
             {
@@ -71,8 +85,11 @@ public class TextBox : MonoBehaviour
                     currentIndex = 0;
                 }
 
-            }else if (Input.GetKeyDown(KeyCode.Escape))
+            }
+            else if (Input.GetKeyDown(KeyCode.Escape))
             {
+                currentIndex = beforeIndex;
+                beforeIndex = 0;
 
                 GameObject topUI = uIManger.UI_stack.Peek();
                 topUI.SetActive(false);
@@ -84,7 +101,7 @@ public class TextBox : MonoBehaviour
                 if (uIManger.UI_stack.Peek() == Menu)
                 {
                     currentIndex = 0;
-                    MenuOpen(false);               
+                    Shop_MenuOpen(false);
                 }
             }
 
@@ -102,6 +119,8 @@ public class TextBox : MonoBehaviour
     {
         NPC_TalkText.transform.parent.gameObject.SetActive(onoff);
     }
+
+    #region 샵 관련
     public void ShopOpen()
     {
         Shop.SetActive(true);
@@ -110,7 +129,7 @@ public class TextBox : MonoBehaviour
     }
 
     //메뉴 열 때
-    public void MenuOpen(bool open)
+    public void Shop_MenuOpen(bool open)
     {
         Menu.SetActive(open);
 
@@ -122,9 +141,9 @@ public class TextBox : MonoBehaviour
         else
         {
             uIManger.UI_stack = null;
+            FindObjectOfType<PlayerMovement>().ismove = true;
         }
     }
-
 
     public void Shop_Choise()
     {
@@ -138,7 +157,7 @@ public class TextBox : MonoBehaviour
 
         uIManger.UI_stack.Push(Shop_Menu);
     }
-    public void Shop_pay() 
+    public void Shop_pay()
     {
         Itemdata[beforeIndex].Quantity++;
 
@@ -152,5 +171,63 @@ public class TextBox : MonoBehaviour
     {
         Item_name.text = Itemdata[currentIndex].Name;
         Item_explanation.text = Itemdata[currentIndex].Explanation;
+        Item_num.text = $"{Itemdata[currentIndex].Quantity}";
+    }
+    #endregion
+
+    public void Pokemon_ShopOpen()
+    {
+        Pokemon_Shop.SetActive(true);
+        uIManger.UI_stack.Push(Pokemon_Shop);
+        beforeIndex = currentIndex;
+
+        for (int i = 0; i < dataManager.pokemon.Length; i++)
+        {
+            pokemon_img[i].sprite = dataManager.pokemon[i].GetComponent<PokemonStats>().image;
+            pokemon_name[i].text = $"{i+1}.{dataManager.pokemon[i].GetComponent<PokemonStats>().Name}";
+        }
+    }
+
+    public void PokemonShop_Choise()
+    {
+        GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
+        RectTransform transform = clickedObject.GetComponent<RectTransform>();
+
+        beforeIndex = currentIndex;
+        currentIndex = 0;
+        Pokemon_Shop_Menu.gameObject.SetActive(true);
+        Pokemon_Shop_Menu.gameObject.transform.position = transform.position + new Vector3(300f, -80f, 0f);
+
+        uIManger.UI_stack.Push(Pokemon_Shop_Menu);
+    }
+
+    public void PokemonShop_pay()
+    {
+        GameObject pokemon = dataManager.pokemon[beforeIndex];
+        pokemon.GetComponent<PokemonStats>().Level = 20;
+
+        playerbag.AddPokemon(pokemon);
+
+        uIManger.UI_stack.Pop();
+        Pokemon_Shop.SetActive(false);
+
+        currentIndex = beforeIndex;
+    }
+    public IEnumerator TypeText(List<string> fullText)
+    {
+
+        for (int j = 0; j < fullText.Count; j++)
+        {
+            for (int i = 0; i <= fullText[j].Length; i++)
+            {
+                string displayedText = fullText[j].Substring(0, i);
+                NPC_TalkText.text = displayedText;
+
+                yield return new WaitForSeconds(0.02f);
+            }
+
+            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+
+        }
     }
 }

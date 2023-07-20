@@ -4371,7 +4371,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 89f59b2f96e94df4f8e4d5af4989f075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dataManager: {fileID: 0}
   PlayerPokemon: []
+  PokemonBox: []
+  Itemdata: []
+  ball: {fileID: 11400000, guid: ed5b68ed938832d4e9b87198f6ff39ac, type: 2}
 --- !u!114 &2546910981996907683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4384,17 +4388,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d92cf84cf61b414eb109f569b82280a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultSpeed: 600
-  walkSpeed: 100
+  ismove: 1
   rotationSpeed: 5
-  ThrowPower: 2
-  distance: 6
+  ThrowPower: 3.5
   ball_loc: {fileID: 7129147292648456067}
   ball_prefab: {fileID: 0}
   groundCheck: {fileID: 3429803218510468503}
   isGrounded: 0
   isLookon: 0
+  isBattle: 0
+  hasControl: 0
+  isWalking: 0
   FollowCamera: {fileID: 0}
+  animator: {fileID: 0}
 --- !u!114 &2546910981996907676
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4456,6 +4462,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 156ce436-1a25-4e0f-bc6b-9b274771fa84
     m_ActionName: Player/New action
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: a1500cf4-f17a-42c0-a8d2-1e30689923af
+    m_ActionName: Player/Input[/Keyboard/space]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: PC
   m_DefaultActionMap: Player
@@ -4508,7 +4518,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.25
+  m_Radius: 0.3
   m_Height: 1.6
   m_Direction: 1
   m_Center: {x: 0, y: 0.87, z: 0}

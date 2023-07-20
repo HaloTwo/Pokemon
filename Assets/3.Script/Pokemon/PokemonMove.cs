@@ -74,6 +74,6 @@ public class PokemonMove : MonoBehaviour
         pokemonbattle.enabled = true;
         this.enabled = false;
 
-        BattleManager.instance.Battle_Start(gameObject, Player);
+        BattleManager.instance.Battle_Start(gameObject, Player, null);
     }
 }

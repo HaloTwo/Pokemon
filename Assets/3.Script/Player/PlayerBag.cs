@@ -58,7 +58,7 @@ public class PlayerBag : MonoBehaviour
                         if (PokemonBox[j] == null)
                         {
                             PokemonBox.RemoveAt(j);
-                            PokemonBox.Insert(j , pokemon);
+                            PokemonBox.Insert(j, pokemon);
                             return;
                         }
                         else
@@ -98,90 +98,95 @@ public class PlayerBag : MonoBehaviour
         //TextAsset jsonFile = Resources.Load<TextAsset>("DataBase/PlayerData");
         //PlayerPokemonData = JsonMapper.ToObject<PlayerPokemonData[]>(jsonFile.text);
 
+
         string jsonFilePath = Path.Combine(Application.dataPath, "Resources/Database", "PlayerData.json");
-        string jsonContent = File.ReadAllText(jsonFilePath);
-        PlayerPokemonData playerPokemonData = JsonUtility.FromJson<PlayerPokemonData>(jsonContent);
 
+       
+        
+            string jsonContent = File.ReadAllText(jsonFilePath);
+            PlayerPokemonData playerPokemonData = JsonUtility.FromJson<PlayerPokemonData>(jsonContent);
 
-        transform.position = playerPokemonData.PlayerPosition;
-        transform.rotation = playerPokemonData.PlayerRotation;
+            transform.position = playerPokemonData.PlayerPosition;
+            transform.rotation = playerPokemonData.PlayerRotation;
 
-        //포켓몬 생성
-        for (int i = 0; i < playerPokemonData.Mypokemon_name.Length; i++)
-        {
-            //우선 원본파일 이름을 찾는다.
-            string playerNames = playerPokemonData.Mypokemon_name[i];
-
-            //이름이 빈공백이면 빈공간을 추가한다.
-            if (playerNames == "")
+            //포켓몬 생성
+            for (int i = 0; i < playerPokemonData.Mypokemon_name.Length; i++)
             {
-                //PlayerPokemon[i] = null;
-                Debug.Log("빈공간이오");
-                PlayerPokemon.Add(null);
-            }
-            else
-            {
-                //아니면 데이터에 있는 몬스터중에서 같은 이름을 찾아서 추가한다.
-                for (int j = 0; j < dataManager.pokemon.Length; j++)
+                //우선 원본파일 이름을 찾는다.
+                string playerNames = playerPokemonData.Mypokemon_name[i];
+
+                //이름이 빈공백이면 빈공간을 추가한다.
+                if (playerNames == "")
                 {
-                    if (playerNames.Contains(dataManager.pokemon[j].name))
+                    //PlayerPokemon[i] = null;
+                    Debug.Log("빈공간이오");
+                    PlayerPokemon.Add(null);
+                }
+                else
+                {
+                    //아니면 데이터에 있는 몬스터중에서 같은 이름을 찾아서 추가한다.
+                    for (int j = 0; j < dataManager.pokemon.Length; j++)
                     {
-                        GameObject newPokemon = Instantiate(dataManager.pokemon[j]);
-                        PokemonStats mypokemonstates = newPokemon.GetComponent<PokemonStats>();
+                        if (playerNames.Contains(dataManager.pokemon[j].name))
+                        {
+                            GameObject newPokemon = Instantiate(dataManager.pokemon[j]);
+                            PokemonStats mypokemonstates = newPokemon.GetComponent<PokemonStats>();
 
-                        PlayerPokemon.Add(newPokemon);
-                        newPokemon.GetComponent<PokemonMove>().enabled = false;
+                            PlayerPokemon.Add(newPokemon);
+                            newPokemon.GetComponent<PokemonMove>().enabled = false;
 
-                        mypokemonstates.PlayerOwned = true;
-                        mypokemonstates.Level = playerPokemonData.Mypokemon_level[i];
+                            mypokemonstates.PlayerOwned = true;
+                            mypokemonstates.Level = playerPokemonData.Mypokemon_level[i];
 
-                        mypokemonstates.LevelUp();
-                        mypokemonstates.Name = playerPokemonData.Mypokemon_korean_name[i];
-                        mypokemonstates.Hp = playerPokemonData.Mypokemon_currenthp[i];
-                        mypokemonstates.isDie = playerPokemonData.Mypokmon_Die[i];
+                            mypokemonstates.LevelUp();
+                            mypokemonstates.Name = playerPokemonData.Mypokemon_korean_name[i];
+                            mypokemonstates.Hp = playerPokemonData.Mypokemon_currenthp[i];
+                            mypokemonstates.isDie = playerPokemonData.Mypokmon_Die[i];
 
-                        PokemonBattleMode newPokemonBattleMode = newPokemon.GetComponent<PokemonBattleMode>();
-                        newPokemonBattleMode.isWild = false;
-                        newPokemonBattleMode.enabled = true;
-                        newPokemon.SetActive(false);
+                            PokemonBattleMode newPokemonBattleMode = newPokemon.GetComponent<PokemonBattleMode>();
+                            newPokemonBattleMode.isWild = false;
+                            newPokemonBattleMode.enabled = true;
+                            newPokemon.SetActive(false);
+                        }
                     }
                 }
             }
-        }
 
-        for (int i = 0; i < playerPokemonData.inBox_Mypokemon_name.Length; i++)
-        {
-            //우선 원본파일 이름을 찾는다.
-            string inbox_pokemon_name = playerPokemonData.inBox_Mypokemon_name[i];
-            //이름이 빈공백이면 빈공간을 추가한다.
-            if (inbox_pokemon_name == "")
+            for (int i = 0; i < playerPokemonData.inBox_Mypokemon_name.Length; i++)
             {
-                PokemonBox.Add(null);
-            }
-            else
-            {
-                //아니면 데이터에 있는 몬스터중에서 같은 이름을 찾아서 추가한다.
-                for (int j = 0; j < dataManager.pokemon.Length; j++)
+                //우선 원본파일 이름을 찾는다.
+                string inbox_pokemon_name = playerPokemonData.inBox_Mypokemon_name[i];
+                //이름이 빈공백이면 빈공간을 추가한다.
+                if (inbox_pokemon_name == "")
                 {
-
-                    if (inbox_pokemon_name.Contains(dataManager.pokemon[j].name))
+                    PokemonBox.Add(null);
+                }
+                else
+                {
+                    //아니면 데이터에 있는 몬스터중에서 같은 이름을 찾아서 추가한다.
+                    for (int j = 0; j < dataManager.pokemon.Length; j++)
                     {
-                        GameObject inbox_pokemon = dataManager.pokemon[j];
-                        PokemonStats mypokemonstates = inbox_pokemon.GetComponent<PokemonStats>();
-                        inbox_pokemon.GetComponent<PokemonMove>().enabled = false;
 
-                        mypokemonstates.PlayerOwned = true;
-                        mypokemonstates.Level = playerPokemonData.inBox_Mypokemon_level[i];
+                        if (inbox_pokemon_name.Contains(dataManager.pokemon[j].name))
+                        {
+                            GameObject inbox_pokemon = dataManager.pokemon[j];
+                            PokemonStats mypokemonstates = inbox_pokemon.GetComponent<PokemonStats>();
+                            inbox_pokemon.GetComponent<PokemonMove>().enabled = false;
 
-                        mypokemonstates.LevelUp();
-                        mypokemonstates.Name = playerPokemonData.inBox_Mypokemon_korean_name[i];
-                        mypokemonstates.Hp = playerPokemonData.inBox_Mypokemon_currenthp[i];
+                            mypokemonstates.PlayerOwned = true;
+                            mypokemonstates.Level = playerPokemonData.inBox_Mypokemon_level[i];
 
-                        PokemonBox.Add(inbox_pokemon);
+                            mypokemonstates.LevelUp();
+                            mypokemonstates.Name = playerPokemonData.inBox_Mypokemon_korean_name[i];
+                            mypokemonstates.Hp = playerPokemonData.inBox_Mypokemon_currenthp[i];
+
+                            PokemonBox.Add(inbox_pokemon);
+                        }
                     }
                 }
             }
-        }
+        
+
 
     }
 
