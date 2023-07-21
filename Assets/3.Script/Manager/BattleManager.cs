@@ -114,11 +114,11 @@ public class BattleManager : MonoBehaviour
         this.player = player;
         Battle_Ready.Invoke();
 
+        this.enemyplayer = enemyplayer;
+
         //포켓몬 생성 하고 playerPokemon을 채워줌
         if (enemyPokemon.GetComponent<PokemonBattleMode>().isWild || enemyplayer == null)
         {
-            //포켓몬과 플레이어 위치 조정
-
             //포켓몬 위치 조정
             Wild_pokemonMove();
 
@@ -144,6 +144,7 @@ public class BattleManager : MonoBehaviour
         StartCoroutine(Battle());
     }
 
+    #region 플레이어 배틀 연출
     void Trainer_Battle_playerMove(out Vector3 playerpos)
     {
         // 플레이어를 적으로부터 20f만큼 앞으로 이동시킵니다.
@@ -160,6 +161,10 @@ public class BattleManager : MonoBehaviour
     void Trainer_Battle_pokemonMove(Vector3 playerpos)
     {
         Vector3 playerpokemonpos = playerpos + player.transform.forward * 6.5f;
+        //playerpokemonpos.z = playerpokemonpos.z - (playerPokemon.GetComponentInChildren<Renderer>().bounds.size.z / 2);
+        Vector3 offset = player.transform.forward * -(playerPokemon.GetComponentInChildren<Renderer>().bounds.size.z / 2);
+        playerpokemonpos += offset;
+
 
         playerPokemon.transform.position = playerpokemonpos;
         playerPokemon.transform.rotation = player.transform.rotation;
@@ -182,6 +187,9 @@ public class BattleManager : MonoBehaviour
         //카메라 이동
         virtualCamera.Priority = 15;
 
+        //BGM변경
+        SoundManager.instance.PlayBGM("Trainer_Battle");
+
         //적 포켓몬의 중심을 찾고, 크기에 따라 카메라 이동
         EnemyLookatCamera(enemyplayer, 0.7f);
 
@@ -190,18 +198,25 @@ public class BattleManager : MonoBehaviour
         yield return new WaitUntil(() => enemyplayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("tr0040_00_trmdl|tr0040_00_01320_ballthrow01_gfbanm")
                                       && enemyplayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
 
+        //포켓몬 켜지고 카메라 이동
         enemyPokemon.SetActive(true);
-        virtualCamera.LookAt = enemyPokemon.transform;
-        enemyPokemon.GetComponent<Animator>().SetTrigger("Roar");
+        Renderer enemypokmonRender = enemyPokemon.GetComponentInChildren<Renderer>();
+        pokemonTarget(enemyPokemon.transform, enemypokmonRender, false, false, true);
+        yield return StartCoroutine(enemyPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
+        //포켓몬 울음이 끝나면
 
-        yield return new WaitUntil(() => enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("roar01")
-                              && enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
-
+        //플레이어에게 카메라 이동하고 볼 던지기
         virtualCamera.LookAt = player.transform;
         player.GetComponent<Animator>().SetTrigger("Turn");
 
-        yield return YieldInstructionCache.WaitForSeconds(1.5f);
+        yield return YieldInstructionCache.WaitForSeconds(1.6f);
+
+        //플레이어 포켓몬에게 카메라 이동
         playerPokemon.SetActive(true);
+        Renderer playerpokemonRender = playerPokemon.GetComponentInChildren<Renderer>();
+        pokemonTarget(playerPokemon.transform, playerpokemonRender, false, false, true);
+
+        yield return StartCoroutine(playerPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
 
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
@@ -218,6 +233,7 @@ public class BattleManager : MonoBehaviour
         Battle_UI.transform.Find("0.enemyPokemon").gameObject.SetActive(true);
     }
 
+    #endregion
 
     #region 야생 포켓몬 연출
     void Wild_pokemonMove()
@@ -277,6 +293,9 @@ public class BattleManager : MonoBehaviour
     //카메라 연출(아직 야생만)
     IEnumerator Wild_BattleCamera_co(Vector3 offset)
     {
+        //사운드 출력
+        SoundManager.instance.PlayBGM("Wild_Battle");
+
         //카메라 이동
         virtualCamera.Priority = 15;
 
@@ -285,7 +304,8 @@ public class BattleManager : MonoBehaviour
 
         //몬스터가 소리 지를때까지 
         yield return new WaitUntil(() => enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("roar01")
-                                      && enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.95f);
+                                      && enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.8f);
+
 
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
@@ -345,14 +365,11 @@ public class BattleManager : MonoBehaviour
         virtualCamera.transform.rotation = Quaternion.LookRotation(targetCenter - virtualCamera.transform.position);
     }
 
-    void CameraMove()
+    void pokemonTarget(Transform Transform, Renderer py_pokemon_renderer, bool playerCamera, bool follow, bool lookat)
     {
-        Transform playerTransform = playerPokemon.transform;
-        Renderer py_pokemon_renderer = playerPokemon.GetComponentInChildren<Renderer>();
-
-        Vector3 position = playerTransform.position + playerTransform.up * py_pokemon_renderer.bounds.size.y * 0.5f;
-        Quaternion py_rotation = playerTransform.rotation;
-        Vector3 scale = playerTransform.localScale;
+        Vector3 position = Transform.position + Transform.up * py_pokemon_renderer.bounds.size.y * 0.5f;
+        Quaternion py_rotation = Transform.rotation;
+        Vector3 scale = Transform.localScale;
 
         if (newTransform == null)
         {
@@ -362,9 +379,52 @@ public class BattleManager : MonoBehaviour
         {
             newTransform.gameObject.SetActive(true);
         }
+
         newTransform.position = position;
         newTransform.rotation = py_rotation;
         newTransform.localScale = scale;
+
+        if (playerCamera)
+        {
+            //PlayerPokemon을 쳐다보도록
+            if (follow)
+            {
+                PlayerCamera.Follow = newTransform;
+            }
+            if (lookat)
+            {
+                PlayerCamera.LookAt = newTransform;
+            }
+        }
+        else
+        {
+            if (follow)
+            {
+                virtualCamera.Follow = newTransform;
+            }
+            if (lookat)
+            {
+                virtualCamera.LookAt = newTransform;
+            }
+        }
+    }
+
+    void CameraMove()
+    {
+        Transform playerTransform = playerPokemon.transform;
+        Renderer py_pokemon_renderer = playerPokemon.GetComponentInChildren<Renderer>();
+
+        pokemonTarget(playerTransform, py_pokemon_renderer, true, true, true);
+
+        if (newTransform == null)
+        {
+            newTransform = new GameObject().transform;
+        }
+        else
+        {
+            newTransform.gameObject.SetActive(true);
+        }
+
 
         if (py_pokemon_renderer.bounds.size.y >= 2)
         {
@@ -375,9 +435,7 @@ public class BattleManager : MonoBehaviour
             PlayerCamera.m_Orbits[1].m_Radius = 4.5f;
         }
 
-        //PlayerPokemon을 쳐다보도록
-        PlayerCamera.Follow = newTransform;
-        PlayerCamera.LookAt = newTransform;
+
 
         //보고싶은 카메라의 각도 = 포켓몬 위치에서 10도
         float playerPokemonAngle = Quaternion.LookRotation(playerPokemon.transform.forward, Vector3.up).eulerAngles.y;
@@ -392,11 +450,9 @@ public class BattleManager : MonoBehaviour
     }
 
 
-
     //배틀 시작
     IEnumerator Battle()
     {
-
         while (true)
         {
             //=========================================================================배틀====================================================================================
@@ -411,22 +467,27 @@ public class BattleManager : MonoBehaviour
 
             playerbag = player.GetComponent<PlayerBag>();
             Animator player_anim = player.GetComponent<PlayerMovement>().animator;
-            if (enemyplayer != null)
-            {
-                Animator enemyplayer_anim = enemyplayer.GetComponent<Animator>();
-
-            }
 
             PokemonStats enemy_pokemon_Stats = enemyPokemon.GetComponent<PokemonStats>();
             PokemonStats player_pokemon_Stats = playerPokemon.GetComponent<PokemonStats>();
             PokemonBattleMode enemy_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
             PokemonBattleMode player_pokemon_battlemode = enemyPokemon.GetComponent<PokemonBattleMode>();
             Slider player_pokemon_slider = uIManger.hPbar;
-            Slider enemy_pokemon_slider = enemy_pokemon_battlemode.pokemon_slider;
+            Slider enemy_pokemon_slider;
             PokemonStats first_attack_pokemon;
             PokemonStats next_attacker_pokemon;
             Slider first_attack_pokemon_slider;
             Slider next_attacker_pokemon_slider;
+
+            if (enemyplayer != null)
+            {
+                Animator enemyplayer_anim = enemyplayer.GetComponent<Animator>();
+                enemy_pokemon_slider = uIManger.enemy_hPbar;
+            }
+            else
+            {
+                enemy_pokemon_slider = enemy_pokemon_battlemode.pokemon_slider;
+            }
 
             //=====================================================================포켓몬 등장=================================================================================
 
@@ -756,16 +817,91 @@ public class BattleManager : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("다 주금");
+
                     break;
                 }
             }
             else if (enemy_pokemon_Stats.isDie)
             {
-                yield return new WaitUntil(() => enemy_pokemon_Stats.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
+                player_pokemon_Stats.Exp += enemy_pokemon_Stats.Level * 50;
+                player_pokemon_Stats.CheckLevelUp();       
 
-                Debug.Log("상대 포켓몬 디짐..");
-                break;
+                if (enemyplayer != null)
+                {
+                    enemyplayer.GetComponent<Animator>().SetTrigger("Back");
+                    yield return StartCoroutine(enemy_pokemon_battlemode.DieAnimation_co(0.5f));
+
+                    bool allPokemonsDead = true; // 모든 포켓몬이 사망한 상태인지 여부를 나타내는 변수
+
+                    // playerbag.PlayerPokemon의 포켓몬들을 검사
+                    for (int i = 0; i < enemyPokemon_List.Length; i++)
+                    {
+                        PokemonStats pokemonStats = enemyPokemon_List[i].GetComponent<PokemonStats>();
+
+                        // 예외처리 생존한 포켓몬 없음
+                        if (!pokemonStats.isDie)
+                        {
+                            allPokemonsDead = false;
+                            enemyPokemon = enemyPokemon_List[i];
+                            break;
+                        }
+
+                    }
+
+                    if (!allPokemonsDead)
+                    {
+                        //적 포켓몬의 중심을 찾고, 크기에 따라 카메라 이동
+                        EnemyLookatCamera(enemyplayer, 0.7f);
+
+                        enemyplayer.GetComponent<Animator>().SetTrigger("Throw");
+                        //볼 던질떄까지
+                        yield return new WaitUntil(() => enemyplayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("tr0040_00_trmdl|tr0040_00_01320_ballthrow01_gfbanm")
+                                                      && enemyplayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
+
+                        //포켓몬 켜지고 카메라 이동
+                        enemyPokemon.SetActive(true);
+                        Renderer enemypokmonRender = enemyPokemon.GetComponentInChildren<Renderer>();
+                        pokemonTarget(enemyPokemon.transform, enemypokmonRender, false, false, true);
+                        yield return StartCoroutine(enemyPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
+
+                        //다시 원래 카메라로
+                        virtualCamera.Priority = 0;
+
+                        //카메라 타겟을 가운데쯤으로
+                        CameraMove();
+
+                        //UI 생성
+                        uIManger.enemypokemon = enemyPokemon.GetComponent<PokemonStats>();
+                        Battle_UI.SetActive(true);
+                        Battle_UI.transform.Find("0.enemyPokemon").gameObject.SetActive(true);
+                        Battle_UI.transform.Find("0.Default").gameObject.SetActive(true);
+                    }
+                    else
+                    {
+                        enemyplayer.GetComponent<Animator>().SetTrigger("Lose");
+                        
+                        //텍스트 출력
+                        TextBox.instance.NPC_Textbox_OnOff(true);
+                        List<string> Lose = new List<string>();
+                        string Losetxt = "승리했습니다!!!";
+                        string Losetxt_2 = $"{enemyplayer.GetComponent<Friend>().getmoney}원을 얻었습니다.";
+
+                        Lose.Add(Losetxt);
+                        Lose.Add(Losetxt_2);
+
+                        yield return StartCoroutine(TextBox.instance.TypeText(Lose));
+                        TextBox.instance.NPC_Textbox_OnOff(false);
+                        //텍스트 출력 끝
+                        break;
+                    }
+                }
+                else
+                {
+                    yield return new WaitUntil(() => enemy_pokemon_battlemode.anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
+
+                    Debug.Log("상대 포켓몬 디짐..");
+                    break;
+                }
             }
 
         }//두번째 while문 나감
@@ -783,6 +919,8 @@ public class BattleManager : MonoBehaviour
         PlayerCamera.m_Orbits[1].m_Radius = 5f;
         PlayerCamera.Follow = player.transform;
         PlayerCamera.LookAt = player.transform;
+
+        SoundManager.instance.PlayBGM("City");
     }
 
 
@@ -2310,6 +2448,7 @@ public class BattleManager : MonoBehaviour
         //스택 다시 이용
         uIManger.UI_stack.Push(Battle_UI.transform.GetChild(2).gameObject);
     }
+
 
 
     //코루틴 캐싱 

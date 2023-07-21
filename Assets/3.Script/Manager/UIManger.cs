@@ -54,6 +54,7 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Text mainUI_Item_name;
     [SerializeField] private Text mainUI_Item_explanation;
     [SerializeField] private ScrollRect mainUI_scrollRect;
+    [SerializeField] private Text playermoney;
 
     [Header("박스UI")]
     [Space(20f)]
@@ -219,6 +220,7 @@ public class UIManger : MonoBehaviour
                 if (Main_UI.activeSelf)
                 {
                     Main_UI.SetActive(false);
+                    Ball_UI.SetActive(true);
                 }
 
                 //스택 다시 정리
@@ -234,6 +236,7 @@ public class UIManger : MonoBehaviour
             if (enemypokemon != null)
             {
                 Current_Enemypokemon_Check(enemypokemon);
+                Ball_UI.SetActive(false);
             }
 
             //현재 UI의 버튼 
@@ -254,8 +257,6 @@ public class UIManger : MonoBehaviour
             //현재 스택에 있는 UI의 버튼들을 선택가능
             buttons = currentbuttons;
             buttons[currentIndex].Select();
-
-            Debug.Log(UI_stack.Peek());
 
             //버튼 이미지 이동
             OnButtonSelected(buttons[currentIndex], selectImage_battle);
@@ -360,7 +361,7 @@ public class UIManger : MonoBehaviour
         enemy_hp_txt.text = enemypokemon.Hp + "/" + enemypokemon.MaxHp;
         enemy_hPbar.value = (float)enemypokemon.Hp / enemypokemon.MaxHp;
 
-        Hpbar_Color(this.hPbar);
+        Hpbar_Color(enemy_hPbar);
     }
 
     //현재 전투중인 플레이어 포켓몬 체크
@@ -1446,12 +1447,14 @@ public class UIManger : MonoBehaviour
     //아이템 메뉴
     public void MainUI_Bag()
     {
+        playermoney.text = $"현재 소지금 : {playerBag.playermoney}원";
 
         if (Main_UI.activeSelf)
         {
             MainUI_Default_UI.SetActive(false);
             mainUI_Bag_UI.SetActive(true);
         }
+        
 
 
         for (int i = 0; i < playerBag.Itemdata.Length; i++)
@@ -1894,6 +1897,7 @@ public class UIManger : MonoBehaviour
         {
             BoxUI_pokemon_img[beforeIndex].color = new Color(0, 0, 0, 0);
             BoxUI_pokemon_name_txt[beforeIndex].text = "";
+            BoxUI_change_pokemon_Lv_txt[beforeIndex].text = "";
             playerBag.PlayerPokemon.RemoveAt(beforeIndex);
             playerBag.PlayerPokemon.Insert(beforeIndex, null);
         }

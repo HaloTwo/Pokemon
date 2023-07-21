@@ -57,15 +57,31 @@ public class PokemonBattleMode : MonoBehaviour
             pokemon_name.text = pokemonStats.Name;
         }
 
+        if (name.Contains("0975.Eiscue"))
+        {
+            Eiscue_head.SetActive(true);
+            Eiscue_broken_head.SetActive(true);
+        }
+
     }
 
     public IEnumerator StartAnim_co()
     {
+        if (isWild)
+        {
+            SoundManager.instance.StopBGM();
+        }
         anim.SetTrigger("Roar");
+
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("roar01") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2f);
+        SoundManager.instance.PlaySFX(name);
 
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).IsName("roar01") && anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
 
-        UI.SetActive(true);
+        if (isWild)
+        {
+            UI.SetActive(true);
+        }
     }
 
     void Start()
@@ -83,6 +99,8 @@ public class PokemonBattleMode : MonoBehaviour
         }
 
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -104,19 +122,19 @@ public class PokemonBattleMode : MonoBehaviour
 
     public void OnDie()
     {
-        anim.SetTrigger("Die");
-
-        if (isWild)
-        {
-            StartCoroutine(DieAnimation_co());
-        }
+        StartCoroutine(DieAnimation_co(1.5f));
     }
 
-    IEnumerator DieAnimation_co()
+    public IEnumerator DieAnimation_co(float looptime)
     {
-        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.5f && anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
+        anim.SetTrigger("Die");
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f);
+        SoundManager.instance.PlaySFX(name);
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > looptime && anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
         gameObject.SetActive(false);
     }
+
+
 
     private void OnCollisionEnter(Collision collision)
     {

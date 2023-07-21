@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject ball_prefab;
     [SerializeField] private GameObject show_Ball;
 
+    //볼 중력
+    private Rigidbody ball_rb;
+
     [Header("체크")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private bool isGrounded = true;
@@ -31,9 +34,6 @@ public class PlayerMovement : MonoBehaviour
     private CharacterController controller;
     [HideInInspector]
     public Animator animator;
-
-    //볼 중력
-    private Rigidbody ball_rb;
 
     private void OnEnable()
     {
@@ -281,14 +281,6 @@ public class PlayerMovement : MonoBehaviour
     void DisableBallPrefab()
     {
         ball_prefab.SetActive(false);
-    }
-
-    IEnumerator StopBallBeforeCollision(Collider target, float duration)
-    {
-        yield return new WaitForSeconds(duration);
-        ball_rb.velocity = Vector3.zero;
-        ball_rb.angularVelocity = Vector3.zero;
-        ball_rb.useGravity = true;
     }
 
     #endregion

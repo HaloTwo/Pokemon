@@ -27,7 +27,7 @@ public class PokemonStats : MonoBehaviour
             {
                 hp = value;
             }
-            
+
         }
     }
 
@@ -54,6 +54,8 @@ public class PokemonStats : MonoBehaviour
     [SerializeField] public int Speed;
     [SerializeField] public int Level;
     [SerializeField] public int Exp;
+    [SerializeField] public int[] required_Exp;
+
     [SerializeField] public Type Type1;
     [SerializeField] public Type Type2;
     [SerializeField] public int[] SkillPP;
@@ -73,12 +75,22 @@ public class PokemonStats : MonoBehaviour
     public void LevelUp()
     {
         MaxHp = Default_MaxHp + (Level * 2);
-        Hp = MaxHp;
         Attack = Default_Attack + (Level * 2);
         Defence = Default_Defence + (Level * 2);
         SpAttack = Default_MaxHp + (Level * 2);
         SpDefence = Default_SpAttack + (Level * 2);
         Default_Speed = Default_Speed + (Level * 2);
+    }
+
+    public void CheckLevelUp()
+    {
+        while (Exp > required_Exp[Level])
+        {
+            SoundManager.instance.PlaySFX("LevelUp");
+            Exp -= required_Exp[Level];
+            Level++;
+            hp += 2;
+        }
     }
 
     //½ºÅ³µé
@@ -110,7 +122,14 @@ public class PokemonStats : MonoBehaviour
             Level = Random.Range(10, 30);
         }
 
+        required_Exp = new int[100];
+        for (int i = 0; i < 100; i++)
+        {
+            required_Exp[i] = 50 * i;
+        }
+
         LevelUp();
+        Hp = MaxHp;
     }
     private void Start()
     {

@@ -114,6 +114,24 @@ public class PokeCenter : MonoBehaviour
         TextBox.instance.Menu.SetActive(false);
         TextBox.instance.NPC_Textbox_OnOff(false);
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SoundManager.instance.PlayBGM("PokemonCenter");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            SoundManager.instance.PlayBGM("City");
+        }
+    }
+
+
     private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))

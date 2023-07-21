@@ -7,7 +7,24 @@ using UnityEngine.UI;
 
 public class TextBox : MonoBehaviour
 {
+    //싱글톤 생성
+    #region 싱글톤
     public static TextBox instance = null;
+    private void Awake()
+    {
+        if (instance == null) //instance가 null. 즉, 시스템상에 존재하고 있지 않을때
+        {
+            instance = this; //내자신을 instance로 넣어줍니다.
+            DontDestroyOnLoad(gameObject); //OnLoad(씬이 로드 되었을때) 자신을 파괴하지 않고 유지
+        }
+        else
+        {
+            if (instance != this) //instance가 내가 아니라면 이미 instance가 하나 존재하고 있다는 의미
+                Destroy(this.gameObject); //둘 이상 존재하면 안되는 객체이니 방금 AWake된 자신을 삭제
+        }
+    }
+
+    #endregion
 
     public Text TalkText;
     public Text NPC_TalkText;
@@ -19,6 +36,7 @@ public class TextBox : MonoBehaviour
     [SerializeField] private Text Item_name;
     [SerializeField] private Text Item_explanation;
     [SerializeField] private Text Item_num;
+    [SerializeField] private Text player_money;
 
     [Header("PokemonShop UI")]
     [SerializeField] private Text[] pokemon_name;
@@ -40,19 +58,7 @@ public class TextBox : MonoBehaviour
     [SerializeField] private DataManager dataManager;
     [SerializeField] private PlayerBag playerbag;
 
-    private void Awake()
-    {
-        if (instance == null) //instance가 null. 즉, 시스템상에 존재하고 있지 않을때
-        {
-            instance = this; //내자신을 instance로 넣어줍니다.
-            DontDestroyOnLoad(gameObject); //OnLoad(씬이 로드 되었을때) 자신을 파괴하지 않고 유지
-        }
-        else
-        {
-            if (instance != this) //instance가 내가 아니라면 이미 instance가 하나 존재하고 있다는 의미
-                Destroy(this.gameObject); //둘 이상 존재하면 안되는 객체이니 방금 AWake된 자신을 삭제
-        }
-    }
+
 
     private void Update()
     {
@@ -129,8 +135,6 @@ public class TextBox : MonoBehaviour
         }
     }
 
-
-
     void inputButton_Exit()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -162,12 +166,14 @@ public class TextBox : MonoBehaviour
         NPC_TalkText.transform.parent.gameObject.SetActive(onoff);
     }
 
+    //샵
     #region 샵 관련
     public void ShopOpen()
     {
         Shop.SetActive(true);
         uIManger.UI_stack.Push(Shop);
         beforeIndex = currentIndex;
+        player_money.text = $"{playerbag.playermoney}원";
     }
 
     //메뉴 열 때
@@ -204,12 +210,17 @@ public class TextBox : MonoBehaviour
     }
     public void Shop_pay()
     {
-        Itemdata[beforeIndex].Quantity++;
+        if (playerbag.playermoney != 0)
+        {
+            Itemdata[beforeIndex].Quantity++;
+            playerbag.playermoney -= Itemdata[beforeIndex].Price;
+        }
 
         uIManger.UI_stack.Pop();
         Shop_Menu.SetActive(false);
 
         currentIndex = beforeIndex;
+        player_money.text = $"{playerbag.playermoney}원";
     }
 
     void itemCheck()
@@ -220,6 +231,8 @@ public class TextBox : MonoBehaviour
     }
     #endregion
 
+    //포켓몬 샵
+    #region 포켓몬 샵 관련
     public void Pokemon_ShopOpen()
     {
         Pokemon_Shop.SetActive(true);
@@ -259,6 +272,10 @@ public class TextBox : MonoBehaviour
 
         currentIndex = beforeIndex;
     }
+
+    #endregion
+
+
     public IEnumerator TypeText(List<string> fullText)
     {
 

@@ -47,6 +47,7 @@ public class StartButton : MonoBehaviour
             //플레이어 위치 저장
             playerData.PlayerPosition = new Vector3(2220.39f, 130.62f, -725.87f);
             playerData.PlayerRotation = new Quaternion(0f, -36.559f, 0f, 0f);
+            playerData.PlayerMoney = 30000;
 
             playerData.Mypokemon_name[0] = "0025.Pikachu(Cap)";
             playerData.Mypokemon_korean_name[0] = "피카츄";
