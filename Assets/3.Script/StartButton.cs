@@ -7,18 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class StartButton : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
 
     public void StartButton_btn()
     {
@@ -52,7 +40,7 @@ public class StartButton : MonoBehaviour
             playerData.Mypokemon_name[0] = "0025.Pikachu(Cap)";
             playerData.Mypokemon_korean_name[0] = "ÇÇÄ«Ãò";
             playerData.Mypokemon_level[0] = 20;
-            playerData.Mypokemon_currenthp[0] = 30;
+            playerData.Mypokemon_currenthp[0] = 60;
             playerData.Mypokmon_Die[0] = false;
 
             for (int i = 1; i < pokemon; i++)

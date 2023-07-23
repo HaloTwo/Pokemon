@@ -34,14 +34,16 @@ public class PlayerBag : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        Itemdata = Resources.LoadAll<ItemData>("Item");
+    }
+
 
     void Start()
     {
-        Itemdata = Resources.LoadAll<ItemData>("Item");
-
         //필드에 플레이어 포켓몬 생성
         PlayerInfo_Road();
-
         BattleManager.instance.Battle_Ready.AddListener(PlayerPokemon_Battle_go);
     }
 

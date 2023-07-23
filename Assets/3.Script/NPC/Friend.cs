@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEditor.ShaderGraph.Internal.KeywordDependentCollection;
 
 public class Friend : MonoBehaviour
 {
@@ -68,7 +67,7 @@ public class Friend : MonoBehaviour
         TextBox.instance.NPC_Textbox_OnOff(true);
         yield return StartCoroutine(TextBox.instance.TypeText(Talk));
 
-        player.GetComponent<PlayerMovement>().ismove = true;
+        player.GetComponent<PlayerMovement>().ismove = false;
         StartCoroutine(player.GetComponent<PlayerMovement>().apply_motion_wait(10f));
         TextBox.instance.NPC_Textbox_OnOff(false);
 
@@ -105,6 +104,7 @@ public class Friend : MonoBehaviour
     #region 볼던지기
     public void Bullthrow()
     {
+        SoundManager.instance.PlayEffect("Pokeball");
         ball_rb.useGravity = true;
         ball_rb.velocity = Vector3.zero;
         ball_rb.angularVelocity = Vector3.zero;

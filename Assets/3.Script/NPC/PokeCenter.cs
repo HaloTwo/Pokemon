@@ -81,11 +81,10 @@ public class PokeCenter : MonoBehaviour
                 }
             }
 
-            uIManger.main_bool = true;
-            playerMovement.ismove = true;
-
-            isTalk = false;
+            SoundManager.instance.PlayEffect("PokeCenter_Heal");
             TextBox.instance.select.gameObject.SetActive(false);
+
+            Invoke("wait", 2);
         }
         //ªÛ¡°
         else if (name.Equals("shop Boy"))
@@ -99,6 +98,14 @@ public class PokeCenter : MonoBehaviour
 
         TextBox.instance.Menu.SetActive(false);
         TextBox.instance.NPC_Textbox_OnOff(false);
+    }
+
+    void wait()
+    {
+        uIManger.main_bool = true;
+        playerMovement.ismove = true;
+
+        isTalk = false;
     }
 
     public void TalkExit()
@@ -138,8 +145,9 @@ public class PokeCenter : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.Space) && !isTalk && !uIManger.Main_UI.activeSelf)
             {
+                SoundManager.instance.PlayEffect("ButtonClick");
                 playerbag = other.GetComponent<PlayerBag>();
-                playerMovement= other.GetComponent<PlayerMovement>();
+                playerMovement = other.GetComponent<PlayerMovement>();
 
                 playerMovement.ismove = false;
                 uIManger.main_bool = false;
@@ -149,7 +157,7 @@ public class PokeCenter : MonoBehaviour
 
                 TextBox.instance.Menu.GetComponentInChildren<Button>().onClick.RemoveAllListeners();
                 TextBox.instance.Menu.GetComponentsInChildren<Button>()[0].onClick.AddListener(PokemonCenter);
-                TextBox.instance.Menu.GetComponentsInChildren<Button>()[1].onClick.AddListener(TalkExit) ;
+                TextBox.instance.Menu.GetComponentsInChildren<Button>()[1].onClick.AddListener(TalkExit);
             }
             else if (Input.GetKeyDown(KeyCode.Escape))
             {

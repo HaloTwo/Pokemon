@@ -17,11 +17,22 @@ public class SkillData : ScriptableObject
     [Header("속성")]
     [SerializeField] public PropertyType propertyType;
 
-
     [Header("우선도")]
     [SerializeField] public int Priority;
     [Header("물공인지 특공인지")]
     [SerializeField] public attackType AttackType;
+    [Header("랭크업")]
+    [SerializeField] public int AttackRankUp;
+    [SerializeField] public int SpAttackRankUp;
+    [SerializeField] public int DefenceRankUp;
+    [SerializeField] public int SpDefenceRankUp;
+    [SerializeField] public int SpeedRankUp;
+    [Header("상대방의 랭크")]
+    [SerializeField] public int EnemyAttackRankUp;
+    [SerializeField] public int EnemySpAttackRankUp;
+    [SerializeField] public int EnemyDefenceRankUp;
+    [SerializeField] public int EnemySpDefenceRankUp;
+    [SerializeField] public int EnemySpeedRankUp;
 
     [Header("필중기인지")]
     [SerializeField] public bool isMustDamage;
@@ -36,5 +47,8 @@ public class SkillData : ScriptableObject
     public enum PropertyType
     {
         Normal, Fight, Poison, Earth, Flight, Bug, Rock, Ghost, Steel, Fire, Water, Electricty, Grass, Ice, Esper, Dragon, Evil, Fairy, None
+    }public enum rankUp
+    {
+        None, AttackerAttackRank, AttackerSpAttackRank, AttackerDefenceRank, AttackerSpDefenceRank, AttackerSpeedRank
     }
 }

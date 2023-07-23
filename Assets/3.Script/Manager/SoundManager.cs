@@ -33,9 +33,11 @@ public class SoundManager : MonoBehaviour
 
     [SerializeField] Sound[] sfx = null;
     [SerializeField] Sound[] bgm = null;
+    [SerializeField] Sound[] effect = null;
 
     [SerializeField] AudioSource bgmPlayer = null;
     [SerializeField] AudioSource sfxPlayer = null;
+    [SerializeField] AudioSource effectPlayer = null;
 
     private void Start()
     {
@@ -67,6 +69,18 @@ public class SoundManager : MonoBehaviour
             {
                 sfxPlayer.clip = sfx[i].clip;
                 sfxPlayer.Play();
+            }
+        }
+    }
+
+    public void PlayEffect(string p_sfxName)
+    {
+        for (int i = 0; i < effect.Length; i++)
+        {
+            if (p_sfxName == effect[i].name)
+            {
+                effectPlayer.clip = effect[i].clip;
+                effectPlayer.Play();
             }
         }
     }

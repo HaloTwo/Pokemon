@@ -48,8 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-        //Cursor.visible = false;
-        //Cursor.lockState = CursorLockMode.Locked;
+       // Cursor.visible = false;
+      //  Cursor.lockState = CursorLockMode.Locked;
 
         if (groundCheck == null) groundCheck = transform.Find("groundCheck");
         if (ball_loc == null) ball_loc = transform.Find("tr0050_00.trmdl/origin/foot_base/waist/spine_01/spine_02/spine_03/right_shoulder/right_arm_width/right_arm_01/right_arm_02/right_hand/right_attach_on");
@@ -71,43 +71,37 @@ public class PlayerMovement : MonoBehaviour
         hasControl = (moveDirection != Vector3.zero);
 
 
-        if (ismove)
+        // 회전
+        Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
+        Vector3 cameraForward = Vector3.Scale(FollowCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
+        moveDirection = (input.x * FollowCamera.transform.right + input.y * cameraForward).normalized;
+
+        if (hasControl && isGrounded && !isLookon && !isBattle && ismove)
         {
-            // 회전
-            Vector2 input = inputActions.Player.Move.ReadValue<Vector2>();
-            Vector3 cameraForward = Vector3.Scale(FollowCamera.transform.forward, new Vector3(1, 0, 1)).normalized;
-            moveDirection = (input.x * FollowCamera.transform.right + input.y * cameraForward).normalized;
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
 
-            if (hasControl && isGrounded && !isLookon && !isBattle)
+            //controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
+
+            if (isWalking)
             {
-                Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-                transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.fixedDeltaTime);
-
-                //controller.Move(transform.forward * (currentSpeed * 0.01f) * Time.fixedDeltaTime);
-
-                if (isWalking)
-                {
-                    animator.SetFloat("Velocity", 1);
-                }
-                else if (animator.GetFloat("Velocity") != 1)
-                {
-                    animator.SetFloat("Velocity", 2);
-                }
+                animator.SetFloat("Velocity", 1);
             }
-            else
+            else if (animator.GetFloat("Velocity") != 1)
             {
-                if (animator.GetFloat("Velocity") != 1)
-                {
-                    animator.SetFloat("Velocity", 0);
-                }
+                animator.SetFloat("Velocity", 2);
             }
         }
         else
         {
-            animator.SetFloat("Velocity", 0);
+            if (animator.GetFloat("Velocity") != 1)
+            {
+                animator.SetFloat("Velocity", 0);
+            }
         }
-
     }
+
+
 
     public void onWalk(InputAction.CallbackContext context)
     {
@@ -201,6 +195,8 @@ public class PlayerMovement : MonoBehaviour
     //볼 날라가는 이벤트
     public void Bullthrow()
     {
+        SoundManager.instance.PlayEffect("Pokeball");
+
         ball_prefab.SetActive(true);
 
         ball_rb.useGravity = true;

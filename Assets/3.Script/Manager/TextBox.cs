@@ -59,7 +59,6 @@ public class TextBox : MonoBehaviour
     [SerializeField] private PlayerBag playerbag;
 
 
-
     private void Update()
     {
         if (Menu.activeSelf || Shop.activeSelf || Pokemon_Shop.activeSelf)
@@ -79,7 +78,6 @@ public class TextBox : MonoBehaviour
 
             //나가기 버튼
             inputButton_Exit();
-
         }
     }
 
@@ -92,7 +90,7 @@ public class TextBox : MonoBehaviour
             {
                 currentIndex = buttons.Length - 1;
             }
-
+            SoundManager.instance.PlayEffect("ButtonMove");
         }
         else if (Input.GetKeyDown(KeyCode.DownArrow))
         {
@@ -101,7 +99,7 @@ public class TextBox : MonoBehaviour
             {
                 currentIndex = 0;
             }
-
+            SoundManager.instance.PlayEffect("ButtonMove");
         }
 
         if (uIManger.UI_stack.Peek() == Pokemon_Shop)
@@ -109,8 +107,6 @@ public class TextBox : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
-
-
                 currentIndex -= 12;
 
                 if (currentIndex < 0)
@@ -118,12 +114,10 @@ public class TextBox : MonoBehaviour
                     int num = currentIndex;
                     currentIndex = num + 12;
                 }
-
+                SoundManager.instance.PlayEffect("ButtonMove");
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
-
-
                 currentIndex += 12;
 
                 if (currentIndex >= buttons.Length)
@@ -131,6 +125,7 @@ public class TextBox : MonoBehaviour
                     int num = currentIndex;
                     currentIndex = num - 12;
                 }
+                SoundManager.instance.PlayEffect("ButtonMove");
             }
         }
     }
@@ -139,6 +134,7 @@ public class TextBox : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
+            SoundManager.instance.PlayEffect("Back");
             currentIndex = beforeIndex;
             beforeIndex = 0;
 
@@ -198,6 +194,7 @@ public class TextBox : MonoBehaviour
 
     public void Shop_Choise()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         RectTransform transform = clickedObject.GetComponent<RectTransform>();
 
@@ -212,15 +209,21 @@ public class TextBox : MonoBehaviour
     {
         if (playerbag.playermoney != 0)
         {
+            SoundManager.instance.PlayEffect("ItemPay");
             Itemdata[beforeIndex].Quantity++;
             playerbag.playermoney -= Itemdata[beforeIndex].Price;
+
+            uIManger.UI_stack.Pop();
+            Shop_Menu.SetActive(false);
+
+            currentIndex = beforeIndex;
+            player_money.text = $"{playerbag.playermoney}원";
+        }
+        else
+        {
+            SoundManager.instance.PlayEffect("No");
         }
 
-        uIManger.UI_stack.Pop();
-        Shop_Menu.SetActive(false);
-
-        currentIndex = beforeIndex;
-        player_money.text = $"{playerbag.playermoney}원";
     }
 
     void itemCheck()
@@ -235,6 +238,7 @@ public class TextBox : MonoBehaviour
     #region 포켓몬 샵 관련
     public void Pokemon_ShopOpen()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         Pokemon_Shop.SetActive(true);
         uIManger.UI_stack.Push(Pokemon_Shop);
         beforeIndex = currentIndex;
@@ -248,6 +252,7 @@ public class TextBox : MonoBehaviour
 
     public void PokemonShop_Choise()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         RectTransform transform = clickedObject.GetComponent<RectTransform>();
 
@@ -261,9 +266,13 @@ public class TextBox : MonoBehaviour
 
     public void PokemonShop_pay()
     {
+        SoundManager.instance.PlayEffect("PokemonPay");
         GameObject pokemon = Instantiate(dataManager.pokemon[beforeIndex]);
-        pokemon.GetComponent<PokemonStats>().Level = 20;
-        pokemon.GetComponent<PokemonStats>().LevelUp();
+        PokemonStats pokemon_stats = pokemon.GetComponent<PokemonStats>();
+
+        pokemon_stats.Level = 25;
+        pokemon_stats.LevelUp();
+        pokemon_stats.Hp = pokemon_stats.MaxHp;
 
         playerbag.AddPokemon(pokemon);
 

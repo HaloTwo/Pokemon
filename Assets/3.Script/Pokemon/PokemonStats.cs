@@ -79,17 +79,18 @@ public class PokemonStats : MonoBehaviour
         Defence = Default_Defence + (Level * 2);
         SpAttack = Default_MaxHp + (Level * 2);
         SpDefence = Default_SpAttack + (Level * 2);
-        Default_Speed = Default_Speed + (Level * 2);
+        Speed = Default_Speed + (Level * 2);
     }
 
     public void CheckLevelUp()
     {
-        while (Exp > required_Exp[Level])
+        while (Exp >= required_Exp[Level])
         {
             SoundManager.instance.PlaySFX("LevelUp");
             Exp -= required_Exp[Level];
             Level++;
-            hp += 2;
+            LevelUp();
+            Hp += 2;
         }
     }
 
@@ -108,6 +109,8 @@ public class PokemonStats : MonoBehaviour
     {
         skills.Clear();
     }
+
+
     string jsonFileName = "DataBase/Pokemon";
     PokemonData[] pokemonArray;
     protected virtual void Awake()
@@ -131,10 +134,6 @@ public class PokemonStats : MonoBehaviour
         LevelUp();
         Hp = MaxHp;
     }
-    private void Start()
-    {
-    }
-
 
     public PokemonData[] GetPokemonArray()
     {

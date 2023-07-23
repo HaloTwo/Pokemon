@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-
 public class UIManger : MonoBehaviour
 {
 
@@ -50,7 +49,8 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Slider[] mainUI_bag_pokemon_hPbar;
     [SerializeField] private Text[] mainUI_bag_pokemon_hp_txt;
     [SerializeField] private GameObject mainUI_Menu_Choise_UI;
-    [SerializeField] private GameObject[] mainUI_Item;
+    [SerializeField] private List<GameObject> mainUI_Item = new List<GameObject>();
+
     [SerializeField] private Text mainUI_Item_name;
     [SerializeField] private Text mainUI_Item_explanation;
     [SerializeField] private ScrollRect mainUI_scrollRect;
@@ -151,7 +151,8 @@ public class UIManger : MonoBehaviour
     [SerializeField] private Text[] bag_pokemon_hp_txt;
     [SerializeField] private GameObject Menu_Choise_UI;
     [SerializeField] private GameObject Item_prefab;
-    [SerializeField] private GameObject[] Item;
+    //[SerializeField] private GameObject[] Item;
+    [SerializeField] private List<GameObject> item = new List<GameObject>();
     [SerializeField] private Text Item_name;
     [SerializeField] private Text Item_explanation;
     [SerializeField] private ScrollRect scrollRect;
@@ -238,6 +239,10 @@ public class UIManger : MonoBehaviour
                 Current_Enemypokemon_Check(enemypokemon);
                 Ball_UI.SetActive(false);
             }
+            else if(!Ball_UI.gameObject.activeSelf)
+            {
+                Ball_UI.SetActive(true);
+            }
 
             //현재 UI의 버튼 
 
@@ -286,12 +291,12 @@ public class UIManger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.Tab))
             {
+                SoundManager.instance.PlayEffect("ButtonClick");
                 playermovement.ismove = false;
                 Main_UI.SetActive(true);
                 currentIndex = 0;
                 UI_stack = new Stack<GameObject>();
                 UI_stack.Push(MainUI_Default_UI);
-                mainUI_Item = new GameObject[playerBag.Itemdata.Length];
             }
             else if (Main_UI.activeSelf)
             {
@@ -335,6 +340,7 @@ public class UIManger : MonoBehaviour
                 {
                     if (UI_stack.Peek() == MainUI_Default_UI)
                     {
+                        SoundManager.instance.PlayEffect("Back");
                         UI_stack = new Stack<GameObject>();
                         choise_pokemon_move = false;
                         playermovement.ismove = true;
@@ -461,6 +467,7 @@ public class UIManger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.X) && BattleManager.instance.enemyPokemon.GetComponent<PokemonBattleMode>().isWild)
             {
+                SoundManager.instance.PlayEffect("ButtonClick");
                 currentIndex = 0;
                 ball_button.SetActive(true);
                 UI_stack.Push(ball_button);
@@ -479,6 +486,7 @@ public class UIManger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex--;
                 if (currentIndex < 0)
                 {
@@ -486,15 +494,14 @@ public class UIManger : MonoBehaviour
                     Scroll(scrollRect, -10f);
                 }
 
-
                 if (currentIndex <= 1)
                 {
                     Scroll(scrollRect, 0.35f);
                 }
-
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex++;
                 if (currentIndex >= buttons.Length)
                 {
@@ -516,6 +523,7 @@ public class UIManger : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex--;
                 if (currentIndex < 0)
                 {
@@ -530,6 +538,7 @@ public class UIManger : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex++;
                 if (currentIndex >= buttons.Length)
                 {
@@ -558,6 +567,7 @@ public class UIManger : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    SoundManager.instance.PlayEffect("ButtonMove");
                     currentIndex--;
                     if (currentIndex < 0)
                     {
@@ -566,6 +576,7 @@ public class UIManger : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    SoundManager.instance.PlayEffect("ButtonMove");
                     currentIndex++;
                     if (currentIndex >= buttons.Length)
                     {
@@ -583,6 +594,7 @@ public class UIManger : MonoBehaviour
 
                 if (Input.GetKeyDown(KeyCode.UpArrow))
                 {
+                    SoundManager.instance.PlayEffect("ButtonMove");
                     currentIndex--;
                     if (currentIndex < 0)
                     {
@@ -591,6 +603,7 @@ public class UIManger : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.DownArrow))
                 {
+                    SoundManager.instance.PlayEffect("ButtonMove");
                     currentIndex++;
                     if (currentIndex >= buttons.Length)
                     {
@@ -599,7 +612,7 @@ public class UIManger : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.LeftArrow))
                 {
-
+                    SoundManager.instance.PlayEffect("ButtonMove");
                     if (currentIndex < subtractnum)
                     {
                         currentIndex += subtractnum;
@@ -621,7 +634,7 @@ public class UIManger : MonoBehaviour
                 }
                 else if (Input.GetKeyDown(KeyCode.RightArrow))
                 {
-
+                    SoundManager.instance.PlayEffect("ButtonMove");
                     if (currentIndex < subtractnum)
                     {
                         currentIndex += subtractnum;
@@ -662,6 +675,7 @@ public class UIManger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex--;
                 if (currentIndex < 0)
                 {
@@ -678,6 +692,7 @@ public class UIManger : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex++;
                 if (currentIndex >= buttons.Length)
                 {
@@ -709,6 +724,7 @@ public class UIManger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex--;
                 if (currentIndex < 0)
                 {
@@ -717,6 +733,7 @@ public class UIManger : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex++;
                 if (currentIndex >= buttons.Length)
                 {
@@ -725,6 +742,7 @@ public class UIManger : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.LeftArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 int pokemonNum = 6;
                 int boxNum = 5;
 
@@ -756,6 +774,7 @@ public class UIManger : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.RightArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 //포켓몬 세로 숫자
                 int pokemonNum = 6;
 
@@ -792,6 +811,7 @@ public class UIManger : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.UpArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex--;
                 if (currentIndex < 0)
                 {
@@ -805,6 +825,7 @@ public class UIManger : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.DownArrow))
             {
+                SoundManager.instance.PlayEffect("ButtonMove");
                 currentIndex++;
                 if (currentIndex >= buttons.Length)
                 {
@@ -1096,6 +1117,7 @@ public class UIManger : MonoBehaviour
     //전투로 이동 , 스킬 사용창
     public void UI_Fight()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         beforeIndex = currentIndex;
         currentIndex = 0;
 
@@ -1104,12 +1126,10 @@ public class UIManger : MonoBehaviour
 
         UI_stack.Push(Skill_UI);
 
-        Debug.Log(UI_stack.Peek());
         PokemonStats pokemonskills = BattleManager.instance.playerPokemon.GetComponent<PokemonStats>();
 
         //속성이랑 이름 파악해서 넣고 pp도 넣기
         TypeCheck_propertyType(pokemonskills, Inbattle_skill_txt, Inbattle_skill_pp_txt, Inbattle_skill_img);
-
     }
 
 
@@ -1117,6 +1137,7 @@ public class UIManger : MonoBehaviour
     //포켓몬 교환창으로 이동
     public void UI_Change()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         beforeIndex = currentIndex;
         currentIndex = 0;
 
@@ -1157,6 +1178,7 @@ public class UIManger : MonoBehaviour
     //포켓몬 사용 메뉴로 이동
     public void UI_Change_Pokemon()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         RectTransform transform = clickedObject.GetComponent<RectTransform>();
 
@@ -1177,7 +1199,13 @@ public class UIManger : MonoBehaviour
             Change_UI.SetActive(false);
             selectImage_battle.gameObject.SetActive(false);
 
+            SoundManager.instance.PlayEffect("ButtonClick");
             BattleManager.instance.player_pokemon_change = true;
+        }
+        else
+        {
+            Debug.Log("No!!");
+            SoundManager.instance.PlayEffect("No");
         }
 
 
@@ -1188,6 +1216,7 @@ public class UIManger : MonoBehaviour
     //가방으로 이동
     public void UI_Bag()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         if (Battle_UI.activeSelf)
         {
             HP_UI.SetActive(false);
@@ -1195,38 +1224,43 @@ public class UIManger : MonoBehaviour
             Bag_UI.SetActive(true);
         }
 
-        for (int i = 0; i < playerBag.Itemdata.Length; i++)
+
+        if (item.Count == 0)
         {
-
-            if (playerBag.Itemdata[i].Quantity == 0)
+            for (int i = 0; i < playerBag.Itemdata.Length; i++)
             {
-                if (Item[i].activeSelf)
+                GameObject battleitem = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                battleitem.transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                battleitem.transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                battleitem.transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                battleitem.name = "Item" + i;
+                battleitem.GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
+
+                item.Add(battleitem);
+
+                if (playerBag.Itemdata[i].Quantity != 0)
                 {
-                    Item[i].SetActive(false);
+                    item[i].SetActive(true);
                 }
-                continue;
+
             }
-            else if (Item[i] == null)
-            {
-                Debug.Log("아이템 생성");
-                Item[i] = Instantiate(Item_prefab, Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
-                Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
-                Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
-                Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
-                Item[i].name = "Item" + i;
-
-                Item[i].GetComponent<Button>().onClick.AddListener(UI_Item_Pokemon);
-
-                Debug.Log(Item[i].name);
-            }
-            else
-            {
-                Item[i].SetActive(true);
-            }
-
-
-
         }
+        else
+        {
+            for (int i = 0; i < playerBag.Itemdata.Length; i++)
+            {
+                if (playerBag.Itemdata[i].Quantity != 0)
+                {
+                    item[i].SetActive(true);
+                    item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                    item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                    item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                    item[i].name = "Item" + i;
+                }
+            }
+        }
+
+
 
         UI_stack.Push(Bag_UI);
         scrollRect.verticalScrollbar.value = 1f;
@@ -1258,6 +1292,7 @@ public class UIManger : MonoBehaviour
     //아이템 사용 메뉴로 이동
     public void UI_Item_Pokemon()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         RectTransform transform = clickedObject.GetComponent<RectTransform>();
 
@@ -1272,6 +1307,7 @@ public class UIManger : MonoBehaviour
     //아이템 사용
     public void UI_Use_Item()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         pokemon_choise = true;
         Item_index = beforeIndex;
         beforeIndex = 0;
@@ -1298,28 +1334,97 @@ public class UIManger : MonoBehaviour
     //아이템 사용할 포켓몬 선택
     public void UI_Use_Pokemon()
     {
-        //아이템 사용
-        PokemonStats choise_pokemon = playerBag.PlayerPokemon[currentIndex].GetComponent<PokemonStats>();
+        if (playerBag.Itemdata[Item_index].Quantity > 0)
+        {
+            SoundManager.instance.PlayEffect("ButtonClick");
+            //아이템 사용
+            PokemonStats choise_pokemon = playerBag.PlayerPokemon[currentIndex].GetComponent<PokemonStats>();
 
-        Debug.Log("체력: " + choise_pokemon.Hp + "체력회복" + playerBag.Itemdata[Item_index].HealingHp);
-        choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
-        choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+            if (choise_pokemon.isDie)
+            {
+                if (playerBag.Itemdata[Item_index].Name.Contains("기력"))
+                {
+                    Debug.Log("체력: " + choise_pokemon.Hp + "체력회복" + playerBag.Itemdata[Item_index].HealingHp);
+                    choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
+                    choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+                    SoundManager.instance.PlayEffect("Healing");
 
+                    choise_pokemon.isDie = false;
+                    pokemon_choise = false;
+                    playerBag.Itemdata[Item_index].Quantity--;
+                    currentIndex = Item_index;
 
-        Debug.Log("체력 회복 한 후체력: " + choise_pokemon.Hp);
-        Reset_BattleUI();
+                    pokemon_choise = false;
+                    playerBag.Itemdata[Item_index].Quantity--;
+                    currentIndex = Item_index;
 
-        HP_UI.SetActive(true);
-        Default_UI.SetActive(false);
-        selectImage_battle.gameObject.SetActive(false);
-        pokemon_choise = false;
+                    Reset_BattleUI();
+                    HP_UI.SetActive(true);
+                    Default_UI.SetActive(false);
+                    selectImage_battle.gameObject.SetActive(false);
+                    pokemon_choise = false;
 
-        BattleManager.instance.player_using_Item = true;
+                    TextBox.instance.Textbox_OnOff(true);
+                    TextBox.instance.TalkText.text = $"{playerBag.Itemdata[Item_index].Name}을 사용했습니다.";
+                    SoundManager.instance.PlayEffect("Healing");
+                    BattleManager.instance.player_using_Item = true;
+                }
+            }
+            else if (playerBag.Itemdata[Item_index].Name == "이상한 사탕")
+            {
+                choise_pokemon.Exp += choise_pokemon.required_Exp[choise_pokemon.Level];
+                choise_pokemon.CheckLevelUp();
+
+                pokemon_choise = false;
+                playerBag.Itemdata[Item_index].Quantity--;
+                currentIndex = Item_index;
+
+                Reset_BattleUI();
+                HP_UI.SetActive(true);
+                Default_UI.SetActive(false);
+                selectImage_battle.gameObject.SetActive(false);
+                pokemon_choise = false;
+
+                TextBox.instance.Textbox_OnOff(true);
+                TextBox.instance.TalkText.text = $"{playerBag.Itemdata[Item_index].Name}을 사용했습니다.";
+                SoundManager.instance.PlayEffect("LevelUp");
+                BattleManager.instance.player_using_Item = true;
+            }
+            else
+            {
+                Debug.Log("체력: " + choise_pokemon.Hp + "체력회복" + playerBag.Itemdata[Item_index].HealingHp);
+                choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
+                choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+                SoundManager.instance.PlayEffect("Healing");
+
+                for (int i = 0; i < choise_pokemon.skills.Count; i++)
+                {
+                    choise_pokemon.skills[i].PP += playerBag.Itemdata[Item_index].HealingPp;
+                    choise_pokemon.skills[i].PP += (int)(choise_pokemon.skills[i].MaxPP * (playerBag.Itemdata[Item_index].HealingPpPercent * 0.01));
+                }
+
+                pokemon_choise = false;
+                playerBag.Itemdata[Item_index].Quantity--;
+                currentIndex = Item_index;
+
+                Reset_BattleUI();
+                HP_UI.SetActive(true);
+                Default_UI.SetActive(false);
+                selectImage_battle.gameObject.SetActive(false);
+                pokemon_choise = false;
+
+                TextBox.instance.Textbox_OnOff(true);
+                TextBox.instance.TalkText.text = $"{playerBag.Itemdata[Item_index].Name}을 사용했습니다.";
+                SoundManager.instance.PlayEffect("Healing");
+                BattleManager.instance.player_using_Item = true;
+            }
+        }
     }
 
     //볼 사용
     public void UI_Use_ball()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         if (playerBag.ball.Quantity <= 0)
         {
             Debug.Log("볼이없습니다.");
@@ -1344,6 +1449,7 @@ public class UIManger : MonoBehaviour
     //도망가기
     public void UI_Run()
     {
+        SoundManager.instance.PlayEffect("Run");
         BattleManager.instance.isRun = true;
         Battle_UI.SetActive(false);
     }
@@ -1389,6 +1495,7 @@ public class UIManger : MonoBehaviour
     //포켓몬 선택
     public void MainUI_pokemon_Choise()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         if (choise_pokemon_move)
         {
             Button[] btns = UI_stack.Peek().transform.GetComponentsInChildren<Button>();
@@ -1418,6 +1525,7 @@ public class UIManger : MonoBehaviour
     }
     public void MainUI_pokemon_Move()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         pokemon_index = beforeIndex;
         currentIndex = beforeIndex;
 
@@ -1447,6 +1555,7 @@ public class UIManger : MonoBehaviour
     //아이템 메뉴
     public void MainUI_Bag()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         playermoney.text = $"현재 소지금 : {playerBag.playermoney}원";
 
         if (Main_UI.activeSelf)
@@ -1454,45 +1563,52 @@ public class UIManger : MonoBehaviour
             MainUI_Default_UI.SetActive(false);
             mainUI_Bag_UI.SetActive(true);
         }
-        
 
 
-        for (int i = 0; i < playerBag.Itemdata.Length; i++)
+
+        if (mainUI_Item.Count == 0)
         {
-
-            if (playerBag.Itemdata[i].Quantity == 0)
+            for (int i = 0; i < playerBag.Itemdata.Length; i++)
             {
-                if (mainUI_Item[i].activeSelf)
+                GameObject item = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                item.transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                item.transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                item.transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                item.name = "Item" + i;
+                item.GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
+
+                mainUI_Item.Add(item);
+
+                if (playerBag.Itemdata[i].Quantity != 0)
                 {
-                    mainUI_Item[i].SetActive(false);
+                    mainUI_Item[i].SetActive(true);
                 }
-                continue;
-            }
-            else if (mainUI_Item[i] == null)
-            {
-                Debug.Log("아이템 생성");
-                mainUI_Item[i] = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
-                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
-                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
-                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
-                mainUI_Item[i].name = "Item" + i;
 
-                mainUI_Item[i].GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
-            }
-            else
-            {
-                mainUI_Item[i].SetActive(true);
-                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
-                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
-                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
-                mainUI_Item[i].name = "Item" + i;
             }
         }
+        else
+        {
+            for (int i = 0; i < playerBag.Itemdata.Length; i++)
+            {
+                if (playerBag.Itemdata[i].Quantity != 0)
+                {
+                    mainUI_Item[i].SetActive(true);
+                    mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                    mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                    mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                    mainUI_Item[i].name = "Item" + i;
+                    Debug.Log(i + "번호,  재생성 키기");
+                }
+            }
+        }
+
 
         UI_stack.Push(mainUI_Bag_UI);
         mainUI_scrollRect.verticalScrollbar.value = 1f;
         beforeIndex = currentIndex;
         currentIndex = 0;
+ 
+
 
         for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)
         {
@@ -1511,6 +1627,7 @@ public class UIManger : MonoBehaviour
             mainUI_bag_pokemon_img[i].color = Color.white;
             mainUI_bag_pokemon_img[i].sprite = pokemon.image;
             mainUI_bag_pokemon_hPbar[i].value = (float)pokemon.Hp / pokemon.MaxHp;
+            mainUI_bag_pokemon_img[i].gameObject.transform.parent.gameObject.SetActive(true);
 
             Hpbar_Color(mainUI_bag_pokemon_hPbar[i]);
 
@@ -1520,6 +1637,7 @@ public class UIManger : MonoBehaviour
     //아이템 사용 메뉴로 이동
     public void MainUI_Item_Pokemon()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         RectTransform transform = clickedObject.GetComponent<RectTransform>();
 
@@ -1532,6 +1650,7 @@ public class UIManger : MonoBehaviour
 
     public void MainUI_Use_Item()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         pokemon_choise = true;
         Item_index = beforeIndex;
         beforeIndex = 0;
@@ -1559,6 +1678,7 @@ public class UIManger : MonoBehaviour
                     Debug.Log("체력: " + choise_pokemon.Hp + "체력회복" + playerBag.Itemdata[Item_index].HealingHp);
                     choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
                     choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+                    SoundManager.instance.PlayEffect("Healing");
 
                     choise_pokemon.isDie = false;
                     pokemon_choise = false;
@@ -1568,8 +1688,8 @@ public class UIManger : MonoBehaviour
             }
             else if (playerBag.Itemdata[Item_index].Name == "이상한 사탕")
             {
-                choise_pokemon.Level++;
-                choise_pokemon.LevelUp();
+                choise_pokemon.Exp += choise_pokemon.required_Exp[choise_pokemon.Level];
+                choise_pokemon.CheckLevelUp();
 
                 pokemon_choise = false;
                 playerBag.Itemdata[Item_index].Quantity--;
@@ -1577,9 +1697,10 @@ public class UIManger : MonoBehaviour
             }
             else
             {
-
                 choise_pokemon.Hp += playerBag.Itemdata[Item_index].HealingHp;
                 choise_pokemon.Hp += (int)(choise_pokemon.MaxHp * (playerBag.Itemdata[Item_index].HealingHpPercent * 0.01));
+                SoundManager.instance.PlayEffect("Healing");
+
                 for (int i = 0; i < choise_pokemon.skills.Count; i++)
                 {
                     choise_pokemon.skills[i].PP += playerBag.Itemdata[Item_index].HealingPp;
@@ -1610,36 +1731,45 @@ public class UIManger : MonoBehaviour
                 currentIndex = Item_index;
             }
         }
-        //아이템 확인
-        for (int i = 0; i < playerBag.Itemdata.Length; i++)
+        else
         {
+            SoundManager.instance.PlayEffect("No");
+        }
+        //아이템 확인
 
-            if (playerBag.Itemdata[i].Quantity == 0)
+        if (mainUI_Item.Count == 0)
+        {
+            for (int i = 0; i < playerBag.Itemdata.Length; i++)
             {
-                if (mainUI_Item[i].activeSelf)
+                GameObject item = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                item.transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                item.transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                item.transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                item.name = "Item" + i;
+                item.GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
+
+                mainUI_Item.Add(item);
+
+                if (playerBag.Itemdata[i].Quantity != 0)
                 {
-                    mainUI_Item[i].SetActive(false);
+                    mainUI_Item[i].SetActive(true);
                 }
-                continue;
-            }
-            else if (mainUI_Item[i] == null)
-            {
-                Debug.Log("아이템 생성");
-                mainUI_Item[i] = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
-                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
-                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
-                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
-                mainUI_Item[i].name = "Item" + i;
 
-                mainUI_Item[i].GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
             }
-            else
+        }
+        else
+        {
+            for (int i = 0; i < playerBag.Itemdata.Length; i++)
             {
-                mainUI_Item[i].SetActive(true);
-                mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
-                mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
-                mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
-                mainUI_Item[i].name = "Item" + i;
+                if (playerBag.Itemdata[i].Quantity != 0)
+                {
+                    mainUI_Item[i].SetActive(true);
+                    mainUI_Item[i].transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
+                    mainUI_Item[i].transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
+                    mainUI_Item[i].transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
+                    mainUI_Item[i].name = "Item" + i;
+                    Debug.Log(i + "번호,  재생성 키기");
+                }
             }
         }
 
@@ -1671,6 +1801,7 @@ public class UIManger : MonoBehaviour
     //박스 메뉴
     public void MainUI_Box()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         beforeIndex = currentIndex;
         currentIndex = 0;
 
@@ -1725,7 +1856,7 @@ public class UIManger : MonoBehaviour
 
     public void MainUI_Box_Choise()
     {
-
+        SoundManager.instance.PlayEffect("ButtonClick");
         if (choise_pokemon_move)
         {
             Button[] btns = UI_stack.Peek().transform.GetComponentsInChildren<Button>();
@@ -1868,6 +1999,7 @@ public class UIManger : MonoBehaviour
 
     public void MainUI_Box_Move()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         pokemon_index = beforeIndex;
         currentIndex = beforeIndex;
 
@@ -1893,6 +2025,7 @@ public class UIManger : MonoBehaviour
 
     public void MainUI_Box_Delect()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         if (beforeIndex < 6)
         {
             BoxUI_pokemon_img[beforeIndex].color = new Color(0, 0, 0, 0);
@@ -1920,6 +2053,7 @@ public class UIManger : MonoBehaviour
     //저장
     public void MainUI_Report_Save()
     {
+        SoundManager.instance.PlaySFX("Save");
         playerBag.PlayerInfo_Save();
     }
 
@@ -1938,6 +2072,7 @@ public class UIManger : MonoBehaviour
     //나가기
     public void ExitButton()
     {
+        SoundManager.instance.PlayEffect("Back");
         pokemon_choise = false;
         choise_pokemon_move = false;
         currentIndex = beforeIndex;
@@ -2000,8 +2135,6 @@ public class UIManger : MonoBehaviour
 
     public void Reset_BattleUI()
     {
-        Item = new GameObject[playerBag.Itemdata.Length];
-
         beforeIndex = currentIndex;
         currentIndex = 0;
 
@@ -2075,6 +2208,7 @@ public class UIManger : MonoBehaviour
     #region 정보보는 UI
     public void Status_UI_Button()
     {
+        SoundManager.instance.PlayEffect("ButtonClick");
         GameObject clickedObject = EventSystem.current.currentSelectedGameObject;
         clickedObject.transform.parent.gameObject.SetActive(false);
         UI_stack.Pop();

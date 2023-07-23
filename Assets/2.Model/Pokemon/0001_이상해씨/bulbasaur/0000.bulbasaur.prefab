@@ -208,7 +208,7 @@ Animator:
   m_GameObject: {fileID: 709371391802610054}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 297eab06417713945881644bc88ab645, type: 2}
+  m_Controller: {fileID: 22100000, guid: 7b2f17731b9d43c4ea66f6fef19cc8bf, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -229,7 +229,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d132e12b7b5ca04894ce4ea93bb65df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hp: 0
+  isDie: 0
+  Default_MaxHp: 0
+  Default_Attack: 0
+  Default_Defence: 0
+  Default_SpAttack: 0
+  Default_SpDefence: 0
+  Default_Speed: 0
+  Default_Level: 0
+  PlayerOwned: 0
   Name: 
+  image: {fileID: 0}
   MaxHp: 0
   Attack: 0
   Defence: 0
@@ -238,8 +249,10 @@ MonoBehaviour:
   Speed: 0
   Level: 0
   Exp: 0
+  required_Exp: 
   Type1: 0
   Type2: 0
+  SkillPP: 
   AttackRank: 0
   SpAttackRank: 0
   DefenceRank: 0

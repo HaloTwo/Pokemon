@@ -624,7 +624,6 @@ public class BattleManager : MonoBehaviour
 
                     TextBox.instance.Textbox_OnOff(false);
                     #endregion
-
                     //플레이어 위치
                     Wild_playerMove(out Vector3 offset);
 
@@ -646,8 +645,8 @@ public class BattleManager : MonoBehaviour
 
                     //공격 모션 중간쯤에 피격 맞음
                     yield return new WaitUntil(() =>
-                    first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
-                    first_attack_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
+                    first_attack_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
+                    first_attack_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
                     yield return null;
 
                     //피격맞고 체력바 떨어짐
@@ -676,8 +675,8 @@ public class BattleManager : MonoBehaviour
                 //공격 모션 중간쯤에 피격 맞음
                 yield return null;
                 yield return new WaitUntil(() =>
-                next_attacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
-                next_attacker_pokemon.gameObject.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
+                next_attacker_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
+                next_attacker_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
                 yield return null;
 
                 //피격맞고 체력바 떨어짐
@@ -693,22 +692,18 @@ public class BattleManager : MonoBehaviour
                 yield return YieldInstructionCache.WaitForSeconds(2f);
                 //=================================================================== 턴 종료 =================================================================================
 
-
-                Debug.Log("조건문 리셋 바로 직전");
                 //UI 리셋!
                 #region UI 리셋
                 if (!Battle_UI.transform.Find("0.Default").gameObject.activeSelf)
                 {
-                    Debug.Log("부분켜기");
-
                     uIManger.Reset_BattleUI();
+                    uIManger.currentIndex = 0;
                     Battle_UI.transform.Find("Select").gameObject.SetActive(true);
                     Battle_UI.transform.Find("0.Default").gameObject.SetActive(true);
 
                 }
                 else if (!Battle_UI.activeSelf)
                 {
-                    Debug.Log("켜져");
                     uIManger.currentIndex = 0;
                     Battle_UI.SetActive(true);
                 }
@@ -734,14 +729,13 @@ public class BattleManager : MonoBehaviour
                 #endregion
 
                 turn++;
-
                 Debug.Log("턴 끝남");
-            }//첫번째 while문 나감
-
+            }//첫번째 while문 나감 턴 종료 끝
 
             if (iscatch)
             {
                 playerbag.AddPokemon(enemyPokemon);
+                SoundManager.instance.PlaySFX("PokeCaught");
                 yield return YieldInstructionCache.WaitForSeconds(2f);
                 ball.SetActive(false);
 
@@ -824,7 +818,7 @@ public class BattleManager : MonoBehaviour
             else if (enemy_pokemon_Stats.isDie)
             {
                 player_pokemon_Stats.Exp += enemy_pokemon_Stats.Level * 50;
-                player_pokemon_Stats.CheckLevelUp();       
+                player_pokemon_Stats.CheckLevelUp();
 
                 if (enemyplayer != null)
                 {
@@ -879,7 +873,7 @@ public class BattleManager : MonoBehaviour
                     else
                     {
                         enemyplayer.GetComponent<Animator>().SetTrigger("Lose");
-                        
+
                         //텍스트 출력
                         TextBox.instance.NPC_Textbox_OnOff(true);
                         List<string> Lose = new List<string>();
@@ -904,7 +898,21 @@ public class BattleManager : MonoBehaviour
                 }
             }
 
-        }//두번째 while문 나감
+        }//두번째 while문 나옴 전투 끝
+        for (int i = 0; i < playerbag.PlayerPokemon.Count; i++)
+        {
+            if (playerbag.PlayerPokemon[i] != null)
+            {
+                PokemonStats mypokemon = playerbag.PlayerPokemon[i].GetComponent<PokemonStats>();
+                mypokemon.AttackRank = 0;
+                mypokemon.DefenceRank = 0;
+                mypokemon.SpAttackRank = 0;
+                mypokemon.SpDefenceRank = 0;
+                mypokemon.SpeedRank = 0;
+                mypokemon.HitrateRank = 0;
+
+            }
+        }
 
         yield return null;
 
@@ -981,6 +989,9 @@ public class BattleManager : MonoBehaviour
             elapsedTime += Time.deltaTime;
             yield return null;
         }
+
+
+        SoundManager.instance.PlaySFX("BallShake");
 
         // 애니메이션 완료 후 원래 위치로 돌아오는 애니메이션 추가
         float returnDuration = duration / 3f; // 돌아오는 애니메이션의 시간
@@ -1119,9 +1130,8 @@ public class BattleManager : MonoBehaviour
         attacker.GetComponent<PokemonBattleMode>().anim.SetTrigger("Attack");
         TextBox.instance.Textbox_OnOff(true);
         TextBox.instance.TalkText.text = $" {attacker.Name}의 {attacker.skills[skillnum].Name}!!";
-
-        Invoke("setoff", 2f);
     }
+
     void setoff()
     {
         TextBox.instance.TalkText.text = "";
@@ -1135,7 +1145,6 @@ public class BattleManager : MonoBehaviour
     {
         if (Target == playerPokemon.GetComponent<PokemonStats>())
         {
-            Debug.Log("플레이어가 맞았다, 체력바만 켜");
             if (!Battle_UI.activeSelf)
             {
                 Battle_UI.SetActive(true);
@@ -1147,7 +1156,34 @@ public class BattleManager : MonoBehaviour
 
         Target.Hp -= (int)Damage;
         Debug.Log($"{Target.Name}에게 {(int)Damage}만큼의 데미지를 주었다!");
-        Target.gameObject.GetComponent<Animator>().SetTrigger("Hit");
+
+        if (DamageRank > 1)
+        {
+            Target.gameObject.GetComponent<Animator>().SetTrigger("SuperHit");
+            SoundManager.instance.PlayEffect("SuperHit");
+            TextBox.instance.TalkText.text = "효과가 굉장했다!";
+        }
+        else if (DamageRank < 1)
+        {
+            Target.gameObject.GetComponent<Animator>().SetTrigger("Hit");
+            SoundManager.instance.PlayEffect("BadHit");
+            TextBox.instance.TalkText.text = "효과가 별로인듯하다...";
+        }
+        else if (DamageRank == 0)
+        {
+            TextBox.instance.TalkText.text = "효과가 없는거같다.";
+        }
+        else if (Damage == 0)
+        {
+
+        }
+        else
+        {
+            Target.gameObject.GetComponent<Animator>().SetTrigger("Hit");
+            SoundManager.instance.PlayEffect("NormalHit");
+        }
+        Invoke("setoff", 1.5f);
+
 
         if (Target.name.Contains("0975.Eiscue"))
         {
@@ -1160,11 +1196,11 @@ public class BattleManager : MonoBehaviour
         float targetHp_Value = (float)Target.Hp / Target.MaxHp;
         float durationTime = 1f;
 
-        StartCoroutine(HpUpdate_Co(targetHp_Value, durationTime, Target_Slider));
+        StartCoroutine(HpUpdate_Co(Target, targetHp_Value, durationTime, Target_Slider));
     }
 
     //자연스럽게 HPbar를 내리기위한 코루틴
-    private IEnumerator HpUpdate_Co(float targetHp_Value, float durationTime, Slider Target)
+    private IEnumerator HpUpdate_Co(PokemonStats Target_stats, float targetHp_Value, float durationTime, Slider Target)
     {
         float elapsedTime = 0f;
         float startHpValue = Target.value;
@@ -1190,8 +1226,16 @@ public class BattleManager : MonoBehaviour
             Target.value = smoothedValue;
 
             yield return null;
-
         }
+
+        if (Target.gameObject.transform.Find("Fill Area/Fill").GetComponent<Image>().color == Color.red)
+        {
+            if (!Target_stats.isDie)
+            {
+                SoundManager.instance.PlayEffect("HealthLow");
+            }
+        }
+
         Target.value = targetHp_Value;
 
         Damage = 0f;
@@ -1296,9 +1340,15 @@ public class BattleManager : MonoBehaviour
     //데미지 판별
     void OnDamage(SkillData skill, PokemonStats attacker, PokemonStats target)
     {
+        ////배틀 변수값들 초기화
+        Damage = 0;
+        PropertyRank = 1;
+        DamageRank = 1;
+
         CheckProPertyType(skill, attacker);
         CheckDamageType(skill, target);
         CheckStateRank(attacker, target);
+
         if (skill.AttackType == SkillData.attackType.Attack)
         {
             Damage = ((attacker.Attack * AttackerAttackRank) * skill.Damage * (attacker.Level * 2 / 5 + 2) / (target.Defence * TargetDefenceRank) / 50 + 2) * PropertyRank * DamageRank;
@@ -1308,36 +1358,23 @@ public class BattleManager : MonoBehaviour
             Damage = ((attacker.SpAttack * AttackerSpAttackRank) * skill.Damage * (attacker.Level * 2 / 5 + 2) / (target.SpDefence * TargetSpDefenceRank) / 50 + 2) * PropertyRank * DamageRank;
         }
 
-        if (Damage <= 0 && skill.AttackType == SkillData.attackType.None)
-        {
-            Damage = 1;
-        }
+        attacker.Attack += skill.AttackRankUp;
+        attacker.SpAttackRank += skill.AttackRankUp;
+        attacker.DefenceRank += skill.DefenceRankUp;
+        attacker.SpDefenceRank += skill.SpDefenceRankUp;
+        attacker.SpeedRank += skill.SpeedRankUp;
 
-        if (DamageRank > 1)
-        {
-            //TextBox.instance.TalkText.text = "효과가 굉장했다!";
-        }
-        else if (DamageRank < 1)
-        {
+        target.Attack += skill.EnemyAttackRankUp;
+        target.SpAttackRank += skill.EnemySpAttackRankUp;
+        target.DefenceRank += skill.EnemyDefenceRankUp;
+        target.SpDefenceRank += skill.EnemySpDefenceRankUp;
+        target.SpeedRank += skill.EnemySpeedRankUp;
 
-            //TextBox.instance.TalkText.text = "효과가 별로인듯하다...";
-        }
-        else if (DamageRank == 0)
-        {
-            //TextBox.instance.TalkText.text = "효과가 없는거같다.";
-            Damage = 0;
-        }
-        else
-        {
 
-        }
 
         //target.Hp -= (int)Damage;
         //Debug.Log($"{target.Name}에게 {(int)Damage}만큼의 데미지를 주었다!");
 
-        //배틀 변수값들 초기화
-        PropertyRank = 1;
-        DamageRank = 1;
     }
 
     //타입 판별
