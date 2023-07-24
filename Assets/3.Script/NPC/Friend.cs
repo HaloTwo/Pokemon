@@ -18,6 +18,9 @@ public class Friend : MonoBehaviour
     [SerializeField] GameObject enemyPos;
     private Animator anim;
     private bool isBattle;
+    [Header("포켓몬 레벨")]
+    [SerializeField] int level;
+    [Header("얻는 돈")]
     public int getmoney = 10000;
 
     private void Awake()
@@ -37,6 +40,7 @@ public class Friend : MonoBehaviour
             in_FriendPokemono[i].GetComponent<PokemonMove>().enabled = false;
             in_FriendPokemono[i].GetComponent<PokemonBattleMode>().isWild = false;
             in_FriendPokemono[i].GetComponent<PokemonBattleMode>().enabled = true;
+            in_FriendPokemono[i].GetComponent<PokemonStats>().Level = level;
         }
     }
 

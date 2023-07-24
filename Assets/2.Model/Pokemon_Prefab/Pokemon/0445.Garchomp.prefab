@@ -434,9 +434,9 @@ MonoBehaviour:
   Default_Defence: 95
   Default_SpAttack: 80
   Default_SpDefence: 85
-  Default_Speed: 142
+  Default_Speed: 102
   Default_Level: 0
-  PlayerOwned: 1
+  PlayerOwned: 0
   Name: "\uD55C\uCE74\uB9AC\uC544\uC2A4"
   image: {fileID: 21300000, guid: b4daa04fbbb036b47a6b9405f74d1b2f, type: 3}
   MaxHp: 148
@@ -447,6 +447,7 @@ MonoBehaviour:
   Speed: 102
   Level: 20
   Exp: 0
+  required_Exp: 
   Type1: 15
   Type2: 3
   SkillPP: 050000000a0000000a00000005000000
@@ -468,7 +469,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 599588303973228438}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3826459dc78667f4ca549160f5cff500, type: 3}
   m_Name: 

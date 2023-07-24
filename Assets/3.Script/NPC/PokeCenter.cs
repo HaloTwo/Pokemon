@@ -78,6 +78,11 @@ public class PokeCenter : MonoBehaviour
                     PokemonStats pokemon = playerbag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
                     pokemon.Hp = pokemon.MaxHp;
+
+                    for (int j = 0; j < pokemon.skills.Count; j++)
+                    {
+                        pokemon.SkillPP[j] = pokemon.skills[j].MaxPP;
+                    }
                 }
             }
 
@@ -127,6 +132,18 @@ public class PokeCenter : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             SoundManager.instance.PlayBGM("PokemonCenter");
+
+            // 플레이어와 충돌한 오브젝트의 방향 벡터
+            Vector3 directionToPlayer = other.transform.position - transform.position;
+            directionToPlayer.y = 0f; // y 축은 회전시키지 않기 위해 0으로 설정
+            directionToPlayer.Normalize();
+
+            // 플레이어가 오브젝트의 뒤쪽에 있는지 확인
+            if (Vector3.Dot(transform.forward, directionToPlayer) < 0f)
+            {
+                // 180도 회전하여 플레이어를 오브젝트의 앞쪽으로 보이게 함
+                transform.Rotate(Vector3.up, 180f);
+            }
         }
     }
 

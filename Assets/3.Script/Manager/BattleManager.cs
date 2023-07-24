@@ -155,7 +155,6 @@ public class BattleManager : MonoBehaviour
         //회전
         Vector3 enemy_look = player.transform.position - enemyplayer.transform.position;
         player.transform.rotation = Quaternion.LookRotation(-enemy_look);
-
     }
 
     void Trainer_Battle_pokemonMove(Vector3 playerpos)
@@ -200,6 +199,8 @@ public class BattleManager : MonoBehaviour
 
         //포켓몬 켜지고 카메라 이동
         enemyPokemon.SetActive(true);
+        SoundManager.instance.PlayEffect("Ball_Out");
+
         Renderer enemypokmonRender = enemyPokemon.GetComponentInChildren<Renderer>();
         pokemonTarget(enemyPokemon.transform, enemypokmonRender, false, false, true);
         yield return StartCoroutine(enemyPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
@@ -213,9 +214,11 @@ public class BattleManager : MonoBehaviour
 
         //플레이어 포켓몬에게 카메라 이동
         playerPokemon.SetActive(true);
+
         Renderer playerpokemonRender = playerPokemon.GetComponentInChildren<Renderer>();
         pokemonTarget(playerPokemon.transform, playerpokemonRender, false, false, true);
 
+        SoundManager.instance.PlayEffect("Ball_Out");
         yield return StartCoroutine(playerPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
 
         //다시 원래 카메라로
@@ -238,33 +241,31 @@ public class BattleManager : MonoBehaviour
     #region 야생 포켓몬 연출
     void Wild_pokemonMove()
     {
-        Bounds enemy = enemyPokemon.GetComponentInChildren<Renderer>().bounds;
-        Bounds playerpokemonrender = playerPokemon.GetComponentInChildren<Renderer>().bounds;
+        Vector3 pokemonpos = enemyPokemon.transform.position + enemyPokemon.transform.forward * distance_wild;
+        Vector3 offset = enemyPokemon.transform.forward
+                      * (playerPokemon.GetComponentInChildren<Renderer>().bounds.size.z / 2
+                      + (enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.z / 2));
 
-        float totalSize = enemy.size.z + playerpokemonrender.size.z; // 두 포켓몬의 크기를 합친 값
-        float adjustedDistance = distance_wild + totalSize; // 크기를 고려한 조정된 거리
+        pokemonpos += offset;
 
-        Vector3 direction = enemyPokemon.transform.forward;
-        Vector3 targetPosition = enemyPokemon.transform.position + direction * adjustedDistance;
-        Vector3 LookRotation = player.transform.position - enemyPokemon.transform.position;
+        playerPokemon.transform.position = pokemonpos;
 
-        Quaternion pokemonLook = Quaternion.LookRotation(-LookRotation);
-        pokemonLook.x = 0;
-        pokemonLook.z = 0;
-        playerPokemon.transform.rotation = pokemonLook;
-
-
-        targetPosition.y = player.transform.position.y;
-
-        playerPokemon.transform.position = targetPosition;
+        Vector3 enemy_look = playerPokemon.transform.position - enemyPokemon.transform.position;
+        playerPokemon.transform.rotation = Quaternion.LookRotation(-enemy_look);
 
         if (betweenObject == null)
         {
             betweenObject = new GameObject("Between");
         }
 
+        float distance = Vector3.Distance(playerPokemon.transform.position, enemyPokemon.transform.position);
+
+        // 거리를 출력합니다.
+        Debug.Log("두 개체 사이의 거리: " + distance);
+
+
         Vector3 objectPosition = (enemyPokemon.transform.position + playerPokemon.transform.position) / 2f;
-        objectPosition.y = enemyPokemon.transform.position.y + (enemy.size.y);
+        objectPosition.y = enemyPokemon.transform.position.y + enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.y;
 
         betweenObject.transform.rotation = Quaternion.identity;
         betweenObject.transform.position = objectPosition;
@@ -275,15 +276,16 @@ public class BattleManager : MonoBehaviour
     {
         // 플레이어 위치
         Quaternion rotation = Quaternion.Euler(0f, 25f, 0f);
+        float playerorigin_Y = player.transform.position.y;
         offset = rotation * -playerPokemon.transform.forward;
-        player.transform.position = playerPokemon.transform.position + offset * 4f;
 
+
+        Vector3 playerPos = player.transform.position + offset * 4f;
+        //playerPos.y = playerorigin_Y;
+        Debug.Log("플레이어 원래 y값" + playerorigin_Y + "이동한 y값 : " + playerPos);
+        player.transform.position = playerPos;
+        Debug.Log("이동한 y값 : " + playerPos);
         Vector3 loc = player.transform.position - enemyPokemon.transform.position;
-        //Vector3 lookDirection = -loc;
-
-        //lookDirection.x = 0;
-        //lookDirection.z = 0;
-
         Quaternion playerLook = Quaternion.LookRotation(-loc);
         playerLook.x = 0;
         playerLook.z = 0;
@@ -332,34 +334,17 @@ public class BattleManager : MonoBehaviour
 
         if (target == ball)
         {
-            Debug.Log("lookat 지정해");
             virtualCamera.LookAt = target.transform;
 
             Vector3 targetPosition = ball.transform.position + ball.transform.forward * 1f;
             targetPosition.y = enemyPokemon.transform.position.y;
-            Debug.Log("적의 앞에 위치해");
             virtualCamera.transform.position = targetPosition;
-            //virtualCamera.transform.position = betweenObject.transform.position;
 
         }
         else if (target != ball)
         {
             virtualCamera.LookAt = null;
             virtualCamera.transform.position = betweenObject.transform.position;
-
-            //if (target_renderer.bounds.size.y >= 5.8f)
-            //{
-            //    targetCenter = target.transform.position + target.transform.up * target_renderer.bounds.size.y * 0.8f;
-            //    virtualCamera.transform.position = targetCenter + target.transform.forward * 8f;
-            //}
-            //else if (target_renderer.bounds.size.y > 3f)
-            //{
-            //    virtualCamera.transform.position = targetCenter + target.transform.forward * 7f;
-            //}
-            //else
-            //{
-            //    virtualCamera.transform.position = targetCenter + target.transform.forward * 3f;
-            //}
         }
 
         virtualCamera.transform.rotation = Quaternion.LookRotation(targetCenter - virtualCamera.transform.position);
@@ -540,24 +525,26 @@ public class BattleManager : MonoBehaviour
                     //몬스터 볼로 카메라 이동
                     EnemyLookatCamera(ball, 0.5f);
 
-                    while (ball.GetComponent<Rigidbody>().velocity == Vector3.zero)
+                    Rigidbody ball_rb = ball.GetComponent<Rigidbody>();
+                    while (ball_rb.velocity != Vector3.zero)
                     {
                         yield return null;
                     }
-                    yield return new WaitUntil(() => ball.GetComponent<Rigidbody>().velocity == Vector3.zero);
-                    ball.GetComponent<Rigidbody>().velocity = Vector3.zero;
-                    ball.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+                    ball_rb.freezeRotation = true;
+                    yield return new WaitUntil(() => ball_rb.velocity == Vector3.zero);
+
+                    ball_rb.velocity = Vector3.zero;
+                    ball_rb.angularVelocity = Vector3.zero;
                     Quaternion ball_rotation = ball.transform.rotation;
                     ball_rotation.z = 0;
                     ball_rotation.x = 0;
                     ball.transform.rotation = ball_rotation;
-                    Debug.Log(ball_rotation + " / " + ball.transform.rotation);
                     //---------------볼 정지 후 계산-------------------------------
 
                     yield return null;
                     yield return StartCoroutine(Catch_count_co());
-                    ball_throw = false;
 
+                    ball_throw = false;
 
                     //잡으면
                     if (iscatch)
@@ -573,6 +560,7 @@ public class BattleManager : MonoBehaviour
                     {
                         ball.SetActive(false);
                         enemyPokemon.SetActive(true);
+                        SoundManager.instance.PlayEffect("Ball_Out");
                         EnemyLookatCamera(enemyPokemon, 0.65f);
                         yield return null;
                         yield return new WaitUntil(() => enemyPokemon.GetComponent<PokemonBattleMode>().anim.GetCurrentAnimatorStateInfo(0).IsName("roar01")
@@ -581,9 +569,8 @@ public class BattleManager : MonoBehaviour
 
                         //다시 원래 카메라로
                         virtualCamera.Priority = 0;
-
+                        SoundManager.instance.PlayBGM("Wild_Battle");
                     }
-
 
                 }
 
@@ -612,20 +599,30 @@ public class BattleManager : MonoBehaviour
 
                     yield return new WaitUntil(() =>
                     player_anim.GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl|tr0050_00_01320_ballthrow01_gfbanm")
-                    && player_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
+                    && player_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
 
                     playerPokemon.transform.position = pokemon_loc;
                     playerPokemon.transform.rotation = pokemon_rot;
                     playerPokemon.SetActive(true);
+                    SoundManager.instance.PlayEffect("Ball_Out");
 
+                    yield return StartCoroutine(playerPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
 
                     first_attack_pokemon = playerPokemon.GetComponent<PokemonStats>();
                     player_pokemon_Stats = playerPokemon.GetComponent<PokemonStats>();
 
                     TextBox.instance.Textbox_OnOff(false);
                     #endregion
-                    //플레이어 위치
-                    Wild_playerMove(out Vector3 offset);
+
+                    if (enemyplayer != null)
+                    {
+                        //플레이어 위치
+                        Wild_playerMove(out Vector3 offset);
+                    }
+                    else
+                    {
+                        Trainer_Battle_playerMove(out Vector3 playerpos);
+                    }
 
                     //카메라 조정
                     CameraMove();
@@ -712,7 +709,7 @@ public class BattleManager : MonoBehaviour
                 //리셋
                 #region 조건문 리셋
 
-                while (player_using_Item || enemy_using_Item || player_pokemon_change || enemy_pokemon_change || ball_throw || iscatch)
+                while (true)
                 {
                     player_using_Item = false;
                     enemy_using_Item = false;
@@ -722,6 +719,10 @@ public class BattleManager : MonoBehaviour
                     iscatch = false;
                     uIManger.isBattle = false;
 
+                    if (!player_using_Item && !enemy_using_Item && !player_pokemon_change && !enemy_pokemon_change && !ball_throw && !iscatch)
+                    {
+                        break;
+                    }
                     yield return null;
                 }
 
@@ -735,9 +736,12 @@ public class BattleManager : MonoBehaviour
             if (iscatch)
             {
                 playerbag.AddPokemon(enemyPokemon);
-                SoundManager.instance.PlaySFX("PokeCaught");
+                SoundManager.instance.PlayEffect("Ball_Gotcha");
+                yield return YieldInstructionCache.WaitForSeconds(0.5f);
+                SoundManager.instance.PlayBGM("PokeCaught");
                 yield return YieldInstructionCache.WaitForSeconds(2f);
                 ball.SetActive(false);
+
 
                 TextBox.instance.Textbox_OnOff(true);
                 TextBox.instance.TalkText.text = enemy_pokemon_Stats.Name + "을 잡았습니다";
@@ -750,22 +754,6 @@ public class BattleManager : MonoBehaviour
                 TextBox.instance.Textbox_OnOff(true);
                 TextBox.instance.TalkText.text = "무사히 도망갔습니다.";
                 yield return YieldInstructionCache.WaitForSeconds(1f);
-                TextBox.instance.Textbox_OnOff(false);
-
-                enemy_pokemon_battlemode.enabled = false;
-                enemy_pokemon_battlemode.anim.SetBool("Battle", false);
-                enemy_pokemon_battlemode.anim.SetBool("Walk", true);
-
-                enemyPokemon.GetComponent<PokemonMove>().enabled = true;
-                break;
-            }
-            else if (islose)
-            {
-                player_pokemon_battlemode.anim.SetTrigger("Die");
-                TextBox.instance.Textbox_OnOff(true);
-
-                TextBox.instance.TalkText.text = "졌습니다.";
-                yield return YieldInstructionCache.WaitForSeconds(1.5f);
                 TextBox.instance.Textbox_OnOff(false);
 
                 enemy_pokemon_battlemode.enabled = false;
@@ -823,7 +811,6 @@ public class BattleManager : MonoBehaviour
                 if (enemyplayer != null)
                 {
                     enemyplayer.GetComponent<Animator>().SetTrigger("Back");
-                    yield return StartCoroutine(enemy_pokemon_battlemode.DieAnimation_co(0.5f));
 
                     bool allPokemonsDead = true; // 모든 포켓몬이 사망한 상태인지 여부를 나타내는 변수
 
@@ -873,6 +860,7 @@ public class BattleManager : MonoBehaviour
                     else
                     {
                         enemyplayer.GetComponent<Animator>().SetTrigger("Lose");
+                        playerbag.playermoney += enemyplayer.GetComponent<Friend>().getmoney;
 
                         //텍스트 출력
                         TextBox.instance.NPC_Textbox_OnOff(true);
@@ -920,6 +908,7 @@ public class BattleManager : MonoBehaviour
         Battle_UI.SetActive(false);
 
         player.GetComponent<PlayerMovement>().isBattle = false;
+        player.GetComponent<PlayerMovement>().ismove = true;
         playerPokemon.SetActive(false);
 
         newTransform.gameObject.SetActive(false);
@@ -943,17 +932,17 @@ public class BattleManager : MonoBehaviour
         float catchRate_2 = 0.8f;
 
         // 회전 애니메이션 시작
-        yield return StartCoroutine(SwingAnimation(40f, -40f, 0.55f));
+        yield return StartCoroutine(SwingAnimation(40f, -40f, 0.4f));
         yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
         if (Random.value <= catchRate_1)
         {
-            yield return StartCoroutine(SwingAnimation(40f, -40f, 0.6f));
+            yield return StartCoroutine(SwingAnimation(40f, -40f, 0.45f));
             yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
             if (Random.value <= catchRate_2)
             {
-                yield return StartCoroutine(SwingAnimation(40f, -40f, 0.6f));
+                yield return StartCoroutine(SwingAnimation(40f, -40f, 0.45f));
                 yield return YieldInstructionCache.WaitForSeconds(0.5f);
 
                 iscatch = true;
@@ -1267,16 +1256,34 @@ public class BattleManager : MonoBehaviour
 
                 num = randomskillnum[Random.Range(0, randomskillnum.Count)];
 
+                if (firstpokemon.SkillPP[num] <= 0)
+                {
+                    List<int> randomskillnum2 = new List<int>();
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (i != enemyskillnum)
+                        {
+                            randomskillnum2.Add(i);
+                        }
+                    }
+
+                    num = randomskillnum2[Random.Range(0, randomskillnum2.Count)];
+                }
             }
             else
             {
                 num = enemyskillnum;
             }
 
+            if (enemyplayer != null)
+            {
+                enemyplayer.GetComponent<Animator>().SetTrigger("Order");
+            }
+
         }
         else if (firstpokemon == playerPokemon.GetComponent<PokemonStats>())
         {
-
             if (firstpokemon.SkillPP[num] <= 0)
             {
                 List<int> randomskillnum = new List<int>();
@@ -1290,6 +1297,23 @@ public class BattleManager : MonoBehaviour
                 }
 
                 num = randomskillnum[Random.Range(0, randomskillnum.Count)];
+
+                if (firstpokemon.SkillPP[num] <= 0)
+                {
+                    List<int> randomskillnum2 = new List<int>();
+
+                    for (int i = 0; i < 3; i++)
+                    {
+                        if (i != playerskillnum)
+                        {
+                            randomskillnum2.Add(i);
+                        }
+                    }
+
+                    num = randomskillnum2[Random.Range(0, randomskillnum2.Count)];
+                }
+
+
             }
             else
             {

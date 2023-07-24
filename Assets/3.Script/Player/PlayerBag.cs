@@ -51,7 +51,6 @@ public class PlayerBag : MonoBehaviour
     //포켓몬 추가
     public void AddPokemon(GameObject pokemon)
     {
-        Debug.Log("플레이어포켓몬 생성");
         for (int i = 0; i < PlayerPokemon.Count; i++)
         {
 

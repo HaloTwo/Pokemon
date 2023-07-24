@@ -1224,17 +1224,16 @@ public class UIManger : MonoBehaviour
             Bag_UI.SetActive(true);
         }
 
-
         if (item.Count == 0)
         {
             for (int i = 0; i < playerBag.Itemdata.Length; i++)
             {
-                GameObject battleitem = Instantiate(Item_prefab, mainUI_Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
+                GameObject battleitem = Instantiate(Item_prefab, Bag_UI.transform.Find("Scroll View/Viewport/Content").transform);
                 battleitem.transform.GetChild(0).GetComponent<Text>().text = playerBag.Itemdata[i].Name;
                 battleitem.transform.GetChild(1).GetComponent<Image>().sprite = playerBag.Itemdata[i].Image;
                 battleitem.transform.GetChild(2).GetComponent<Text>().text = "✕ " + playerBag.Itemdata[i].Quantity;
                 battleitem.name = "Item" + i;
-                battleitem.GetComponent<Button>().onClick.AddListener(MainUI_Item_Pokemon);
+                battleitem.GetComponent<Button>().onClick.AddListener(UI_Item_Pokemon);
 
                 item.Add(battleitem);
 
@@ -1259,8 +1258,6 @@ public class UIManger : MonoBehaviour
                 }
             }
         }
-
-
 
         UI_stack.Push(Bag_UI);
         scrollRect.verticalScrollbar.value = 1f;

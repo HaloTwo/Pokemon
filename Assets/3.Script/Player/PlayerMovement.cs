@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 position = transform.position + transform.forward * 4f;
         Quaternion rotation = transform.rotation;
-        Vector3 size = new Vector3(1f, 6f, 8f);
+        Vector3 size = new Vector3(1f, 5f, 8f);
 
         // 기즈모 시각화
         Gizmos.color = new Color(0f, 1f, 0f, 0.3f);
@@ -207,7 +207,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 position = transform.position + transform.forward * 4f;
         Quaternion rotation = transform.rotation;
-        Vector3 size = new Vector3(1f, 6f, 8f);
+        Vector3 size = new Vector3(1f, 5f, 8f);
 
         Collider[] colls;
         int PokemonLayer = LayerMask.GetMask("Pokemon");
@@ -221,7 +221,7 @@ public class PlayerMovement : MonoBehaviour
 
             GameObject target = BattleManager.instance.enemyPokemon;
 
-            Vector3 targetCenter = target.transform.position + target.transform.up * target.GetComponentInChildren<Renderer>().bounds.size.y * 0.8f;
+            Vector3 targetCenter = target.transform.position + target.transform.up * target.GetComponentInChildren<Renderer>().bounds.size.y * 0.5f;
 
             Vector3 forceDirection = (targetCenter - ball_loc.position).normalized;
             ball_rb.AddForce(forceDirection * ThrowPower, ForceMode.Impulse);
@@ -236,7 +236,6 @@ public class PlayerMovement : MonoBehaviour
         //포켓몬과 전투하려고 할 때, 가장 가까운 포켓몬 조준
         else if (colls.Length > 0)
         {
-            Debug.Log("포켓몬 조준 싸우자");
             Collider closestPokemon = null;
             float closestDistance = Mathf.Infinity;
 

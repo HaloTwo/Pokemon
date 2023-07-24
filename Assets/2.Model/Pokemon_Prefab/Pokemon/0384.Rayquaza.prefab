@@ -2776,7 +2776,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7813509237518155570}
-  m_LocalRotation: {x: 0, y: -0.23469467, z: 0, w: 0.97206914}
+  m_LocalRotation: {x: 0, y: -0.23469256, z: 0, w: 0.9720697}
   m_LocalPosition: {x: 2207.2456, y: 128.77783, z: -707.37115}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -2788,7 +2788,7 @@ Transform:
   - {fileID: 6413862263114395894}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -27.147, z: 0}
 --- !u!95 &6966576665431212641
 Animator:
   serializedVersion: 3
@@ -2859,7 +2859,7 @@ MonoBehaviour:
   Default_SpDefence: 90
   Default_Speed: 95
   Default_Level: 0
-  PlayerOwned: 1
+  PlayerOwned: 0
   Name: "\uB808\uCFE0\uC7C8"
   image: {fileID: 21300000, guid: 525e8931673b6d249878d7b4db35b93c, type: 3}
   MaxHp: 145
@@ -2870,6 +2870,7 @@ MonoBehaviour:
   Speed: 95
   Level: 20
   Exp: 0
+  required_Exp: 
   Type1: 4
   Type2: 15
   SkillPP: 0a000000050000001400000005000000
@@ -2891,7 +2892,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7813509237518155570}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3826459dc78667f4ca549160f5cff500, type: 3}
   m_Name: 

@@ -57,7 +57,7 @@ public class PokemonMove : MonoBehaviour
         }
 
         //애니메이터 잠시 끔
-        StartCoroutine(Player.GetComponent<PlayerMovement>().apply_motion_wait(5f));
+        StartCoroutine(Player.GetComponent<PlayerMovement>().apply_motion_wait(7f));
 
         //플레이어 못움직이게
         Player.GetComponent<PlayerMovement>().isBattle = true;
