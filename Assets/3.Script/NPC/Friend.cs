@@ -17,7 +17,7 @@ public class Friend : MonoBehaviour
     [SerializeField] private GameObject[] in_FriendPokemono = new GameObject[5];
     [SerializeField] GameObject enemyPos;
     private Animator anim;
-    private bool isBattle;
+    public bool isBattle;
     [Header("포켓몬 레벨")]
     [SerializeField] int level;
     [Header("얻는 돈")]
@@ -41,6 +41,7 @@ public class Friend : MonoBehaviour
             in_FriendPokemono[i].GetComponent<PokemonBattleMode>().isWild = false;
             in_FriendPokemono[i].GetComponent<PokemonBattleMode>().enabled = true;
             in_FriendPokemono[i].GetComponent<PokemonStats>().Level = level;
+            in_FriendPokemono[i].GetComponent<PokemonStats>().LevelUp();
         }
     }
 
@@ -75,13 +76,19 @@ public class Friend : MonoBehaviour
         StartCoroutine(player.GetComponent<PlayerMovement>().apply_motion_wait(10f));
         TextBox.instance.NPC_Textbox_OnOff(false);
 
-        anim.SetBool("Battle", isBattle);
+        anim.SetBool("Battle", true);
         player.GetComponent<PlayerMovement>().isBattle = true;
 
         transform.position = enemyPos.transform.position;
         transform.rotation = enemyPos.transform.rotation;
 
         friends_pokemon_Move();
+
+        for (int i = 0; i < in_FriendPokemono.Length; i++)
+        {
+            PokemonStats pokemon = in_FriendPokemono[i].GetComponent<PokemonStats>();
+            pokemon.Hp = pokemon.MaxHp;
+        }
 
         BattleManager.instance.Battle_Start(in_FriendPokemono, player, gameObject);
 

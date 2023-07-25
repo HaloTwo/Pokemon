@@ -44,7 +44,6 @@ public class PlayerBag : MonoBehaviour
     {
         //필드에 플레이어 포켓몬 생성
         PlayerInfo_Road();
-        BattleManager.instance.Battle_Ready.AddListener(PlayerPokemon_Battle_go);
     }
 
 
@@ -110,13 +109,9 @@ public class PlayerBag : MonoBehaviour
             {
                 PlayerPokemon[i].SetActive(true);
                 BattleManager.instance.playerPokemon = PlayerPokemon[i];
-
                 break;
             }
-            else
-            {
 
-            }
         }
     }
 
@@ -148,8 +143,6 @@ public class PlayerBag : MonoBehaviour
             //이름이 빈공백이면 빈공간을 추가한다.
             if (playerNames == "")
             {
-                //PlayerPokemon[i] = null;
-                Debug.Log("빈공간이오");
                 PlayerPokemon.Add(null);
             }
             else

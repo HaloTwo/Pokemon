@@ -90,11 +90,10 @@ public class BattleManager : MonoBehaviour
     public bool player_using_Item = false;
     public bool enemy_using_Item = false;
     public bool player_pokemon_change = false;
+    public bool player_pokemon_die_change = false;
     public bool enemy_pokemon_change = false;
     public bool ball_throw = false;
     public bool iscatch = false;
-
-    public UnityEvent Battle_Ready;
 
     Transform newTransform;
     //배틀 시작!
@@ -102,17 +101,20 @@ public class BattleManager : MonoBehaviour
     private void Start()
     {
         uIManger = Battle_UI.transform.parent.GetComponent<UIManger>();
+        playerbag = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerBag>();
     }
     public void Battle_Start(GameObject[] enemyPokemon_List, GameObject player, GameObject enemyplayer)
     {
         Debug.Log("배틀시작!");
+        //전의 필드의 노래 저장
+        SoundManager.instance.SaveBGM();
 
         this.enemyPokemon_List = new GameObject[enemyPokemon_List.Length];
         this.enemyPokemon_List = enemyPokemon_List;
 
         this.enemyPokemon = enemyPokemon_List[0];
         this.player = player;
-        Battle_Ready.Invoke();
+        playerbag.PlayerPokemon_Battle_go();
 
         this.enemyplayer = enemyplayer;
 
@@ -187,8 +189,17 @@ public class BattleManager : MonoBehaviour
         virtualCamera.Priority = 15;
 
         //BGM변경
-        SoundManager.instance.PlayBGM("Trainer_Battle");
+        if (enemyplayer.name.Equals("Friend"))
+        {
+            SoundManager.instance.PlayBGM("Friend_Battle");
+        }
+        else
+        {
+            SoundManager.instance.PlayBGM("Trainer_Battle");
+        }
 
+
+        //====================================================================================================================================================================
         //적 포켓몬의 중심을 찾고, 크기에 따라 카메라 이동
         EnemyLookatCamera(enemyplayer, 0.7f);
 
@@ -204,23 +215,27 @@ public class BattleManager : MonoBehaviour
         Renderer enemypokmonRender = enemyPokemon.GetComponentInChildren<Renderer>();
         pokemonTarget(enemyPokemon.transform, enemypokmonRender, false, false, true);
         yield return StartCoroutine(enemyPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
-        //포켓몬 울음이 끝나면
 
+        //====================================================================================================================================================================
         //플레이어에게 카메라 이동하고 볼 던지기
         virtualCamera.LookAt = player.transform;
+        //====================================================================================================================================================================
+
+        // 플레이어의 턴
         player.GetComponent<Animator>().SetTrigger("Turn");
 
-        yield return YieldInstructionCache.WaitForSeconds(1.6f);
+        yield return new WaitUntil(() =>
+                    player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl|tr0050_00_01320_ballthrow01_gfbanm")
+                    && player.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
 
         //플레이어 포켓몬에게 카메라 이동
         playerPokemon.SetActive(true);
+        SoundManager.instance.PlayEffect("Ball_Out");
 
         Renderer playerpokemonRender = playerPokemon.GetComponentInChildren<Renderer>();
         pokemonTarget(playerPokemon.transform, playerpokemonRender, false, false, true);
-
-        SoundManager.instance.PlayEffect("Ball_Out");
         yield return StartCoroutine(playerPokemon.GetComponent<PokemonBattleMode>().StartAnim_co());
-
+        //=====================================================================================================================================================================
         //다시 원래 카메라로
         virtualCamera.Priority = 0;
 
@@ -245,7 +260,6 @@ public class BattleManager : MonoBehaviour
         Vector3 offset = enemyPokemon.transform.forward
                       * (playerPokemon.GetComponentInChildren<Renderer>().bounds.size.z / 2
                       + (enemyPokemon.GetComponentInChildren<Renderer>().bounds.size.z / 2));
-
         pokemonpos += offset;
 
         playerPokemon.transform.position = pokemonpos;
@@ -282,9 +296,9 @@ public class BattleManager : MonoBehaviour
 
         Vector3 playerPos = player.transform.position + offset * 4f;
         //playerPos.y = playerorigin_Y;
-        Debug.Log("플레이어 원래 y값" + playerorigin_Y + "이동한 y값 : " + playerPos);
+        Debug.Log("플레이어 위치 : " + player.transform.position);
         player.transform.position = playerPos;
-        Debug.Log("이동한 y값 : " + playerPos);
+        Debug.Log("이동한 위치 : " + player.transform.position);
         Vector3 loc = player.transform.position - enemyPokemon.transform.position;
         Quaternion playerLook = Quaternion.LookRotation(-loc);
         playerLook.x = 0;
@@ -450,7 +464,6 @@ public class BattleManager : MonoBehaviour
             iscatch = false;
             turn = 0;
 
-            playerbag = player.GetComponent<PlayerBag>();
             Animator player_anim = player.GetComponent<PlayerMovement>().animator;
 
             PokemonStats enemy_pokemon_Stats = enemyPokemon.GetComponent<PokemonStats>();
@@ -482,6 +495,7 @@ public class BattleManager : MonoBehaviour
 
                 playerskillnum = -1;
                 enemyskillnum = Random.Range(0, 4);
+                uIManger.currentIndex = 0;
 
                 yield return null;
                 yield return new WaitUntil(() =>
@@ -599,7 +613,7 @@ public class BattleManager : MonoBehaviour
 
                     yield return new WaitUntil(() =>
                     player_anim.GetCurrentAnimatorStateInfo(0).IsName("tr0050_00_trmdl|tr0050_00_01320_ballthrow01_gfbanm")
-                    && player_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f);
+                    && player_anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.7f);
 
                     playerPokemon.transform.position = pokemon_loc;
                     playerPokemon.transform.rotation = pokemon_rot;
@@ -656,37 +670,35 @@ public class BattleManager : MonoBehaviour
                     yield return YieldInstructionCache.WaitForSeconds(2f);
                     break;
                 }
-                //=============================================================================================================================================================
-
-
-                yield return new WaitUntil(() => next_attacker_pokemon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2);
-                yield return YieldInstructionCache.WaitForSeconds(4f);
-                yield return null;
-
-
-                //================================================================후공 포켓몬 턴===============================================================================
-
-                //다음 포켓몬 공격
-                AttackPhase(next_attacker_pokemon, first_attack_pokemon);
-
-                //공격 모션 중간쯤에 피격 맞음
-                yield return null;
-                yield return new WaitUntil(() =>
-                next_attacker_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
-                next_attacker_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
-                yield return null;
-
-                //피격맞고 체력바 떨어짐
-                HitPhase(first_attack_pokemon, first_attack_pokemon_slider);
-
-                //조건 검사
-                if (islose || isWin || isRun || iscatch || first_attack_pokemon.isDie)
+                //================================================================선공 포켓몬 턴 종료===============================================================================
+                if (!player_pokemon_die_change)
                 {
-                    yield return YieldInstructionCache.WaitForSeconds(2f);
-                    break;
-                }
+                    yield return new WaitUntil(() => next_attacker_pokemon.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.2);
+                    yield return YieldInstructionCache.WaitForSeconds(3.5f);
+                    yield return null;
+                    //================================================================후공 포켓몬 턴===============================================================================
+                    //다음 포켓몬 공격
+                    AttackPhase(next_attacker_pokemon, first_attack_pokemon);
 
-                yield return YieldInstructionCache.WaitForSeconds(2f);
+                    //공격 모션 중간쯤에 피격 맞음
+                    yield return null;
+                    yield return new WaitUntil(() =>
+                    next_attacker_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Attack") &&
+                    next_attacker_pokemon.gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.6f);
+                    yield return null;
+
+                    //피격맞고 체력바 떨어짐
+                    HitPhase(first_attack_pokemon, first_attack_pokemon_slider);
+
+                    //조건 검사
+                    if (islose || isWin || isRun || iscatch || first_attack_pokemon.isDie)
+                    {
+                        yield return YieldInstructionCache.WaitForSeconds(2f);
+                        break;
+                    }
+
+                    yield return YieldInstructionCache.WaitForSeconds(2f);
+                }
                 //=================================================================== 턴 종료 =================================================================================
 
                 //UI 리셋!
@@ -714,12 +726,14 @@ public class BattleManager : MonoBehaviour
                     player_using_Item = false;
                     enemy_using_Item = false;
                     player_pokemon_change = false;
+                    player_pokemon_die_change = false;
                     enemy_pokemon_change = false;
                     ball_throw = false;
                     iscatch = false;
                     uIManger.isBattle = false;
 
-                    if (!player_using_Item && !enemy_using_Item && !player_pokemon_change && !enemy_pokemon_change && !ball_throw && !iscatch)
+
+                    if (!player_using_Item && !enemy_using_Item && !player_pokemon_change && !enemy_pokemon_change && !ball_throw && !iscatch && !player_pokemon_die_change)
                     {
                         break;
                     }
@@ -756,11 +770,21 @@ public class BattleManager : MonoBehaviour
                 yield return YieldInstructionCache.WaitForSeconds(1f);
                 TextBox.instance.Textbox_OnOff(false);
 
-                enemy_pokemon_battlemode.enabled = false;
-                enemy_pokemon_battlemode.anim.SetBool("Battle", false);
-                enemy_pokemon_battlemode.anim.SetBool("Walk", true);
+                if (enemyplayer != null)
+                {
+                    enemyPokemon.SetActive(false);
+                    enemyplayer.GetComponent<Friend>().isBattle = false;
+                    enemyplayer.GetComponent<Animator>().SetBool("Battle", false);
+                }
+                else
+                {
+                    enemy_pokemon_battlemode.enabled = false;
+                    enemy_pokemon_battlemode.anim.SetBool("Battle", false);
+                    enemy_pokemon_battlemode.anim.SetBool("Walk", true);
 
-                enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+                    enemyPokemon.GetComponent<PokemonMove>().enabled = true;
+                }
+
                 break;
             }
             else if (player_pokemon_Stats.isDie)
@@ -770,39 +794,47 @@ public class BattleManager : MonoBehaviour
                 // playerbag.PlayerPokemon의 포켓몬들을 검사
                 for (int i = 0; i < playerbag.PlayerPokemon.Count; i++)
                 {
-                    // 생존한 포켓몬 없음
-                    if (playerbag.PlayerPokemon[i] == null)
-                    {
-                        allPokemonsDead = false;
-                        break;
-                    }
-                    else
+                    // 가지고있는 포켓몬이 공백이 아니면
+                    if (playerbag.PlayerPokemon[i] != null)
                     {
                         PokemonStats pokemonStats = playerbag.PlayerPokemon[i].GetComponent<PokemonStats>();
 
                         // 예외처리 생존한 포켓몬 없음
-                        if (pokemonStats.Hp > 0)
+                        if (!pokemonStats.isDie)
                         {
                             allPokemonsDead = false;
                             break;
                         }
                     }
-                }
+                    //공백이면 끝난거, 가지고 있는 포켓몬 다 죽음
+                    else
+                    {
+                        allPokemonsDead = true;
+                    }
 
+                }
+                //다 죽지 않았을 때
                 if (!allPokemonsDead)
                 {
-                    Debug.Log("My Pokemon digim...");
-
-                    // 추가적인 처리를 수행
                     uIManger.UI_Change();
                     uIManger.beforeIndex = 0;
+                    player_pokemon_die_change = true;
                 }
+                //다 죽었을 떄
                 else
                 {
-
+                    enemyPokemon.SetActive(false);
+                    enemyplayer.GetComponent<Friend>().isBattle = false;
+                    enemyplayer.GetComponent<Animator>().SetBool("Battle", false);
+                    TextBox.instance.NPC_Textbox_OnOff(true);
+                    TextBox.instance.NPC_TalkText.text = "패배했습니다...";
+                    yield return YieldInstructionCache.WaitForSeconds(1f);
+                    TextBox.instance.NPC_Textbox_OnOff(false);
                     break;
                 }
             }
+
+
             else if (enemy_pokemon_Stats.isDie)
             {
                 player_pokemon_Stats.Exp += enemy_pokemon_Stats.Level * 50;
@@ -811,6 +843,7 @@ public class BattleManager : MonoBehaviour
                 if (enemyplayer != null)
                 {
                     enemyplayer.GetComponent<Animator>().SetTrigger("Back");
+                    yield return new WaitUntil(() => enemyplayer.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("tr0040_00_trmdl|tr0040_00_01332_ballreturn01_end_gfbanm"));
 
                     bool allPokemonsDead = true; // 모든 포켓몬이 사망한 상태인지 여부를 나타내는 변수
 
@@ -910,14 +943,14 @@ public class BattleManager : MonoBehaviour
         player.GetComponent<PlayerMovement>().isBattle = false;
         player.GetComponent<PlayerMovement>().ismove = true;
         playerPokemon.SetActive(false);
+        uIManger.enemypokemon = null;
 
         newTransform.gameObject.SetActive(false);
 
         PlayerCamera.m_Orbits[1].m_Radius = 5f;
         PlayerCamera.Follow = player.transform;
         PlayerCamera.LookAt = player.transform;
-
-        SoundManager.instance.PlayBGM("City");
+        SoundManager.instance.SaveBGM_Start();
     }
 
 

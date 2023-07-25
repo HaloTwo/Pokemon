@@ -48,8 +48,8 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
-       // Cursor.visible = false;
-      //  Cursor.lockState = CursorLockMode.Locked;
+       Cursor.visible = false;
+       Cursor.lockState = CursorLockMode.Locked;
 
         if (groundCheck == null) groundCheck = transform.Find("groundCheck");
         if (ball_loc == null) ball_loc = transform.Find("tr0050_00.trmdl/origin/foot_base/waist/spine_01/spine_02/spine_03/right_shoulder/right_arm_width/right_arm_01/right_arm_02/right_hand/right_attach_on");
@@ -231,7 +231,7 @@ public class PlayerMovement : MonoBehaviour
             ball_rb.useGravity = false;
             ball_rb.AddForce(transform.forward * ThrowPower / 3, ForceMode.Impulse);
 
-            Invoke("DisableBallPrefab", 0.35f);
+            Invoke("DisableBallPrefab", 0.45f);
         }
         //포켓몬과 전투하려고 할 때, 가장 가까운 포켓몬 조준
         else if (colls.Length > 0)

@@ -238,10 +238,15 @@ public class UIManger : MonoBehaviour
             {
                 Current_Enemypokemon_Check(enemypokemon);
                 Ball_UI.SetActive(false);
+                enemy_HP_UI.SetActive(true);
             }
-            else if(!Ball_UI.gameObject.activeSelf)
+            else if (!Ball_UI.gameObject.activeSelf)
             {
                 Ball_UI.SetActive(true);
+            }
+            else
+            {
+                enemy_HP_UI.SetActive(false);
             }
 
             //현재 UI의 버튼 
@@ -1201,6 +1206,7 @@ public class UIManger : MonoBehaviour
 
             SoundManager.instance.PlayEffect("ButtonClick");
             BattleManager.instance.player_pokemon_change = true;
+
         }
         else
         {
@@ -1604,7 +1610,7 @@ public class UIManger : MonoBehaviour
         mainUI_scrollRect.verticalScrollbar.value = 1f;
         beforeIndex = currentIndex;
         currentIndex = 0;
- 
+
 
 
         for (int i = 0; i < playerBag.PlayerPokemon.Count; i++)

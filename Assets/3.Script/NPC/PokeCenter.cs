@@ -131,6 +131,7 @@ public class PokeCenter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            SoundManager.instance.SaveBGM();
             SoundManager.instance.PlayBGM("PokemonCenter");
 
             // 플레이어와 충돌한 오브젝트의 방향 벡터
@@ -151,7 +152,7 @@ public class PokeCenter : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SoundManager.instance.PlayBGM("City");
+            SoundManager.instance.SaveBGM_Start();
         }
     }
 

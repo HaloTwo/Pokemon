@@ -122,13 +122,13 @@ public class PokemonBattleMode : MonoBehaviour
 
     public void OnDie()
     {
-        StartCoroutine(DieAnimation_co(1.5f));
+        StartCoroutine(DieAnimation_co(1f));
     }
 
     public IEnumerator DieAnimation_co(float looptime)
     {
         anim.SetTrigger("Die");
-        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.3f);
+        yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.5f);
         SoundManager.instance.PlaySFX(name);
         yield return new WaitUntil(() => anim.GetCurrentAnimatorStateInfo(0).normalizedTime > looptime && anim.GetCurrentAnimatorStateInfo(0).IsName("down01_loop_gfbanm"));
         gameObject.SetActive(false);

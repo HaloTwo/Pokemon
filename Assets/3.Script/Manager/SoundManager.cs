@@ -39,9 +39,12 @@ public class SoundManager : MonoBehaviour
     [SerializeField] AudioSource sfxPlayer = null;
     [SerializeField] AudioSource effectPlayer = null;
 
+    [SerializeField] string beforeMusic;
+    [SerializeField] int beforenum;
+
     private void Start()
     {
-        PlayBGM("City");
+        PlayBGM("SouthArea");
     }
 
     public void PlayBGM(string p_bgmName)
@@ -52,6 +55,25 @@ public class SoundManager : MonoBehaviour
             {
                 bgmPlayer.clip = bgm[i].clip;
                 bgmPlayer.Play();
+                beforenum = i;
+            }
+        }
+    }
+
+    public void SaveBGM()
+    {
+        beforeMusic = bgm[beforenum].name;
+    }
+
+    public void SaveBGM_Start()
+    {
+        for (int i = 0; i < bgm.Length; i++)
+        {
+            if (beforeMusic == bgm[i].name)
+            {
+                bgmPlayer.clip = bgm[i].clip;
+                bgmPlayer.Play();
+                beforenum = i;
             }
         }
     }
