@@ -16,6 +16,7 @@ public class MapMove : MonoBehaviour
             Debug.Log("이동하자");
             if (other.transform.position != out_obj.transform.position + out_obj.transform.forward * 3f)
             {
+                Debug.Log("왜 이동안해 ?");
                 other.transform.position = out_obj.transform.position + out_obj.transform.forward * 3f;
                 other.transform.rotation = out_obj.transform.rotation;
             }
@@ -34,7 +35,7 @@ public class MapMove : MonoBehaviour
             {
                 SoundManager.instance.PlayBGM("City");
             }
-            other.GetComponent<PlayerMovement>().apply_motion_wait(1f);
+            StartCoroutine(other.GetComponent<PlayerMovement>().apply_motion_wait(0.3f));
             other.transform.position = out_obj.transform.position + out_obj.transform.forward * 3f;
             other.transform.rotation = out_obj.transform.rotation;
         }
