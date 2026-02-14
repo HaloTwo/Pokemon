@@ -33,15 +33,15 @@ GAME FREAK의 3D 오픈월드 RPG 게임, Pokemon: Scarlet 모작 프로젝트�
 - Light Map Bake 적용  
 - Profiler 기반 성능 최적화
 
-### 🔎 Code
-- 🔊 Sound Manager (전역 오디오 시스템)
-  https://github.com/HaloTwo/Pokemon/blob/main/Assets/3.Script/Manager/SoundManager.cs
-
-- 🧬 Pokemon Stats Data Structure (캐릭터 데이터 설계)
-  https://github.com/HaloTwo/Pokemon/blob/main/Assets/3.Script/Pokemon/PokemonStats.cs
-
-- 🎒 Item Data System (아이템 데이터 구조)
-  https://github.com/HaloTwo/Pokemon/blob/main/Assets/3.Script/ItemData.cs
+### 🔧 Core Systems (Code Reference)
+- Battle System Manager  
+  → [BattleManager.cs](https://github.com/HaloTwo/Pokemon/blob/main/Assets/3.Script/Manager/BattleManager.cs)
+- Sound Management System  
+  → [SoundManager.cs](https://github.com/HaloTwo/Pokemon/blob/main/Assets/3.Script/Manager/SoundManager.cs)
+- Pokemon Stat Data Structure  
+  → [PokemonStats.cs](https://github.com/HaloTwo/Pokemon/blob/main/Assets/3.Script/Pokemon/PokemonStats.cs)
+- Item Data & ScriptableObject 구조  
+  → [ItemData.cs](https://github.com/HaloTwo/Pokemon/blob/main/Assets/3.Script/ItemData.cs)
 
 ---
 
